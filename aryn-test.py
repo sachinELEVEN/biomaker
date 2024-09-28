@@ -1,9 +1,22 @@
 import aryn_sdk
+import sys
 from aryn_sdk.partition import partition_file, tables_to_pandas
 import pandas as pd
 from io import BytesIO
 import json
 import re
+
+#Providing file path from nodejs
+# Get file paths from command-line arguments
+file_path = sys.argv[1] if len(sys.argv) > 1 else None
+# You can add more file paths if needed (e.g., sys.argv[2], sys.argv[3], etc.)
+
+if file_path is None:
+    print("No file path provided.")
+    sys.exit(1)
+
+file = open(file_path, 'rb')
+aryn_api_key = 'your_api_key_here'  # Use your actual API key
 
 file_full = '/Users/sachinjeph/Desktop/biomarker/repo/assets/Sachin_M_23_2024_2 copy.pdf'
 file_single = '/Users/sachinjeph/Desktop/biomarker/repo/assets/single-page-medical-report-img.pdf'
@@ -39,6 +52,12 @@ print("******************ORIGINAL RESPONSE ABOVE")
 # print(supplemental_income)
 
 def parse_tables(json_data):
+
+    if len(json_data) == 0:
+        print("The dictionary is empty.")
+        return{}
+   
+
     # Initialize a dictionary to hold the parsed tables
     parsed_tables = {}
 
@@ -77,6 +96,11 @@ result = parse_tables(partitioned_file)
 
 #validate header row- should contain header information which denotes a medical test table
 def validate_and_header_row(parsed_table, a, b, c, d):
+
+    if len(parsed_table) == 0:
+        print("The dictionary is empty.")
+        return{}
+
     # Initialize an empty dictionary to store valid tables
     valid_tables = {}
 
@@ -135,6 +159,11 @@ print("valid_header_table",valid_header_table)
 
 #Merge columns having the same header name
 def combine_duplicate_columns(parsed_table):
+
+    if len(parsed_table) == 0:
+        print("The dictionary is empty.")
+        return{}
+
     combined_tables = {}
 
     for table_key, rows in parsed_table.items():
@@ -310,6 +339,12 @@ def extract_numbers(input_string):
         #   ]
         # }
 def flatten_dict_standardize_col_names(data, *tuples):
+
+    if len(data) == 0:
+            print("The dictionary is empty.")
+            return{}
+
+
     updated_data = {}
 
     # Iterate over the main dictionary
