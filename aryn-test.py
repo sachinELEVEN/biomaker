@@ -36,7 +36,7 @@ aryn_api_key = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiZW1sIjoia3VtYXJ
 ## returns: JSON object with elements representing information inside the PDF
 partitioned_file = partition_file(file, aryn_api_key, extract_table_structure=True, use_ocr=True)
 localprint("******************ORIGINAL RESPONSE")
-# localprint(partitioned_file)
+localprint(partitioned_file)
 localprint("******************ORIGINAL RESPONSE ABOVE")
 
 # pandas = tables_to_pandas(partitioned_file)
@@ -126,8 +126,7 @@ def validate_and_header_row(parsed_table, a, b, c, d):
         # Check if there are at least 3 columns
         if len(column_names) < 3:
             localprint(f"Invalid table found (not enough columns): {table_key}")
-            return []
-
+            continue
         # Check if at least one column contains substring 'a', 'b', and 'c' (case insensitive)
         has_a = any(a_lower in col_name.lower() for col_name in column_names)
         has_b = any(b_lower in col_name.lower() for col_name in column_names)
@@ -145,7 +144,7 @@ def validate_and_header_row(parsed_table, a, b, c, d):
         localprint("validate_and_header_row: conditions for validity:",has_a,has_b,has_c,invalid_column_found)
         if not (has_a and has_b and has_c) or invalid_column_found:
             localprint(f"Invalid table found: {table_key}")
-            return []
+            continue
 
         # If valid, store the valid table
         valid_tables[table_key] = rows

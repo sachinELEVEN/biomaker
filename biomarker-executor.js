@@ -7,8 +7,10 @@ app.get('/', (req, res) => {
     console.log("Received request");
 
     // Return a promise for running the Python script
+    const filePathFull = '/Users/sachinjeph/Desktop/biomarker/repo/assets/Sachin_M_23_2024_2 copy.pdf'
+    const filePathSingle = '/Users/sachinjeph/Desktop/biomarker/repo/assets/single-page-medical-report-img.pdf'
     let runPy = new Promise((resolve, reject) => {
-        const pyprog = spawn('python', ['/Users/sachinjeph/Desktop/biomarker/repo/aryn-test.py', '/Users/sachinjeph/Desktop/biomarker/repo/assets/single-page-medical-report-img.pdf']);
+        const pyprog = spawn('python', ['/Users/sachinjeph/Desktop/biomarker/repo/aryn-test.py', filePathFull]);
 
         let output = '';
 
