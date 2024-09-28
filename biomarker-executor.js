@@ -27,6 +27,7 @@ app.get('/', (req, res) => {
         // Resolve the promise when the process ends
         pyprog.on('close', (code) => {
             if (code === 0) {
+                console.log("closing")
                 resolve(output); // Resolve with the output
             } else {
                 reject(`Process exited with code: ${code}`); // Handle non-zero exit codes
@@ -37,6 +38,7 @@ app.get('/', (req, res) => {
     // Respond to the request
     runPy.then((fromRunpy) => {
         console.log(fromRunpy);
+        console.log("response sent")
         res.send(fromRunpy); // Send output as response
     }).catch((error) => {
         console.error("Failed to run Python script:", error);

@@ -6,13 +6,18 @@ from io import BytesIO
 import json
 import re
 
+def localprint(*data, doPrint=False):
+    if doPrint:
+        print(*data)
+ 
+
 #Providing file path from nodejs
 # Get file paths from command-line arguments
 file_path = sys.argv[1] if len(sys.argv) > 1 else None
 # You can add more file paths if needed (e.g., sys.argv[2], sys.argv[3], etc.)
 
 if file_path is None:
-    print("No file path provided.")
+    localprint("No file path provided.")
     sys.exit(1)
 
 # file = open(file_path, 'rb')
@@ -30,9 +35,9 @@ aryn_api_key = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiZW1sIjoia3VtYXJ
 ## param use_ocr (boolean): extract text using an OCR model instead of extracting embedded text in PDF. default: False
 ## returns: JSON object with elements representing information inside the PDF
 partitioned_file = partition_file(file, aryn_api_key, extract_table_structure=True, use_ocr=True)
-print("******************ORIGINAL RESPONSE")
-# print(partitioned_file)
-print("******************ORIGINAL RESPONSE ABOVE")
+localprint("******************ORIGINAL RESPONSE")
+# localprint(partitioned_file)
+localprint("******************ORIGINAL RESPONSE ABOVE")
 
 # pandas = tables_to_pandas(partitioned_file)
 
@@ -46,15 +51,15 @@ print("******************ORIGINAL RESPONSE ABOVE")
         
 # # supplemental_income = tables[0]
 # for table in tables:
-#     print("#####")
-#     print(table)#maybe later we just send this data to gpt for better analysis as out input token will be very less, using gpt should be cheap enough i think
+#     localprint("#####")
+#     localprint(table)#maybe later we just send this data to gpt for better analysis as out input token will be very less, using gpt should be cheap enough i think
 # display(supplemental_income)
-# print(supplemental_income)
+# localprint(supplemental_income)
 
 def parse_tables(json_data):
 
     if len(json_data) == 0:
-        print("The dictionary is empty.")
+        localprint("The dictionary is empty.")
         return{}
    
 
@@ -98,7 +103,7 @@ result = parse_tables(partitioned_file)
 def validate_and_header_row(parsed_table, a, b, c, d):
 
     if len(parsed_table) == 0:
-        print("The dictionary is empty.")
+        localprint("The dictionary is empty.")
         return{}
 
     # Initialize an empty dictionary to store valid tables
@@ -120,7 +125,7 @@ def validate_and_header_row(parsed_table, a, b, c, d):
 
         # Check if there are at least 3 columns
         if len(column_names) < 3:
-            print(f"Invalid table found (not enough columns): {table_key}")
+            localprint(f"Invalid table found (not enough columns): {table_key}")
             return []
 
         # Check if at least one column contains substring 'a', 'b', and 'c' (case insensitive)
@@ -129,7 +134,7 @@ def validate_and_header_row(parsed_table, a, b, c, d):
         has_c = any(c_lower in col_name.lower() for col_name in column_names)
 
         # Check for any column names that do not contain a, b, c, or d
-        print("validate_and_header_row Header columns-",column_names)
+        localprint("validate_and_header_row Header columns-",column_names)
         invalid_column_found = any(
             not any(substring in col_name.lower() for substring in (a_lower, b_lower, c_lower, d_lower))
             for col_name in column_names
@@ -137,9 +142,9 @@ def validate_and_header_row(parsed_table, a, b, c, d):
         #For now now if extra column is there it is fine
         invalid_column_found = False
 
-        print("validate_and_header_row: conditions for validity:",has_a,has_b,has_c,invalid_column_found)
+        localprint("validate_and_header_row: conditions for validity:",has_a,has_b,has_c,invalid_column_found)
         if not (has_a and has_b and has_c) or invalid_column_found:
-            print(f"Invalid table found: {table_key}")
+            localprint(f"Invalid table found: {table_key}")
             return []
 
         # If valid, store the valid table
@@ -155,13 +160,13 @@ test_unit_header = 'unit'
 test_ref_header = 'ref'
 valid_header_table = validate_and_header_row(result,test_name_header,test_value_header,test_unit_header,test_ref_header)
 
-print("valid_header_table",valid_header_table)
+localprint("valid_header_table",valid_header_table)
 
 #Merge columns having the same header name
 def combine_duplicate_columns(parsed_table):
 
     if len(parsed_table) == 0:
-        print("The dictionary is empty.")
+        localprint("The dictionary is empty.")
         return{}
 
     combined_tables = {}
@@ -230,7 +235,7 @@ def combine_duplicate_columns(parsed_table):
 #combine_duplicate_columns also modified subsequent rows where each new row is other than 1 is completely self explaining.
 #each non-zero row has the test_name_header and its value, test_unit_header and its value, test_value_header and its value, and optionally test_ref_header and its value  and similarly for other headers 
 merged_cols_table = combine_duplicate_columns(valid_header_table)
-print("merged_cols_table",merged_cols_table)
+localprint("merged_cols_table",merged_cols_table)
 
 #Normalization of column names
 
@@ -341,7 +346,7 @@ def extract_numbers(input_string):
 def flatten_dict_standardize_col_names(data, *tuples):
 
     if len(data) == 0:
-            print("The dictionary is empty.")
+            localprint("The dictionary is empty.")
             return{}
 
 
@@ -412,7 +417,7 @@ tuple4 = (test_ref_header,test_ref_header_normalized)
 normalized_column_names_table = flatten_dict_standardize_col_names(merged_cols_table,tuple1,tuple2,tuple3,tuple4)
 
 
-print(json.dumps(normalized_column_names_table, indent=2))
+localprint(json.dumps(normalized_column_names_table, indent=2),doPrint=True)
 
 # sys.stdout.flush()
 #Now we need to parse this this data so that we only have what we want
