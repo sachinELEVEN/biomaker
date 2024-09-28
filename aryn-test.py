@@ -15,14 +15,14 @@ if file_path is None:
     print("No file path provided.")
     sys.exit(1)
 
-file = open(file_path, 'rb')
-aryn_api_key = 'your_api_key_here'  # Use your actual API key
+# file = open(file_path, 'rb')
+# aryn_api_key = 'your_api_key_here'  # Use your actual API key
 
 file_full = '/Users/sachinjeph/Desktop/biomarker/repo/assets/Sachin_M_23_2024_2 copy.pdf'
 file_single = '/Users/sachinjeph/Desktop/biomarker/repo/assets/single-page-medical-report-img.pdf'
 file_single2 = '/Users/sachinjeph/Desktop/biomarker/repo/assets/sample-report-3.pdf'
 file_single3 = '/Users/sachinjeph/Desktop/biomarker/repo/assets/sample-report4.pdf'
-file = open(file_single2, 'rb')
+file = open(file_path, 'rb')
 aryn_api_key = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiZW1sIjoia3VtYXJqYWdkZXNoODExQGdtYWlsLmNvbSIsImFjdCI6IjQzMDcyODg2MjQyNCJ9LCJpYXQiOjE3Mjc1MjU1MjMuMTA2NzU0M30.JYhkly2EZ2YNtyS9sH64R8tFsQrDdW14RpMyNOXkK5BW6l37nyXsyxW-r8l2AfTvoKZEw5IZxRdl997xgJnGCA'
 
 ## Make a call to the Aryn Partitioning Service (APS) 
@@ -31,7 +31,7 @@ aryn_api_key = 'eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiZW1sIjoia3VtYXJ
 ## returns: JSON object with elements representing information inside the PDF
 partitioned_file = partition_file(file, aryn_api_key, extract_table_structure=True, use_ocr=True)
 print("******************ORIGINAL RESPONSE")
-print(partitioned_file)
+# print(partitioned_file)
 print("******************ORIGINAL RESPONSE ABOVE")
 
 # pandas = tables_to_pandas(partitioned_file)
@@ -413,6 +413,8 @@ normalized_column_names_table = flatten_dict_standardize_col_names(merged_cols_t
 
 
 print(json.dumps(normalized_column_names_table, indent=2))
+
+# sys.stdout.flush()
 #Now we need to parse this this data so that we only have what we want
 # columnsNamesOfInterest = ['*test*','*ref*','*unit*','*value*']
 
