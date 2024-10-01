@@ -68,7 +68,7 @@ class MedicalDocumentSection: ObservableObject{
     
 }
 
-class BasicMedicalTestRecordv1: Codable {
+class BasicMedicalTestRecordv1: Codable, Identifiable {
     let test: String
     let value: String
     let unit: String
@@ -89,6 +89,18 @@ class BasicMedicalTestRecordv1: Codable {
         case plottablereflowerlimit
         case plottablerefupperlimit
     }
+    
+    init(test: String, value: String, unit: String, plottable: String, ref: String? = nil, plottableref: String? = nil, plottablereflowerlimit: String? = nil, plottablerefupperlimit: String? = nil) {
+           self.test = test
+           self.value = value
+           self.unit = unit
+           self.plottable = plottable
+           self.ref = ref
+           self.plottableref = plottableref
+           self.plottablereflowerlimit = plottablereflowerlimit
+           self.plottablerefupperlimit = plottablerefupperlimit
+           //self.id = UUID().uuidString // Automatically generate UUID
+       }
     
     
     func getDouble(_ val: String)->Double{
