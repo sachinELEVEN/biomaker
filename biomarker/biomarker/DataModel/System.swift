@@ -44,17 +44,19 @@ class System: ObservableObject{
                     }
                     
                     //store the section in the medical document
-                    DispatchQueue.main.async{
+                   
                     medicalDocument.addNewMedicalSection(section: medicalSection)
                     print("/generateNewMedicalTestRecords: New medical section added with \(medicalSection.testRecords.count) test records")
-                    }
+                   
                 }
                 
+            DispatchQueue.main.async{
                 //Adding the medical document to the user's list of medical documents
                 self.medicalDocuments.append(medicalDocument)
                 msg += "Processing done for \(testCounter) tests"
                 print("/generateNewMedicalTestRecords: New medical document added to the system with \(medicalDocument.sections.count) sections")
                 completion(true,msg)
+            }
             }
         }
 

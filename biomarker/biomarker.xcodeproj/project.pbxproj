@@ -22,6 +22,7 @@
 		8E28FE512CAC6E7000BE56DA /* MedicalDocumentViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE502CAC6E7000BE56DA /* MedicalDocumentViewer.swift */; };
 		8E28FE542CAC704900BE56DA /* IndependentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE532CAC704900BE56DA /* IndependentUI.swift */; };
 		8E28FE562CAC726200BE56DA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE552CAC726200BE56DA /* Extensions.swift */; };
+		8E28FE582CAC89DD00BE56DA /* TestRecordSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		8E28FE502CAC6E7000BE56DA /* MedicalDocumentViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalDocumentViewer.swift; sourceTree = "<group>"; };
 		8E28FE532CAC704900BE56DA /* IndependentUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndependentUI.swift; sourceTree = "<group>"; };
 		8E28FE552CAC726200BE56DA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRecordSmallView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				8E28FE502CAC6E7000BE56DA /* MedicalDocumentViewer.swift */,
+				8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E28FE582CAC89DD00BE56DA /* TestRecordSmallView.swift in Sources */,
 				8E28FE492CAC465C00BE56DA /* System.swift in Sources */,
 				8E28FE1A2CAC426B00BE56DA /* RootView.swift in Sources */,
 				8E28FE442CAC45BE00BE56DA /* MedicalTestRecordDM.swift in Sources */,
@@ -506,7 +510,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;
@@ -544,7 +548,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;

@@ -143,6 +143,8 @@ struct MedicalDocumentViewer: View{
                 .padding()
                 
                
+            //list of tests
+               
             }//.padding()
             
             //for now
@@ -150,3 +152,5 @@ struct MedicalDocumentViewer: View{
         }
     }
 }
+
+

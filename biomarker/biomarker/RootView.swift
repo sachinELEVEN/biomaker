@@ -12,7 +12,13 @@ struct RootView: View {
     var body: some View {
         VStack {
             GeometryReader{ geo in
-                MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first ?? MedicalDocument(pdfDocumentUrl: mockPdfUrl!))
+               // MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first ?? MedicalDocument(pdfDocumentUrl: mockPdfUrl!))
+                if sys.medicalDocuments.first != nil{
+                    MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first!)
+                }else{
+                    ContentView()
+                   // PDFUploaderView()
+                }
                 
             }
         }
