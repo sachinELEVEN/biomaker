@@ -55,47 +55,48 @@ struct MedicalDocumentViewer: View{
                             .cornerRadius(20)
                         
                         //  Spacer()
-                        Group{
-                            HStack{
-                                // Spacer()
-                                VStack(alignment: .leading){
+                        
+                        HStack{
+                            // Spacer()
+                            VStack(alignment: .leading){
+                                
+                                HStack{
+                                    Text("Tests")
+                                        .fontWeight(.bold)
+                                        .font(.subheadline)
                                     
-                                    HStack{
-                                        Text("Tests")
-                                            .fontWeight(.bold)
-                                            .font(.subheadline)
-                                        
-                                        
-                                        Text("\(doc.totalTestRecordsCount())")
-                                            .font(.subheadline)
-                                            .foregroundStyle(Color.secondary)
-                                    }
-                                    // Spacer()
-                                    HStack{
-                                        Text("Out of ref range")
-                                            .fontWeight(.bold)
-                                            .font(.subheadline)
-                                            .multilineTextAlignment(.center)
-                                        
-                                        Text("\(doc.totalTestOutOfRangeCount())")
-                                            .font(.subheadline)
-                                            .foregroundStyle(Color.secondary)
-                                    }
-                                    //  Spacer()
                                     
+                                    Text("\(doc.totalTestRecordsCount())")
+                                        .font(.subheadline)
+                                        .foregroundStyle(Color.secondary)
                                 }
-                                Spacer()
-                            }.foregroundColor(.primary)
-                                .padding([.leading,.top])
-                            
-                            
-                            
-                        }
+                                // Spacer()
+                                HStack{
+                                    Text("Out of ref range")
+                                        .fontWeight(.bold)
+                                        .font(.subheadline)
+                                        .multilineTextAlignment(.center)
+                                    
+                                    Text("\(doc.totalTestOutOfRangeCount())")
+                                        .font(.subheadline)
+                                        .foregroundStyle(Color.secondary)
+                                }
+                                //  Spacer()
+                                
+                            }
+                            Spacer()
+                        }.foregroundColor(.primary)
+                            .padding([.leading,.top])
+                        
+                    }
+                        
+                    }
+                        
                         .padding()
                         .background(CustomBlur(style: .prominent))
                         .cornerRadius(20)
                         .padding()
-                    }
+                    
                     .sheet(isPresented: $showPDFViewer) {
                         PDFViewer(url: doc.pdfDocumentUrl)
                     }
@@ -142,16 +143,16 @@ struct MedicalDocumentViewer: View{
                     .background(CustomBlur(style: .prominent))
                     .cornerRadius(20)
                     .padding()
-                }
+                
                
             //list of testRecords
                 
-                Picker("", selection: $testRecordPicker) {
-                                Text("All Tests").tag(0)
-                                Text("Out of Range Tests").tag(1)
-                               
-                            }
-                            .pickerStyle(.segmented)
+//                Picker("", selection: $testRecordPicker) {
+//                                Text("All Tests").tag(0)
+//                                Text("Out of Range Tests").tag(1)
+//                               
+//                            }
+//                            .pickerStyle(.segmented)
 
               
                 ForEach(doc.sections){ section in
@@ -164,7 +165,7 @@ struct MedicalDocumentViewer: View{
                     ForEach(getSectionTestRecords(section: section,val: testRecordPicker)){ testRecord in
                         VStack{
                             TestRecordView(record: testRecord)
-                              
+                             // Text("")
                         }.padding()
                         //.background(Color.secondary.opacity(0.2))
                             .background(CustomBlur(style: .prominent))
