@@ -59,18 +59,20 @@ struct TestRecordView: View {
           
                 HStack{
                     Text(record.test)
-                        .font(.headline)
+                        .font(.title3)
+                        .fontWeight(.bold)
                        
                     
                     
                     Spacer()
                     
-                    imageView(systemName: record.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: record.isOutOfRange() ? .red : .green,size: 40)
+                    imageView(systemName: record.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: record.isOutOfRange() ? .red : .green,size: 30)
                         .padding(.trailing,3)
                     
                     
                     
-                }.padding(.bottom,3)
+                }//.padding(.bottom,1)
+                .padding(.leading)
                 
                 
                 
@@ -84,7 +86,8 @@ struct TestRecordView: View {
                     Text(record.unit)
                         .font(.headline)
                     
-                }.padding(.bottom)
+                }.padding([.bottom,.leading])
+                .foregroundColor(.secondary)
        
                
            

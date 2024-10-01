@@ -150,6 +150,7 @@ struct MedicalDocumentViewer: View{
                 Picker("", selection: $testRecordPicker) {
                                 Text("All Tests").tag(0)
                                 Text("Out of Range Tests").tag(1)
+                                Text("Plain List").tag(2)
                                
                             }
                             .pickerStyle(.segmented)
@@ -157,21 +158,59 @@ struct MedicalDocumentViewer: View{
 
               
                 ForEach(doc.sections){ section in
-                    
-                    Text("Report Section \(doc.findIndexOfSection(section: section)+1)")
-                        .fontWeight(.bold)
-                        .font(.title)
-                        .padding()
+                   
+                    if getSectionTestRecords(section: section,val: testRecordPicker).count != 0{
+                        Text("Report Section \(doc.findIndexOfSection(section: section)+1)")
+                            .fontWeight(.bold)
+                            .font(.title)
+                            .padding()
+                    }
                     
                     ForEach(getSectionTestRecords(section: section,val: testRecordPicker)){ testRecord in
                         VStack{
-                            TestRecordView(record: testRecord)
+                            if testRecordPicker == 2{
+                                HStack{
+                                    VStack{
+                                        HStack{
+                                            Text(testRecord.test)
+                                                .fontWeight(.bold)
+                                            Spacer()
+                                        } .padding(.leading)
+                                        HStack{
+                                            Text(testRecord.value)
+                                            Text(testRecord.unit)
+                                            Spacer()
+                                        }.padding(.leading)
+                                        if testRecord.plottablereflowerlimit != nil && testRecord.plottablerefupperlimit != nil{
+                                            HStack{
+//                                                Text("Should be between")
+//                                                Text(testRecord.plottablerefupperlimit ?? "")
+//                                                Text("\(Text(testRecord.unit)) and")
+//                                                Text(testRecord.plottablereflowerlimit ?? "")
+//                                                Text(testRecord.unit)
+                                                Text("Should be between \(testRecord.plottablerefupperlimit ?? "") \(testRecord.unit) and \(testRecord.plottablereflowerlimit ?? "") \(testRecord.unit)")
+
+                                                Spacer()
+                                            }.padding(.leading)
+                                                .foregroundStyle(Color.secondary)
+                                        }
+                                        
+                                    }
+                                    imageView(systemName: testRecord.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: testRecord.isOutOfRange() ? .red : .green,size: 20)
+                                        .padding(.trailing,3)
+                                }
+                                Divider().padding(.horizontal).padding(.vertical,3)
+                            }else{
+                                TestRecordView(record: testRecord)
+                                    .padding()
+                                    //.background(Color.secondary.opacity(0.2))
+                                        .background(CustomBlur(style: .prominent))
+                                        .cornerRadius(20)
+                                        .padding([.horizontal,.top])
+                            }
+                            
                              // Text("")
-                        }.padding()
-                        //.background(Color.secondary.opacity(0.2))
-                            .background(CustomBlur(style: .prominent))
-                            .cornerRadius(20)
-                            .padding([.horizontal,.top])
+                        }
                     }
                 }
                
@@ -188,7 +227,14 @@ struct MedicalDocumentViewer: View{
         
       
             for testRecord in section.testRecords{
-                sectionTestRecords.append(testRecord)
+                if val == 1 {//1 means only pick out of range tests
+                    if testRecord.isOutOfRange(){
+                        sectionTestRecords.append(testRecord)
+                    }
+                }else if val == 0 || val == 2{//0 means pick all the tests, 2 means a plain list of test names
+                        sectionTestRecords.append(testRecord)
+                }
+                
             }
         
         return sectionTestRecords
