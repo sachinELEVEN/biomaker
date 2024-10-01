@@ -50,6 +50,19 @@ class MedicalDocument: ObservableObject{
         return count
     }
     
+    //this is such a stupid method, but its 3:50 in the morning, and i am not spending time on arguing with myselfg
+    func findIndexOfSection(section: MedicalDocumentSection)->Int{
+        var index = 0;
+        for _section in sections {
+            if _section.id == section.id{
+                break
+            }
+            index += 1
+        }
+        
+        return index
+    }
+    
 }
 
 //A medical document has a the original medical document reference and a list of medical records

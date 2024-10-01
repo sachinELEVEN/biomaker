@@ -147,17 +147,18 @@ struct MedicalDocumentViewer: View{
                
             //list of testRecords
                 
-//                Picker("", selection: $testRecordPicker) {
-//                                Text("All Tests").tag(0)
-//                                Text("Out of Range Tests").tag(1)
-//                               
-//                            }
-//                            .pickerStyle(.segmented)
+                Picker("", selection: $testRecordPicker) {
+                                Text("All Tests").tag(0)
+                                Text("Out of Range Tests").tag(1)
+                               
+                            }
+                            .pickerStyle(.segmented)
+                
 
               
                 ForEach(doc.sections){ section in
                     
-                    Text("Report Section")
+                    Text("Report Section \(doc.findIndexOfSection(section: section)+1)")
                         .fontWeight(.bold)
                         .font(.title)
                         .padding()
