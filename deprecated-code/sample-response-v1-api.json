@@ -1,0 +1,323 @@
+{
+  "table_10": [
+    {
+      "test": "FREE TESTOSTERONE",
+      "combined-TECHNOLOGY": "E.LIS.A",
+      "plottable": "yes",
+      "value": "1.24",
+      "unit": "pg/mL"
+    },
+    {
+      "test": "Bio. Ref. Interval:.",
+      "combined-TECHNOLOGY": "Bio. Ref. Interval:.",
+      "plottable": "no",
+      "value": "Bio. Ref. Interval:.",
+      "unit": "Bio. Ref. Interval:."
+    },
+    {
+      "test": "Male",
+      "combined-TECHNOLOGY": "Male",
+      "plottable": "no",
+      "value": "Male",
+      "unit": "Male"
+    },
+    {
+      "test": "< 12 Yrs 4.60",
+      "combined-TECHNOLOGY": "< 12 Yrs 4.60",
+      "plottable": "no",
+      "value": "< 12 Yrs 4.60",
+      "unit": "< 12 Yrs 4.60"
+    },
+    {
+      "test": "12-18 Yrs 0.18 23.08",
+      "combined-TECHNOLOGY": "12-18 Yrs 0.18 23.08",
+      "plottable": "no",
+      "value": "12-18 Yrs 0.18 23.08",
+      "unit": "12-18 Yrs 0.18 23.08"
+    },
+    {
+      "test": "19-55 Yrs 1.00 28.28",
+      "combined-TECHNOLOGY": "19-55 Yrs 1.00 28.28",
+      "plottable": "no",
+      "value": "19-55 Yrs 1.00 28.28",
+      "unit": "19-55 Yrs 1.00 28.28"
+    },
+    {
+      "test": "> 55 Yrs 0.70 21.45",
+      "combined-TECHNOLOGY": "> 55 Yrs 0.70 21.45",
+      "plottable": "no",
+      "value": "> 55 Yrs 0.70 21.45",
+      "unit": "> 55 Yrs 0.70 21.45"
+    },
+    {
+      "test": "Female",
+      "combined-TECHNOLOGY": "Female",
+      "plottable": "no",
+      "value": "Female",
+      "unit": "Female"
+    },
+    {
+      "test": "12 Yrs < 1.46",
+      "combined-TECHNOLOGY": "12 Yrs < 1.46",
+      "plottable": "no",
+      "value": "12 Yrs < 1.46",
+      "unit": "12 Yrs < 1.46"
+    },
+    {
+      "test": "12-18 Yrs 2.24",
+      "combined-TECHNOLOGY": "12-18 Yrs 2.24",
+      "plottable": "no",
+      "value": "12-18 Yrs 2.24",
+      "unit": "12-18 Yrs 2.24"
+    },
+    {
+      "test": "19-55 Yrs 2.85",
+      "combined-TECHNOLOGY": "19-55 Yrs 2.85",
+      "plottable": "no",
+      "value": "19-55 Yrs 2.85",
+      "unit": "19-55 Yrs 2.85"
+    },
+    {
+      "test": "55 Yrs < 1.56",
+      "combined-TECHNOLOGY": "",
+      "plottable": "no",
+      "value": "",
+      "unit": ""
+    }
+  ],
+  "table_14": [
+    {
+      "test": "25-OH VITAMIN D (TOTAL)",
+      "combined-TECHNOLOGY": "E.CL.I.A",
+      "plottable": "yes",
+      "value": "32.2",
+      "unit": "ng/mL"
+    }
+  ],
+  "table_19": [
+    {
+      "test": "HIGH SENSITIVITY C-REACTIVE PROTEIN (HS-CRP)",
+      "combined-TECHNOLOGY": "IMMUNOTURBIDIMETRY",
+      "plottable": "yes",
+      "value": "0.54",
+      "unit": "mg/L"
+    },
+    {
+      "test": "Bio. Ref. Interval:",
+      "combined-TECHNOLOGY": "",
+      "plottable": "no",
+      "value": "",
+      "unit": ""
+    }
+  ],
+  "table_22": [
+    {
+      "test": "Lipoprotein (a) [Lp(a)]",
+      "combined-TECHNOLOGY": "IMMUNOTURBIDIMETRY",
+      "plottable": "yes",
+      "value": "15",
+      "unit": "mg/dL"
+    }
+  ],
+  "table_24": [
+    {
+      "test": "ALKALINE PHOSPHATASE",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "60.6",
+      "unit": "U/L",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "45.0",
+      "plottablerefupperlimit": "129.0",
+      "ref": "45-129"
+    },
+    {
+      "test": "BILIRUBIN TOTAL",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "122",
+      "unit": "mg/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "0.3",
+      "plottablerefupperlimit": "1.2",
+      "ref": "0.3-1.2"
+    },
+    {
+      "test": "BILIRUBIN -DIRECT",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "0.29",
+      "unit": "mg/dL",
+      "plottableref": "no",
+      "ref": "0.3"
+    },
+    {
+      "test": "BILIRUBIN (INDIRECT)",
+      "combined-TECHNOLOGY": "CALCULATED",
+      "plottable": "yes",
+      "value": "093",
+      "unit": "mg/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "0.0",
+      "plottablerefupperlimit": "0.9",
+      "ref": "0-0.9"
+    },
+    {
+      "test": "GAMMA GLUTAMYL TRANSFERASE (GGT)",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "10.3",
+      "unit": "U/L",
+      "plottableref": "no",
+      "ref": "55"
+    },
+    {
+      "test": "ASPARTATE AMINOTRANSFERASE (SGOT )",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "20",
+      "unit": "U/L",
+      "plottableref": "no",
+      "ref": "35"
+    },
+    {
+      "test": "ALANINE TRANSAMINASE (SGPT)",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "21.1",
+      "unit": "U/L",
+      "plottableref": "no",
+      "ref": "45"
+    },
+    {
+      "test": "SGOT SGPT RATIO",
+      "combined-TECHNOLOGY": "CALCULATED",
+      "plottable": "yes",
+      "value": "0.95",
+      "unit": "Ratio",
+      "plottableref": "no",
+      "ref": "< 2"
+    },
+    {
+      "test": "PROTEIN TOTAL",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "7.63",
+      "unit": "gm/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "5.7",
+      "plottablerefupperlimit": "8.2",
+      "ref": "5.7-8.2"
+    },
+    {
+      "test": "ALBUMIN SERUM",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "4.69",
+      "unit": "gm/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "3.2",
+      "plottablerefupperlimit": "4.8",
+      "ref": "3.2-4.8"
+    },
+    {
+      "test": "SERUM GLOBULIN",
+      "combined-TECHNOLOGY": "CALCULATED",
+      "plottable": "yes",
+      "value": "2.94",
+      "unit": "gm/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "2.5",
+      "plottablerefupperlimit": "3.4",
+      "ref": "2.5-3.4"
+    },
+    {
+      "test": "SERUM ALBI/GLOBULIN RATIO",
+      "combined-TECHNOLOGY": "CALCULATED",
+      "plottable": "yes",
+      "value": "1.6",
+      "unit": "Ratio",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "0.9",
+      "plottablerefupperlimit": "2.0",
+      "ref": "0.9 - 2"
+    }
+  ],
+  "table_27": [
+    {
+      "test": "BLOOD UREA NITROGEN (BUN)",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "17.3",
+      "unit": "mg/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "7.94",
+      "plottablerefupperlimit": "20.07",
+      "ref": "7.94 20.07"
+    },
+    {
+      "test": "CREATININE SERUM",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "0.77",
+      "unit": "mg/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "0.72",
+      "plottablerefupperlimit": "1.18",
+      "ref": "0.72-1.18"
+    },
+    {
+      "test": "BUN SRCREATININE RATIO",
+      "combined-TECHNOLOGY": "CALCULATED",
+      "plottable": "yes",
+      "value": "22.47",
+      "unit": "Ratio",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "9.0",
+      "plottablerefupperlimit": "23.0",
+      "ref": "9:1-23:1"
+    },
+    {
+      "test": "UREA (CALCULATED)",
+      "combined-TECHNOLOGY": "CALCULATED",
+      "plottable": "yes",
+      "value": "37.02",
+      "unit": "mg/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "17.0",
+      "plottablerefupperlimit": "43.0",
+      "ref": "Adult 17-43"
+    },
+    {
+      "test": "UREA SR.CREATININE RATIO",
+      "combined-TECHNOLOGY": "CALCULATED",
+      "plottable": "yes",
+      "value": "48.08",
+      "unit": "Ratio",
+      "plottableref": "no",
+      "ref": "52"
+    },
+    {
+      "test": "CALCIUM",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "9.87",
+      "unit": "mg/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "8.8",
+      "plottablerefupperlimit": "10.6",
+      "ref": "8.8-10.6"
+    },
+    {
+      "test": "URIC ACID",
+      "combined-TECHNOLOGY": "PHOTOMETRY",
+      "plottable": "yes",
+      "value": "5.6",
+      "unit": "mg/dL",
+      "plottableref": "yes",
+      "plottablereflowerlimit": "4.2",
+      "plottablerefupperlimit": "7.3",
+      "ref": "4.2 7.3"
+    }
+  ]
+}

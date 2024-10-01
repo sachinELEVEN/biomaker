@@ -1,0 +1,666 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8E28FE182CAC426B00BE56DA /* biomarkerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE172CAC426B00BE56DA /* biomarkerApp.swift */; };
+		8E28FE1A2CAC426B00BE56DA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE192CAC426B00BE56DA /* RootView.swift */; };
+		8E28FE1C2CAC426C00BE56DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E28FE1B2CAC426C00BE56DA /* Assets.xcassets */; };
+		8E28FE202CAC426C00BE56DA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E28FE1F2CAC426C00BE56DA /* Preview Assets.xcassets */; };
+		8E28FE2A2CAC426C00BE56DA /* biomarkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE292CAC426C00BE56DA /* biomarkerTests.swift */; };
+		8E28FE342CAC426C00BE56DA /* biomarkerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE332CAC426C00BE56DA /* biomarkerUITests.swift */; };
+		8E28FE362CAC426C00BE56DA /* biomarkerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE352CAC426C00BE56DA /* biomarkerUITestsLaunchTests.swift */; };
+		8E28FE442CAC45BE00BE56DA /* MedicalTestRecordDM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE432CAC45BE00BE56DA /* MedicalTestRecordDM.swift */; };
+		8E28FE472CAC462500BE56DA /* APICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE462CAC462500BE56DA /* APICalls.swift */; };
+		8E28FE492CAC465C00BE56DA /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE482CAC465C00BE56DA /* System.swift */; };
+		8E28FE4C2CAC506100BE56DA /* PDFManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE4B2CAC506100BE56DA /* PDFManagement.swift */; };
+		8E28FE4E2CAC538300BE56DA /* globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE4D2CAC538300BE56DA /* globals.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8E28FE262CAC426C00BE56DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E28FE0C2CAC426B00BE56DA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E28FE132CAC426B00BE56DA;
+			remoteInfo = biomarker;
+		};
+		8E28FE302CAC426C00BE56DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8E28FE0C2CAC426B00BE56DA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8E28FE132CAC426B00BE56DA;
+			remoteInfo = biomarker;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8E28FE142CAC426B00BE56DA /* biomarker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = biomarker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E28FE172CAC426B00BE56DA /* biomarkerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = biomarkerApp.swift; sourceTree = "<group>"; };
+		8E28FE192CAC426B00BE56DA /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		8E28FE1B2CAC426C00BE56DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8E28FE1D2CAC426C00BE56DA /* biomarker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = biomarker.entitlements; sourceTree = "<group>"; };
+		8E28FE1F2CAC426C00BE56DA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8E28FE252CAC426C00BE56DA /* biomarkerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = biomarkerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E28FE292CAC426C00BE56DA /* biomarkerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = biomarkerTests.swift; sourceTree = "<group>"; };
+		8E28FE2F2CAC426C00BE56DA /* biomarkerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = biomarkerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8E28FE332CAC426C00BE56DA /* biomarkerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = biomarkerUITests.swift; sourceTree = "<group>"; };
+		8E28FE352CAC426C00BE56DA /* biomarkerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = biomarkerUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		8E28FE432CAC45BE00BE56DA /* MedicalTestRecordDM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalTestRecordDM.swift; sourceTree = "<group>"; };
+		8E28FE462CAC462500BE56DA /* APICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APICalls.swift; sourceTree = "<group>"; };
+		8E28FE482CAC465C00BE56DA /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
+		8E28FE4B2CAC506100BE56DA /* PDFManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFManagement.swift; sourceTree = "<group>"; };
+		8E28FE4D2CAC538300BE56DA /* globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = globals.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8E28FE112CAC426B00BE56DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E28FE222CAC426C00BE56DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E28FE2C2CAC426C00BE56DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8E28FE0B2CAC426B00BE56DA = {
+			isa = PBXGroup;
+			children = (
+				8E28FE162CAC426B00BE56DA /* biomarker */,
+				8E28FE282CAC426C00BE56DA /* biomarkerTests */,
+				8E28FE322CAC426C00BE56DA /* biomarkerUITests */,
+				8E28FE152CAC426B00BE56DA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8E28FE152CAC426B00BE56DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE142CAC426B00BE56DA /* biomarker.app */,
+				8E28FE252CAC426C00BE56DA /* biomarkerTests.xctest */,
+				8E28FE2F2CAC426C00BE56DA /* biomarkerUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E28FE162CAC426B00BE56DA /* biomarker */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE4A2CAC504900BE56DA /* PDFManager */,
+				8E28FE452CAC460B00BE56DA /* Networking */,
+				8E28FE422CAC457900BE56DA /* DataModel */,
+				8E28FE172CAC426B00BE56DA /* biomarkerApp.swift */,
+				8E28FE192CAC426B00BE56DA /* RootView.swift */,
+				8E28FE4D2CAC538300BE56DA /* globals.swift */,
+				8E28FE1B2CAC426C00BE56DA /* Assets.xcassets */,
+				8E28FE1D2CAC426C00BE56DA /* biomarker.entitlements */,
+				8E28FE1E2CAC426C00BE56DA /* Preview Content */,
+			);
+			path = biomarker;
+			sourceTree = "<group>";
+		};
+		8E28FE1E2CAC426C00BE56DA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE1F2CAC426C00BE56DA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8E28FE282CAC426C00BE56DA /* biomarkerTests */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE292CAC426C00BE56DA /* biomarkerTests.swift */,
+			);
+			path = biomarkerTests;
+			sourceTree = "<group>";
+		};
+		8E28FE322CAC426C00BE56DA /* biomarkerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE332CAC426C00BE56DA /* biomarkerUITests.swift */,
+				8E28FE352CAC426C00BE56DA /* biomarkerUITestsLaunchTests.swift */,
+			);
+			path = biomarkerUITests;
+			sourceTree = "<group>";
+		};
+		8E28FE422CAC457900BE56DA /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE432CAC45BE00BE56DA /* MedicalTestRecordDM.swift */,
+				8E28FE482CAC465C00BE56DA /* System.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		8E28FE452CAC460B00BE56DA /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE462CAC462500BE56DA /* APICalls.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		8E28FE4A2CAC504900BE56DA /* PDFManager */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE4B2CAC506100BE56DA /* PDFManagement.swift */,
+			);
+			path = PDFManager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8E28FE132CAC426B00BE56DA /* biomarker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E28FE392CAC426C00BE56DA /* Build configuration list for PBXNativeTarget "biomarker" */;
+			buildPhases = (
+				8E28FE102CAC426B00BE56DA /* Sources */,
+				8E28FE112CAC426B00BE56DA /* Frameworks */,
+				8E28FE122CAC426B00BE56DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = biomarker;
+			productName = biomarker;
+			productReference = 8E28FE142CAC426B00BE56DA /* biomarker.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8E28FE242CAC426C00BE56DA /* biomarkerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E28FE3C2CAC426C00BE56DA /* Build configuration list for PBXNativeTarget "biomarkerTests" */;
+			buildPhases = (
+				8E28FE212CAC426C00BE56DA /* Sources */,
+				8E28FE222CAC426C00BE56DA /* Frameworks */,
+				8E28FE232CAC426C00BE56DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E28FE272CAC426C00BE56DA /* PBXTargetDependency */,
+			);
+			name = biomarkerTests;
+			productName = biomarkerTests;
+			productReference = 8E28FE252CAC426C00BE56DA /* biomarkerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8E28FE2E2CAC426C00BE56DA /* biomarkerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8E28FE3F2CAC426C00BE56DA /* Build configuration list for PBXNativeTarget "biomarkerUITests" */;
+			buildPhases = (
+				8E28FE2B2CAC426C00BE56DA /* Sources */,
+				8E28FE2C2CAC426C00BE56DA /* Frameworks */,
+				8E28FE2D2CAC426C00BE56DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8E28FE312CAC426C00BE56DA /* PBXTargetDependency */,
+			);
+			name = biomarkerUITests;
+			productName = biomarkerUITests;
+			productReference = 8E28FE2F2CAC426C00BE56DA /* biomarkerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8E28FE0C2CAC426B00BE56DA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					8E28FE132CAC426B00BE56DA = {
+						CreatedOnToolsVersion = 15.0;
+					};
+					8E28FE242CAC426C00BE56DA = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 8E28FE132CAC426B00BE56DA;
+					};
+					8E28FE2E2CAC426C00BE56DA = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 8E28FE132CAC426B00BE56DA;
+					};
+				};
+			};
+			buildConfigurationList = 8E28FE0F2CAC426B00BE56DA /* Build configuration list for PBXProject "biomarker" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8E28FE0B2CAC426B00BE56DA;
+			productRefGroup = 8E28FE152CAC426B00BE56DA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8E28FE132CAC426B00BE56DA /* biomarker */,
+				8E28FE242CAC426C00BE56DA /* biomarkerTests */,
+				8E28FE2E2CAC426C00BE56DA /* biomarkerUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8E28FE122CAC426B00BE56DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E28FE202CAC426C00BE56DA /* Preview Assets.xcassets in Resources */,
+				8E28FE1C2CAC426C00BE56DA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E28FE232CAC426C00BE56DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E28FE2D2CAC426C00BE56DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8E28FE102CAC426B00BE56DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E28FE492CAC465C00BE56DA /* System.swift in Sources */,
+				8E28FE1A2CAC426B00BE56DA /* RootView.swift in Sources */,
+				8E28FE442CAC45BE00BE56DA /* MedicalTestRecordDM.swift in Sources */,
+				8E28FE4C2CAC506100BE56DA /* PDFManagement.swift in Sources */,
+				8E28FE472CAC462500BE56DA /* APICalls.swift in Sources */,
+				8E28FE182CAC426B00BE56DA /* biomarkerApp.swift in Sources */,
+				8E28FE4E2CAC538300BE56DA /* globals.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E28FE212CAC426C00BE56DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E28FE2A2CAC426C00BE56DA /* biomarkerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8E28FE2B2CAC426C00BE56DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E28FE342CAC426C00BE56DA /* biomarkerUITests.swift in Sources */,
+				8E28FE362CAC426C00BE56DA /* biomarkerUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8E28FE272CAC426C00BE56DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E28FE132CAC426B00BE56DA /* biomarker */;
+			targetProxy = 8E28FE262CAC426C00BE56DA /* PBXContainerItemProxy */;
+		};
+		8E28FE312CAC426C00BE56DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8E28FE132CAC426B00BE56DA /* biomarker */;
+			targetProxy = 8E28FE302CAC426C00BE56DA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		8E28FE372CAC426C00BE56DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		8E28FE382CAC426C00BE56DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		8E28FE3A2CAC426C00BE56DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = biomarker/biomarker.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"biomarker/Preview Content\"";
+				DEVELOPMENT_TEAM = 34XRA32US9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkResearch.biomarker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8E28FE3B2CAC426C00BE56DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = biomarker/biomarker.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"biomarker/Preview Content\"";
+				DEVELOPMENT_TEAM = 34XRA32US9;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkResearch.biomarker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8E28FE3D2CAC426C00BE56DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 34XRA32US9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkResearch.biomarkerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/biomarker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/biomarker";
+			};
+			name = Debug;
+		};
+		8E28FE3E2CAC426C00BE56DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 34XRA32US9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkResearch.biomarkerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/biomarker.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/biomarker";
+			};
+			name = Release;
+		};
+		8E28FE402CAC426C00BE56DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 34XRA32US9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkResearch.biomarkerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = biomarker;
+			};
+			name = Debug;
+		};
+		8E28FE412CAC426C00BE56DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 34XRA32US9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thinkResearch.biomarkerUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = biomarker;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8E28FE0F2CAC426B00BE56DA /* Build configuration list for PBXProject "biomarker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E28FE372CAC426C00BE56DA /* Debug */,
+				8E28FE382CAC426C00BE56DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E28FE392CAC426C00BE56DA /* Build configuration list for PBXNativeTarget "biomarker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E28FE3A2CAC426C00BE56DA /* Debug */,
+				8E28FE3B2CAC426C00BE56DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E28FE3C2CAC426C00BE56DA /* Build configuration list for PBXNativeTarget "biomarkerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E28FE3D2CAC426C00BE56DA /* Debug */,
+				8E28FE3E2CAC426C00BE56DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8E28FE3F2CAC426C00BE56DA /* Build configuration list for PBXNativeTarget "biomarkerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8E28FE402CAC426C00BE56DA /* Debug */,
+				8E28FE412CAC426C00BE56DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8E28FE0C2CAC426B00BE56DA /* Project object */;
+}
