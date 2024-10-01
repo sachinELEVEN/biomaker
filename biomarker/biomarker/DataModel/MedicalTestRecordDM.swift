@@ -11,9 +11,11 @@ import Foundation
 class MedicalDocument: ObservableObject{
     
     var pdfDocumentUrl : URL//represent the documenturl of the pdf which is saved to the local file system. this is the string saved in local user defaults for later access to the document
+    var date:Date
     
-    init(pdfDocumentUrl: URL){
+    init(pdfDocumentUrl: URL, date:Date = Date()){
         self.pdfDocumentUrl = pdfDocumentUrl
+        self.date = date
     }
     
     ///1 document can have multiple section, each table can have multiple tests(represented by BasicMedicalTestRecordv1)
@@ -21,14 +23,33 @@ class MedicalDocument: ObservableObject{
     let id = UUID.init().uuidString//represents the id of the document stored in user defaults
     //some generative ai data properties
     var name = ""//todo
-    var summary = ""//todo
-    var keyPoints = ""//todo
+    var summary = "This document has tests related to liver and heart"//todo
+    var healthInsights = "You need to visit a doctor and focus on liver health, try reducing fats in your diet"//todo
     
 
     
     func addNewMedicalSection(section: MedicalDocumentSection){
         self.sections.append(section)
     }
+    
+    func totalTestRecordsCount()->Int{
+        var count = 0
+        for section in sections{
+            count += section.testRecords.count
+        }
+        return count
+    }
+    
+    func totalTestOutOfRangeCount()->Int{
+        var count = 0
+        for section in sections{
+            for test in section.testRecords{
+                count += test.isOutOfRange() ? 1 : 0
+            }
+        }
+        return count
+    }
+    
 }
 
 //A medical document has a the original medical document reference and a list of medical records
@@ -67,6 +88,23 @@ class BasicMedicalTestRecordv1: Codable {
         case plottableref
         case plottablereflowerlimit
         case plottablerefupperlimit
+    }
+    
+    
+    func getDouble(_ val: String)->Double{
+        return Double(val) ?? -1
+    }
+    
+    //we will only consider those who have a ref range specified
+    func isOutOfRange()->Bool{
+        if plottableref != nil{
+            if getDouble(value) > getDouble(plottablerefupperlimit!) || getDouble(value) < getDouble(plottablereflowerlimit!)
+            {
+                return true
+            }
+        }
+        
+        return false
     }
 }
 

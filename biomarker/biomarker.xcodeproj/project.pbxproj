@@ -19,6 +19,9 @@
 		8E28FE492CAC465C00BE56DA /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE482CAC465C00BE56DA /* System.swift */; };
 		8E28FE4C2CAC506100BE56DA /* PDFManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE4B2CAC506100BE56DA /* PDFManagement.swift */; };
 		8E28FE4E2CAC538300BE56DA /* globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE4D2CAC538300BE56DA /* globals.swift */; };
+		8E28FE512CAC6E7000BE56DA /* MedicalDocumentViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE502CAC6E7000BE56DA /* MedicalDocumentViewer.swift */; };
+		8E28FE542CAC704900BE56DA /* IndependentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE532CAC704900BE56DA /* IndependentUI.swift */; };
+		8E28FE562CAC726200BE56DA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE552CAC726200BE56DA /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		8E28FE482CAC465C00BE56DA /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		8E28FE4B2CAC506100BE56DA /* PDFManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFManagement.swift; sourceTree = "<group>"; };
 		8E28FE4D2CAC538300BE56DA /* globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = globals.swift; sourceTree = "<group>"; };
+		8E28FE502CAC6E7000BE56DA /* MedicalDocumentViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalDocumentViewer.swift; sourceTree = "<group>"; };
+		8E28FE532CAC704900BE56DA /* IndependentUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndependentUI.swift; sourceTree = "<group>"; };
+		8E28FE552CAC726200BE56DA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,8 @@
 		8E28FE162CAC426B00BE56DA /* biomarker */ = {
 			isa = PBXGroup;
 			children = (
+				8E28FE522CAC702D00BE56DA /* Extras */,
+				8E28FE4F2CAC6E5F00BE56DA /* Views */,
 				8E28FE4A2CAC504900BE56DA /* PDFManager */,
 				8E28FE452CAC460B00BE56DA /* Networking */,
 				8E28FE422CAC457900BE56DA /* DataModel */,
@@ -166,6 +174,23 @@
 				8E28FE4B2CAC506100BE56DA /* PDFManagement.swift */,
 			);
 			path = PDFManager;
+			sourceTree = "<group>";
+		};
+		8E28FE4F2CAC6E5F00BE56DA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE502CAC6E7000BE56DA /* MedicalDocumentViewer.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8E28FE522CAC702D00BE56DA /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				8E28FE532CAC704900BE56DA /* IndependentUI.swift */,
+				8E28FE552CAC726200BE56DA /* Extensions.swift */,
+			);
+			path = Extras;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -301,9 +326,12 @@
 				8E28FE492CAC465C00BE56DA /* System.swift in Sources */,
 				8E28FE1A2CAC426B00BE56DA /* RootView.swift in Sources */,
 				8E28FE442CAC45BE00BE56DA /* MedicalTestRecordDM.swift in Sources */,
+				8E28FE542CAC704900BE56DA /* IndependentUI.swift in Sources */,
 				8E28FE4C2CAC506100BE56DA /* PDFManagement.swift in Sources */,
+				8E28FE562CAC726200BE56DA /* Extensions.swift in Sources */,
 				8E28FE472CAC462500BE56DA /* APICalls.swift in Sources */,
 				8E28FE182CAC426B00BE56DA /* biomarkerApp.swift in Sources */,
+				8E28FE512CAC6E7000BE56DA /* MedicalDocumentViewer.swift in Sources */,
 				8E28FE4E2CAC538300BE56DA /* globals.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,7 +506,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;
@@ -516,7 +544,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.6;

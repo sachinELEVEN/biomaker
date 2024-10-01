@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct RootView: View {
+    @ObservedObject var sys = system
     var body: some View {
         VStack {
-            PDFUploaderView()
+            GeometryReader{ geo in
+                MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first ?? MedicalDocument(pdfDocumentUrl: mockPdfUrl!))
+                
+            }
         }
         .padding()
     }

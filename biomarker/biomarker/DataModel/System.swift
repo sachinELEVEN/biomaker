@@ -9,7 +9,10 @@ import Foundation
 import SwiftUI
 
 class System: ObservableObject{
-   @Published var medicalDocuments = [MedicalDocument]()
+    @Published var medicalDocuments = [MedicalDocument]()
+    
+    let fullWidth = UIScreen.main.bounds.width
+    let fullHeight = UIScreen.main.bounds.height
     
     
     
@@ -32,18 +35,24 @@ class System: ObservableObject{
                     for record in testRecords {
                         print("Test: \(record.test), Value: \(record.value), Unit: \(record.unit), Plottable: \(record.plottable)")
                         //store the test record in the medical section
+                        if record.plottable != "yes"{
+                            //for now we are only concerned about tests which are plottable
+                            continue
+                        }
                         testCounter += testRecords.count
                         medicalSection.addNewMedicalTestRecords(testRecords: record)
                     }
                     
                     //store the section in the medical document
+                    DispatchQueue.main.async{
                     medicalDocument.addNewMedicalSection(section: medicalSection)
                     print("/generateNewMedicalTestRecords: New medical section added with \(medicalSection.testRecords.count) test records")
+                    }
                 }
                 
                 //Adding the medical document to the user's list of medical documents
                 self.medicalDocuments.append(medicalDocument)
-                msg += "Processing done"
+                msg += "Processing done for \(testCounter) tests"
                 print("/generateNewMedicalTestRecords: New medical document added to the system with \(medicalDocument.sections.count) sections")
                 completion(true,msg)
             }

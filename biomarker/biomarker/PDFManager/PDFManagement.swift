@@ -45,6 +45,7 @@ struct PDFUploaderView: View {
     @State private var showDocumentPicker = false
     @State private var showPDFViewer = false
     @State private var tempMedicalDocument : MedicalDocument? = nil
+    @State private var showMedicalDocument = false
     
     var body: some View {
         VStack(spacing: 20) {
@@ -79,8 +80,17 @@ struct PDFUploaderView: View {
                             print("Document process was successful? \(success) with msg: \(msg)")
                         }
                     }
+                    
+                    Button("Show medical doc"){
+                        showMedicalDocument.toggle()
+                    }
+                    .sheet(isPresented: $showMedicalDocument){
+                        MedicalDocumentViewer(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: tempMedicalDocument!)
+                    }
+                    
                 }
                
+                
                 
             }
         }
