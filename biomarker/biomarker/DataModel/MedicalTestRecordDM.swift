@@ -53,12 +53,12 @@ class MedicalDocument: ObservableObject{
 }
 
 //A medical document has a the original medical document reference and a list of medical records
-class MedicalDocumentSection: ObservableObject{
+class MedicalDocumentSection: ObservableObject, Identifiable{
     ///1 document can have multiple sections, each section can have multiple tests(represented by BasicMedicalTestRecordv1)
     @Published var testRecords = [BasicMedicalTestRecordv1]()
     let id = UUID.init().uuidString
     //some generative ai data properties
-    let name = ""//todo
+    let name = "Liver function tests"//todo
     let summary = ""//todo
     let keyPoints = ""//todo
     
@@ -109,7 +109,7 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
     
     //we will only consider those who have a ref range specified
     func isOutOfRange()->Bool{
-        if plottableref != nil{
+        if plottableref != nil && plottablereflowerlimit != nil && plottablerefupperlimit != nil{
             if getDouble(value) > getDouble(plottablerefupperlimit!) || getDouble(value) < getDouble(plottablereflowerlimit!)
             {
                 return true
