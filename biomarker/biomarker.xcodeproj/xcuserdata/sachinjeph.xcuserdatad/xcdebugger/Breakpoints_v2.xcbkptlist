@@ -14,8 +14,8 @@
             filePath = "biomarker/DataModel/MedicalTestRecordDM.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "testDate()"
             landmarkType = "7">
             <Locations>
@@ -62,6 +62,21 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "149"
                   endingLineNumber = "149"
+                  offsetFromSymbolStart = "888">
+               </Location>
+               <Location
+                  uuid = "ADC3A793-678B-4DA7-AC73-505A7048CBF2 - 54ee21c31ca85e00"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "biomarker.BasicMedicalTestRecordv1.testDate() -&gt; Swift.Optional&lt;Foundation.Date&gt;"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/DataModel/MedicalTestRecordDM.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "150"
+                  endingLineNumber = "150"
                   offsetFromSymbolStart = "888">
                </Location>
             </Locations>

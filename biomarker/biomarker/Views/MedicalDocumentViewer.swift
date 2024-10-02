@@ -335,36 +335,7 @@ struct MedicalDocumentViewerDetailed: View{
                     ForEach(getSectionTestRecords(section: section,val: testRecordPicker)){ testRecord in
                         VStack{
                             if testRecordPicker == 2{
-                                HStack{
-                                    VStack{
-                                        HStack{
-                                            Text(testRecord.test)
-                                                .fontWeight(.bold)
-                                            Spacer()
-                                        } .padding(.leading)
-                                        HStack{
-                                            Text(testRecord.value)
-                                            Text(testRecord.unit)
-                                            Spacer()
-                                        }.padding(.leading)
-                                        if testRecord.plottablereflowerlimit != nil && testRecord.plottablerefupperlimit != nil{
-                                            HStack{
-//                                                Text("Should be between")
-//                                                Text(testRecord.plottablerefupperlimit ?? "")
-//                                                Text("\(Text(testRecord.unit)) and")
-//                                                Text(testRecord.plottablereflowerlimit ?? "")
-//                                                Text(testRecord.unit)
-                                                Text("Should be between \(testRecord.plottablerefupperlimit ?? "") \(testRecord.unit) and \(testRecord.plottablereflowerlimit ?? "") \(testRecord.unit)")
-
-                                                Spacer()
-                                            }.padding(.leading)
-                                                .foregroundStyle(Color.secondary)
-                                        }
-                                        
-                                    }
-                                    imageView(systemName: testRecord.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: testRecord.isOutOfRange() ? .red : .green,size: 20)
-                                        .padding(.trailing,3)
-                                }
+                              TestRecordPlainView(testRecord: testRecord)
                                 Divider().padding(.horizontal).padding(.vertical,3)
                             }else{
                                 TestRecordView(record: testRecord)

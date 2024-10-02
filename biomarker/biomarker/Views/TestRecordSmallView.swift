@@ -202,3 +202,50 @@ struct TestRecordView: View {
     }
 }
 
+
+
+struct TestRecordPlainView: View{
+    var testRecord : BasicMedicalTestRecordv1
+    var showDate : Bool = false
+    var body: some View{
+        HStack{
+            VStack{
+                HStack{
+                    Text(testRecord.test)
+                        .fontWeight(.bold)
+                    Spacer()
+                } .padding(.leading)
+                HStack{
+                    Text(testRecord.value)
+                    Text(testRecord.unit)
+                    Spacer()
+                }.padding(.leading)
+                if testRecord.plottablereflowerlimit != nil && testRecord.plottablerefupperlimit != nil{
+                    HStack{
+                        //                                                Text("Should be between")
+                        //                                                Text(testRecord.plottablerefupperlimit ?? "")
+                        //                                                Text("\(Text(testRecord.unit)) and")
+                        //                                                Text(testRecord.plottablereflowerlimit ?? "")
+                        //                                                Text(testRecord.unit)
+                        Text("Should be between \(testRecord.plottablerefupperlimit ?? "") \(testRecord.unit) and \(testRecord.plottablereflowerlimit ?? "") \(testRecord.unit)")
+                        
+                        Spacer()
+                    }.padding(.leading)
+                        .foregroundStyle(Color.secondary)
+                }
+                
+                if showDate{
+                    HStack{
+                        Text(Utils.formatDate(testRecord.testDate() ?? Date()))
+                            .font(.subheadline)
+                            .foregroundStyle(Color.secondary)
+                        Spacer()
+                    } .padding(.leading)
+                }
+                
+            }
+            imageView(systemName: testRecord.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: testRecord.isOutOfRange() ? .red : .green,size: 20)
+                .padding(.trailing,3)
+        }
+    }
+}

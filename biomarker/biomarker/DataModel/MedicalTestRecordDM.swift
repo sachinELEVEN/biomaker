@@ -133,6 +133,7 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
     }
     
     //returns the date of the medical document created
+    //it returns an optional because its used by swiftui charts which requires optional value
     func testDate()->Date?{
         for doc in system.medicalDocuments{
             for section in doc.sections{

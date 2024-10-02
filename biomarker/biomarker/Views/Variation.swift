@@ -243,7 +243,34 @@ struct GroupedTestRecordChartView: View {
                 //  combinedChart(for: selectedGroupedRecords)
                 //   } else {
                 // Create separate graphs for each group
+                
+               
                 ForEach(selectedGroupedRecords.keys.sorted(), id: \.self) { testName in
+                    
+                    if let records = selectedGroupedRecords[testName] {
+                        
+                        if let firstRecord = records.first {
+                            //   Text(firstRecord.test) // Display the test name as the title of the chart
+                            //      .font(.headline)
+                            HStack{
+                                Text(firstRecord.test)
+                                    .font(.title2)
+                                    .fontWeight(.bold)
+                                
+                                
+                                
+                                Spacer()
+                                
+                                //  imageView(systemName: record.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: record.isOutOfRange() ? .red : .green,size: 30)
+                                //    .padding(.trailing,3)
+                                
+                                
+                                
+                            }//.padding(.bottom,1)
+                            .padding([.top,.horizontal])
+                        }
+                    }
+                    //
                     if let records = selectedGroupedRecords[testName] {
                         // Create a combined chart for the current group
                         singleGroupChart(for: records)
@@ -254,6 +281,16 @@ struct GroupedTestRecordChartView: View {
                             .cornerRadius(20)
                             .padding([.horizontal,.top])
                     }
+                    
+                    //display information about what tests were used using simple list p150
+                    if let records = selectedGroupedRecords[testName] {
+                        //Text("Tests used in the above chart").fontWeight(.bold).font(.headline)
+                        ForEach(records){ testRecord in
+                            TestRecordPlainView(testRecord: testRecord,showDate: true)
+                            Divider().padding(.horizontal).padding(.vertical,3)
+                        }
+                    }
+                    
                 }
                 // }
             }
@@ -320,22 +357,22 @@ struct GroupedTestRecordChartView: View {
             if let firstRecord = records.first {
              //   Text(firstRecord.test) // Display the test name as the title of the chart
               //      .font(.headline)
-                HStack{
-                    Text(firstRecord.test)
-                        .font(.title3)
-                        .fontWeight(.bold)
-                       
-                    
-                    
-                    Spacer()
-                    
-                  //  imageView(systemName: record.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: record.isOutOfRange() ? .red : .green,size: 30)
-                    //    .padding(.trailing,3)
-                    
-                    
-                    
-                }//.padding(.bottom,1)
-                .padding()
+//                HStack{
+//                    Text(firstRecord.test)
+//                        .font(.title3)
+//                        .fontWeight(.bold)
+//                       
+//                    
+//                    
+//                    Spacer()
+//                    
+//                  //  imageView(systemName: record.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: record.isOutOfRange() ? .red : .green,size: 30)
+//                    //    .padding(.trailing,3)
+//                    
+//                    
+//                    
+//                }//.padding(.bottom,1)
+               // .padding()
 
                 Chart {
                     // Loop through each record in the group
