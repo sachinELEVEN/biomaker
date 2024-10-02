@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Charts
 
 // MARK: - VariationView
 struct VariationView: View {
@@ -8,6 +9,8 @@ struct VariationView: View {
     @State private var selectedRecords: Set<String> = []  // Track selected records
     @State private var showActionSheet = false            // Control action sheet visibility
     @State private var searchText = ""                   // Text to filter records
+    @State private var showVariationCharts = false
+    @State private var trackThemAllTogether = false
 
     var body: some View {
         NavigationView {
@@ -58,11 +61,15 @@ struct VariationView: View {
                                 title: Text("Track Variation"),
                                 message: Text("How would you like to track the variations?"),
                                 buttons: [
-                                    .default(Text("Track All Selected Tests Together")) {
-                                        print("rack All Selected Tests Together")
-                                    },
                                     .default(Text("Track Each Selected Test Separately")) {
+                                        trackThemAllTogether = false
+                                        showVariationCharts = true
                                         print("Track Each Selected Test Separately")
+                                    },
+                                    .default(Text("Track All Selected Tests Together")) {
+                                        trackThemAllTogether = true
+                                        showVariationCharts = true
+                                        print("rack All Selected Tests Together")
                                     },
                                     .cancel()
                                 ]
@@ -80,6 +87,11 @@ struct VariationView: View {
                             .padding()
                     }
                 }
+                
+                //track variation charts
+                NavigationLink(destination: GroupedTestRecordView(selectedGroupedRecords: getSelectedGroups(), trackThemAllTogether: self.trackThemAllTogether)) {
+                    Text("show")
+                }
             }
             .navigationTitle("Track Variation")
             .toolbar {
@@ -93,6 +105,21 @@ struct VariationView: View {
                             }
         }
     }
+    
+    
+    func getSelectedGroups() -> [String: [BasicMedicalTestRecordv1]] {
+        // Group all test records by test name
+        let allGroupedRecords = Dictionary(grouping: sys.getAllTestRecords(), by: { $0.test })
+        
+        // Filter the grouped records to only include the selected groups
+        let selectedGroupedRecords = allGroupedRecords.filter { selectedRecords.contains($0.key) }
+        
+        //we should sort them by document.date before here
+        //TODO
+        return selectedGroupedRecords
+    }
+
+    
 }
 
 // MARK: - GroupedTestRecordsView
@@ -153,6 +180,82 @@ struct GroupedTestRecordsView: View {
                 
                 Divider().padding(.horizontal)
             }
+        }
+    }
+}
+
+
+
+
+struct GroupedTestRecordView: View {
+    var selectedGroupedRecords: [String: [BasicMedicalTestRecordv1]]
+    var trackThemAllTogether: Bool
+
+    var body: some View {
+        ScrollView(showsIndicators: false){
+            VStack {
+                if trackThemAllTogether {
+                    // Create a single graph for all selected records
+                    combinedChart(for: selectedGroupedRecords)
+                } else {
+                    // Create separate graphs for each group
+                    ForEach(selectedGroupedRecords.keys.sorted(), id: \.self) { testName in
+                        if let records = selectedGroupedRecords[testName] {
+                            ForEach(records, id: \.id) { record in
+                                TestRecordView(record: record)
+                                    .padding(.bottom)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .navigationTitle("Test Records")
+        .padding()
+    }
+
+    // Combined chart for all records
+    private func combinedChart(for records: [String: [BasicMedicalTestRecordv1]]) -> some View {
+        VStack {
+            Text("Combined Test Results")
+                .font(.headline)
+            
+            // Create an empty chart
+            Chart {
+                // Loop through each test record
+                ForEach(records.flatMap { $0.value }, id: \.id) { record in
+                    if let testValue = Double(record.value) {
+                        // Plot point marks for each record
+                        PointMark(
+                            x: .value("Test", record.test),
+                            y: .value("Value", testValue)
+                        )
+                        .symbolSize(60)
+                        .foregroundStyle(record.isOutOfRange() ? .red : .green)
+                        
+                        // Upper reference limit line
+                        if let upperLimit = Double(record.plottablerefupperlimit ?? "") {
+                            RuleMark(y: .value("Upper Limit", upperLimit.truncate(places: 2)))
+                                .foregroundStyle(.red)
+                                .lineStyle(StrokeStyle(lineWidth: 2))
+                        }
+                        
+                        // Lower reference limit line
+                        if let lowerLimit = Double(record.plottablereflowerlimit ?? "") {
+                            RuleMark(y: .value("Lower Limit", lowerLimit.truncate(places: 2)))
+                                .foregroundStyle(.blue)
+                                .lineStyle(StrokeStyle(lineWidth: 2))
+                        }
+                    }
+                }
+            }
+            .chartYAxis {
+                AxisMarks(position: .leading)
+            }
+            .chartXAxis {
+                AxisMarks(position: .bottom)
+            }
+            .frame(height: 300)
         }
     }
 }
