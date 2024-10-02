@@ -247,13 +247,17 @@ struct GroupedTestRecordChartView: View {
                     if let records = selectedGroupedRecords[testName] {
                         // Create a combined chart for the current group
                         singleGroupChart(for: records)
-                            .padding(.bottom)
-                            .background()
+                           // .padding(.bottom)
+                            .padding()
+                            //.background(Color.secondary.opacity(0.2))
+                            .background(CustomBlur(style: .prominent))
+                            .cornerRadius(20)
+                            .padding([.horizontal,.top])
                     }
                 }
                 // }
             }
-            .navigationTitle("Test Records")
+            .navigationTitle("Variation with time")
             .padding()
         }
     }
@@ -314,8 +318,24 @@ struct GroupedTestRecordChartView: View {
     private func singleGroupChart(for records: [BasicMedicalTestRecordv1]) -> some View {
         VStack {
             if let firstRecord = records.first {
-                Text(firstRecord.test) // Display the test name as the title of the chart
-                    .font(.headline)
+             //   Text(firstRecord.test) // Display the test name as the title of the chart
+              //      .font(.headline)
+                HStack{
+                    Text(firstRecord.test)
+                        .font(.title3)
+                        .fontWeight(.bold)
+                       
+                    
+                    
+                    Spacer()
+                    
+                  //  imageView(systemName: record.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: record.isOutOfRange() ? .red : .green,size: 30)
+                    //    .padding(.trailing,3)
+                    
+                    
+                    
+                }//.padding(.bottom,1)
+                .padding()
 
                 Chart {
                     // Loop through each record in the group
