@@ -61,4 +61,15 @@ class System: ObservableObject{
         }
 
     }
+    
+    func totalTestRecordsCount()->Int{
+        var count = 0
+        for doc in self.medicalDocuments{
+            for section in doc.sections{
+                count += section.testRecords.count
+            }
+        }
+        
+        return count
+    }
 }

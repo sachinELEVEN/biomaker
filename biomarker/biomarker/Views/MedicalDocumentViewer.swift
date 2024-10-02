@@ -145,7 +145,7 @@ struct MedicalDocumentViewerHandler: View{
             
             if testRecordPicker == 2 {
                 ScrollView{
-                    Text("Take actions")
+                    Text("Take actions")//delete, share original document, share biomarker data
                         .navigationTitle("Medical Record")
                         
                 }
