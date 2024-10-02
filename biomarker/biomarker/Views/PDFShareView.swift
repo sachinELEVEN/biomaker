@@ -17,21 +17,14 @@ struct SharePDFView: View {
     var body: some View {
         VStack {
             // Display PDF name or any other content
-            Text("Share PDF")
-                .font(.headline)
+//            Text("Share PDF")
+//                .font(.headline)
             
             // Share button
             Button(action: {
                 isSharePresented = true
             }) {
-                HStack {
-                    Image(systemName: "square.and.arrow.up")
-                    Text("Share PDF")
-                }
-                .padding()
-                .foregroundColor(.white)
-                .background(Color.blue)
-                .cornerRadius(8)
+                label("Share Original Document (PDF)", textColor: .primaryInvert, bgColor: .primary, imgName: "square.and.arrow.up.fill", imgColor: .primaryInvert, width: 300, radius: 10)
             }
             .sheet(isPresented: $isSharePresented) {
                 ShareSheet(activityItems: [pdfURL])

@@ -145,9 +145,28 @@ struct MedicalDocumentViewerHandler: View{
             
             if testRecordPicker == 2 {
                 ScrollView{
+//                    HStack{
+//                        VStack(alignment: .leading){
+//                            Text("Share original document")
+//                                .fontWeight(.bold)
+//                                .font(.headline)
+//                            
+//                        }.padding(.horizontal)
+//                        Spacer()
+//                    }
+                    
                     SharePDFView(pdfURL: doc.pdfDocumentUrl)
-                    Text("Take actions")//delete, share original document, share biomarker data
+                    
+                    Button(action: {
+                       print("Delete medical document- todo")
+                    }) {
+                        label("Delete Medical Document", textColor: .primaryInvert, bgColor: .red, imgName: "trash.fill", imgColor: .primaryInvert, width: 300, radius: 10)
+                    }
+                    
+                    //delete, share original document, share biomarker data
                         .navigationTitle("Medical Record")
+                    
+                    
                         
                 }
                // MedicalDocumentViewerDetailed(size: size, doc: doc)
