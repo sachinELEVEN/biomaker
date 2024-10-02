@@ -138,7 +138,7 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
             for section in doc.sections{
                 for testRecord in section.testRecords{
                     if testRecord.id == self.id{
-                        print(doc.date)
+                       // print(doc.date)
                         return doc.date
                     }
                 }

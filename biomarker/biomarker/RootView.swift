@@ -62,7 +62,7 @@ struct RootTabView: View {
         ]
         
         let records2: [BasicMedicalTestRecordv1] = [
-            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "19", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
             BasicMedicalTestRecordv1(test: "Haemoglobin", value: "16", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
             BasicMedicalTestRecordv1(test: "Haemoglobin", value: "19", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
             BasicMedicalTestRecordv1(test: "Haemoglobin", value: "21", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
