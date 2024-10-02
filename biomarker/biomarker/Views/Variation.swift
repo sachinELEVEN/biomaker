@@ -299,12 +299,13 @@ struct GroupedTestRecordChartView: View {
                             NavigationLink(destination:MedicalDocumentViewerHandler(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: testRecord.getParentDocument()!)){
                                 VStack(alignment: .leading){
                                     TestRecordPlainView(testRecord: testRecord,showDate: true)
+                                       
                                     Text("View medical document")
                                         .foregroundStyle(Color.pink)
                                         .padding([.horizontal])
                                         .padding(.vertical,2)
                                     Divider().padding(.horizontal).padding(.vertical,3)
-                                }
+                                } .padding(.horizontal,5)
                             }
                         }
                     }
