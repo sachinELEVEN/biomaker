@@ -60,20 +60,20 @@ struct VariationView: View {
                         }
                         .actionSheet(isPresented: $showActionSheet) {
                             ActionSheet(
-                                title: Text("Track Variation"),
-                                message: Text("How would you like to track the variations?"),
+                                title: Text("Analyze Tests"),
+                                message: Text("You have selected multiple tests, how would like to analyze them?\nYou can treat multiple tests as a single group, this is useful when 2 or more tests are the same but with different test names. For eg (ALBUMIN - SERUM) and (ALBUMIN)"),
                                 buttons: [
-                                    .default(Text("Track Each Selected Test Separately")) {
+                                    .default(Text("Analyze Each Test Separately")) {
                                         // Navigate to chart view for separate tracking
                                         mergeSelectedGroups = false
                                         navigateToChartView()
-                                        print("Track Each Selected Test Separately")
+                                        print("Each Test Separately")
                                     },
-                                    .default(Text("Track All Selected Tests Together")) {
+                                    .default(Text("Analyze All Tests as a Single Group")) {
                                         // Navigate to chart view for combined tracking
                                         mergeSelectedGroups = true
                                         navigateToChartView()
-                                        print("Track All Selected Tests Together")
+                                        print("Analyze All Tests as a Single Group")
                                     },
                                     .cancel()
                                 ]
