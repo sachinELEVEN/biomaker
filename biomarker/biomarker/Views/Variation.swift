@@ -119,29 +119,37 @@ struct GroupedTestRecordsView: View {
     var body: some View {
         ForEach(filteredRecords.keys.sorted(), id: \.self) { testName in
             if let group = filteredRecords[testName] {
-                HStack {
-                    // Display the group name (test name)
-                    Text(testName)
-                        .font(.headline)
-
-                    Spacer()
-
-                    // Display the number of items in the group
-                    Text("Found \(group.count) \(group.count == 1 ? "time" : "times")")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                }
-                .padding(.vertical, 8)
-                .padding(.horizontal)
-                .background(selectedRecords.contains(testName) ? Color.blue.opacity(0.2) : Color.clear)
-                .onTapGesture {
+                Button(action:{
                     // Toggle selection of the row
                     if selectedRecords.contains(testName) {
                         selectedRecords.remove(testName)
                     } else {
                         selectedRecords.insert(testName)
                     }
+                }){
+                    HStack {
+                        // Display the group name (test name)
+                        Text(testName)
+                            .font(.headline)
+                        
+                        Spacer()
+                        
+                        // Display the number of items in the group
+                        Text("Found \(group.count) \(group.count == 1 ? "time" : "times")")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                    }
                 }
+               
+                .padding(.vertical,8)
+                .padding(.horizontal,8)
+                .background(selectedRecords.contains(testName) ? Color.blue.opacity(0.2) : Color.clear)
+                
+                .cornerRadius(10)
+                
+                .padding(.horizontal)
+                
+            
                 
                 Divider().padding(.horizontal)
             }
