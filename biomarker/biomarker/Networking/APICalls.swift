@@ -47,6 +47,7 @@ class APIService {
             }
             
             // Parse the JSON response
+            /*
             do {
                 let decoder = JSONDecoder()
                 let records = try decoder.decode([String: [BasicMedicalTestRecordv1]].self, from: data)
@@ -54,6 +55,35 @@ class APIService {
             } catch {
                 completion(nil, error)
             }
+            */
+            
+            // Decode the JSON response
+            do {
+                let decoder = JSONDecoder()
+                
+                // First, decode the outer structure with 'message' and 'results' as a string
+                struct ResponseData: Decodable {
+                    let message: String
+                    let results: String // Capture the results as a string first
+                }
+                
+                let responseData = try decoder.decode(ResponseData.self, from: data)
+                print("/uploadMedicalDocumentAndFetchDetails: message: \(responseData.message)")
+                
+                // Now decode the 'results' string into the actual dictionary
+                let resultsData = responseData.results.data(using: .utf8)! // Convert to Data
+                let resultsDecoder = JSONDecoder()
+                let results = try resultsDecoder.decode([String: [BasicMedicalTestRecordv1]].self, from: resultsData)
+                
+                // Completion with the actual results
+                completion(results, nil)
+                
+            } catch {
+                print("Error fetching records:", error)
+                completion(nil, error)
+            }
+
+            
         }
         task.resume()
     }
