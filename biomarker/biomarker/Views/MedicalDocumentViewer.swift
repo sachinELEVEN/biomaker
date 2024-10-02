@@ -262,7 +262,19 @@ struct MedicalDocumentViewerDetailed: View{
                         .padding()
                     
                     .sheet(isPresented: $showPDFViewer) {
-                        PDFViewer(url: doc.pdfDocumentUrl)
+                        NavigationView{
+                            PDFViewer(url: doc.pdfDocumentUrl)
+                                .navigationTitle("Original Document")
+                                .navigationBarTitleDisplayMode(.inline)
+                                .toolbar {
+                                   
+                                        Button("Close") {
+                                            showPDFViewer.toggle()
+                                        }
+                                    
+                                }
+                        }
+                        
                     }
                     
                     VStack{
