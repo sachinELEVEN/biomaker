@@ -11,7 +11,7 @@ import SwiftUI
 struct biomarkerApp: App {
     var body: some Scene {
         WindowGroup {
-            RootView()
+            RootTabView()
         }
     }
 }

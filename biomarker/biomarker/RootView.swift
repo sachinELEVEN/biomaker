@@ -7,30 +7,59 @@
 
 import SwiftUI
 
-struct RootView: View {
+import SwiftUI
+
+struct RootTabView: View {
+    var body: some View {
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "doc.text.below.ecg")
+                }
+            
+            SearchView()
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
+            
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
+        }
+    }
+}
+
+
+
+// MARK: - Home View
+struct HomeView: View {
     @ObservedObject var sys = system
     var body: some View {
-        VStack {
-            GeometryReader{ geo in
-//                MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first ?? MedicalDocument(pdfDocumentUrl: mockPdfUrl!))
-                if sys.medicalDocuments.first != nil{
-                    MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first!)
-                }else{
-                   // ContentView()
-                    PDFUploaderView()
+        NavigationView{
+            VStack {
+                GeometryReader{ geo in
+                    if sys.medicalDocuments.first != nil{
+                        MedicalDocumentViewerSmall(size: geo.size, doc: sys.medicalDocuments.first!)
+                        //MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first!)
+                    }else{
+                        // ContentView()
+                        PDFUploaderView()
+                    }
+                    
                 }
-                
+            }.onAppear{
+                setMockMedicalDocument()
             }
-        }.onAppear{
-            setMockMedicalDocument()
+            .padding()
+            .navigationTitle("Home")
         }
-        .padding()
+    
+
     }
     
     func setMockMedicalDocument(){
    
-        
-        
         
         //creating mock test records
         let records: [BasicMedicalTestRecordv1] = [
@@ -51,8 +80,32 @@ struct RootView: View {
         mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
         mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
         
+        mockMedicalDocument.name = "LFT and KFT with other gastonomical tests"
+        mockMedicalDocument.summary = "Everything looks good, you can consult a gastrologist for in-depth analysis"
+        
         //adding to the system
         system.medicalDocuments.append(mockMedicalDocument)
 
+    }
+}
+
+
+// MARK: - Search View
+struct SearchView: View {
+    var body: some View {
+        NavigationView {
+            Text("Search Page")
+                .navigationTitle("Search")
+        }
+    }
+}
+
+// MARK: - Settings View
+struct SettingsView: View {
+    var body: some View {
+        NavigationView {
+            Text("Settings Page")
+                .navigationTitle("Settings")
+        }
     }
 }

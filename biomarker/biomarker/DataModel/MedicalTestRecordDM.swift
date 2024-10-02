@@ -71,9 +71,9 @@ class MedicalDocumentSection: ObservableObject, Identifiable{
     @Published var testRecords = [BasicMedicalTestRecordv1]()
     let id = UUID.init().uuidString
     //some generative ai data properties
-    let name = "Liver function tests"//todo
-    let summary = ""//todo
-    let keyPoints = ""//todo
+    var name = "Liver function tests"//todo
+    var summary = ""//todo
+    var keyPoints = ""//todo
     
     func addNewMedicalTestRecords(testRecords: BasicMedicalTestRecordv1){
         self.testRecords.append(testRecords)

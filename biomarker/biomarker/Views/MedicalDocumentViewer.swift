@@ -8,6 +8,98 @@
 import Foundation
 import SwiftUI
 
+struct MedicalDocumentViewerSmall: View{
+    var size: CGSize
+    var doc : MedicalDocument
+    var body: some View{
+        NavigationLink(destination: MedicalDocumentViewer(size: size, doc: doc)){
+            VStack(alignment: .leading){
+                
+                HStack{
+                    imageView(systemName: "doc.text.image", color: .primary)
+                    
+                    Text("Medical Report")
+                        .fontWeight(.bold)
+                    
+                    
+                }
+                Text("\(doc.name)")
+                    .multilineTextAlignment(.leading)
+                    .foregroundStyle(.secondary)
+                    .padding([.bottom])
+                
+                HStack{
+                    
+                    imageView(systemName: "note.text", color: .primary)
+                    
+                    VStack(alignment: .leading){
+                        Text("Summary")
+                            .fontWeight(.bold)
+                        
+                        //.font(.title2)
+                        // .padding([.top])
+                        
+                    }
+                    
+                    Spacer()
+                }
+                Text("\(doc.summary)")
+                    .foregroundStyle(.secondary)
+                    .padding([.bottom])
+                    .multilineTextAlignment(.leading)
+                
+                HStack{
+                    // Spacer()
+                    VStack(alignment: .leading){
+                        
+                        //  Spacer()
+                        HStack{
+                            Text(Utils.formatDate(doc.date))
+                            // .fontWeight(.bold)
+                                .font(.headline)
+                                .foregroundStyle(Color.secondary)
+                            //.padding([.leading])
+                            Spacer()
+                        }
+                        
+                        
+                        HStack{
+                            Text("Tests")
+                            // .fontWeight(.bold)
+                                .font(.subheadline)
+                            
+                            
+                            Text("\(doc.totalTestRecordsCount())")
+                                .font(.subheadline)
+                                .foregroundStyle(Color.secondary)
+                        }
+                        // Spacer()
+                        HStack{
+                            Text("Out of ref range")
+                            //   .fontWeight(.bold)
+                                .font(.subheadline)
+                                .multilineTextAlignment(.center)
+                            
+                            Text("\(doc.totalTestOutOfRangeCount())")
+                                .font(.subheadline)
+                                .foregroundStyle(Color.secondary)
+                        }
+                        
+                    }
+                    Spacer()
+                }.foregroundColor(.primary)
+                    .padding([.top])
+            }
+            .padding()
+            .background(CustomBlur(style: .prominent))
+            .cornerRadius(20)
+            .padding([.horizontal,.top])
+            .foregroundColor(.primary)
+        }
+        
+    }
+}
+
 //This view is used to represent a MedicalDocumentView
 struct MedicalDocumentViewer: View{
     var size: CGSize
@@ -17,10 +109,6 @@ struct MedicalDocumentViewer: View{
     var body: some View{
         ScrollView(showsIndicators: false){
             VStack(alignment: .leading){
-                Text(Utils.formatDate(doc.date))
-                    .fontWeight(.bold)
-                    .font(.title3)
-                    .padding([.leading])
                 
                 
                 
@@ -32,14 +120,23 @@ struct MedicalDocumentViewer: View{
                             
                             imageView(systemName: "doc.text.image", color: .primary)
                             
-                            Text("Medical Report")
+                            Text(doc.name)
+                                .multilineTextAlignment(.leading)
                                 .fontWeight(.bold)
-                                .font(.title2)
+                                .font(.headline)
                                 .foregroundColor(.primary)
                                 .padding([.top,.bottom])
                             
                             Spacer()
                         }
+                        
+//                    HStack{
+//                        Text("\(doc.name)")
+//                            .multilineTextAlignment(.leading)
+//                            .foregroundStyle(Color.secondary)
+//                            .padding([.leading,.bottom])
+//                        Spacer()
+//                    }
                         
                         
                         VStack{
@@ -51,7 +148,7 @@ struct MedicalDocumentViewer: View{
                         
                         PDFViewer(url: doc.pdfDocumentUrl)
                         //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
-                            .frame(width: size.width*0.8,height: (size.width*0.8)/1.77)
+                            .frame(width: size.width*0.9,height: (size.width*0.9)/1.77)
                             .cornerRadius(20)
                         
                         //  Spacer()
@@ -59,6 +156,17 @@ struct MedicalDocumentViewer: View{
                         HStack{
                             // Spacer()
                             VStack(alignment: .leading){
+                                
+                                //  Spacer()
+                                HStack{
+                                    Text(Utils.formatDate(doc.date))
+                                        .fontWeight(.bold)
+                                        .font(.title3)
+                                        .foregroundStyle(Color.secondary)
+                                        //.padding([.leading])
+                                    Spacer()
+                                }
+                                
                                 
                                 HStack{
                                     Text("Tests")
@@ -81,8 +189,7 @@ struct MedicalDocumentViewer: View{
                                         .font(.subheadline)
                                         .foregroundStyle(Color.secondary)
                                 }
-                                //  Spacer()
-                                
+                               
                             }
                             Spacer()
                         }.foregroundColor(.primary)
@@ -115,6 +222,7 @@ struct MedicalDocumentViewer: View{
                         }
                         
                         Text("Biomarker found \(doc.totalTestRecordsCount()) tests in the document. \(doc.summary)")
+                            .multilineTextAlignment(.leading)
                             .foregroundStyle(.secondary)
                     }
                     .padding()
@@ -154,6 +262,7 @@ struct MedicalDocumentViewer: View{
                                
                             }
                             .pickerStyle(.segmented)
+                            .padding(.horizontal)
                 
 
               
@@ -215,9 +324,11 @@ struct MedicalDocumentViewer: View{
                 }
                
             }//.padding()
+            .navigationTitle("Medical Record")
             
             //for now
             PDFUploaderView()
+                
         }
     }
     
