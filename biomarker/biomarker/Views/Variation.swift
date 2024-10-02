@@ -256,18 +256,22 @@ struct GroupedTestRecordChartView: View {
                                 Text(firstRecord.test)
                                     .font(.title2)
                                     .fontWeight(.bold)
-                                
-                                
-                                
+        
                                 Spacer()
-                                
-                                //  imageView(systemName: record.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: record.isOutOfRange() ? .red : .green,size: 30)
-                                //    .padding(.trailing,3)
-                                
-                                
-                                
+                     
                             }//.padding(.bottom,1)
                             .padding([.top,.horizontal])
+                            
+                            HStack{
+                                Text("Variation across \(records.count) tests")
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                    .foregroundColor(.secondary)
+        
+                                Spacer()
+                     
+                            }//.padding(.bottom,1)
+                            .padding([.horizontal])
                         }
                     }
                     //
