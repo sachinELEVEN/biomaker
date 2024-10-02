@@ -26,44 +26,9 @@ struct RootTabView: View {
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
+        }.onAppear{
+            setMockMedicalDocument()
         }
-    }
-}
-
-
-
-// MARK: - Home View
-struct HomeView: View {
-    @ObservedObject var sys = system
-    var body: some View {
-        NavigationView{
-           
-                VStack {
-                    GeometryReader{ geo in
-                        ScrollView(showsIndicators: false){
-                        
-                            Text("You have \(sys.medicalDocuments.count) medical \(sys.medicalDocuments.count==1 ? "document" : "documents") containing \(sys.totalTestRecordsCount()) tests")
-                            .fontWeight(.bold)
-                            .padding()
-                        
-                        if sys.medicalDocuments.first != nil{
-                            MedicalDocumentViewerSmall(size: geo.size, doc: sys.medicalDocuments.first!)
-                            //MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first!)
-                        }else{
-                            // ContentView()
-                            PDFUploaderView()
-                        }
-                        
-                    }
-                }.onAppear{
-                    setMockMedicalDocument()
-                }
-            }
-            .padding()
-            .navigationTitle("Home")
-        }
-    
-
     }
     
     func setMockMedicalDocument(){
@@ -93,6 +58,42 @@ struct HomeView: View {
         
         //adding to the system
         system.medicalDocuments.append(mockMedicalDocument)
+
+    }
+
+}
+
+
+
+// MARK: - Home View
+struct HomeView: View {
+    @ObservedObject var sys = system
+    var body: some View {
+        NavigationView{
+           
+                VStack {
+                    GeometryReader{ geo in
+                        ScrollView(showsIndicators: false){
+                        
+                            Text("You have \(sys.medicalDocuments.count) medical \(sys.medicalDocuments.count==1 ? "document" : "documents") containing \(sys.totalTestRecordsCount()) tests")
+                            .fontWeight(.bold)
+                            .padding()
+                        
+                        if sys.medicalDocuments.first != nil{
+                            MedicalDocumentViewerSmall(size: geo.size, doc: sys.medicalDocuments.first!)
+                            //MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first!)
+                        }else{
+                            // ContentView()
+                            PDFUploaderView()
+                        }
+                        
+                    }
+                }
+            }
+            .padding()
+            .navigationTitle("Home")
+        }
+    
 
     }
 }
