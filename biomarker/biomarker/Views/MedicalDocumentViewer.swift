@@ -205,7 +205,7 @@ struct MedicalDocumentViewerDetailed: View{
                         
                         PDFViewer(url: doc.pdfDocumentUrl)
                         //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
-                            .frame(width: size.width*0.9,height: (size.width*0.9)/1.77)
+                            .frame(width: size.width*0.85,height: (size.width*0.85)/1.77)
                             .cornerRadius(20)
                         
                         //  Spacer()
@@ -335,7 +335,8 @@ struct MedicalDocumentViewerDetailed: View{
                     ForEach(getSectionTestRecords(section: section,val: testRecordPicker)){ testRecord in
                         VStack{
                             if testRecordPicker == 2{
-                              TestRecordPlainView(testRecord: testRecord)
+                                TestRecordPlainView(testRecord: testRecord)
+                                    .padding(.horizontal)
                                 Divider().padding(.horizontal).padding(.vertical,3)
                             }else{
                                 TestRecordView(record: testRecord)

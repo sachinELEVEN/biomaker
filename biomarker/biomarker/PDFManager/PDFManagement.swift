@@ -49,9 +49,14 @@ struct PDFUploaderView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Button("Upload PDF") {
+            
+            Button(action:{
                 showDocumentPicker.toggle()
+            }){
+                label("Add Medical PDF Report", textColor: .white, bgColor: .dashboardM3OrangeBar, imgName: "doc.text.image", imgColor: .white, width: 300, radius: 20)
             }
+              
+            
             .sheet(isPresented: $showDocumentPicker) {
                 DocumentPickerView { selectedPDFURL in
                     if let selectedPDFURL = selectedPDFURL {

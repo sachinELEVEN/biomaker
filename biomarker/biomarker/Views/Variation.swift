@@ -201,7 +201,9 @@ struct GroupedTestRecordsView: View {
                     HStack {
                         // Display the group name (test name)
                         Text(testName)
+                            .multilineTextAlignment(.leading)
                             .font(.headline)
+                            
                         
                         Spacer()
                         

@@ -133,6 +133,8 @@ struct HomeView: View {
                             .fontWeight(.bold)
                             .padding()
                         
+                           PDFUploaderView()
+                            
                         if sys.medicalDocuments.count != 0{
                             ForEach(sys.medicalDocuments){ doc in
                                 MedicalDocumentViewerSmall(size: geo.size, doc: doc)
