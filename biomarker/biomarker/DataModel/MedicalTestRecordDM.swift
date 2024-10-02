@@ -131,5 +131,22 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         
         return false
     }
+    
+    //returns the date of the medical document created
+    func testDate()->Date?{
+        for doc in system.medicalDocuments{
+            for section in doc.sections{
+                for testRecord in section.testRecords{
+                    if testRecord.id == self.id{
+                        print(doc.date)
+                        return doc.date
+                    }
+                }
+            }
+        }
+        
+        //returning today's date// this should never happen because the test should be in one of the docment
+        return Date()
+    }
 }
 

@@ -91,8 +91,9 @@ struct VariationView: View {
                 }
                 
                 //track variation charts
-                NavigationLink(destination: GroupedTestRecordView(selectedGroupedRecords: getSelectedGroups(), trackThemAllTogether: self.trackThemAllTogether)) {
-                    Text("show")
+               // NavigationLink(destination: GroupedTestRecordChartView(selectedGroupedRecords: getSelectedGroups(), trackThemAllTogether: self.trackThemAllTogether)) {
+                .sheet(isPresented: $showVariationCharts){
+                    GroupedTestRecordChartView(selectedGroupedRecords: getSelectedGroups(), trackThemAllTogether: self.trackThemAllTogether)
                 }
             }
             .navigationTitle("Track Variation")
@@ -189,25 +190,27 @@ struct GroupedTestRecordsView: View {
 
 
 
-struct GroupedTestRecordView: View {
+
+
+import SwiftUI
+import Charts
+
+struct GroupedTestRecordChartView: View {
     var selectedGroupedRecords: [String: [BasicMedicalTestRecordv1]]
     var trackThemAllTogether: Bool
 
     var body: some View {
-        ScrollView(showsIndicators: false){
-            VStack {
-                if trackThemAllTogether {
-                    // Create a single graph for all selected records
-                    combinedChart(for: selectedGroupedRecords)
-                } else {
-                    // Create separate graphs for each group
-                    ForEach(selectedGroupedRecords.keys.sorted(), id: \.self) { testName in
-                        if let records = selectedGroupedRecords[testName] {
-                            ForEach(records, id: \.id) { record in
-                                TestRecordView(record: record)
-                                    .padding(.bottom)
-                            }
-                        }
+        VStack {
+            if trackThemAllTogether {
+                // Create a single graph for all selected records
+                combinedChart(for: selectedGroupedRecords)
+            } else {
+                // Create separate graphs for each group
+                ForEach(selectedGroupedRecords.keys.sorted(), id: \.self) { testName in
+                    if let records = selectedGroupedRecords[testName] {
+                        // Create a combined chart for the current group
+                        singleGroupChart(for: records)
+                            .padding(.bottom)
                     }
                 }
             }
@@ -221,27 +224,33 @@ struct GroupedTestRecordView: View {
         VStack {
             Text("Combined Test Results")
                 .font(.headline)
-            
-            // Create an empty chart
+
             Chart {
                 // Loop through each test record
                 ForEach(records.flatMap { $0.value }, id: \.id) { record in
-                    if let testValue = Double(record.value) {
-                        // Plot point marks for each record
+                    if let testValue = Double(record.value), let testDate = record.testDate() {
+                        // Plot point marks for each record using test date as x-value
                         PointMark(
-                            x: .value("Test", record.test),
+                            x: .value("Date", testDate),  // Use test date as x-value
                             y: .value("Value", testValue)
                         )
                         .symbolSize(60)
                         .foregroundStyle(record.isOutOfRange() ? .red : .green)
-                        
+
+                        // Connect dots with a line
+                        LineMark(
+                            x: .value("Date", testDate),
+                            y: .value("Value", testValue)
+                        )
+                        .foregroundStyle(record.isOutOfRange() ? .red : .green)
+
                         // Upper reference limit line
                         if let upperLimit = Double(record.plottablerefupperlimit ?? "") {
                             RuleMark(y: .value("Upper Limit", upperLimit.truncate(places: 2)))
                                 .foregroundStyle(.red)
                                 .lineStyle(StrokeStyle(lineWidth: 2))
                         }
-                        
+
                         // Lower reference limit line
                         if let lowerLimit = Double(record.plottablereflowerlimit ?? "") {
                             RuleMark(y: .value("Lower Limit", lowerLimit.truncate(places: 2)))
@@ -258,6 +267,59 @@ struct GroupedTestRecordView: View {
                 AxisMarks(position: .bottom)
             }
             .frame(height: 300)
+        }
+    }
+
+    // Create a single chart for a group of records
+    private func singleGroupChart(for records: [BasicMedicalTestRecordv1]) -> some View {
+        VStack {
+            if let firstRecord = records.first {
+                Text(firstRecord.test) // Display the test name as the title of the chart
+                    .font(.headline)
+
+                Chart {
+                    // Loop through each record in the group
+                    ForEach(records, id: \.id) { record in
+                        if let testValue = Double(record.value), let testDate = record.testDate() {
+                            // Plot point marks for each record using test date as x-value
+                            PointMark(
+                                x: .value("Date", testDate),  // Use test date as x-value
+                                y: .value("Value", testValue)
+                            )
+                            .symbolSize(60)
+                            .foregroundStyle(record.isOutOfRange() ? .red : .green)
+
+                            // Connect dots with a line
+                            LineMark(
+                                x: .value("Date", testDate),
+                                y: .value("Value", testValue)
+                            )
+                            .foregroundStyle(record.isOutOfRange() ? .red : .green)
+
+                            // Upper reference limit line
+                            if let upperLimit = Double(record.plottablerefupperlimit ?? "") {
+                                RuleMark(y: .value("Upper Limit", upperLimit.truncate(places: 2)))
+                                    .foregroundStyle(.red)
+                                    .lineStyle(StrokeStyle(lineWidth: 2))
+                            }
+
+                            // Lower reference limit line
+                            if let lowerLimit = Double(record.plottablereflowerlimit ?? "") {
+                                RuleMark(y: .value("Lower Limit", lowerLimit.truncate(places: 2)))
+                                    .foregroundStyle(.blue)
+                                    .lineStyle(StrokeStyle(lineWidth: 2))
+                            }
+                        }
+                    }
+                }
+                .chartYAxis {
+                    AxisMarks(position: .leading)
+                }
+                .chartXAxis {
+                    AxisMarks(position: .bottom)
+                }
+                .frame(height: 300)
+            }
         }
     }
 }

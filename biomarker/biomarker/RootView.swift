@@ -45,6 +45,9 @@ struct RootTabView: View {
         //creating mock test records
         let records: [BasicMedicalTestRecordv1] = [
             BasicMedicalTestRecordv1(test: "Haemoglobin", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "16", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "19", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "21", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
             BasicMedicalTestRecordv1(test: "Free Testosterone", value: "1.24", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.5", plottablerefupperlimit: "2.0"),
             BasicMedicalTestRecordv1(test: "Vitamin D", value: "32.2", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "20.0", plottablerefupperlimit: "50.0"),
             BasicMedicalTestRecordv1(test: "Bilirubin", value: "1.5", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.3", plottablerefupperlimit: "2.0"),
@@ -58,24 +61,57 @@ struct RootTabView: View {
             BasicMedicalTestRecordv1(test: "Haemoglobin10", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit:"5", plottablerefupperlimit: "10")
         ]
         
+        let records2: [BasicMedicalTestRecordv1] = [
+            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "16", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "19", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "21", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Free Testosterone", value: "1.24", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.5", plottablerefupperlimit: "2.0"),
+            BasicMedicalTestRecordv1(test: "Vitamin D", value: "32.2", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "20.0", plottablerefupperlimit: "50.0"),
+            BasicMedicalTestRecordv1(test: "Bilirubin", value: "1.5", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.3", plottablerefupperlimit: "2.0"),
+            BasicMedicalTestRecordv1(test: "Haemoglobin2", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit:"5", plottablerefupperlimit: "10"),
+            BasicMedicalTestRecordv1(test: "Haemoglobin3", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Free Testosterone2", value: "1.24", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.5", plottablerefupperlimit: "2.0"),
+            BasicMedicalTestRecordv1(test: "Vitamin D3", value: "32.2", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "20.0", plottablerefupperlimit: "50.0"),
+            BasicMedicalTestRecordv1(test: "Bilirubin4", value: "1.5", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.3", plottablerefupperlimit: "2.0"),
+            BasicMedicalTestRecordv1(test: "Haemoglobin9", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit:"5", plottablerefupperlimit: "10"),
+            BasicMedicalTestRecordv1(test: "Bilirubin7", value: "1.5", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.3", plottablerefupperlimit: "2.0"),
+            BasicMedicalTestRecordv1(test: "Haemoglobin10", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit:"5", plottablerefupperlimit: "10")
+        ]
+
+        
         //creating mock medical document section
         let mockDocumentSection = MedicalDocumentSection()
+        let mockDocumentSection2 = MedicalDocumentSection()
         for record in records{
             mockDocumentSection.addNewMedicalTestRecords(testRecords: record)
+            mockDocumentSection2.addNewMedicalTestRecords(testRecords: record)
         }
         
-        let mockMedicalDocument = MedicalDocument(pdfDocumentUrl: mockPdfUrl!)
+        for record in records2{
+            mockDocumentSection2.addNewMedicalTestRecords(testRecords: record)
+        }
+        
+        let date1 = Date(timeIntervalSince1970: 20000)
+        let mockMedicalDocument = MedicalDocument(pdfDocumentUrl: mockPdfUrl!,date: date1)
+        let date2 = Date()
+        let mockMedicalDocument2 = MedicalDocument(pdfDocumentUrl: mockPdfUrl!,date: date2)
         mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
         mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
         mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
         mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+        
+        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
         
         mockMedicalDocument.name = "LFT and KFT with other gastonomical tests"
         mockMedicalDocument.summary = "Everything looks good, you can consult a gastrologist for in-depth analysis"
         
         //adding to the system
         system.medicalDocuments.append(mockMedicalDocument)
-        system.medicalDocuments.append(mockMedicalDocument)
+        system.medicalDocuments.append(mockMedicalDocument2)
 
     }
 
@@ -97,7 +133,7 @@ struct HomeView: View {
                             .fontWeight(.bold)
                             .padding()
                         
-                        if sys.medicalDocuments.count != nil{
+                        if sys.medicalDocuments.count != 0{
                             ForEach(sys.medicalDocuments){ doc in
                                 MedicalDocumentViewerSmall(size: geo.size, doc: doc)
                                 //MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first!)
