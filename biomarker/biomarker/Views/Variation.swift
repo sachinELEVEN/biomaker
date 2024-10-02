@@ -289,7 +289,7 @@ struct GroupedTestRecordChartView: View {
                             //.background(Color.secondary.opacity(0.2))
                             .background(CustomBlur(style: .prominent))
                             .cornerRadius(20)
-                            .padding([.horizontal,.top])
+                            .padding([.horizontal,.vertical])
                     }
                     
                     //display information about what tests were used using simple list p150

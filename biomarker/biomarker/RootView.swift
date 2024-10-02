@@ -18,11 +18,11 @@ struct RootTabView: View {
                     Label("Home", systemImage: "doc.text.below.ecg")
                 }
             
-            SearchView()
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
-            
+//            SearchView()
+//                .tabItem {
+//                    Label("Search", systemImage: "magnifyingglass")
+//                }
+//            
             VariationView()
                 .tabItem {
                     Label("Variation", systemImage: "chart.bar.fill")
