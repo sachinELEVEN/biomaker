@@ -55,89 +55,110 @@ struct PDFUploaderView: View {
     @Binding var showSelf: Bool 
     
     var body: some View {
-        ScrollView(showsIndicators: false){
-            VStack(spacing: 20) {
-                
-                HStack{
-                    Text("Add Medical Report")
-                        .multilineTextAlignment(.leading)
-                        .fontWeight(.bold)
-                        .font(.title)
-                        .padding()
-                        Spacer()
-                }
+        NavigationView{
+            ScrollView(showsIndicators: false){
+                VStack(spacing: 20) {
                     
-                    .sheet(isPresented: $showDocumentPicker) {
-                        DocumentPickerView { selectedPDFURL in
-                            if let selectedPDFURL = selectedPDFURL {
-                                if let savedURL = FileManagerHelper.shared.savePDF(url: selectedPDFURL) {
-                                    //create a new medical record
-                                    pdfURL = savedURL
-                                    self.tempMedicalDocument = MedicalDocument(pdfDocumentUrl: savedURL)
+                    //                HStack{
+                    //                    Text("Add Medical Report")
+                    //                        .multilineTextAlignment(.leading)
+                    //                        .fontWeight(.bold)
+                    //                        .font(.title)
+                    //                        .padding()
+                    //                        Spacer()
+                    //                }
+                    
+                    Text("")
+                        .sheet(isPresented: $showDocumentPicker) {
+                            DocumentPickerView { selectedPDFURL in
+                                if let selectedPDFURL = selectedPDFURL {
+                                    if let savedURL = FileManagerHelper.shared.savePDF(url: selectedPDFURL) {
+                                        //create a new medical record
+                                        pdfURL = savedURL
+                                        self.tempMedicalDocument = MedicalDocument(pdfDocumentUrl: savedURL)
+                                    }
                                 }
                             }
                         }
-                    }
-                
-                if let pdfURL = pdfURL {
-                    //                Button("View PDF") {
-                    //                    showPDFViewer.toggle()
-                    //                }
-                    //                .sheet(isPresented: $showPDFViewer) {
-                    //                    PDFViewer(url: pdfURL)
-                    //                }
                     
-                    PDFViewer(url: pdfURL)
-                    //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
-                        .frame(width: system.fullWidth*0.85,height: (system.fullHeight*0.5))
-                        .cornerRadius(20)
-                    
-                    
-                    if tempMedicalDocument != nil{
-                        Spacer()
-                        Text("It may take a few seconds to analyse your file depending on the file size")
-                            .font(.subheadline)
-                            .padding([.horizontal])
-                            .padding(.top, 3)
-                            .foregroundStyle(Color.secondary)
+                    if let pdfURL = pdfURL {
+                        //                Button("View PDF") {
+                        //                    showPDFViewer.toggle()
+                        //                }
+                        //                .sheet(isPresented: $showPDFViewer) {
+                        //                    PDFViewer(url: pdfURL)
+                        //                }
                         
-                        Button(action:{
-                            system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!){
-                                success, msg in
-                                //processing done
-                                print("Document process was successful? \(success) with msg: \(msg)")
+                        PDFViewer(url: pdfURL)
+                        //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
+                            .frame(width: system.fullWidth*0.85,height: (system.fullHeight*0.5))
+                            .cornerRadius(20)
+                        
+                        
+                        if tempMedicalDocument != nil{
+                            Spacer()
+                            Text("It may take a few seconds to analyse your file depending on the file size")
+                                .font(.subheadline)
+                                .padding([.horizontal])
+                                .padding(.top, 3)
+                                .foregroundStyle(Color.secondary)
+                            
+                            Button(action:{
+                                system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!){
+                                    success, msg in
+                                    //processing done
+                                    print("Document process was successful? \(success) with msg: \(msg)")
+                                }
+                            }){
+                                
+                                
+                                label("Analyze with Biomarker", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 300, radius: 10)
                             }
-                        }){
                             
+                            //                    Button("Process Document"){
+                            //                        system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!){
+                            //                            success, msg in
+                            //                            //processing done
+                            //                            print("Document process was successful? \(success) with msg: \(msg)")
+                            //                        }
+                            //                    }
                             
-                            label("Add to Biomarker", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 300, radius: 10)
+                            //                    Button("Show medical doc"){
+                            //                        showMedicalDocument.toggle()
+                            //                    }
+                            //                    .sheet(isPresented: $showMedicalDocument){
+                            //                        MedicalDocumentViewerHandler(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: tempMedicalDocument!)
+                            //                    }
+                            
                         }
                         
-                        //                    Button("Process Document"){
-                        //                        system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!){
-                        //                            success, msg in
-                        //                            //processing done
-                        //                            print("Document process was successful? \(success) with msg: \(msg)")
-                        //                        }
-                        //                    }
                         
-                        //                    Button("Show medical doc"){
-                        //                        showMedicalDocument.toggle()
-                        //                    }
-                        //                    .sheet(isPresented: $showMedicalDocument){
-                        //                        MedicalDocumentViewerHandler(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: tempMedicalDocument!)
-                        //                    }
                         
                     }
                     
+                    //choose pdf
+                    Button(action:{
+                        showDocumentPicker.toggle()
+                    }){
+                        label("Select Medical Record (PDF)", textColor: .primary, bgColor: .secondary.opacity(0.15), imgName: "doc.text.image", imgColor: .primary, width: 300, radius: 10)
+                    }
                     
-                    
+                }.onAppear{
+                    showDocumentPicker.toggle()
                 }
-            }.onAppear{
-                showDocumentPicker.toggle()
+            }
+            .padding()
+            .navigationTitle("Add Medical Report")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                
+                Button("Close") {
+                    showSelf.toggle()
+                }
+                
+                
             }
         }
-        .padding()
     }
 }
 
