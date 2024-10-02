@@ -11,14 +11,20 @@ class FileManagerHelper {
     static let shared = FileManagerHelper()
     
     func savePDF(url: URL) -> URL? {
-        let fileName = UUID.init().uuidString//create a random pdf file name
+        // Create a file name based on the current date and time
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+        let fileName = "-biomarker-" + dateFormatter.string(from: Date()) + ".pdf"
+        
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let destinationURL = documentDirectory.appendingPathComponent(fileName)
         
         do {
+            // If a file already exists at the destination, remove it
             if FileManager.default.fileExists(atPath: destinationURL.path) {
                 try FileManager.default.removeItem(at: destinationURL)
             }
+            // Copy the file from the provided URL to the destination URL
             try FileManager.default.copyItem(at: url, to: destinationURL)
             print("/FileManagerHelper: File saved to local file system with url \(destinationURL)")
             return destinationURL
@@ -27,7 +33,7 @@ class FileManagerHelper {
             return nil
         }
     }
-    
+
     func getPDF(fileName: String) -> URL? {
         let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         let fileURL = documentDirectory.appendingPathComponent(fileName)
