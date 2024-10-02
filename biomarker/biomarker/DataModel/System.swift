@@ -14,6 +14,9 @@ class System: ObservableObject{
     let fullWidth = UIScreen.main.bounds.width
     let fullHeight = UIScreen.main.bounds.height
     
+    func viewSize()->CGSize{
+        return CGSize(width: fullWidth, height: fullHeight)
+    }
     
     
     ///sends the medical test document to the server and generates new medical records and stores it in the system.medicalDocuments

@@ -145,7 +145,7 @@ struct HomeView: View {
                            
                             
                         if sys.medicalDocuments.count != 0{
-                            ForEach(sys.medicalDocuments){ doc in
+                            ForEach(sys.medicalDocuments.sorted { $0.date > $1.date }){ doc in
                                 MedicalDocumentViewerSmall(size: geo.size, doc: doc)
                                 //MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first!)
                             }

@@ -52,7 +52,8 @@ struct PDFUploaderView: View {
     @State private var showPDFViewer = false
     @State private var tempMedicalDocument : MedicalDocument? = nil
     @State private var showMedicalDocument = false
-    @Binding var showSelf: Bool 
+    @State private var documentProcessingStatus = 0//0 means not started, 1 means in progress, 2 means success, -1 means failed
+    @Binding var showSelf: Bool
     
     var body: some View {
         NavigationView{
@@ -95,24 +96,40 @@ struct PDFUploaderView: View {
                             .cornerRadius(20)
                         
                         
-                        if tempMedicalDocument != nil{
+                        if tempMedicalDocument != nil && documentProcessingStatus != 2{
                             Spacer()
-                            Text("It may take a few seconds to analyse your file depending on the file size")
+                            Text("It may take a few seconds to analyze your file depending on the file size")
                                 .font(.subheadline)
                                 .padding([.horizontal])
                                 .padding(.top, 3)
                                 .foregroundStyle(Color.secondary)
                             
                             Button(action:{
+                                //start loading indicator
+                                if documentProcessingStatus == 1{
+                                    return
+                                }
+                                documentProcessingStatus = 1
                                 system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!){
                                     success, msg in
                                     //processing done
+                                    //finish loading indicator with status update on the biomarker button, ability to analyze the document
                                     print("Document process was successful? \(success) with msg: \(msg)")
+                                    documentProcessingStatus = success ? 2 : -1
                                 }
                             }){
                                 
+                                VStack{
+                                    
+                                    if documentProcessingStatus == 1{
+                                        ActivityIndicator(shouldAnimate: .constant(true))
+                                    }
+                                    
+                                    label(processingButtonText(), textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 300, radius: 10)
+                                }
                                 
-                                label("Analyze with Biomarker", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 300, radius: 10)
+                               
+                                
                             }
                             
                             //                    Button("Process Document"){
@@ -132,6 +149,20 @@ struct PDFUploaderView: View {
                             
                         }
                         
+                    
+                        if tempMedicalDocument != nil && documentProcessingStatus == 2{
+                           
+                            Text("Successfully processed your medical record and added to your Biomarker app")
+                                .font(.subheadline)
+                                .padding([.horizontal])
+                                .padding(.top, 3)
+                                .foregroundStyle(Color.secondary)
+                            //successfully document processed
+                            NavigationLink(destination: MedicalDocumentViewerHandler(size: system.viewSize(), doc: tempMedicalDocument!)){
+                                label("View Your Medical Record", textColor: .white, bgColor: .blue, imgName: "doc.text.image", imgColor: .white, width: 300, radius: 10)
+                            }
+                        }
+                        
                         
                         
                     }
@@ -144,7 +175,10 @@ struct PDFUploaderView: View {
                     }
                     
                 }.onAppear{
-                    showDocumentPicker.toggle()
+                    if documentProcessingStatus == 0{
+                        //we only wanna aut toggle this to true on the first launch of the upload sheet
+                        showDocumentPicker.toggle()
+                    }
                 }
             }
             .padding()
@@ -159,6 +193,20 @@ struct PDFUploaderView: View {
                 
             }
         }
+    }
+    
+    func processingButtonText()->String{
+        if documentProcessingStatus == 1{
+            return "Processing..."
+        }
+        if documentProcessingStatus == 0{
+            return "Analyze with Biomarker"
+        }
+        if documentProcessingStatus == -1{
+            return "Something went wrong. Try again..."
+        }
+        
+        return ""
     }
 }
 
