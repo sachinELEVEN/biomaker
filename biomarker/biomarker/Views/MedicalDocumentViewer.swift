@@ -356,7 +356,7 @@ struct MedicalDocumentViewerDetailed: View{
             .navigationTitle("Medical Record")
             
             //for now
-            PDFUploaderView()
+           // PDFUploaderView()
                 
         }
     }

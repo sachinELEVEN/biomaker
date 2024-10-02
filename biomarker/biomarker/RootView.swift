@@ -122,6 +122,7 @@ struct RootTabView: View {
 // MARK: - Home View
 struct HomeView: View {
     @ObservedObject var sys = system
+    @State var showPdfUploadScreen = false
     var body: some View {
         NavigationView{
            
@@ -133,7 +134,15 @@ struct HomeView: View {
                             .fontWeight(.bold)
                             .padding()
                         
-                           PDFUploaderView()
+                            Button(action:{
+                                showPdfUploadScreen.toggle()
+                            }){
+                                label("Add Medical PDF Report", textColor: .white, bgColor: .dashboardM3OrangeBar, imgName: "doc.text.image", imgColor: .white, width: 300, radius: 20)
+                            }
+                            .sheet(isPresented: $showPdfUploadScreen){
+                                PDFUploaderView(showSelf: $showPdfUploadScreen)
+                            }
+                           
                             
                         if sys.medicalDocuments.count != 0{
                             ForEach(sys.medicalDocuments){ doc in
@@ -142,7 +151,8 @@ struct HomeView: View {
                             }
                         }else{
                             // ContentView()
-                            PDFUploaderView()
+                           // PDFUploaderView()
+                            Text("Add your first medical pdf report and store, manage, analyze it with Biomarker")
                         }
                         
                     }

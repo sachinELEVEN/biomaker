@@ -46,57 +46,89 @@ struct PDFUploaderView: View {
     @State private var showPDFViewer = false
     @State private var tempMedicalDocument : MedicalDocument? = nil
     @State private var showMedicalDocument = false
+    @Binding var showSelf: Bool 
     
     var body: some View {
-        VStack(spacing: 20) {
-            
-            Button(action:{
-                showDocumentPicker.toggle()
-            }){
-                label("Add Medical PDF Report", textColor: .white, bgColor: .dashboardM3OrangeBar, imgName: "doc.text.image", imgColor: .white, width: 300, radius: 20)
-            }
-              
-            
-            .sheet(isPresented: $showDocumentPicker) {
-                DocumentPickerView { selectedPDFURL in
-                    if let selectedPDFURL = selectedPDFURL {
-                        if let savedURL = FileManagerHelper.shared.savePDF(url: selectedPDFURL) {
-                            //create a new medical record
-                            pdfURL = savedURL
-                            self.tempMedicalDocument = MedicalDocument(pdfDocumentUrl: savedURL)
+        ScrollView(showsIndicators: false){
+            VStack(spacing: 20) {
+                
+                HStack{
+                    Text("Add Medical Report")
+                        .multilineTextAlignment(.leading)
+                        .fontWeight(.bold)
+                        .font(.title)
+                        .padding()
+                        Spacer()
+                }
+                    
+                    .sheet(isPresented: $showDocumentPicker) {
+                        DocumentPickerView { selectedPDFURL in
+                            if let selectedPDFURL = selectedPDFURL {
+                                if let savedURL = FileManagerHelper.shared.savePDF(url: selectedPDFURL) {
+                                    //create a new medical record
+                                    pdfURL = savedURL
+                                    self.tempMedicalDocument = MedicalDocument(pdfDocumentUrl: savedURL)
+                                }
+                            }
                         }
                     }
-                }
-            }
-            
-            if let pdfURL = pdfURL {
-                Button("Open PDF") {
-                    showPDFViewer.toggle()
-                }
-                .sheet(isPresented: $showPDFViewer) {
+                
+                if let pdfURL = pdfURL {
+                    //                Button("View PDF") {
+                    //                    showPDFViewer.toggle()
+                    //                }
+                    //                .sheet(isPresented: $showPDFViewer) {
+                    //                    PDFViewer(url: pdfURL)
+                    //                }
+                    
                     PDFViewer(url: pdfURL)
-                }
-                
-                if tempMedicalDocument != nil{
-                    Button("Process Document"){
-                        system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!){
-                            success, msg in
-                            //processing done
-                            print("Document process was successful? \(success) with msg: \(msg)")
+                    //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
+                        .frame(width: system.fullWidth*0.85,height: (system.fullHeight*0.5))
+                        .cornerRadius(20)
+                    
+                    
+                    if tempMedicalDocument != nil{
+                        Spacer()
+                        Text("It may take a few seconds to analyse your file depending on the file size")
+                            .font(.subheadline)
+                            .padding([.horizontal])
+                            .padding(.top, 3)
+                            .foregroundStyle(Color.secondary)
+                        
+                        Button(action:{
+                            system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!){
+                                success, msg in
+                                //processing done
+                                print("Document process was successful? \(success) with msg: \(msg)")
+                            }
+                        }){
+                            
+                            
+                            label("Add to Biomarker", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 300, radius: 10)
                         }
+                        
+                        //                    Button("Process Document"){
+                        //                        system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!){
+                        //                            success, msg in
+                        //                            //processing done
+                        //                            print("Document process was successful? \(success) with msg: \(msg)")
+                        //                        }
+                        //                    }
+                        
+                        //                    Button("Show medical doc"){
+                        //                        showMedicalDocument.toggle()
+                        //                    }
+                        //                    .sheet(isPresented: $showMedicalDocument){
+                        //                        MedicalDocumentViewerHandler(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: tempMedicalDocument!)
+                        //                    }
+                        
                     }
                     
-                    Button("Show medical doc"){
-                        showMedicalDocument.toggle()
-                    }
-                    .sheet(isPresented: $showMedicalDocument){
-                        MedicalDocumentViewerHandler(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: tempMedicalDocument!)
-                    }
+                    
                     
                 }
-               
-                
-                
+            }.onAppear{
+                showDocumentPicker.toggle()
             }
         }
         .padding()
