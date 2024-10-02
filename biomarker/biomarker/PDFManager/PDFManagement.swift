@@ -128,7 +128,7 @@ struct PDFUploaderView: View {
                                     label(processingButtonText(), textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 300, radius: 10)
                                 }
                                 
-                               
+                                
                                 
                             }
                             
@@ -149,10 +149,10 @@ struct PDFUploaderView: View {
                             
                         }
                         
-                    
+                        
                         if tempMedicalDocument != nil && documentProcessingStatus == 2{
-                           
-                            Text("Successfully processed your medical record and added to your Biomarker app")
+                            
+                            Text("Successfully processed your medical document and added to your Biomarker app")
                                 .font(.subheadline)
                                 .padding([.horizontal])
                                 .padding(.top, 3)
@@ -167,11 +167,15 @@ struct PDFUploaderView: View {
                         
                     }
                     
-                    //choose pdf
-                    Button(action:{
-                        showDocumentPicker.toggle()
-                    }){
-                        label("Select Medical Record (PDF)", textColor: .primary, bgColor: .secondary.opacity(0.15), imgName: "doc.text.image", imgColor: .primary, width: 300, radius: 10)
+                    
+                    if documentProcessingStatus != 2{
+                        //as of now we do not allow multiple uploads one after another without closing the screen
+                        //choose pdf
+                        Button(action:{
+                            showDocumentPicker.toggle()
+                        }){
+                            label("Select Medical Record (PDF)", textColor: .primary, bgColor: .secondary.opacity(0.15), imgName: "doc.text.image", imgColor: .primary, width: 300, radius: 10)
+                        }
                     }
                     
                 }.onAppear{
