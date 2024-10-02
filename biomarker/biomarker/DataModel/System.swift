@@ -24,7 +24,7 @@ class System: ObservableObject{
        print("EXPENSIVE CALL - GENERATING NEW MEDICAL TEST RECORDS FOR A NEW MEDICAL DOCUMENT")
         //this medicalDocument will probably have the reference to the actual pdf document which we will have to upload to the server
         
-        APIService.fetchMedicalRecords(medicalDocument: medicalDocument) { records, error in
+        APIService.uploadMedicalDocumentAndFetchDetails(medicalDocument: medicalDocument) { records, error in
             if let error = error {
                 let msg = "Error fetching records: \(error)"
                 print("Error fetching records: \(error)")

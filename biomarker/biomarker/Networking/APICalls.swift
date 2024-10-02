@@ -1,36 +1,52 @@
-//
-//  APICalls.swift
-//  biomarker
-//
-//  Created by sachin jeph on 01/10/24.
-//
-
 import Foundation
 
 class APIService {
     
-    
-    //this will take in a medical record document and return a list of BasicMedicalTestRecordv1
-    static func fetchMedicalRecords(medicalDocument: MedicalDocument,completion: @escaping ([String: [BasicMedicalTestRecordv1]]?, Error?) -> Void) {
+    static func uploadMedicalDocumentAndFetchDetails(medicalDocument: MedicalDocument, completion: @escaping ([String: [BasicMedicalTestRecordv1]]?, Error?) -> Void) {
         
-        //we need to upload the medical document present in the medical document, as of now that will be a pdf
+        // API endpoint
+        var useProdUrl = false
+        var urlString = useProdUrl ? "https://backend.brainsphere.in/biomarker_report_analyser" : "http://localhost:3000/biomarker_report_analyser"
+        guard let url = URL(string: urlString) else { return }
         
-        // Prepare the URL and request
-        guard let url = URL(string: "https://backend.brainsphere.in/biomarker_report_analyser") else { return }
+        // Create a URLRequest
         var request = URLRequest(url: url)
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
         
-        // Optionally, add request headers or body as required by the API
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-
-        // Start the URLSession
+        // Generate the boundary string
+        let boundary = "Boundary-\(UUID().uuidString)"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        // Create the multipart form data
+        var body = Data()
+        
+        // Add credentials
+        let credentials = "2930hrifnef43983hr@9RHIOWWN"
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"credentials\"\r\n\r\n".data(using: .utf8)!)
+        body.append("\(credentials)\r\n".data(using: .utf8)!)
+        
+        // Add the PDF file data
+        let pdfUrl = medicalDocument.pdfDocumentUrl
+        if let pdfData = try? Data(contentsOf: pdfUrl) {
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"files\"; filename=\"medical_document.pdf\"\r\n".data(using: .utf8)!)
+            body.append("Content-Type: application/pdf\r\n\r\n".data(using: .utf8)!)
+            body.append(pdfData)
+            body.append("\r\n".data(using: .utf8)!)
+        }
+        
+        body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+        request.httpBody = body
+        
+        // Start the URLSession task
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, error == nil else {
                 completion(nil, error)
                 return
             }
             
-            // Decode the JSON response
+            // Parse the JSON response
             do {
                 let decoder = JSONDecoder()
                 let records = try decoder.decode([String: [BasicMedicalTestRecordv1]].self, from: data)
