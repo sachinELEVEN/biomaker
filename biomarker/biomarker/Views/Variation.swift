@@ -290,8 +290,16 @@ struct GroupedTestRecordChartView: View {
                     if let records = selectedGroupedRecords[testName] {
                         //Text("Tests used in the above chart").fontWeight(.bold).font(.headline)
                         ForEach(records){ testRecord in
-                            TestRecordPlainView(testRecord: testRecord,showDate: true)
-                            Divider().padding(.horizontal).padding(.vertical,3)
+                            NavigationLink(destination:MedicalDocumentViewerHandler(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: testRecord.getParentDocument()!)){
+                                VStack(alignment: .leading){
+                                    TestRecordPlainView(testRecord: testRecord,showDate: true)
+                                    Text("View medical document")
+                                        .foregroundStyle(Color.pink)
+                                        .padding([.horizontal])
+                                        .padding(.vertical,2)
+                                    Divider().padding(.horizontal).padding(.vertical,3)
+                                }
+                            }
                         }
                     }
                     
