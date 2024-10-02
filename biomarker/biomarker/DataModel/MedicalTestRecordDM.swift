@@ -164,5 +164,36 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         
         return nil
     }
+    
+    func getParentSection()->MedicalDocumentSection?{
+        for doc in system.medicalDocuments{
+            for section in doc.sections{
+                for testRecord in section.testRecords{
+                    if testRecord.id == self.id{
+                       // print(doc.date)
+                        return section
+                    }
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    
+    ///returns a boolean value indicating whether this result matches the search key string
+    func satisfiesSearch(searchStr: String)->Bool{
+        //we need to get parent section's summary, name access here
+        if let parentSection = getParentSection(){
+            //now we need to make a corpus text and find the string there
+            if parentSection.name.lowercased().contains(searchStr) || parentSection.summary.lowercased().contains(searchStr) || parentSection.keyPoints.lowercased().contains(searchStr) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    
 }
 

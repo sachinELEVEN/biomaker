@@ -177,9 +177,15 @@ struct GroupedTestRecordsView: View {
         if searchText.isEmpty {
             return groupedRecords
         } else {
-            return groupedRecords.filter { $0.key.lowercased().contains(searchText.lowercased()) }
+            return groupedRecords.filter { group in
+                // Check if the group name (key) matches the search text
+                group.key.lowercased().contains(searchText.lowercased()) ||
+                // Check if any record in the group matches the search text using satisfiedsearch
+                group.value.contains { $0.satisfiesSearch(searchStr: searchText.lowercased()) }
+            }
         }
     }
+
 
     var body: some View {
         ForEach(filteredRecords.keys.sorted(), id: \.self) { testName in
