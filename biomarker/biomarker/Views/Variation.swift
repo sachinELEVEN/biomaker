@@ -45,6 +45,8 @@ struct VariationView: View {
                                 showActionSheet = true
                             } else {
                                 print("1 row selected only")
+                                trackThemAllTogether = false
+                                showVariationCharts = true
                             }
                         }) {
                             Text("Track \(selectedRecords.count) \(selectedRecords.count==1 ? "Test" : "Tests")")
