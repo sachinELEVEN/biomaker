@@ -49,6 +49,13 @@ struct RootTabView: View {
             BasicMedicalTestRecordv1(test: "Vitamin D", value: "32.2", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "20.0", plottablerefupperlimit: "50.0"),
             BasicMedicalTestRecordv1(test: "Bilirubin", value: "1.5", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.3", plottablerefupperlimit: "2.0"),
             BasicMedicalTestRecordv1(test: "Haemoglobin2", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit:"5", plottablerefupperlimit: "10"),
+            BasicMedicalTestRecordv1(test: "Haemoglobin3", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+            BasicMedicalTestRecordv1(test: "Free Testosterone2", value: "1.24", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.5", plottablerefupperlimit: "2.0"),
+            BasicMedicalTestRecordv1(test: "Vitamin D3", value: "32.2", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "20.0", plottablerefupperlimit: "50.0"),
+            BasicMedicalTestRecordv1(test: "Bilirubin4", value: "1.5", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.3", plottablerefupperlimit: "2.0"),
+            BasicMedicalTestRecordv1(test: "Haemoglobin9", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit:"5", plottablerefupperlimit: "10"),
+            BasicMedicalTestRecordv1(test: "Bilirubin7", value: "1.5", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.3", plottablerefupperlimit: "2.0"),
+            BasicMedicalTestRecordv1(test: "Haemoglobin10", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit:"5", plottablerefupperlimit: "10")
         ]
         
         //creating mock medical document section
@@ -60,11 +67,14 @@ struct RootTabView: View {
         let mockMedicalDocument = MedicalDocument(pdfDocumentUrl: mockPdfUrl!)
         mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
         mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
         
         mockMedicalDocument.name = "LFT and KFT with other gastonomical tests"
         mockMedicalDocument.summary = "Everything looks good, you can consult a gastrologist for in-depth analysis"
         
         //adding to the system
+        system.medicalDocuments.append(mockMedicalDocument)
         system.medicalDocuments.append(mockMedicalDocument)
 
     }
