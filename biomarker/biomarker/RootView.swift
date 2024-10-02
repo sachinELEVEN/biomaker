@@ -23,6 +23,12 @@ struct RootTabView: View {
                     Label("Search", systemImage: "magnifyingglass")
                 }
             
+            VariationView()
+                .tabItem {
+                    Label("Variation", systemImage: "chart.bar.fill")
+                }
+            
+            
             SettingsView()
                 .tabItem {
                     Label("Settings", systemImage: "gear")
@@ -122,3 +128,7 @@ struct SettingsView: View {
         }
     }
 }
+
+
+
+

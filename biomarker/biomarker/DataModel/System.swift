@@ -72,4 +72,15 @@ class System: ObservableObject{
         
         return count
     }
+    
+    func getAllTestRecords()->[BasicMedicalTestRecordv1]{
+        var result = [BasicMedicalTestRecordv1]()
+        for doc in self.medicalDocuments{
+            for section in doc.sections{
+                result.append(contentsOf: section.testRecords)
+            }
+        }
+        
+        return result
+    }
 }

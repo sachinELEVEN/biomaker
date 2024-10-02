@@ -23,6 +23,7 @@
 		8E28FE542CAC704900BE56DA /* IndependentUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE532CAC704900BE56DA /* IndependentUI.swift */; };
 		8E28FE562CAC726200BE56DA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE552CAC726200BE56DA /* Extensions.swift */; };
 		8E28FE582CAC89DD00BE56DA /* TestRecordSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */; };
+		8E28FE5A2CAD2DBB00BE56DA /* Variation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE592CAD2DBB00BE56DA /* Variation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		8E28FE532CAC704900BE56DA /* IndependentUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndependentUI.swift; sourceTree = "<group>"; };
 		8E28FE552CAC726200BE56DA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRecordSmallView.swift; sourceTree = "<group>"; };
+		8E28FE592CAD2DBB00BE56DA /* Variation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				8E28FE502CAC6E7000BE56DA /* MedicalDocumentViewer.swift */,
+				8E28FE592CAD2DBB00BE56DA /* Variation.swift */,
 				8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */,
 			);
 			path = Views;
@@ -333,6 +336,7 @@
 				8E28FE542CAC704900BE56DA /* IndependentUI.swift in Sources */,
 				8E28FE4C2CAC506100BE56DA /* PDFManagement.swift in Sources */,
 				8E28FE562CAC726200BE56DA /* Extensions.swift in Sources */,
+				8E28FE5A2CAD2DBB00BE56DA /* Variation.swift in Sources */,
 				8E28FE472CAC462500BE56DA /* APICalls.swift in Sources */,
 				8E28FE182CAC426B00BE56DA /* biomarkerApp.swift in Sources */,
 				8E28FE512CAC6E7000BE56DA /* MedicalDocumentViewer.swift in Sources */,
