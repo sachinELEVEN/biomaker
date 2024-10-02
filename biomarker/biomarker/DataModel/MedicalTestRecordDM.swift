@@ -8,7 +8,7 @@
 import Foundation
 
 //A medical document has a the original medical document reference and a list of medical records
-class MedicalDocument: ObservableObject{
+class MedicalDocument: ObservableObject,Identifiable{
     
     var pdfDocumentUrl : URL//represent the documenturl of the pdf which is saved to the local file system. this is the string saved in local user defaults for later access to the document
     var date:Date

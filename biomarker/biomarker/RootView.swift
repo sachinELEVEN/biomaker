@@ -10,6 +10,7 @@ import SwiftUI
 import SwiftUI
 
 struct RootTabView: View {
+    @ObservedObject var sys = system
     var body: some View {
         TabView {
             HomeView()
@@ -29,6 +30,7 @@ struct RootTabView: View {
         }.onAppear{
             setMockMedicalDocument()
         }
+        .accentColor(.primary)
     }
     
     func setMockMedicalDocument(){
@@ -79,9 +81,11 @@ struct HomeView: View {
                             .fontWeight(.bold)
                             .padding()
                         
-                        if sys.medicalDocuments.first != nil{
-                            MedicalDocumentViewerSmall(size: geo.size, doc: sys.medicalDocuments.first!)
-                            //MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first!)
+                        if sys.medicalDocuments.count != nil{
+                            ForEach(sys.medicalDocuments){ doc in
+                                MedicalDocumentViewerSmall(size: geo.size, doc: doc)
+                                //MedicalDocumentViewer(size: geo.size, doc: sys.medicalDocuments.first!)
+                            }
                         }else{
                             // ContentView()
                             PDFUploaderView()
