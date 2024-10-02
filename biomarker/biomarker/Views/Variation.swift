@@ -10,7 +10,7 @@ struct VariationView: View {
     @State private var showActionSheet = false            // Control action sheet visibility
     @State private var searchText = ""                   // Text to filter records
     @State private var showVariationCharts = false
-    @State private var trackThemAllTogether = false
+    @State private var mergeSelectedGroups = false
 
     var body: some View {
         NavigationView {
@@ -45,7 +45,7 @@ struct VariationView: View {
                                 showActionSheet = true
                             } else {
                                 print("1 row selected only")
-                                trackThemAllTogether = false
+                                //trackThemAllTogether = false
                                 showVariationCharts = true
                             }
                         }) {
@@ -64,12 +64,14 @@ struct VariationView: View {
                                 message: Text("How would you like to track the variations?"),
                                 buttons: [
                                     .default(Text("Track Each Selected Test Separately")) {
-                                        trackThemAllTogether = false
+                                       // trackThemAllTogether = false
+                                        mergeSelectedGroups = false
                                         showVariationCharts = true
                                         print("Track Each Selected Test Separately")
                                     },
                                     .default(Text("Track All Selected Tests Together")) {
-                                        trackThemAllTogether = true
+                                      //  trackThemAllTogether = true
+                                        mergeSelectedGroups = true
                                         showVariationCharts = true
                                         print("rack All Selected Tests Together")
                                     },
@@ -93,7 +95,7 @@ struct VariationView: View {
                 //track variation charts
                // NavigationLink(destination: GroupedTestRecordChartView(selectedGroupedRecords: getSelectedGroups(), trackThemAllTogether: self.trackThemAllTogether)) {
                 .sheet(isPresented: $showVariationCharts){
-                    GroupedTestRecordChartView(selectedGroupedRecords: getSelectedGroups(), trackThemAllTogether: self.trackThemAllTogether)
+                    GroupedTestRecordChartView(selectedGroupedRecords: getSelectedGroups())
                 }
             }
             .navigationTitle("Track Variation")
@@ -112,10 +114,25 @@ struct VariationView: View {
     
     func getSelectedGroups() -> [String: [BasicMedicalTestRecordv1]] {
         // Group all test records by test name
-        var allGroupedRecords = Dictionary(grouping: sys.getAllTestRecords(), by: { $0.test })
+        let allGroupedRecords = Dictionary(grouping: sys.getAllTestRecords(), by: { $0.test })
+        
+        // Filter the grouped records to only include the selected groups
+        var selectedGroupedRecords = allGroupedRecords.filter { selectedRecords.contains($0.key) }
+        
+       
+        // Check if we need to merge the selected groups
+        if mergeSelectedGroups {
+            // Combine all the records from the selected groups into one array
+            let combinedRecords = selectedGroupedRecords.values.flatMap { $0 }
+                
+            // Create a new entry in selectedGroupedRecords for the combined records
+            selectedGroupedRecords = ["combined": combinedRecords]
+        }
+        
+        
         
         // Sort the grouped records by the test date for each group
-        for (testName, records) in allGroupedRecords {
+        for (testName, records) in selectedGroupedRecords {
             // Sort records by their test date in ascending order
             let sortedRecords = records.sorted {
                 guard let date1 = $0.testDate(), let date2 = $1.testDate() else {
@@ -125,12 +142,11 @@ struct VariationView: View {
             }
             
             // Update the grouped records with sorted records
-            allGroupedRecords[testName] = sortedRecords
+            selectedGroupedRecords[testName] = sortedRecords
         }
 
         
-        // Filter the grouped records to only include the selected groups
-        let selectedGroupedRecords = allGroupedRecords.filter { selectedRecords.contains($0.key) }
+      
         
         return selectedGroupedRecords
     }
@@ -210,14 +226,15 @@ import Charts
 
 struct GroupedTestRecordChartView: View {
     var selectedGroupedRecords: [String: [BasicMedicalTestRecordv1]]
-    var trackThemAllTogether: Bool
+   // var mergeSelectedGroups: Bool
 
     var body: some View {
         VStack {
-            if trackThemAllTogether {
+           // if mergeSelectedGroups {
                 // Create a single graph for all selected records
-                combinedChart(for: selectedGroupedRecords)
-            } else {
+                //i dont think we need this, if multiple test groups are to be plotted we will just put them in a single list and sort them according to date
+              //  combinedChart(for: selectedGroupedRecords)
+         //   } else {
                 // Create separate graphs for each group
                 ForEach(selectedGroupedRecords.keys.sorted(), id: \.self) { testName in
                     if let records = selectedGroupedRecords[testName] {
@@ -226,7 +243,7 @@ struct GroupedTestRecordChartView: View {
                             .padding(.bottom)
                     }
                 }
-            }
+           // }
         }
         .navigationTitle("Test Records")
         .padding()
@@ -301,27 +318,29 @@ struct GroupedTestRecordChartView: View {
                             )
                             .symbolSize(60)
                             .foregroundStyle(record.isOutOfRange() ? .red : .green)
-
+                            
                             // Connect dots with a line
                             LineMark(
                                 x: .value("Date", testDate),
                                 y: .value("Value", testValue)
                             )
                             .foregroundStyle(record.isOutOfRange() ? .red : .green)
-                        
+                            
+                           
                             // Upper reference limit line
                             if let upperLimit = Double(record.plottablerefupperlimit ?? "") {
                                 RuleMark(y: .value("Upper Limit", upperLimit.truncate(places: 2)))
                                     .foregroundStyle(.red)
-                                    .lineStyle(StrokeStyle(lineWidth: 2))
+                                    .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, dash: [0.5, 5]))
                             }
-
+                            
                             // Lower reference limit line
                             if let lowerLimit = Double(record.plottablereflowerlimit ?? "") {
                                 RuleMark(y: .value("Lower Limit", lowerLimit.truncate(places: 2)))
                                     .foregroundStyle(.blue)
-                                    .lineStyle(StrokeStyle(lineWidth: 2))
+                                    .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, dash: [0.5, 5]))
                             }
+                       
                         }
                     }
                 }
