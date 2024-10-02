@@ -112,13 +112,26 @@ struct VariationView: View {
     
     func getSelectedGroups() -> [String: [BasicMedicalTestRecordv1]] {
         // Group all test records by test name
-        let allGroupedRecords = Dictionary(grouping: sys.getAllTestRecords(), by: { $0.test })
+        var allGroupedRecords = Dictionary(grouping: sys.getAllTestRecords(), by: { $0.test })
+        
+        // Sort the grouped records by the test date for each group
+        for (testName, records) in allGroupedRecords {
+            // Sort records by their test date in ascending order
+            let sortedRecords = records.sorted {
+                guard let date1 = $0.testDate(), let date2 = $1.testDate() else {
+                    return false // Handle the case where date might be nil
+                }
+                return date1 < date2 // Sort records by date in ascending order
+            }
+            
+            // Update the grouped records with sorted records
+            allGroupedRecords[testName] = sortedRecords
+        }
+
         
         // Filter the grouped records to only include the selected groups
         let selectedGroupedRecords = allGroupedRecords.filter { selectedRecords.contains($0.key) }
         
-        //we should sort them by document.date before here
-        //TODO
         return selectedGroupedRecords
     }
 
@@ -295,7 +308,7 @@ struct GroupedTestRecordChartView: View {
                                 y: .value("Value", testValue)
                             )
                             .foregroundStyle(record.isOutOfRange() ? .red : .green)
-
+                        
                             // Upper reference limit line
                             if let upperLimit = Double(record.plottablerefupperlimit ?? "") {
                                 RuleMark(y: .value("Upper Limit", upperLimit.truncate(places: 2)))
