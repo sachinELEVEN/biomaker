@@ -85,7 +85,7 @@ struct RootTabView: View {
         let mockDocumentSection2 = MedicalDocumentSection()
         for record in records{
             mockDocumentSection.addNewMedicalTestRecords(testRecords: record)
-            mockDocumentSection2.addNewMedicalTestRecords(testRecords: record)
+           // mockDocumentSection2.addNewMedicalTestRecords(testRecords: record)
         }
         
         for record in records2{
@@ -97,13 +97,13 @@ struct RootTabView: View {
         let date2 = Date()
         let mockMedicalDocument2 = MedicalDocument(pdfDocumentUrl: mockPdfUrl!,date: date2)
         mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
-        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
-        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
-        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+//        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+//        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+//        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
         
-        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
-        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
-        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+//        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+//        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+//        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
         mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
         
         mockMedicalDocument.name = "LFT and KFT with other gastonomical tests"
