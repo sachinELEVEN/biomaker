@@ -85,7 +85,7 @@ struct PDFUploaderView: View {
                                         self.tempMedicalDocument = MedicalDocument(pdfDocumentUrl: savedURL)
                                     }
                                 }
-                            }
+                            }.ignoresSafeArea(.all)
                         }
                     
                     if let pdfURL = pdfURL {
@@ -191,6 +191,7 @@ struct PDFUploaderView: View {
                     }
                 }
             }
+            .ignoresSafeArea(.all)
             .padding()
             .navigationTitle("Add Medical Report")
             .navigationBarTitleDisplayMode(.inline)
