@@ -73,9 +73,15 @@ struct PDFUploaderView: View {
                         .sheet(isPresented: $showDocumentPicker) {
                             DocumentPickerView { selectedPDFURL in
                                 if let selectedPDFURL = selectedPDFURL {
+                                    
                                     if let savedURL = FileManagerHelper.shared.savePDF(url: selectedPDFURL) {
                                         //create a new medical record
-                                        pdfURL = savedURL
+                                        //WORKAROUND- For some reason changing the pdfUrl is not updating the pdf we display, so this below workaround works. i am not going into detail as to why its happening for now, its very late and chances are this side project will be dead soon, so who cares (i care but i care about other things more for now, like getting this app ready for v1 release)
+                                        pdfURL = nil
+                                        DispatchQueue.main.asyncAfter(deadline: .now()+0.1, execute: {
+                                            pdfURL = savedURL
+                                        })
+                                       
                                         self.tempMedicalDocument = MedicalDocument(pdfDocumentUrl: savedURL)
                                     }
                                 }
