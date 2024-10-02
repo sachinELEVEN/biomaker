@@ -21,7 +21,7 @@ struct VariationView: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(8)
                     .padding(.horizontal)
-                
+
                 ScrollView {
                     GroupedTestRecordsView(
                         testRecords: sys.getAllTestRecords(),
@@ -29,15 +29,15 @@ struct VariationView: View {
                         searchText: searchText // Pass the search text
                     )
                 }
-                
+
                 // "Track" button at the bottom
-                VStack{
+                VStack {
                     Text("Track how test results vary across medical records. Select one or more tests to Track and analyze.")
                         .font(.subheadline)
                         .padding([.horizontal])
                         .padding(.top, 3)
                         .foregroundStyle(Color.secondary)
-                    
+
                     if !selectedRecords.isEmpty {
                         Button(action: {
                             // Show action sheet when 2 or more records are selected
@@ -45,11 +45,11 @@ struct VariationView: View {
                                 showActionSheet = true
                             } else {
                                 print("1 row selected only")
-                                //trackThemAllTogether = false
-                                showVariationCharts = true
+                                // Navigate directly to the chart view when one record is selected
+                                navigateToChartView()
                             }
                         }) {
-                            Text("Track \(selectedRecords.count) \(selectedRecords.count==1 ? "Test" : "Tests")")
+                            Text("Track \(selectedRecords.count) \(selectedRecords.count == 1 ? "Test" : "Tests")")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -64,16 +64,16 @@ struct VariationView: View {
                                 message: Text("How would you like to track the variations?"),
                                 buttons: [
                                     .default(Text("Track Each Selected Test Separately")) {
-                                       // trackThemAllTogether = false
+                                        // Navigate to chart view for separate tracking
                                         mergeSelectedGroups = false
-                                        showVariationCharts = true
+                                        navigateToChartView()
                                         print("Track Each Selected Test Separately")
                                     },
                                     .default(Text("Track All Selected Tests Together")) {
-                                      //  trackThemAllTogether = true
+                                        // Navigate to chart view for combined tracking
                                         mergeSelectedGroups = true
-                                        showVariationCharts = true
-                                        print("rack All Selected Tests Together")
+                                        navigateToChartView()
+                                        print("Track All Selected Tests Together")
                                     },
                                     .cancel()
                                 ]
@@ -91,26 +91,32 @@ struct VariationView: View {
                             .padding()
                     }
                 }
-                
-                //track variation charts
-               // NavigationLink(destination: GroupedTestRecordChartView(selectedGroupedRecords: getSelectedGroups(), trackThemAllTogether: self.trackThemAllTogether)) {
-                .sheet(isPresented: $showVariationCharts){
-                    GroupedTestRecordChartView(selectedGroupedRecords: getSelectedGroups())
+
+                // Navigation link for chart view
+                NavigationLink(destination: GroupedTestRecordChartView(selectedGroupedRecords: getSelectedGroups()),isActive: $showVariationCharts) {
+                    EmptyView() // This will not show any button; it only serves to navigate
                 }
+                .hidden() // Hide the navigation link since we navigate directly via button actions
             }
             .navigationTitle("Track Variation")
             .toolbar {
-                if selectedRecords.count >= 1{
+                if selectedRecords.count >= 1 {
                     Button("Deselect All") {
                         selectedRecords.removeAll()
                     }
-                    
                 }
-
-                            }
+            }
         }
+
+        
+
     }
     
+    
+    // Function to handle navigation to the chart view
+    private func navigateToChartView() {
+        showVariationCharts = true // Set this flag if you want to manage navigation
+    }
     
     func getSelectedGroups() -> [String: [BasicMedicalTestRecordv1]] {
         // Group all test records by test name
@@ -229,25 +235,29 @@ struct GroupedTestRecordChartView: View {
    // var mergeSelectedGroups: Bool
 
     var body: some View {
-        VStack {
-           // if mergeSelectedGroups {
+        ScrollView(showsIndicators: false){
+            VStack {
+                // if mergeSelectedGroups {
                 // Create a single graph for all selected records
                 //i dont think we need this, if multiple test groups are to be plotted we will just put them in a single list and sort them according to date
-              //  combinedChart(for: selectedGroupedRecords)
-         //   } else {
+                //  combinedChart(for: selectedGroupedRecords)
+                //   } else {
                 // Create separate graphs for each group
                 ForEach(selectedGroupedRecords.keys.sorted(), id: \.self) { testName in
                     if let records = selectedGroupedRecords[testName] {
                         // Create a combined chart for the current group
                         singleGroupChart(for: records)
                             .padding(.bottom)
+                            .background()
                     }
                 }
-           // }
+                // }
+            }
+            .navigationTitle("Test Records")
+            .padding()
         }
-        .navigationTitle("Test Records")
-        .padding()
     }
+        
 
     // Combined chart for all records
     private func combinedChart(for records: [String: [BasicMedicalTestRecordv1]]) -> some View {
