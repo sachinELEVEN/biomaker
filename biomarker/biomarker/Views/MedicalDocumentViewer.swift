@@ -11,8 +11,22 @@ import SwiftUI
 struct MedicalDocumentViewerSmall: View{
     var size: CGSize
     var doc : MedicalDocument
+    var allowNavtoMedicalDocumentViewerHandler = true
     var body: some View{
-        NavigationLink(destination: MedicalDocumentViewer(size: size, doc: doc)){
+        if allowNavtoMedicalDocumentViewerHandler{
+            NavigationLink(destination: MedicalDocumentViewerHandler(size: size, doc: doc)){
+                MedicalDocumentViewerSmallInternal(size: size, doc: doc)
+            }
+        }else{
+            MedicalDocumentViewerSmallInternal(size: size, doc: doc)
+        }
+        
+    }
+    
+    struct MedicalDocumentViewerSmallInternal : View{
+        var size: CGSize
+        var doc : MedicalDocument
+        var body : some View{
             VStack(alignment: .leading){
                 
                 HStack{
@@ -95,13 +109,56 @@ struct MedicalDocumentViewerSmall: View{
             .cornerRadius(20)
             .padding([.horizontal,.top])
             .foregroundColor(.primary)
+            
         }
-        
+    }
+}
+
+struct MedicalDocumentViewerHandler: View{
+    var size: CGSize
+    var doc : MedicalDocument
+    @State var testRecordPicker = 0//0- for full detail, 1 for brief, 2 for other options like share, delete, chart with ai etc
+    var body: some View{
+        VStack{
+            Picker("", selection: $testRecordPicker) {
+                            Text("Detailed").tag(0)
+                            Text("Brief").tag(1)
+                            Text("More").tag(2)
+                           
+                        }
+                        .pickerStyle(.segmented)
+                        .padding(.horizontal)
+            
+            
+            if testRecordPicker == 0 {
+                MedicalDocumentViewerDetailed(size: size, doc: doc)
+            }
+            
+            if testRecordPicker == 1 {
+                ScrollView{
+                    //this should have AI features as well
+                    MedicalDocumentViewerSmall(size: size, doc: doc, allowNavtoMedicalDocumentViewerHandler: false)
+                        .navigationTitle("Medical Record")
+                        
+                }
+            }
+            
+            if testRecordPicker == 2 {
+                ScrollView{
+                    Text("Take actions")
+                        .navigationTitle("Medical Record")
+                        
+                }
+               // MedicalDocumentViewerDetailed(size: size, doc: doc)
+            }
+            
+
+        }
     }
 }
 
 //This view is used to represent a MedicalDocumentView
-struct MedicalDocumentViewer: View{
+struct MedicalDocumentViewerDetailed: View{
     var size: CGSize
     @State var showPDFViewer = false
     @State var testRecordPicker = 0//0- for all, 1 for out of range

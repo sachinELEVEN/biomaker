@@ -85,7 +85,7 @@ struct PDFUploaderView: View {
                         showMedicalDocument.toggle()
                     }
                     .sheet(isPresented: $showMedicalDocument){
-                        MedicalDocumentViewer(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: tempMedicalDocument!)
+                        MedicalDocumentViewerHandler(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: tempMedicalDocument!)
                     }
                     
                 }
