@@ -1,27 +1,38 @@
 import Foundation
 import SwiftUI
 
-// MARK: - Settings View
+// MARK: - VariationView
 struct VariationView: View {
     @ObservedObject var sys = system
     
     @State private var selectedRecords: Set<String> = []  // Track selected records
     @State private var showActionSheet = false            // Control action sheet visibility
-    
+    @State private var searchText = ""                   // Text to filter records
+
     var body: some View {
         NavigationView {
             VStack {
+                // Search bar
+                TextField("Search tests...", text: $searchText)
+                    .padding(10)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+                
                 ScrollView {
-                    GroupedTestRecordsView(testRecords: sys.getAllTestRecords(), selectedRecords: $selectedRecords)
+                    GroupedTestRecordsView(
+                        testRecords: sys.getAllTestRecords(),
+                        selectedRecords: $selectedRecords,
+                        searchText: searchText // Pass the search text
+                    )
                 }
                 
-                // "Compare" button at the bottom
+                // "Track" button at the bottom
                 VStack{
-                    Text("Track how test results vary across medical records. Select one or more tests to compare and analyze.")
-                    // .fontWeight(.bold)
+                    Text("Track how test results vary across medical records. Select one or more tests to Track and analyze.")
                         .font(.subheadline)
                         .padding([.horizontal])
-                        .padding(.top,3)
+                        .padding(.top, 3)
                         .foregroundStyle(Color.secondary)
                     
                     if !selectedRecords.isEmpty {
@@ -33,7 +44,7 @@ struct VariationView: View {
                                 print("1 row selected only")
                             }
                         }) {
-                            Text("Compare")
+                            Text("Track \(selectedRecords.count) \(selectedRecords.count==1 ? "Test" : "Tests")")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding()
@@ -47,23 +58,19 @@ struct VariationView: View {
                                 title: Text("Track Variation"),
                                 message: Text("How would you like to track the variations?"),
                                 buttons: [
-                                    .default(Text("Track All Rows Together")) {
-                                        print("Track all selected rows together")
+                                    .default(Text("Track All Selected Tests Together")) {
+                                        print("rack All Selected Tests Together")
                                     },
-                                    .default(Text("Track Each Row Separately")) {
-                                        print("Track each row separately")
+                                    .default(Text("Track Each Selected Test Separately")) {
+                                        print("Track Each Selected Test Separately")
                                     },
                                     .cancel()
                                 ]
                             )
                         }
-                    }
-                    
-                    else{
-                        
-                        
-                        //Dummy compare button
-                        Text("Compare")
+                    } else {
+                        // Disabled Track button
+                        Text("Track")
                             .font(.headline)
                             .frame(maxWidth: .infinity)
                             .padding()
@@ -71,18 +78,19 @@ struct VariationView: View {
                             .foregroundColor(.white)
                             .cornerRadius(8)
                             .padding()
-                        
-                        
                     }
                 }
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-//                        .stroke(selectedRecords.isEmpty ? Color.secondary : Color.blue, lineWidth: 1)
-//                        
-//                )
-                
             }
             .navigationTitle("Track Variation")
+            .toolbar {
+                if selectedRecords.count >= 1{
+                    Button("Deselect All") {
+                        selectedRecords.removeAll()
+                    }
+                    
+                }
+
+                            }
         }
     }
 }
@@ -92,15 +100,25 @@ struct GroupedTestRecordsView: View {
     var testRecords: [BasicMedicalTestRecordv1]
     
     @Binding var selectedRecords: Set<String>  // Binding to track selected records
+    var searchText: String                     // Search text to filter records
     
     // Group the test records by test name
     var groupedRecords: [String: [BasicMedicalTestRecordv1]] {
         Dictionary(grouping: testRecords, by: { $0.test })
     }
 
+    // Filtered records based on search text
+    var filteredRecords: [String: [BasicMedicalTestRecordv1]] {
+        if searchText.isEmpty {
+            return groupedRecords
+        } else {
+            return groupedRecords.filter { $0.key.lowercased().contains(searchText.lowercased()) }
+        }
+    }
+
     var body: some View {
-        ForEach(groupedRecords.keys.sorted(), id: \.self) { testName in
-            if let group = groupedRecords[testName] {
+        ForEach(filteredRecords.keys.sorted(), id: \.self) { testName in
+            if let group = filteredRecords[testName] {
                 HStack {
                     // Display the group name (test name)
                     Text(testName)
@@ -128,6 +146,5 @@ struct GroupedTestRecordsView: View {
                 Divider().padding(.horizontal)
             }
         }
-        .navigationTitle("Track Variation")
     }
 }
