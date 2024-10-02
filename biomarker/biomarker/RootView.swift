@@ -137,7 +137,7 @@ struct HomeView: View {
                             Button(action:{
                                 showPdfUploadScreen.toggle()
                             }){
-                                label("Add Medical PDF Report", textColor: .white, bgColor: .dashboardM3OrangeBar, imgName: "doc.text.image", imgColor: .white, width: 300, radius: 20)
+                                label("Add Medical Report (PDF)", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 300, radius: 10)
                             }
                             .sheet(isPresented: $showPdfUploadScreen){
                                 PDFUploaderView(showSelf: $showPdfUploadScreen)

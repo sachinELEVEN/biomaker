@@ -52,6 +52,8 @@ class System: ObservableObject{
                 
             DispatchQueue.main.async{
                 //Adding the medical document to the user's list of medical documents
+                //GET MEDICAL DOCUMENT DATE FROM API CALL //TODO LATER
+                medicalDocument.date = Date()
                 self.medicalDocuments.append(medicalDocument)
                 msg += "Processing done for \(testCounter) tests"
                 print("/generateNewMedicalTestRecords: New medical document added to the system with \(medicalDocument.sections.count) sections")
