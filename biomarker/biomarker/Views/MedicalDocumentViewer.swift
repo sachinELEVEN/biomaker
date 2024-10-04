@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct MedicalDocumentViewerSmall: View{
+    @ObservedObject var sys = system
     var size: CGSize
     var doc : MedicalDocument
     var allowNavtoMedicalDocumentViewerHandler = true
@@ -24,6 +25,7 @@ struct MedicalDocumentViewerSmall: View{
     }
     
     struct MedicalDocumentViewerSmallInternal : View{
+        @ObservedObject var sys = system
         var size: CGSize
         var doc : MedicalDocument
         var body : some View{
@@ -115,8 +117,10 @@ struct MedicalDocumentViewerSmall: View{
 }
 
 struct MedicalDocumentViewerHandler: View{
+    @ObservedObject var sys = system
     var size: CGSize
     var doc : MedicalDocument
+    @State var showAddTestManuallyScreen = false
     @State var testRecordPicker = 0//0- for full detail, 1 for brief, 2 for other options like share, delete, chart with ai etc
     var body: some View{
         VStack{
@@ -132,6 +136,20 @@ struct MedicalDocumentViewerHandler: View{
             
             if testRecordPicker == 0 {
                 MedicalDocumentViewerDetailed(size: size, doc: doc)
+                    .toolbar {
+                                        ToolbarItem(placement: .navigationBarTrailing) {
+                                            Button(action: {
+                                                // Your action here
+                                                //print("Plus button tapped")
+                                                self.showAddTestManuallyScreen.toggle()
+                                            }) {
+                                                Image(systemName: "plus")  // SF Symbol for plus icon
+                                            }
+                                        }
+                                    }
+                    .sheet(isPresented: $showAddTestManuallyScreen){
+                        CreateTestRecordView(showSelf: $showAddTestManuallyScreen, document: doc)
+                    }
             }
             
             if testRecordPicker == 1 {
@@ -179,6 +197,7 @@ struct MedicalDocumentViewerHandler: View{
 
 //This view is used to represent a MedicalDocumentView
 struct MedicalDocumentViewerDetailed: View{
+    @ObservedObject var sys = system
     var size: CGSize
     @State var showPDFViewer = false
     @State var testRecordPicker = 0//0- for all, 1 for out of range

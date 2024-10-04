@@ -228,6 +228,7 @@ struct TestRecordPlainView: View{
                         //                                                Text(testRecord.plottablereflowerlimit ?? "")
                         //                                                Text(testRecord.unit)
                         Text("Should be between \(testRecord.plottablereflowerlimit ?? "") \(testRecord.unit) and \(testRecord.plottablerefupperlimit ?? "") \(testRecord.unit)")
+                            .multilineTextAlignment(.leading)
                         
                         Spacer()
                     }.padding(.leading)

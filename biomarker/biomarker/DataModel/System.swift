@@ -10,6 +10,11 @@ import SwiftUI
 
 class System: ObservableObject{
     @Published var medicalDocuments = [MedicalDocument]()
+    @Published var _refresh = true
+    
+    func refresh(){
+        self._refresh.toggle()
+    }
     
     let fullWidth = UIScreen.main.bounds.width
     let fullHeight = UIScreen.main.bounds.height

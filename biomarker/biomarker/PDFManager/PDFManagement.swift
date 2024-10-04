@@ -207,6 +207,7 @@ struct PDFUploaderView: View {
             .padding()
             .navigationTitle("Add Medical Report")
             .navigationBarTitleDisplayMode(.inline)
+            .edgesIgnoringSafeArea(.bottom)
             .toolbar {
                 
                 Button("Close") {

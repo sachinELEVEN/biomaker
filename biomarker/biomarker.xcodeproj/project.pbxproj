@@ -25,6 +25,7 @@
 		8E28FE582CAC89DD00BE56DA /* TestRecordSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */; };
 		8E28FE5A2CAD2DBB00BE56DA /* Variation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE592CAD2DBB00BE56DA /* Variation.swift */; };
 		8E28FE5C2CAD8E3300BE56DA /* PDFShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */; };
+		8E604EA92CB0665A00694510 /* TestRecordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E604EA82CB0665A00694510 /* TestRecordEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRecordSmallView.swift; sourceTree = "<group>"; };
 		8E28FE592CAD2DBB00BE56DA /* Variation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variation.swift; sourceTree = "<group>"; };
 		8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFShareView.swift; sourceTree = "<group>"; };
+		8E604EA82CB0665A00694510 /* TestRecordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRecordEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				8E28FE502CAC6E7000BE56DA /* MedicalDocumentViewer.swift */,
+				8E604EA82CB0665A00694510 /* TestRecordEditView.swift */,
 				8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */,
 				8E28FE592CAD2DBB00BE56DA /* Variation.swift */,
 				8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */,
@@ -345,6 +348,7 @@
 				8E28FE182CAC426B00BE56DA /* biomarkerApp.swift in Sources */,
 				8E28FE512CAC6E7000BE56DA /* MedicalDocumentViewer.swift in Sources */,
 				8E28FE4E2CAC538300BE56DA /* globals.swift in Sources */,
+				8E604EA92CB0665A00694510 /* TestRecordEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

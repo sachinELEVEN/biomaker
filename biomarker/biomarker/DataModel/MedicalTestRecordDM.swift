@@ -10,6 +10,7 @@ import Foundation
 //A medical document has a the original medical document reference and a list of medical records
 class MedicalDocument: ObservableObject,Identifiable{
     
+    public static var manualSectionName = "Manually Added Tests"
     var pdfDocumentUrl : URL//represent the documenturl of the pdf which is saved to the local file system. this is the string saved in local user defaults for later access to the document
     var date:Date
     
@@ -27,6 +28,21 @@ class MedicalDocument: ObservableObject,Identifiable{
     var healthInsights = "You need to visit a doctor and focus on liver health, try reducing fats in your diet"//todo
     
 
+    ///creates a new manually added section if it does not already exist
+    func addNewTestRecordToManuallyAddedSection(testRecord: BasicMedicalTestRecordv1){
+        for section in sections {
+            if section.name == MedicalDocument.manualSectionName{
+                section.addNewMedicalTestRecords(testRecords: testRecord)
+                return
+            }
+        }
+        
+        //no Manual section presente
+        let manualSection = MedicalDocumentSection()
+        manualSection.name = MedicalDocument.manualSectionName
+        manualSection.addNewMedicalTestRecords(testRecords: testRecord)
+        self.addNewMedicalSection(section: manualSection)
+    }
     
     func addNewMedicalSection(section: MedicalDocumentSection){
         self.sections.append(section)

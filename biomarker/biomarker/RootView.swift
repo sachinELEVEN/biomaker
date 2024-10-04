@@ -158,7 +158,8 @@ struct HomeView: View {
                     }
                 }
             }
-            .padding()
+                
+                .padding([.horizontal])
             .navigationTitle("Home")
         }
     
