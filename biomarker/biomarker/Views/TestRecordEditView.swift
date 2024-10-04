@@ -195,7 +195,7 @@ struct TestRecordEditActionView: View{
                             //print("Each Test Separately")
                             showUpdateTestManuallyScreen.toggle()
                         },
-                        .default(Text("Delete Test From Report")) {
+                        .destructive(Text("Delete Test From Report")) {
                             deleteTestRecord()
                         },
                         .cancel()
@@ -208,6 +208,6 @@ struct TestRecordEditActionView: View{
     }
     
     func deleteTestRecord(){
-        testRecord.deleteFromSystem()
+        let _ = testRecord.deleteFromSystem()
     }
 }
