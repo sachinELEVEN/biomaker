@@ -153,6 +153,11 @@ struct HomeView: View {
                             // ContentView()
                            // PDFUploaderView()
                             Text("Add your first medical pdf report and store, manage, analyze it with Biomarker")
+                                .fontWeight(.bold)
+                                .font(.largeTitle)
+                                .foregroundStyle(.brightpurple)
+                                .padding()
+                                .padding([.top,.top])
                         }
                         
                     }
