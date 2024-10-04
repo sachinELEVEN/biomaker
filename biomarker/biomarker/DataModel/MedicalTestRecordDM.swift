@@ -210,6 +210,30 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         return false
     }
     
+    //returns a boolean value indicating whether deletion from system was a success or not
+    func deleteFromSystem()->Bool{
+        guard let section = getParentSection() else{
+            print("/deleteFromSystem- Failed to remove test as it does not have a parent section. This means this test is just a standalone test and not part of the system")
+            return false
+        }
+        
+        var didDelete = false
+        section.testRecords.removeAll { record in
+            if (record.id == self.id){
+                didDelete = true
+                return true
+            }
+            return false
+        }
+        
+        if didDelete{
+            print("deleteFromSystem- test record removed from system")
+            system.refresh()
+        }
+        return didDelete
+        
+                
+    }
     
 }
 

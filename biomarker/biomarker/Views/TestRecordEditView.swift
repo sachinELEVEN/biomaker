@@ -196,10 +196,7 @@ struct TestRecordEditActionView: View{
                             showUpdateTestManuallyScreen.toggle()
                         },
                         .default(Text("Delete Test From Report")) {
-                            // Navigate to chart view for combined tracking
-                           // mergeSelectedGroups = true
-                           // navigateToChartView()
-                            //print("Analyze All Tests as a Single Group")
+                            deleteTestRecord()
                         },
                         .cancel()
                     ]
@@ -208,5 +205,9 @@ struct TestRecordEditActionView: View{
             .sheet(isPresented: $showUpdateTestManuallyScreen){
                 CreateTestRecordView(showSelf: $showUpdateTestManuallyScreen, document: testRecord.getParentDocument()!, existingRecord: testRecord)
             }
+    }
+    
+    func deleteTestRecord(){
+        testRecord.deleteFromSystem()
     }
 }
