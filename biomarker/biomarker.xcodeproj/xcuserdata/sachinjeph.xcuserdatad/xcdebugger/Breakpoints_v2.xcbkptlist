@@ -49,6 +49,21 @@
                   endingLineNumber = "166"
                   offsetFromSymbolStart = "888">
                </Location>
+               <Location
+                  uuid = "ADC3A793-678B-4DA7-AC73-505A7048CBF2 - 54ee21c31ca85c30"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "biomarker.BasicMedicalTestRecordv1.testDate() -&gt; Swift.Optional&lt;Foundation.Date&gt;"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/DataModel/MedicalTestRecordDM.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "166"
+                  endingLineNumber = "166"
+                  offsetFromSymbolStart = "884">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

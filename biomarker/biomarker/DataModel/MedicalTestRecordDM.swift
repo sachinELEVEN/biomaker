@@ -98,15 +98,15 @@ class MedicalDocumentSection: ObservableObject, Identifiable{
 }
 
 class BasicMedicalTestRecordv1: Codable, Identifiable {
-    let test: String
-    let value: String
-    let unit: String
-    let plottable: String
-    let ref: String?
-    let plottableref: String?
-    let plottablereflowerlimit: String?
-    let plottablerefupperlimit: String?
-    let id = UUID.init().uuidString
+    var test: String
+    var value: String
+    var unit: String
+    var plottable: String
+    var ref: String?
+    var plottableref: String?
+    var plottablereflowerlimit: String?
+    var plottablerefupperlimit: String?
+    var id = UUID.init().uuidString
 
     enum CodingKeys: String, CodingKey {
         case test

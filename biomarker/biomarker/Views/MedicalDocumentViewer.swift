@@ -377,10 +377,12 @@ struct MedicalDocumentViewerDetailed: View{
                 ForEach(doc.sections){ section in
                    
                     if getSectionTestRecords(section: section,val: testRecordPicker).count != 0{
-                        Text("Report Section \(doc.findIndexOfSection(section: section)+1)")
+                        Text(section.name.isEmpty ? "Report Section \(doc.findIndexOfSection(section: section)+1)" : section.name)
                             .fontWeight(.bold)
                             .font(.title)
-                            .padding()
+                            .padding(.horizontal)
+                            .padding([.top,.top])
+                            .padding(.bottom,4)
                     }
                     
                     ForEach(getSectionTestRecords(section: section,val: testRecordPicker)){ testRecord in

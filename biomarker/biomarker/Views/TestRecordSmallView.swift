@@ -51,6 +51,7 @@ import Charts
 
 
 struct TestRecordView: View {
+    @ObservedObject var sys = system
     var record: BasicMedicalTestRecordv1
     
     var body: some View {
@@ -62,6 +63,7 @@ struct TestRecordView: View {
                         .font(.title3)
                         .fontWeight(.bold)
                        
+                    TestRecordEditActionView(testRecord: record)
                     
                     
                     Spacer()
@@ -144,7 +146,7 @@ struct TestRecordView: View {
                             if let upperLimit = Double(record.plottablerefupperlimit ?? "") {
                                 RuleMark(y: .value("Upper Limit", upperLimit.truncate(places: 2)))
                                     .foregroundStyle(.red)
-                                    .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+                                    .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, dash: [0.5, 5]))
                                     .annotation(position: .top, alignment: .leading) {
                                         Text("Upper: \(String(format: "%.2f", upperLimit))")
                                             .font(.caption)
@@ -156,7 +158,7 @@ struct TestRecordView: View {
                             if let lowerLimit = Double(record.plottablereflowerlimit ?? "") {
                                 RuleMark(y: .value("Lower Limit", lowerLimit.truncate(places: 2)))
                                     .foregroundStyle(.blue)
-                                    .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+                                    .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, dash: [0.5, 5]))
                                     .annotation(position: .top, alignment: .leading) {
                                         Text("Lower: \(String(format: "%.2f", lowerLimit))")
                                             .font(.caption)
@@ -205,6 +207,7 @@ struct TestRecordView: View {
 
 
 struct TestRecordPlainView: View{
+    @ObservedObject var sys = system
     var testRecord : BasicMedicalTestRecordv1
     var showDate : Bool = false
     var body: some View{
@@ -245,6 +248,7 @@ struct TestRecordPlainView: View{
                 }
                 
             }
+            TestRecordEditActionView(testRecord: testRecord,iconSize: 20).padding(.trailing,3)
             imageView(systemName: testRecord.isOutOfRange() ? "exclamationmark.triangle.fill" : "checkmark.circle.fill",color: testRecord.isOutOfRange() ? .red : .green,size: 20)
                 .padding(.trailing,3)
         }
