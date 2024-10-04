@@ -11,6 +11,7 @@ import UIKit
 
 struct SharePDFView: View {
     let pdfURL: URL // URL to the locally stored PDF file
+    var width: CGFloat = 300
     
     @State private var isSharePresented = false
     
@@ -24,7 +25,7 @@ struct SharePDFView: View {
             Button(action: {
                 isSharePresented = true
             }) {
-                label("Share Original Document (PDF)", textColor: .primaryInvert, bgColor: .primary, imgName: "square.and.arrow.up.fill", imgColor: .primaryInvert, width: 300, radius: 10)
+                label("Share", textColor: .white, bgColor: .blue, imgName: "square.and.arrow.up.fill", imgColor: .white, width: width, radius: 10)
             }
             .sheet(isPresented: $isSharePresented) {
                 ShareSheet(activityItems: [pdfURL])

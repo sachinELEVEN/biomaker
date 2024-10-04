@@ -23,6 +23,13 @@ class System: ObservableObject{
         return CGSize(width: fullWidth, height: fullHeight)
     }
     
+    func deleteDocument(document: MedicalDocument){
+        self.medicalDocuments.removeAll { doc in
+            doc.id == document.id
+        }
+        
+    }
+    
     
     ///sends the medical test document to the server and generates new medical records and stores it in the system.medicalDocuments
     func generateNewMedicalTestRecords(medicalDocument: MedicalDocument, isScannedDocument: Bool,completion: @escaping (Bool,String) -> Void){

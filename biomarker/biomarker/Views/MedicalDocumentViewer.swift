@@ -122,6 +122,10 @@ struct MedicalDocumentViewerHandler: View{
     var doc : MedicalDocument
     @State var showAddTestManuallyScreen = false
     @State var testRecordPicker = 0//0- for full detail, 1 for brief, 2 for other options like share, delete, chart with ai etc
+    @State var documentName = ""
+    @State var documentNotes = ""
+    @State var showActionSheet = false
+    @State private var isSharePresented = false
     var body: some View{
         VStack{
             Picker("", selection: $testRecordPicker) {
@@ -137,19 +141,55 @@ struct MedicalDocumentViewerHandler: View{
             if testRecordPicker == 0 {
                 MedicalDocumentViewerDetailed(size: size, doc: doc)
                     .toolbar {
-                                        ToolbarItem(placement: .navigationBarTrailing) {
-                                            Button(action: {
-                                                // Your action here
-                                                //print("Plus button tapped")
-                                                self.showAddTestManuallyScreen.toggle()
-                                            }) {
-                                                Image(systemName: "plus")  // SF Symbol for plus icon
-                                            }
-                                        }
-                                    }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                // Your action here
+                                self.showAddTestManuallyScreen.toggle()
+                            }) {
+                                Image(systemName: "plus")  // SF Symbol for plus icon
+                            }
+                        }
+
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                // Your action here
+                                self.showActionSheet.toggle()
+                            }) {
+                                Image(systemName: "info.circle")  // SF Symbol for info icon
+                            }
+                            .actionSheet(isPresented: $showActionSheet) {
+                                ActionSheet(
+                                    title: Text("Actions"),
+                                    message: Text(""),
+                                    buttons: [
+                                        .default(Text("Share Original Document (PDF)")) {
+                                            // Navigate to chart view for separate tracking
+                                            //mergeSelectedGroups = false
+                                           // navigateToChartView()
+                                            //print("Each Test Separately")
+        //                                        showUpdateTestManuallyScreen.toggle()
+                                            isSharePresented.toggle()
+                                           // SharePDFView(pdfURL: doc.pdfDocumentUrl,width: system.fullWidth*0.2)
+                                        },
+                                        .destructive(Text("Delete Medical Report")) {
+        //                                        deleteTestRecord()
+                                            //system.medicalDocuments
+                                            system.deleteDocument(document: doc)
+                                        },
+                                        .cancel()
+                                    ]
+                                )
+                            }
+                            .sheet(isPresented: $isSharePresented) {
+                                ShareSheet(activityItems: [doc.pdfDocumentUrl])
+                            }
+                        }
+                    }
+
                     .sheet(isPresented: $showAddTestManuallyScreen){
                         CreateTestRecordView(showSelf: $showAddTestManuallyScreen, document: doc)
                     }
+                    
             }
             
             if testRecordPicker == 1 {
@@ -162,7 +202,7 @@ struct MedicalDocumentViewerHandler: View{
             }
             
             if testRecordPicker == 2 {
-                ScrollView{
+             //   ScrollView{
 //                    HStack{
 //                        VStack(alignment: .leading){
 //                            Text("Share original document")
@@ -173,20 +213,41 @@ struct MedicalDocumentViewerHandler: View{
 //                        Spacer()
 //                    }
                     
-                    SharePDFView(pdfURL: doc.pdfDocumentUrl)
-                    
-                    Button(action: {
-                       print("Delete medical document- todo")
-                    }) {
-                        label("Delete Medical Document", textColor: .primaryInvert, bgColor: .red, imgName: "trash.fill", imgColor: .primaryInvert, width: 300, radius: 10)
+                    //form to edit document name and document note
+                ZStack(alignment: .bottom){
+                    Form {
+                        Section(header: Text("Medical Report Name")) {
+                            TextField("Medical Report Name", text: $documentName)
+                        }
+                        
+                        Section(header: Text("Add Notes"),
+                                footer: Text("You can add detailed notes about this medical document.")) {
+                            TextEditor(text: $documentNotes)
+                                .frame(height: system.fullHeight/4) // Adjust height as needed for longer text input
+                               // .padding(.vertical)
+                            //                            .overlay(
+                            //                                RoundedRectangle(cornerRadius: 8)
+                            //                                    .stroke(Color.gray.opacity(0.5), lineWidth: 1)
+                            //                            ) // Optional: adds border around the text editor
+                        }
                     }
                     
+                    
                     //delete, share original document, share biomarker data
-                        .navigationTitle("Medical Record")
+                    .navigationTitle("Medical Record")
                     
                     
-                        
+                }.onAppear{
+                    self.documentName = doc.name
+                    self.documentNotes = doc.notes
                 }
+                .onChange(of: documentName) { oldValue, newValue in
+                    doc.name = newValue
+                }
+                .onChange(of: documentNotes) { oldValue, newValue in
+                    doc.notes = newValue
+                }
+              //  }
                // MedicalDocumentViewerDetailed(size: size, doc: doc)
             }
             
@@ -224,6 +285,20 @@ struct MedicalDocumentViewerDetailed: View{
                                 .padding([.top,.bottom])
                             
                             Spacer()
+                            
+                        /*
+                         
+                         HStack{
+                            
+                             
+                             Button(action: {
+                                 print("Delete medical document- todo")
+                             }) {
+                                 label("Delete Report", textColor: .primaryInvert, bgColor: .red, imgName: "trash.fill", imgColor: .primaryInvert, width: system.fullWidth*0.5, radius: 10)
+                             }
+                             
+                         }
+                         */
                         }
                         
 //                    HStack{

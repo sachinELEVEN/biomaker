@@ -26,6 +26,7 @@ class MedicalDocument: ObservableObject,Identifiable{
     var name = ""//todo
     var summary = "This document has tests related to liver and heart"//todo
     var healthInsights = "You need to visit a doctor and focus on liver health, try reducing fats in your diet"//todo
+    var notes = ""//user notes
     
 
     ///creates a new manually added section if it does not already exist
