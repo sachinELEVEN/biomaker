@@ -241,10 +241,10 @@ struct MedicalDocumentViewerHandler: View{
                     self.documentName = doc.name
                     self.documentNotes = doc.notes
                 }
-                .onChange(of: documentName) { oldValue, newValue in
+                .onChange(of: documentName) { newValue in
                     doc.name = newValue
                 }
-                .onChange(of: documentNotes) { oldValue, newValue in
+                .onChange(of: documentNotes) { newValue in
                     doc.notes = newValue
                 }
               //  }
