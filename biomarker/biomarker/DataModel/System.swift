@@ -20,11 +20,11 @@ class System: ObservableObject{
     
     
     ///sends the medical test document to the server and generates new medical records and stores it in the system.medicalDocuments
-    func generateNewMedicalTestRecords(medicalDocument: MedicalDocument,completion: @escaping (Bool,String) -> Void){
+    func generateNewMedicalTestRecords(medicalDocument: MedicalDocument, isScannedDocument: Bool,completion: @escaping (Bool,String) -> Void){
        print("EXPENSIVE CALL - GENERATING NEW MEDICAL TEST RECORDS FOR A NEW MEDICAL DOCUMENT")
         //this medicalDocument will probably have the reference to the actual pdf document which we will have to upload to the server
         
-        APIService.uploadMedicalDocumentAndFetchDetails(medicalDocument: medicalDocument) { records, error in
+        APIService.uploadMedicalDocumentAndFetchDetails(medicalDocument: medicalDocument, isScannedDocument: isScannedDocument) { records, error in
             if let error = error {
                 let msg = "Error fetching records: \(error)"
                 print("Error fetching records: \(error)")

@@ -2,7 +2,7 @@ import Foundation
 
 class APIService {
     
-    static func uploadMedicalDocumentAndFetchDetails(medicalDocument: MedicalDocument, completion: @escaping ([String: [BasicMedicalTestRecordv1]]?, Error?) -> Void) {
+    static func uploadMedicalDocumentAndFetchDetails(medicalDocument: MedicalDocument, isScannedDocument: Bool, completion: @escaping ([String: [BasicMedicalTestRecordv1]]?, Error?) -> Void) {
         
         // API endpoint
         var useProdUrl = false
@@ -20,12 +20,20 @@ class APIService {
         // Create the multipart form data
         var body = Data()
         
-        // Add credentials
+        // Add credentials and isScannedDocument
         let credentials = "2930hrifnef43983hr@9RHIOWWN"
+        let isScannedDocument = isScannedDocument ? "yes" : "no"
+
+        // Append boundary and form data for credentials
         body.append("--\(boundary)\r\n".data(using: .utf8)!)
         body.append("Content-Disposition: form-data; name=\"credentials\"\r\n\r\n".data(using: .utf8)!)
         body.append("\(credentials)\r\n".data(using: .utf8)!)
-        
+
+        // Append boundary and form data for isScannedDocument
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"isscanneddocument\"\r\n\r\n".data(using: .utf8)!)
+        body.append("\(isScannedDocument)\r\n".data(using: .utf8)!)
+
         // Add the PDF file data
         let pdfUrl = medicalDocument.pdfDocumentUrl
         if let pdfData = try? Data(contentsOf: pdfUrl) {

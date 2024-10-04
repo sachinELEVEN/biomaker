@@ -54,6 +54,7 @@ struct PDFUploaderView: View {
     @State private var showMedicalDocument = false
     @State private var documentProcessingStatus = 0//0 means not started, 1 means in progress, 2 means success, -1 means failed
     @Binding var showSelf: Bool
+    @State var isScannedDocument = false
     
     var body: some View {
         NavigationView{
@@ -111,12 +112,22 @@ struct PDFUploaderView: View {
                                 .foregroundStyle(Color.secondary)
                             
                             Button(action:{
+                                isScannedDocument.toggle()
+                            }){
+                                imageView(systemName: isScannedDocument ? "checkmark.square.fill" : "square",color: isScannedDocument ? .blue : .secondary)
+                                Text("Treat as camera scanned document")
+                                    .font(.caption)
+                                    .foregroundStyle(Color.secondary)
+                                    .multilineTextAlignment(.leading)
+                            }
+                            
+                            Button(action:{
                                 //start loading indicator
                                 if documentProcessingStatus == 1{
                                     return
                                 }
                                 documentProcessingStatus = 1
-                                system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!){
+                                system.generateNewMedicalTestRecords(medicalDocument: tempMedicalDocument!, isScannedDocument: isScannedDocument){
                                     success, msg in
                                     //processing done
                                     //finish loading indicator with status update on the biomarker button, ability to analyze the document
