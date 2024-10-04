@@ -227,7 +227,7 @@ struct TestRecordPlainView: View{
                         //                                                Text("\(Text(testRecord.unit)) and")
                         //                                                Text(testRecord.plottablereflowerlimit ?? "")
                         //                                                Text(testRecord.unit)
-                        Text("Should be between \(testRecord.plottablerefupperlimit ?? "") \(testRecord.unit) and \(testRecord.plottablereflowerlimit ?? "") \(testRecord.unit)")
+                        Text("Should be between \(testRecord.plottablereflowerlimit ?? "") \(testRecord.unit) and \(testRecord.plottablerefupperlimit ?? "") \(testRecord.unit)")
                         
                         Spacer()
                     }.padding(.leading)
