@@ -11,6 +11,8 @@ class FileManagerHelper {
     static let shared = FileManagerHelper()
     
     func savePDF(url: URL) -> URL? {
+        //to prevent the NSCocoaErrorDomain Code=257, go the solution from here -> https://stackoverflow.com/questions/58223929/how-do-i-get-around-nscocoaerrordomain257-when-pulling-a-file-from-the-files-ap
+        let isAccessing = url.startAccessingSecurityScopedResource()
         // Create a file name based on the current date and time
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMddHHmmss"
@@ -27,9 +29,15 @@ class FileManagerHelper {
             // Copy the file from the provided URL to the destination URL
             try FileManager.default.copyItem(at: url, to: destinationURL)
             print("/FileManagerHelper: File saved to local file system with url \(destinationURL)")
+            if isAccessing {
+                url.stopAccessingSecurityScopedResource()
+            }
             return destinationURL
         } catch {
             print("/FileManagerHelper: Error saving file: \(error)")
+            if isAccessing {
+                url.stopAccessingSecurityScopedResource()
+            }
             return nil
         }
     }
