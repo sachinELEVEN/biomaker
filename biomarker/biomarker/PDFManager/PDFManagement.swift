@@ -54,7 +54,7 @@ struct PDFUploaderView: View {
     @State private var showMedicalDocument = false
     @State private var documentProcessingStatus = 0//0 means not started, 1 means in progress, 2 means success, -1 means failed
     @Binding var showSelf: Bool
-    @State var isScannedDocument = false
+    @State var isScannedDocument = true//we will force the backend to use OCR for processing, its better than its embedded text based processing
     
     var body: some View {
         NavigationView{
@@ -110,7 +110,7 @@ struct PDFUploaderView: View {
                                 .padding([.horizontal])
                                 .padding(.top, 3)
                                 .foregroundStyle(Color.secondary)
-                            
+                            /*
                             Button(action:{
                                 isScannedDocument.toggle()
                             }){
@@ -120,6 +120,7 @@ struct PDFUploaderView: View {
                                     .foregroundStyle(Color.secondary)
                                     .multilineTextAlignment(.leading)
                             }
+                            */
                             
                             Button(action:{
                                 //start loading indicator
