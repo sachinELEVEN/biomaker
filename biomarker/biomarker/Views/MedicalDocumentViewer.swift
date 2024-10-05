@@ -42,13 +42,13 @@ struct MedicalDocumentViewerSmall: View{
                 Text("\(doc.name.isEmpty ? doc.name : doc.name)")
                     .multilineTextAlignment(.leading)
                     .foregroundStyle(.secondary)
-                    .padding(.bottom,3)
+                    .padding(.vertical,6)
                 
                 PDFViewer(url: doc.pdfDocumentUrl)
                 //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
                     .frame(width: size.width*0.85,height: (size.width*0.85)/3.5)
-                    .cornerRadius(20)
-                    .padding(.bottom)
+                    .cornerRadius(10)
+                    .padding()
                 
                 HStack{
                     
@@ -67,7 +67,7 @@ struct MedicalDocumentViewerSmall: View{
                 }
                 Text("Biomarker found \(doc.totalTestRecordsCount()) tests in the document. \(doc.summary)")
                     .foregroundStyle(.secondary)
-                    .padding(.bottom,3)
+                    .padding(.vertical,6)
                     .multilineTextAlignment(.leading)
                 
                 HStack{
