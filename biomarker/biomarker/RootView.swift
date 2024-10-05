@@ -181,8 +181,8 @@ struct RootTabView: View {
 //        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
       //  mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
         
-        mockMedicalDocument1.name = "(Sample) LFT with Vitamin D Report- September 24"
-        mockMedicalDocument1.summary = ""
+        mockMedicalDocument1.name = "(Sample) LFT with Vitamin D Report- November 23"
+        mockMedicalDocument1.summary = "This sample document shows you how your medical reports will appear in Biomarker. Checkout report charts and variations"
         
 //        mockMedicalDocument2.name = "(Sample) LFT with Vitamin D Report- January"
 //        mockMedicalDocument2.summary = ""
@@ -216,7 +216,7 @@ struct HomeView: View {
                             Button(action:{
                                 showPdfUploadScreen.toggle()
                             }){
-                                label("Add Medical Report (PDF)", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 300, radius: 10)
+                                label("Add Medical Report (PDF)", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: geo.size.width*0.8, radius: 10)
                             }
                             .sheet(isPresented: $showPdfUploadScreen){
                                 PDFUploaderView(showSelf: $showPdfUploadScreen)

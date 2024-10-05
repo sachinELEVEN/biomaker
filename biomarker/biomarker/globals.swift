@@ -9,7 +9,7 @@ import Foundation
 
 let system = System()
 
-let mockPdfUrl = URL(string: "file:///Users/sachinjeph/Library/Developer/CoreSimulator/Devices/9CFB1C0E-A042-48B9-977B-6E7E01826257/data/Containers/Data/Application/BB84A0B9-6319-4054-9602-428A04714A8B/Documents/78C36E25-47EA-4694-954F-DACD84FF368D.pdf")
+let mockPdfUrl = URL(string: "file:///sample/Documents/sample.pdf")
 
 
 class Utils{
