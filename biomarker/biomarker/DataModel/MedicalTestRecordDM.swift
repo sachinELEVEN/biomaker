@@ -62,8 +62,8 @@ class MedicalDocument: ObservableObject,Identifiable,Codable{
     var id = UUID.init().uuidString//represents the id of the document stored in user defaults
     //some generative ai data properties
     var name = ""//todo
-    var summary = "This document has tests related to liver and heart"//todo
-    var healthInsights = "You need to visit a doctor and focus on liver health, try reducing fats in your diet"//todo
+    var summary = ""//todo
+    var healthInsights = "Visit a doctor to better understand your reports. You can also track changes in your test results over time by pressing the 'Variation' button at the bottom"//todo
     var notes = ""//user notes
     
 
@@ -126,7 +126,7 @@ class MedicalDocumentSection: ObservableObject, Identifiable, Codable{
     @Published var testRecords = [BasicMedicalTestRecordv1]()
     var id = ""
     //some generative ai data properties
-    var name = "Liver function tests"//todo
+    var name = ""//todo
     var summary = ""//todo
     var keyPoints = ""//todo
     
