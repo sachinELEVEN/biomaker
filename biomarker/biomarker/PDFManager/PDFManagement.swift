@@ -198,6 +198,7 @@ struct PDFUploaderView: View {
                         //as of now we do not allow multiple uploads one after another without closing the screen
                         //choose pdf
                         Button(action:{
+                            reset()
                             showDocumentPicker.toggle()
                         }){
                             label("Select Medical Record (PDF)", textColor: .primary, bgColor: .secondary.opacity(0.15), imgName: "doc.text.image", imgColor: .primary, width: 300, radius: 10)
@@ -239,6 +240,13 @@ struct PDFUploaderView: View {
         }
         
         return ""
+    }
+    
+    func reset(){
+        //resets the state to the original state
+        pdfURL = nil
+        tempMedicalDocument = nil
+        documentProcessingStatus = 0
     }
 }
 
