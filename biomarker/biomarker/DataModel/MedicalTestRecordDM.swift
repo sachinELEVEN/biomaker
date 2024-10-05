@@ -8,20 +8,58 @@
 import Foundation
 
 //A medical document has a the original medical document reference and a list of medical records
-class MedicalDocument: ObservableObject,Identifiable{
+class MedicalDocument: ObservableObject,Identifiable,Codable{
+    
+    enum CodingKeys: String, CodingKey {
+            case pdfDocumentUrl
+            case date
+            case sections
+            case id
+            case name
+            case summary
+            case healthInsights
+            case notes
+        }
     
     public static var manualSectionName = "Manually Added Tests"
     var pdfDocumentUrl : URL//represent the documenturl of the pdf which is saved to the local file system. this is the string saved in local user defaults for later access to the document
     var date:Date
     
-    init(pdfDocumentUrl: URL, date:Date = Date()){
-        self.pdfDocumentUrl = pdfDocumentUrl
-        self.date = date
-    }
+    init(pdfDocumentUrl: URL, date: Date = Date()) {
+           self.pdfDocumentUrl = pdfDocumentUrl
+           self.date = date
+           self.id = UUID().uuidString
+       }
+    
+    // Manually implement encoding
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(pdfDocumentUrl, forKey: .pdfDocumentUrl)
+            try container.encode(date, forKey: .date)
+            try container.encode(sections, forKey: .sections)
+            try container.encode(id, forKey: .id)
+            try container.encode(name, forKey: .name)
+            try container.encode(summary, forKey: .summary)
+            try container.encode(healthInsights, forKey: .healthInsights)
+            try container.encode(notes, forKey: .notes)
+        }
+
+        // Manually implement decoding
+        required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            pdfDocumentUrl = try container.decode(URL.self, forKey: .pdfDocumentUrl)
+            date = try container.decode(Date.self, forKey: .date)
+            sections = try container.decode([MedicalDocumentSection].self, forKey: .sections)
+            id = try container.decode(String.self, forKey: .id)
+            name = try container.decode(String.self, forKey: .name)
+            summary = try container.decode(String.self, forKey: .summary)
+            healthInsights = try container.decode(String.self, forKey: .healthInsights)
+            notes = try container.decode(String.self, forKey: .notes)
+        }
     
     ///1 document can have multiple section, each table can have multiple tests(represented by BasicMedicalTestRecordv1)
     @Published var sections = [MedicalDocumentSection]()
-    let id = UUID.init().uuidString//represents the id of the document stored in user defaults
+    var id = UUID.init().uuidString//represents the id of the document stored in user defaults
     //some generative ai data properties
     var name = ""//todo
     var summary = "This document has tests related to liver and heart"//todo
@@ -83,14 +121,46 @@ class MedicalDocument: ObservableObject,Identifiable{
 }
 
 //A medical document has a the original medical document reference and a list of medical records
-class MedicalDocumentSection: ObservableObject, Identifiable{
+class MedicalDocumentSection: ObservableObject, Identifiable, Codable{
     ///1 document can have multiple sections, each section can have multiple tests(represented by BasicMedicalTestRecordv1)
     @Published var testRecords = [BasicMedicalTestRecordv1]()
-    let id = UUID.init().uuidString
+    var id = ""
     //some generative ai data properties
     var name = "Liver function tests"//todo
     var summary = ""//todo
     var keyPoints = ""//todo
+    
+    enum CodingKeys: String, CodingKey {
+            case testRecords
+            case id
+            case name
+            case summary
+            case keyPoints
+        }
+    
+    init() {
+            self.id = UUID().uuidString
+        }
+    
+    // Manually implement encoding
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(testRecords, forKey: .testRecords)
+            try container.encode(id, forKey: .id)
+            try container.encode(name, forKey: .name)
+            try container.encode(summary, forKey: .summary)
+            try container.encode(keyPoints, forKey: .keyPoints)
+        }
+
+        // Manually implement decoding
+        required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            testRecords = try container.decode([BasicMedicalTestRecordv1].self, forKey: .testRecords)
+            id = try container.decode(String.self, forKey: .id)
+            name = try container.decode(String.self, forKey: .name)
+            summary = try container.decode(String.self, forKey: .summary)
+            keyPoints = try container.decode(String.self, forKey: .keyPoints)
+        }
     
     func addNewMedicalTestRecords(testRecords: BasicMedicalTestRecordv1){
         self.testRecords.append(testRecords)
@@ -168,6 +238,7 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
     }
     
     func getParentDocument()->MedicalDocument?{
+        print("Test record \(id) looking for parent document")
         for doc in system.medicalDocuments{
             for section in doc.sections{
                 for testRecord in section.testRecords{

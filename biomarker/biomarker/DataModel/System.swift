@@ -70,6 +70,8 @@ class System: ObservableObject{
                 //GET MEDICAL DOCUMENT DATE FROM API CALL //TODO LATER
                 medicalDocument.date = Date()
                 self.medicalDocuments.append(medicalDocument)
+                //saving changes
+                BiomarkerFileSystem.saveSystemMedicalDocuments()
                 msg += "Processing done for \(testCounter) tests"
                 print("/generateNewMedicalTestRecords: New medical document added to the system with \(medicalDocument.sections.count) sections")
                 completion(true,msg)

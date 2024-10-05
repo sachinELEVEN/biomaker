@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E0656022CB1ABDA00D736F5 /* ModelStorageViaFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0656012CB1ABDA00D736F5 /* ModelStorageViaFiles.swift */; };
 		8E28FE182CAC426B00BE56DA /* biomarkerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE172CAC426B00BE56DA /* biomarkerApp.swift */; };
 		8E28FE1A2CAC426B00BE56DA /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE192CAC426B00BE56DA /* RootView.swift */; };
 		8E28FE1C2CAC426C00BE56DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E28FE1B2CAC426C00BE56DA /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8E0656012CB1ABDA00D736F5 /* ModelStorageViaFiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelStorageViaFiles.swift; sourceTree = "<group>"; };
 		8E28FE142CAC426B00BE56DA /* biomarker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = biomarker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E28FE172CAC426B00BE56DA /* biomarkerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = biomarkerApp.swift; sourceTree = "<group>"; };
 		8E28FE192CAC426B00BE56DA /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				8E28FE432CAC45BE00BE56DA /* MedicalTestRecordDM.swift */,
+				8E0656012CB1ABDA00D736F5 /* ModelStorageViaFiles.swift */,
 				8E28FE482CAC465C00BE56DA /* System.swift */,
 			);
 			path = DataModel;
@@ -345,6 +348,7 @@
 				8E28FE5A2CAD2DBB00BE56DA /* Variation.swift in Sources */,
 				8E28FE5C2CAD8E3300BE56DA /* PDFShareView.swift in Sources */,
 				8E28FE472CAC462500BE56DA /* APICalls.swift in Sources */,
+				8E0656022CB1ABDA00D736F5 /* ModelStorageViaFiles.swift in Sources */,
 				8E28FE182CAC426B00BE56DA /* biomarkerApp.swift in Sources */,
 				8E28FE512CAC6E7000BE56DA /* MedicalDocumentViewer.swift in Sources */,
 				8E28FE4E2CAC538300BE56DA /* globals.swift in Sources */,

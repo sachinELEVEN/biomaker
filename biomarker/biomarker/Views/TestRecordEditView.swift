@@ -41,7 +41,7 @@ struct CreateTestRecordView: View {
                     } else {
                         ScrollView(showsIndicators: false) {
                             VStack(alignment: .leading) {
-                                TestRecordView(record: newRecord!)
+                                TestRecordView(record: existingRecord != nil ? existingRecord! : newRecord!,showEditOptions: false)
                                     .padding()
                                     .background(CustomBlur(style: .prominent))
                                     .cornerRadius(20)
@@ -166,6 +166,9 @@ struct CreateTestRecordView: View {
             // Add a new record to the manually added section
             document.addNewTestRecordToManuallyAddedSection(testRecord: newRecord!)
         }
+        
+        //saving changes
+        BiomarkerFileSystem.saveSystemMedicalDocuments()
     }
 }
 
@@ -209,5 +212,6 @@ struct TestRecordEditActionView: View{
     
     func deleteTestRecord(){
         let _ = testRecord.deleteFromSystem()
+        BiomarkerFileSystem.saveSystemMedicalDocuments()
     }
 }

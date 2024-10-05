@@ -34,12 +34,12 @@ struct RootTabView: View {
                     Label("Settings", systemImage: "gear")
                 }
         }.onAppear{
-            setMockMedicalDocument()
+            BiomarkerFileSystem.loadModelDataFromFile()
         }
         .accentColor(.primary)
     }
     
-    func setMockMedicalDocument(){
+   public static func setMockMedicalDocument(){
    
         
         //creating mock test records

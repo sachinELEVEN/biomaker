@@ -176,6 +176,7 @@ struct MedicalDocumentViewerHandler: View{
         //                                        deleteTestRecord()
                                             //system.medicalDocuments
                                             system.deleteDocument(document: doc)
+                                            BiomarkerFileSystem.saveSystemMedicalDocuments()
                                         },
                                         .cancel()
                                     ]
@@ -250,12 +251,15 @@ struct MedicalDocumentViewerHandler: View{
                 }
                 .onChange(of: documentName) { newValue in
                     doc.name = newValue
+                    peristChangesInDisk()
                 }
                 .onChange(of: documentNotes) { newValue in
                     doc.notes = newValue
+                    peristChangesInDisk()
                 }
                 .onChange(of: docDate) { newValue in
                     doc.date = docDate
+                    persistChangesInDisk()
                 }
               //  }
                // MedicalDocumentViewerDetailed(size: size, doc: doc)
@@ -263,6 +267,11 @@ struct MedicalDocumentViewerHandler: View{
             
 
         }
+    }
+    
+    func persistChangesInDisk(){
+        //we should add a debouncer logic to this so that we dont save file on every keystroke
+        BiomarkerFileSystem.saveSystemMedicalDocuments()
     }
 }
 

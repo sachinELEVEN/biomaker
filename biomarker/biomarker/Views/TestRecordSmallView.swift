@@ -53,6 +53,7 @@ import Charts
 struct TestRecordView: View {
     @ObservedObject var sys = system
     var record: BasicMedicalTestRecordv1
+    var showEditOptions : Bool = true
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -63,8 +64,9 @@ struct TestRecordView: View {
                         .font(.title3)
                         .fontWeight(.bold)
                        
-                    TestRecordEditActionView(testRecord: record)
-                    
+                    if showEditOptions{
+                        TestRecordEditActionView(testRecord: record)
+                    }
                     
                     Spacer()
                     
