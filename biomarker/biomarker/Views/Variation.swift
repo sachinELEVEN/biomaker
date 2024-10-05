@@ -243,80 +243,82 @@ struct GroupedTestRecordChartView: View {
    // var mergeSelectedGroups: Bool
 
     var body: some View {
-        ScrollView(showsIndicators: false){
-            VStack {
-                // if mergeSelectedGroups {
-                // Create a single graph for all selected records
-                //i dont think we need this, if multiple test groups are to be plotted we will just put them in a single list and sort them according to date
-                //  combinedChart(for: selectedGroupedRecords)
-                //   } else {
-                // Create separate graphs for each group
-                
-               
-                ForEach(selectedGroupedRecords.keys.sorted(), id: \.self) { testName in
+        GeometryReader{ geo in
+            ScrollView(showsIndicators: false){
+                VStack {
+                    // if mergeSelectedGroups {
+                    // Create a single graph for all selected records
+                    //i dont think we need this, if multiple test groups are to be plotted we will just put them in a single list and sort them according to date
+                    //  combinedChart(for: selectedGroupedRecords)
+                    //   } else {
+                    // Create separate graphs for each group
                     
-                    if let records = selectedGroupedRecords[testName] {
+                    
+                    ForEach(selectedGroupedRecords.keys.sorted(), id: \.self) { testName in
                         
-                        if let firstRecord = records.first {
-                            //   Text(firstRecord.test) // Display the test name as the title of the chart
-                            //      .font(.headline)
-                            HStack{
-                                Text(firstRecord.test)
-                                    .font(.title2)
-                                    .fontWeight(.bold)
-        
-                                Spacer()
-                     
-                            }//.padding(.bottom,1)
-                            .padding([.top,.horizontal])
+                        if let records = selectedGroupedRecords[testName] {
                             
-                            HStack{
-                                Text("Variation across \(records.count) tests")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.secondary)
-        
-                                Spacer()
-                     
-                            }//.padding(.bottom,1)
-                            .padding([.horizontal])
-                        }
-                    }
-                    //
-                    if let records = selectedGroupedRecords[testName] {
-                        // Create a combined chart for the current group
-                        singleGroupChart(for: records)
-                           // .padding(.bottom)
-                            .padding()
-                            //.background(Color.secondary.opacity(0.2))
-                            .background(CustomBlur(style: .prominent))
-                            .cornerRadius(20)
-                            .padding([.horizontal,.vertical])
-                    }
-                    
-                    //display information about what tests were used using simple list p150
-                    if let records = selectedGroupedRecords[testName] {
-                        //Text("Tests used in the above chart").fontWeight(.bold).font(.headline)
-                        ForEach(records){ testRecord in
-                            NavigationLink(destination:MedicalDocumentViewerHandler(size: CGSize(width: system.fullWidth,height: system.fullHeight), doc: testRecord.getParentDocument()!)){
-                                VStack(alignment: .leading){
-                                    TestRecordPlainView(testRecord: testRecord,showDate: true)
-                                       
-                                    Text("View medical document")
-                                        .foregroundStyle(Color.pink)
-                                        .padding([.horizontal])
-                                        .padding(.vertical,2)
-                                    Divider().padding(.horizontal).padding(.vertical,3)
-                                } .padding(.horizontal,5)
+                            if let firstRecord = records.first {
+                                //   Text(firstRecord.test) // Display the test name as the title of the chart
+                                //      .font(.headline)
+                                HStack{
+                                    Text(firstRecord.test)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                    
+                                    Spacer()
+                                    
+                                }//.padding(.bottom,1)
+                                .padding([.top,.horizontal])
+                                
+                                HStack{
+                                    Text("Variation across \(records.count) tests")
+                                        .font(.headline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.secondary)
+                                    
+                                    Spacer()
+                                    
+                                }//.padding(.bottom,1)
+                                .padding([.horizontal])
                             }
                         }
+                        //
+                        if let records = selectedGroupedRecords[testName] {
+                            // Create a combined chart for the current group
+                            singleGroupChart(for: records)
+                            // .padding(.bottom)
+                                .padding()
+                            //.background(Color.secondary.opacity(0.2))
+                                .background(CustomBlur(style: .prominent))
+                                .cornerRadius(20)
+                                .padding([.horizontal,.vertical])
+                        }
+                        
+                        //display information about what tests were used using simple list p150
+                        if let records = selectedGroupedRecords[testName] {
+                            //Text("Tests used in the above chart").fontWeight(.bold).font(.headline)
+                            ForEach(records){ testRecord in
+                                NavigationLink(destination:MedicalDocumentViewerHandler(size: geo.size, doc: testRecord.getParentDocument()!)){
+                                    VStack(alignment: .leading){
+                                        TestRecordPlainView(testRecord: testRecord,showDate: true)
+                                        
+                                        Text("View medical document")
+                                            .foregroundStyle(Color.pink)
+                                            .padding([.horizontal])
+                                            .padding(.vertical,2)
+                                        Divider().padding(.horizontal).padding(.vertical,3)
+                                    } .padding(.horizontal,5)
+                                }
+                            }
+                        }
+                        
                     }
-                    
+                    // }
                 }
-                // }
+                .navigationTitle("Variation with time")
+                .padding()
             }
-            .navigationTitle("Variation with time")
-            .padding()
         }
     }
         

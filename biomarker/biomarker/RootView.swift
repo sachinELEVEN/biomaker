@@ -147,7 +147,7 @@ struct RootTabView: View {
         mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[0])
         mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[1])
         mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[2])
-        mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[2])
+        mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[3])
         
         mockDocumentSection2ForDoc1.addNewMedicalTestRecords(testRecords: records[4])
         mockDocumentSection2ForDoc1.addNewMedicalTestRecords(testRecords: records[5])
