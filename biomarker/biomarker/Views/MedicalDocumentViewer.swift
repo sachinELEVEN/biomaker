@@ -270,8 +270,7 @@ struct MedicalDocumentViewerHandler: View{
     }
     
     func persistChangesInDisk(){
-        //we should add a debouncer logic to this so that we dont save file on every keystroke
-        BiomarkerFileSystem.saveSystemMedicalDocuments()
+        BiomarkerFileSystem.saveSystemMedicalDocuments(useDebouncer: true)
     }
 }
 

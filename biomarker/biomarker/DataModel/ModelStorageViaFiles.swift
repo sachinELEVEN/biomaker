@@ -9,9 +9,36 @@ import Foundation
 
 class BiomarkerFileSystem{
     
-    public static func saveSystemMedicalDocuments(){
-        print("/BiomarkerFileSystem: saveSystemMedicalDocuments")
-        saveMedicalDocuments(system.medicalDocuments)
+    // Define a debouncing delay
+    private static var saveDebounceTime: TimeInterval = 1
+       // Reference for canceling previous scheduled work
+    private static var workItem: DispatchWorkItem?
+    
+    ///by default changes are saved immediately but if you are calling from a certain method where its being called repeatedly like on every keystroke then please use debouncer so that we dont save a file multiple times in the system
+    public static func saveSystemMedicalDocuments(useDebouncer: Bool = false){
+        print("/BiomarkerFileSystem: saveSystemMedicalDocuments with debouncer \(useDebouncer)")
+        
+        // Cancel the previous work item if it exists
+        workItem?.cancel()
+        
+        if !useDebouncer {
+            saveMedicalDocuments(system.medicalDocuments)
+            print("Changes persisted to disk without debouncer")
+            return
+        }
+        
+        // Create a new work item with the save logic
+        let newWorkItem = DispatchWorkItem {
+            saveMedicalDocuments(system.medicalDocuments)
+            print("Changes persisted to disk with debouncer")
+        }
+        
+        // Store the new work item
+        workItem = newWorkItem
+                
+        // Schedule the new work item to execute after the debounce time
+        DispatchQueue.main.asyncAfter(deadline: .now() + saveDebounceTime, execute: newWorkItem)
+        
     }
     
   private static  func saveMedicalDocuments(_ documents: [MedicalDocument]) {
