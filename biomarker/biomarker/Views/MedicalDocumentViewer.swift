@@ -125,6 +125,7 @@ struct MedicalDocumentViewerHandler: View{
     @State var documentName = ""
     @State var documentNotes = ""
     @State var showActionSheet = false
+    @State var docDate = Date()
     @State private var isSharePresented = false
     var body: some View{
         VStack{
@@ -220,8 +221,13 @@ struct MedicalDocumentViewerHandler: View{
                             TextField("Medical Report Name", text: $documentName)
                         }
                         
+                        Section(header: Text("Date"),footer: Text("Adding date to your medical record helps you better analyze the variation of test results across time")) {
+                            DatePicker("Select Date", selection: $docDate, displayedComponents: .date)
+                                    .datePickerStyle(GraphicalDatePickerStyle())
+                        }
+                        
                         Section(header: Text("Add Notes"),
-                                footer: Text("You can add detailed notes about this medical document.")) {
+                                footer: Text("You can add detailed notes about this medical document to help you reflect on any factors that may have influenced your test results at the time")) {
                             TextEditor(text: $documentNotes)
                                 .frame(height: system.fullHeight/4) // Adjust height as needed for longer text input
                                // .padding(.vertical)
@@ -240,12 +246,16 @@ struct MedicalDocumentViewerHandler: View{
                 }.onAppear{
                     self.documentName = doc.name
                     self.documentNotes = doc.notes
+                    self.docDate = doc.date
                 }
                 .onChange(of: documentName) { newValue in
                     doc.name = newValue
                 }
                 .onChange(of: documentNotes) { newValue in
                     doc.notes = newValue
+                }
+                .onChange(of: docDate) { newValue in
+                    doc.date = docDate
                 }
               //  }
                // MedicalDocumentViewerDetailed(size: size, doc: doc)
@@ -464,7 +474,7 @@ struct MedicalDocumentViewerDetailed: View{
                         VStack{
                             if testRecordPicker == 2{
                                 TestRecordPlainView(testRecord: testRecord)
-                                    .padding(.horizontal)
+                                    .padding([.horizontal,.top])
                                 Divider().padding(.horizontal).padding(.vertical,3)
                             }else{
                                 TestRecordView(record: testRecord)
