@@ -121,7 +121,7 @@ struct RootTabView: View {
         //creating mock test records
         let records: [BasicMedicalTestRecordv1] = [
             BasicMedicalTestRecordv1(test: "Bilirubin Total", value: "0.57", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:"0.1", plottablerefupperlimit: "1.2"),
-            BasicMedicalTestRecordv1(test: "Bilirubin Direct", value: "2.5", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:"0", plottablerefupperlimit: "0.2"),
+            BasicMedicalTestRecordv1(test: "Bilirubin Direct", value: "0.25", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:"0", plottablerefupperlimit: "0.2"),
             BasicMedicalTestRecordv1(test: "Bilirubin Indirect", value: "0.43", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.2", plottablerefupperlimit: "0.8"),
             BasicMedicalTestRecordv1(test: "Albumin", value: "4.24", unit: "g/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "3.5", plottablerefupperlimit: "5.2"),
             BasicMedicalTestRecordv1(test: "Vitamin D", value: "32.2", unit: "ng/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "30.0", plottablerefupperlimit: "90.0"),
@@ -147,9 +147,10 @@ struct RootTabView: View {
         mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[0])
         mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[1])
         mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[2])
+        mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[2])
         
-        mockDocumentSection2ForDoc1.addNewMedicalTestRecords(testRecords: records[2])
         mockDocumentSection2ForDoc1.addNewMedicalTestRecords(testRecords: records[4])
+        mockDocumentSection2ForDoc1.addNewMedicalTestRecords(testRecords: records[5])
         
         //creating mock medical document section for document 2
 //        let mockDocumentSectionForDoc2 = MedicalDocumentSection()

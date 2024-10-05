@@ -27,7 +27,7 @@
 		8E28FE5A2CAD2DBB00BE56DA /* Variation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE592CAD2DBB00BE56DA /* Variation.swift */; };
 		8E28FE5C2CAD8E3300BE56DA /* PDFShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */; };
 		8E604EA92CB0665A00694510 /* TestRecordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E604EA82CB0665A00694510 /* TestRecordEditView.swift */; };
-		8EFAC5082CB1CD2E0067ACDB /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAC5072CB1CD2E0067ACDB /* sample.pdf */; };
+		8EFAC50A2CB1D15B0067ACDB /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAC5092CB1D15B0067ACDB /* sample.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +73,7 @@
 		8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFShareView.swift; sourceTree = "<group>"; };
 		8E604EA82CB0665A00694510 /* TestRecordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRecordEditView.swift; sourceTree = "<group>"; };
 		8EFAC5072CB1CD2E0067ACDB /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
+		8EFAC5092CB1D15B0067ACDB /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = sample.pdf; path = "../../medical-reports/sample.pdf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				8EFAC5072CB1CD2E0067ACDB /* sample.pdf */,
+				8EFAC5092CB1D15B0067ACDB /* sample.pdf */,
 				8E28FE162CAC426B00BE56DA /* biomarker */,
 				8E28FE282CAC426C00BE56DA /* biomarkerTests */,
 				8E28FE322CAC426C00BE56DA /* biomarkerUITests */,
@@ -317,7 +319,7 @@
 			files = (
 				8E28FE202CAC426C00BE56DA /* Preview Assets.xcassets in Resources */,
 				8E28FE1C2CAC426C00BE56DA /* Assets.xcassets in Resources */,
-				8EFAC5082CB1CD2E0067ACDB /* sample.pdf in Resources */,
+				8EFAC50A2CB1D15B0067ACDB /* sample.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
