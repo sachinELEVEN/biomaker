@@ -251,11 +251,11 @@ struct MedicalDocumentViewerHandler: View{
                 }
                 .onChange(of: documentName) { newValue in
                     doc.name = newValue
-                    peristChangesInDisk()
+                    persistChangesInDisk()
                 }
                 .onChange(of: documentNotes) { newValue in
                     doc.notes = newValue
-                    peristChangesInDisk()
+                    persistChangesInDisk()
                 }
                 .onChange(of: docDate) { newValue in
                     doc.date = docDate
