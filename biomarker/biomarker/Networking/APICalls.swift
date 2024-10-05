@@ -5,7 +5,7 @@ class APIService {
     static func uploadMedicalDocumentAndFetchDetails(medicalDocument: MedicalDocument, isScannedDocument: Bool, completion: @escaping ([String: [BasicMedicalTestRecordv1]]?, Error?) -> Void) {
         
         // API endpoint
-        var useProdUrl = false
+        var useProdUrl = true
         var urlString = useProdUrl ? "https://backend.brainsphere.in/biomarker_report_analyser" : "http://localhost:3000/biomarker_report_analyser"
         guard let url = URL(string: urlString) else { return }
         
