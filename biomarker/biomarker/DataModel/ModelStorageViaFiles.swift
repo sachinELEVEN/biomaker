@@ -69,7 +69,7 @@ class BiomarkerFileSystem{
                 print("Error loading data: \(error)")
                 //this can happen due to many reason, one of the main reason is simply the file wont exist on the first launch or till the user makes/save any changes, so in that case we will popuplate using mockdata so user can see what the app can do
                 print("Using mock data to populate views")
-                RootTabView.setMockMedicalDocument()
+                return RootTabView.getSampleDataForProd()
             }
         }
         return []

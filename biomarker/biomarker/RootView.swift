@@ -114,6 +114,85 @@ struct RootTabView: View {
         system.medicalDocuments.append(mockMedicalDocument2)
 
     }
+    
+    public static func getSampleDataForProd()->[MedicalDocument]{
+        
+        
+        //creating mock test records
+        let records: [BasicMedicalTestRecordv1] = [
+            BasicMedicalTestRecordv1(test: "Bilirubin Total", value: "0.57", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:"0.1", plottablerefupperlimit: "1.2"),
+            BasicMedicalTestRecordv1(test: "Bilirubin Direct", value: "2.5", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:"0", plottablerefupperlimit: "0.2"),
+            BasicMedicalTestRecordv1(test: "Bilirubin Indirect", value: "0.43", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.2", plottablerefupperlimit: "0.8"),
+            BasicMedicalTestRecordv1(test: "Albumin", value: "4.24", unit: "g/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "3.5", plottablerefupperlimit: "5.2"),
+            BasicMedicalTestRecordv1(test: "Vitamin D", value: "32.2", unit: "ng/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "30.0", plottablerefupperlimit: "90.0"),
+            BasicMedicalTestRecordv1(test: "ESR", value: "15", unit: "mm/hr", plottable: "yes", plottableref: "no", plottablereflowerlimit: nil, plottablerefupperlimit: nil)
+        ]
+        
+        
+//        let records2: [BasicMedicalTestRecordv1] = [
+//            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "13", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+//            BasicMedicalTestRecordv1(test: "Haemoglobin", value: "16", unit: "mg/dl", plottable: "yes", plottableref: "no", plottablereflowerlimit:nil, plottablerefupperlimit: nil),
+//            BasicMedicalTestRecordv1(test: "Free Testosterone", value: "1.24", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.5", plottablerefupperlimit: "2.0"),
+//            BasicMedicalTestRecordv1(test: "Free Testosterone", value: "1.24", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "0.5", plottablerefupperlimit: "2.0"),
+//            BasicMedicalTestRecordv1(test: "Vitamin D", value: "32.2", unit: "mg/dl", plottable: "yes", plottableref: "yes", plottablereflowerlimit: "20.0", plottablerefupperlimit: "50.0"),
+//        ]
+        
+        
+
+        
+        //creating mock medical document section for document 1
+        let mockDocumentSection1ForDoc1 = MedicalDocumentSection()
+        let mockDocumentSection2ForDoc1 = MedicalDocumentSection()
+        
+        mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[0])
+        mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[1])
+        mockDocumentSection1ForDoc1.addNewMedicalTestRecords(testRecords: records[2])
+        
+        mockDocumentSection2ForDoc1.addNewMedicalTestRecords(testRecords: records[2])
+        mockDocumentSection2ForDoc1.addNewMedicalTestRecords(testRecords: records[4])
+        
+        //creating mock medical document section for document 2
+//        let mockDocumentSectionForDoc2 = MedicalDocumentSection()
+//        let mockDocumentSection2ForDoc2 = MedicalDocumentSection()
+//        
+//        mockDocumentSectionForDoc2.addNewMedicalTestRecords(testRecords: records[0])
+//        mockDocumentSectionForDoc2.addNewMedicalTestRecords(testRecords: records[1])
+//        mockDocumentSectionForDoc2.addNewMedicalTestRecords(testRecords: records[2])
+//        
+//        mockDocumentSectionForDoc2.addNewMedicalTestRecords(testRecords: records[3])
+//        mockDocumentSectionForDoc2.addNewMedicalTestRecords(testRecords: records[4])
+//        
+        
+        
+        
+        let date1 = Date(timeIntervalSince1970: 1700000000)//15 november 2023
+        let mockMedicalDocument1 = MedicalDocument(pdfDocumentUrl: mockPdfUrl!,date: date1)
+        mockMedicalDocument1.addNewMedicalSection(section: mockDocumentSection1ForDoc1)
+        mockMedicalDocument1.addNewMedicalSection(section: mockDocumentSection2ForDoc1)
+        //let date2 = Date(timeIntervalSinceNow: -500000)
+      //  let mockMedicalDocument2 = MedicalDocument(pdfDocumentUrl: mockPdfUrl!,date: date2)
+       // mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+//        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+//        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+//        mockMedicalDocument.addNewMedicalSection(section: mockDocumentSection)
+        
+//        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+//        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+//        mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+      //  mockMedicalDocument2.addNewMedicalSection(section: mockDocumentSection2)
+        
+        mockMedicalDocument1.name = "(Sample) LFT with Vitamin D Report- September 24"
+        mockMedicalDocument1.summary = ""
+        
+//        mockMedicalDocument2.name = "(Sample) LFT with Vitamin D Report- January"
+//        mockMedicalDocument2.summary = ""
+
+        
+        return [mockMedicalDocument1]
+//        system.medicalDocuments.append(mockMedicalDocument1)
+//        system.medicalDocuments.append(mockMedicalDocument2)
+
+    }
 
 }
 
