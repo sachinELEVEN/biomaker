@@ -67,7 +67,7 @@ struct MedicalDocumentViewerSmall: View{
                 }
                 Text("Biomarker found \(doc.totalTestRecordsCount()) tests in the document. \(doc.summary)")
                     .foregroundStyle(.secondary)
-                    .padding([.bottom])
+                    .padding(.bottom,3)
                     .multilineTextAlignment(.leading)
                 
                 HStack{
@@ -79,16 +79,17 @@ struct MedicalDocumentViewerSmall: View{
                             Text(Utils.formatDate(doc.date))
                             // .fontWeight(.bold)
                                 .font(.headline)
-                                .foregroundStyle(Color.secondary)
+                                .foregroundStyle(Color.pink)
                             //.padding([.leading])
                             Spacer()
-                        }
+                        }.padding(.bottom,2)
                         
                         
                         HStack{
                             Text("Tests")
                             // .fontWeight(.bold)
                                 .font(.subheadline)
+                                .foregroundStyle(Color.secondary)
                             
                             
                             Text("\(doc.totalTestRecordsCount())")
@@ -100,7 +101,8 @@ struct MedicalDocumentViewerSmall: View{
                             Text("Out of ref range")
                             //   .fontWeight(.bold)
                                 .font(.subheadline)
-                                .multilineTextAlignment(.center)
+                                .multilineTextAlignment(.leading)
+                                .foregroundStyle(Color.secondary)
                             
                             Text("\(doc.totalTestOutOfRangeCount())")
                                 .font(.subheadline)
@@ -357,10 +359,10 @@ struct MedicalDocumentViewerDetailed: View{
                                     Text(Utils.formatDate(doc.date))
                                         .fontWeight(.bold)
                                         .font(.title3)
-                                        .foregroundStyle(Color.secondary)
+                                        .foregroundStyle(Color.pink)
                                         //.padding([.leading])
                                     Spacer()
-                                }
+                                }.padding(.bottom,2)
                                 
                                 
                                 HStack{
