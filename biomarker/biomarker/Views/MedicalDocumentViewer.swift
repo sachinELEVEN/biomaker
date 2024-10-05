@@ -48,7 +48,7 @@ struct MedicalDocumentViewerSmall: View{
                 //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
                     .frame(width: size.width*0.85,height: (size.width*0.85)/3.5)
                     .cornerRadius(10)
-                    .padding()
+                    .padding(.vertical)
                 
                 HStack{
                     
