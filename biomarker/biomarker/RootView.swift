@@ -29,10 +29,10 @@ struct RootTabView: View {
                 }
             
             
-            SettingsView()
-                .tabItem {
-                    Label("Settings", systemImage: "gear")
-                }
+//            SettingsView()
+//                .tabItem {
+//                    Label("Settings", systemImage: "gear")
+//                }
         }.onAppear{
             BiomarkerFileSystem.loadModelDataFromFile()
         }
