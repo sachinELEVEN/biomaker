@@ -230,13 +230,23 @@ struct TestRecordView: View {
                 
             }
             
+            /*
             if(record.ai_info_available()){
+                HStack{
+                   
+                        imageView(systemName: "staroflife.fill",color: .primary,size: 10)
+                   
+                    Spacer()
+                }.padding(.leading)
+                    .padding(.vertical,3)
+                
                 Text("Powered by Biomarker Intelligence")
                     .font(.caption2)
                     .fontWeight(.bold)
                     .foregroundStyle(Color.secondary)
                     .padding(.leading)
             }
+            */
            
             
         }
@@ -334,6 +344,16 @@ struct TestRecordPlainView: View{
                             .padding(.top,4)
                         Spacer()
                     } .padding(.leading)
+                }
+                
+                if testRecord.ai_info_available(){
+                    HStack{
+                       
+                            imageView(systemName: "staroflife.fill",color: .primary,size: 20)
+                       
+                        Spacer()
+                    }.padding(.leading)
+                        .padding(.vertical,3)
                 }
                 
             }
