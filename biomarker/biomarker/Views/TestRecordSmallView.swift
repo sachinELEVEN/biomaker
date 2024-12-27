@@ -92,6 +92,23 @@ struct TestRecordView: View {
             }.padding([.leading])
             .foregroundColor(.secondary)
             
+            if(record.ai_info_available() && showAIInfoButton){
+                Button(action:{
+                    showAIInfoPopup.toggle()
+                }){
+                   // label("Learn more about \(record.userFacingTestName())", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 100, radius: 10)
+                    ShowTestAIInfoButtonView(record: record)
+                        .padding(.vertical,5)
+                        .padding(.leading)
+                   
+                }
+                .sheet(isPresented: $showAIInfoPopup){
+                    ScrollView(showsIndicators: false){
+                        TestAIInfoView(testRecord: record, showPopupCloseButton: true, showChart: true, showSelf: $showAIInfoPopup)
+                    }
+                }
+            }
+            
                 HStack{
                     Text(record.value)
                         .font(.headline)
@@ -213,30 +230,30 @@ struct TestRecordView: View {
                 
             }
             
-            if(record.ai_info_available() && showAIInfoButton){
-                Button(action:{
-                    showAIInfoPopup.toggle()
-                }){
-                   // label("Learn more about \(record.userFacingTestName())", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 100, radius: 10)
-                    HStack{
-                        imageView(systemName: "staroflife.fill")
-                        Text("Learn more about \(record.userFacingTestName())")
-                    }
-                   
-                }
-                .sheet(isPresented: $showAIInfoPopup){
-                    ScrollView(showsIndicators: false){
-                        TestAIInfoView(testRecord: record, showPopupCloseButton: true, showChart: true, showSelf: $showAIInfoPopup)
-                    }
-                }
-            }
+           
             
         }
        // .padding()
     }
 }
 
-
+struct ShowTestAIInfoButtonView: View{
+    var record: BasicMedicalTestRecordv1
+    var body: some View{
+            HStack{
+                imageView(systemName: "staroflife.fill",color: .primaryInvert)
+                Text("More about \(record.userFacingTestName()) Electrostatic force unit of measurement")
+                    .foregroundStyle(Color.primaryInvert)
+                    .fontWeight(.bold)
+                    .multilineTextAlignment(.leading)
+            }.padding(.horizontal)
+                .padding(.vertical,5)
+                .background(Color.primary)
+            .background(CustomBlur(style: .prominent))
+                .cornerRadius(10)
+        }
+    
+}
 
 struct TestRecordPlainView: View{
     @ObservedObject var sys = system
