@@ -297,6 +297,9 @@ struct GroupedTestRecordChartView: View {
                                 .padding([.horizontal,.vertical])
                         }
                         
+                        //Display ai information on this test
+                        
+                        
                         //display information about what tests were used using simple list p150
                         if let records = selectedGroupedRecords[testName] {
                             //Text("Tests used in the above chart").fontWeight(.bold).font(.headline)

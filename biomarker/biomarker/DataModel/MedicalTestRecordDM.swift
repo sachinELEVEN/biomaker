@@ -313,6 +313,14 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         return Date()
     }
     
+    func ref_range_male_exists()->Bool{
+        return ai_ref_range_lower_male != nil && ai_ref_range_upper_male != nil
+    }
+    
+    func ref_range_female_exists()->Bool{
+        return ai_ref_range_lower_female != nil && ai_ref_range_upper_female != nil
+    }
+    
     func getParentDocument()->MedicalDocument?{
         print("Test record \(id) looking for parent document")
         for doc in system.medicalDocuments{

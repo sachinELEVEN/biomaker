@@ -258,9 +258,25 @@ struct TestRecordPlainView: View{
                         //                                                Text("\(Text(testRecord.userFacingUnit())) and")
                         //                                                Text(testRecord.plottablereflowerlimit ?? "")
                         //                                                Text(testRecord.userFacingUnit())
-                        Text("Should be between \(testRecord.plottablereflowerlimit ?? "") \(testRecord.userFacingUnit()) and \(testRecord.plottablerefupperlimit ?? "") \(testRecord.userFacingUnit())")
-                            .multilineTextAlignment(.leading)
-                        
+                        if testRecord.ref_range_male_exists() && testRecord.ref_range_female_exists(){
+                            VStack(alignment: .leading){
+                                Text("Male ref range \(testRecord.ai_ref_range_lower_male!.truncated(toDecimalPlaces: 2) ) - \(testRecord.ai_ref_range_upper_male!.truncated(toDecimalPlaces: 2)) \(testRecord.userFacingUnit())")
+                                    .font(.subheadline)
+                                    .multilineTextAlignment(.leading)
+                                
+                                Text("Female ref range \(testRecord.ai_ref_range_lower_female!.truncated(toDecimalPlaces: 2)) - \(testRecord.ai_ref_range_upper_female!.truncated(toDecimalPlaces: 2)) \(testRecord.userFacingUnit())")
+                                    .font(.subheadline)
+                                    .multilineTextAlignment(.leading)
+                            }
+                            
+                        }else{
+                            
+                            
+                            Text("Should be between \(testRecord.plottablereflowerlimit ?? "") and \(testRecord.plottablerefupperlimit ?? "") \(testRecord.userFacingUnit())")
+                                .font(.subheadline)
+                            //.fontWeight(.bold)
+                                .multilineTextAlignment(.leading)
+                        }
                         Spacer()
                     }.padding(.leading)
                         .foregroundStyle(Color.secondary)

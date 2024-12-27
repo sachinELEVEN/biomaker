@@ -24,3 +24,13 @@ extension Double {
         return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
     }
 }
+
+extension Float {
+    /// Returns a string representation of the float truncated to `n` decimal digits.
+    func truncated(toDecimalPlaces n: Int) -> String {
+        guard n >= 0 else { return "\(self)" } // Return the number as-is if `n` is invalid.
+        let multiplier = pow(10.0, Float(n))
+        let truncatedValue = Float(Int(self * multiplier)) / multiplier
+        return String(format: "%.\(n)f", truncatedValue)
+    }
+}
