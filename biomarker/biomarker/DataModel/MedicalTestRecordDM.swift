@@ -178,6 +178,20 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
     var plottablereflowerlimit: String?
     var plottablerefupperlimit: String?
     var id = UUID.init().uuidString
+    //llm generated data below
+    var ai_original_name: String?//same as test in the response from the server
+    var ai_common_name: String?//i would say this is more user friendly name, so try to use this for user facing string
+    var ai_ref_range_lower_male: Float?
+    var ai_ref_range_upper_male: Float?
+    var ai_ref_range_lower_female: Float?
+    var ai_ref_range_upper_female: Float?
+    var ai_unit: String?
+    var ai_use: String?
+    var ai_reason_for_high_value: String?
+    var ai_reason_for_lower_value: String?
+    var ai_related_organs: String?
+    var ai_properties_set: String?//yes when its set
+    
 
     enum CodingKeys: String, CodingKey {
         case test
@@ -188,9 +202,21 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         case plottableref
         case plottablereflowerlimit
         case plottablerefupperlimit
+        case ai_original_name
+        case ai_common_name
+        case ai_ref_range_lower_male
+        case ai_ref_range_upper_male
+        case ai_ref_range_lower_female
+        case ai_ref_range_upper_female
+        case ai_unit
+        case ai_use
+        case ai_reason_for_high_value
+        case ai_reason_for_lower_value
+        case ai_related_organs
+        case ai_properties_set
     }
     
-    init(test: String, value: String, unit: String, plottable: String, ref: String? = nil, plottableref: String? = nil, plottablereflowerlimit: String? = nil, plottablerefupperlimit: String? = nil) {
+    init(test: String, value: String, unit: String, plottable: String, ref: String? = nil, plottableref: String? = nil, plottablereflowerlimit: String? = nil, plottablerefupperlimit: String? = nil, ai_original_name: String? = nil, ai_common_name: String? = nil, ai_ref_range_lower_male: Float? = nil, ai_ref_range_upper_male: Float? = nil, ai_ref_range_lower_female: Float? = nil, ai_ref_range_upper_female: Float? = nil, ai_unit: String? = nil, ai_use: String? = nil, ai_reason_for_high_value: String? = nil, ai_reason_for_lower_value: String? = nil, ai_related_organs: String? = nil, ai_properties_set: String = "no" ) {
            self.test = test
            self.value = value
            self.unit = unit
@@ -200,6 +226,38 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
            self.plottablereflowerlimit = plottablereflowerlimit
            self.plottablerefupperlimit = plottablerefupperlimit
            //self.id = UUID().uuidString // Automatically generate UUID
+           //Using LLM generated fields
+        self.ai_original_name = ai_original_name
+        self.ai_common_name = ai_common_name
+        self.ai_ref_range_lower_male = ai_ref_range_lower_male
+        self.ai_ref_range_upper_male = ai_ref_range_upper_male
+        self.ai_ref_range_lower_female = ai_ref_range_lower_female
+        self.ai_ref_range_upper_female = ai_ref_range_upper_female
+        self.ai_unit = ai_unit
+        self.ai_use = ai_use
+        self.ai_reason_for_high_value = ai_reason_for_high_value
+        self.ai_reason_for_lower_value = ai_reason_for_lower_value
+        self.ai_related_organs = ai_related_organs
+        //this needs to be set if the ai data is generated for this test. Note- this will be mostly true for documents analysed by the server but for locally added tests this will be false, so we use this property to determine if we need to show an option to do ai analysis for that test or not
+        self.ai_properties_set = ai_properties_set
+        
+        //additional stuff
+        if self.plottablereflowerlimit == nil{
+            //taking average of men and women rating, change this once we start capturing if the user is men or women
+            //we will be taking men's value for now, as this is just indicative, taking average will mess up the result as tests like testosterone has huge diff in its ref ranges between both the male and female
+            if let ref_low_male = self.ai_ref_range_lower_male{
+                self.plottablereflowerlimit = "\(ref_low_male)"
+            }
+            
+            if let ref_upper_male = self.ai_ref_range_upper_male {
+                self.plottablerefupperlimit = "\(ref_upper_male)"
+            }
+            
+            if let ai_unit_ = ai_unit{
+                self.unit = ai_unit_
+            }
+          
+        }
        }
     
     
@@ -274,7 +332,13 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         //we need to get parent section's summary, name access here
         if let parentSection = getParentSection(){
             //now we need to make a corpus text and find the string there
-            if parentSection.name.lowercased().contains(searchStr) || parentSection.summary.lowercased().contains(searchStr) || parentSection.keyPoints.lowercased().contains(searchStr) {
+            if parentSection.name.lowercased().contains(searchStr) || parentSection.summary.lowercased().contains(searchStr) || parentSection.keyPoints.lowercased().contains(searchStr) ||
+                (ai_original_name?.lowercased() ?? "").contains(searchStr) ||
+                (ai_common_name?.lowercased() ?? "").contains(searchStr) ||
+                (ai_use?.lowercased() ?? "").contains(searchStr) ||
+                (ai_related_organs?.lowercased() ?? "").contains(searchStr) ||
+                (ai_reason_for_high_value?.lowercased() ?? "").contains(searchStr) ||
+                (ai_reason_for_lower_value?.lowercased() ?? "").contains(searchStr){
                 return true
             }
         }

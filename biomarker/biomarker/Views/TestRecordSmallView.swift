@@ -221,6 +221,11 @@ struct TestRecordPlainView: View{
                     Spacer()
                 } .padding(.leading)
                 HStack{
+                    Text(testRecord.ai_use ?? "could not found use")
+                        .fontWeight(.bold)
+                    Spacer()
+                } .padding(.leading)
+                HStack{
                     Text(testRecord.value)
                     Text(testRecord.unit)
                     Spacer()
