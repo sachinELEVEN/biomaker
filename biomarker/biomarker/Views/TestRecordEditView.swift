@@ -179,6 +179,7 @@ struct TestRecordEditActionView: View{
     var iconSize : CGFloat = 25
     @State var showActionSheet = false
     @State var showUpdateTestManuallyScreen = false
+    @State var showAIInfoPopup = false
     var body : some View{
         Button(action:{
             showActionSheet = true
@@ -186,27 +187,48 @@ struct TestRecordEditActionView: View{
             imageView(systemName: "info.circle",color: .secondary.opacity(0.4),size: iconSize)
                 .padding(.trailing,5)
         }
-            .actionSheet(isPresented: $showActionSheet) {
-                ActionSheet(
-                    title: Text("Actions"),
-                    message: Text(""),
-                    buttons: [
-                        .default(Text("Edit Test Values")) {
-                            // Navigate to chart view for separate tracking
-                            //mergeSelectedGroups = false
-                           // navigateToChartView()
-                            //print("Each Test Separately")
-                            showUpdateTestManuallyScreen.toggle()
-                        },
-                        .destructive(Text("Delete Test From Report")) {
-                            deleteTestRecord()
-                        },
-                        .cancel()
-                    ]
+        .actionSheet(isPresented: $showActionSheet) {
+            var buttons: [ActionSheet.Button] = []
+
+            if testRecord.ai_info_available() {
+                buttons.append(
+                    .default(Text("Learn More with Biomarker Intelligence")) {
+                        // Toggle AI Info Popup
+                        showAIInfoPopup.toggle()
+                    }
                 )
             }
+
+            buttons.append(
+                .default(Text("Edit Test Values")) {
+                    // Toggle Update Test Manually Screen
+                    showUpdateTestManuallyScreen.toggle()
+                }
+            )
+
+            buttons.append(
+                .destructive(Text("Delete Test From Report")) {
+                    // Delete the test record
+                    deleteTestRecord()
+                }
+            )
+
+            buttons.append(.cancel())
+
+            return ActionSheet(
+                title: Text("Actions"),
+                message: Text(""),
+                buttons: buttons
+            )
+        }
+
             .sheet(isPresented: $showUpdateTestManuallyScreen){
                 CreateTestRecordView(showSelf: $showUpdateTestManuallyScreen, document: testRecord.getParentDocument()!, existingRecord: testRecord)
+            }
+            .sheet(isPresented: $showAIInfoPopup){
+                ScrollView(showsIndicators: false){
+                    TestAIInfoView(testRecord: testRecord, showPopupCloseButton: true, showChart: true, showSelf: $showAIInfoPopup)
+                }
             }
     }
     
