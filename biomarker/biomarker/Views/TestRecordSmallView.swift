@@ -54,6 +54,8 @@ struct TestRecordView: View {
     @ObservedObject var sys = system
     var record: BasicMedicalTestRecordv1
     var showEditOptions : Bool = true
+    var showAIInfoButton = true
+    @State var showAIInfoPopup = false
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -209,6 +211,24 @@ struct TestRecordView: View {
                     
                 } .padding(.top)
                 
+            }
+            
+            if(record.ai_info_available() && showAIInfoButton){
+                Button(action:{
+                    showAIInfoPopup.toggle()
+                }){
+                   // label("Learn more about \(record.userFacingTestName())", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 100, radius: 10)
+                    HStack{
+                        imageView(systemName: "staroflife.fill")
+                        Text("Learn more about \(record.userFacingTestName())")
+                    }
+                   
+                }
+                .sheet(isPresented: $showAIInfoPopup){
+                    ScrollView(showsIndicators: false){
+                        TestAIInfoView(testRecord: record, showPopupCloseButton: true, showChart: true, showSelf: $showAIInfoPopup)
+                    }
+                }
             }
             
         }

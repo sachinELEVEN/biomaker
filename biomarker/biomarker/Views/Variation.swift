@@ -317,7 +317,7 @@ struct GroupedTestRecordChartView: View {
                         
                         if let records = selectedGroupedRecords[testName] {
                             if let firstRecord = records.first{
-                                TestAIInfoView(testRecord: firstRecord, showUseInfo: false)
+                                TestAIInfoView(testRecord: firstRecord, showUseInfo: false, showSelf: .constant(true))
                             }
                         }
                         
@@ -476,7 +476,10 @@ struct GroupedTestRecordChartView: View {
 
 struct TestAIInfoView: View{
     var testRecord: BasicMedicalTestRecordv1
+    var showPopupCloseButton = false
     var showUseInfo: Bool = true
+    var showChart: Bool = false
+    @Binding var showSelf : Bool
     var body: some View{
         VStack{
             //Display ai information on this test
@@ -492,19 +495,37 @@ struct TestAIInfoView: View{
                             //                                        Text(testUse)
                             //                                    }
                             
-                            if let testUse = testRecord.ai_use{
-                                HStack{
-                                   Text("More Info")
-                                       .fontWeight(.bold)
-                                       .padding([.leading,.top])
-                               Spacer()
-                               }
-                                Text(testUse)
+                            if showChart{
+                                Text(testRecord.userFacingTestName())
                                     .fontWeight(.bold)
-                                    .font(.headline)
-                                    .foregroundStyle(Color.secondary)
-                                    .multilineTextAlignment(.leading)
-                                    .padding(.leading)
+                                    .font(.largeTitle)
+                                    .padding()
+                            }
+                            
+                            if showUseInfo{
+                                if let testUse = testRecord.ai_use{
+                                    HStack{
+                                        Text("More Info")
+                                            .fontWeight(.bold)
+                                            .padding([.leading,.top])
+                                        Spacer()
+                                    }
+                                    Text(testUse)
+                                        .fontWeight(.bold)
+                                        .font(.headline)
+                                        .foregroundStyle(Color.secondary)
+                                        .multilineTextAlignment(.leading)
+                                        .padding(.leading)
+                                }
+                            }
+                            
+                            if showChart{
+                                TestRecordView(record: testRecord, showAIInfoButton: false)
+                                    .padding()
+                                    //.background(Color.secondary.opacity(0.2))
+                                        .background(CustomBlur(style: .prominent))
+                                        .cornerRadius(20)
+                                        .padding([.horizontal,.top])
                             }
                             
                             if let relatedOrgans = testRecord.ai_related_organs{
@@ -572,6 +593,13 @@ struct TestAIInfoView: View{
                         }
                     }
             
+            if showPopupCloseButton{
+                Button(action:{
+                    self.showSelf.toggle()
+                }){
+                    label("Close")
+                }
+            }
         }
 
         
