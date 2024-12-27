@@ -118,6 +118,16 @@ class MedicalDocument: ObservableObject,Identifiable,Codable{
         return index
     }
     
+    func setup_medical_document(){
+        
+        //setting up of test record
+        for section in sections{
+            for test in section.testRecords{
+                test.setup_test_record()
+            }
+        }
+    }
+    
 }
 
 //A medical document has a the original medical document reference and a list of medical records
@@ -169,7 +179,7 @@ class MedicalDocumentSection: ObservableObject, Identifiable, Codable{
 }
 
 class BasicMedicalTestRecordv1: Codable, Identifiable {
-    var test: String
+    var test: String////this is the full name that was actually present in the report aka which has been detected by our pdf analysis system
     var value: String
     var unit: String
     var plottable: String
@@ -242,6 +252,10 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         self.ai_properties_set = ai_properties_set
         
         //additional stuff
+        setup_test_record()
+       }
+    
+    func setup_test_record(){
         if self.plottablereflowerlimit == nil{
             //taking average of men and women rating, change this once we start capturing if the user is men or women
             //we will be taking men's value for now, as this is just indicative, taking average will mess up the result as tests like testosterone has huge diff in its ref ranges between both the male and female
@@ -253,13 +267,17 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
                 self.plottablerefupperlimit = "\(ref_upper_male)"
             }
             
-            if let ai_unit_ = ai_unit{
-                self.unit = ai_unit_
-            }
           
         }
-       }
+    }
     
+    func userFacingTestName()->String{
+        return ai_common_name ?? test
+    }
+    
+    func userFacingUnit()->String{
+        return ai_unit ?? unit
+    }
     
     func getDouble(_ val: String)->Double{
         return Double(val) ?? -1

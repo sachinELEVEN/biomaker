@@ -64,6 +64,9 @@ class BiomarkerFileSystem{
                 let data = try Data(contentsOf: fileURL)
                 let documents = try decoder.decode([MedicalDocument].self, from: data)
                 print("Data loaded successfully from \(fileURL)")
+                for doc in documents{
+                    doc.setup_medical_document()
+                }
                 return documents
             } catch {
                 print("Error loading data: \(error)")

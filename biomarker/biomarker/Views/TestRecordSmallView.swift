@@ -60,7 +60,7 @@ struct TestRecordView: View {
            
           
                 HStack{
-                    Text(record.test)
+                    Text(record.userFacingTestName())
                         .font(.title3)
                         .fontWeight(.bold)
                        
@@ -81,17 +81,27 @@ struct TestRecordView: View {
                 
                 
                 
+            HStack{
+                if (record.test != record.userFacingTestName()){
+                    Text(record.test)
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                }
+            }.padding([.leading])
+            .foregroundColor(.secondary)
+            
                 HStack{
                     Text(record.value)
                         .font(.headline)
                         .fontWeight(.bold)
                        
                     
-                    Text(record.unit)
+                    Text(record.userFacingUnit())
                         .font(.headline)
                     
                 }.padding([.bottom,.leading])
                 .foregroundColor(.secondary)
+            
        
                
            
@@ -216,28 +226,23 @@ struct TestRecordPlainView: View{
         HStack{
             VStack{
                 HStack{
-                    Text(testRecord.test)
-                        .fontWeight(.bold)
-                    Spacer()
-                } .padding(.leading)
-                HStack{
-                    Text(testRecord.ai_use ?? "could not found use")
+                    Text(testRecord.userFacingTestName())
                         .fontWeight(.bold)
                     Spacer()
                 } .padding(.leading)
                 HStack{
                     Text(testRecord.value)
-                    Text(testRecord.unit)
+                    Text(testRecord.userFacingUnit())
                     Spacer()
                 }.padding(.leading)
                 if testRecord.plottablereflowerlimit != nil && testRecord.plottablerefupperlimit != nil{
                     HStack{
                         //                                                Text("Should be between")
                         //                                                Text(testRecord.plottablerefupperlimit ?? "")
-                        //                                                Text("\(Text(testRecord.unit)) and")
+                        //                                                Text("\(Text(testRecord.userFacingUnit())) and")
                         //                                                Text(testRecord.plottablereflowerlimit ?? "")
-                        //                                                Text(testRecord.unit)
-                        Text("Should be between \(testRecord.plottablereflowerlimit ?? "") \(testRecord.unit) and \(testRecord.plottablerefupperlimit ?? "") \(testRecord.unit)")
+                        //                                                Text(testRecord.userFacingUnit())
+                        Text("Should be between \(testRecord.plottablereflowerlimit ?? "") \(testRecord.userFacingUnit()) and \(testRecord.plottablerefupperlimit ?? "") \(testRecord.userFacingUnit())")
                             .multilineTextAlignment(.leading)
                         
                         Spacer()

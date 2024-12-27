@@ -69,6 +69,7 @@ class System: ObservableObject{
                 //Adding the medical document to the user's list of medical documents
                 //GET MEDICAL DOCUMENT DATE FROM API CALL //TODO LATER
                 medicalDocument.date = Date()
+                medicalDocument.setup_medical_document()
                 self.medicalDocuments.append(medicalDocument)
                 //saving changes
                 BiomarkerFileSystem.saveSystemMedicalDocuments()
