@@ -283,6 +283,24 @@ struct GroupedTestRecordChartView: View {
                                     
                                 }//.padding(.bottom,1)
                                 .padding([.horizontal])
+                                
+                                if firstRecord.ai_info_available(){
+                                    
+                                    if let testUse = firstRecord.ai_use{
+                                        HStack{
+                                           Text("More Info")
+                                               .fontWeight(.bold)
+                                               .padding([.leading,.top])
+                                       Spacer()
+                                       }
+                                        Text(testUse)
+                                            .fontWeight(.bold)
+                                            .font(.headline)
+                                            .foregroundStyle(Color.secondary)
+                                            .multilineTextAlignment(.leading)
+                                            .padding(.leading)
+                                    }
+                                }
                             }
                         }
                         //
@@ -301,48 +319,83 @@ struct GroupedTestRecordChartView: View {
                         if let records = selectedGroupedRecords[testName]{
                             if let firstRecord = records.first {
                                 if firstRecord.ai_info_available(){
-                                
-                                    //heading here?
-                                    
-                                    if let testUse = firstRecord.ai_use{
-                                        Text("Use of \(firstRecord.userFacingTestName())")
-                                            .fontWeight(.bold)
-                                        Text(testUse)
-                                    }
-                                    
-                                    if let relatedOrgans = firstRecord.ai_related_organs{
-                                        Text("Body parts \(firstRecord.userFacingTestName()) tells us about")
-                                            .fontWeight(.bold)
-                                        Text(relatedOrgans)
-                                    }
-                                    
-                                    Text("Reference Range")
-                                        .fontWeight(.bold)
-                                    
-                                    if firstRecord.ref_range_male_exists(){
-                                        Text("Male ref range \(firstRecord.ai_ref_range_lower_male!.truncated(toDecimalPlaces: 2) ) - \(firstRecord.ai_ref_range_upper_male!.truncated(toDecimalPlaces: 2)) \(firstRecord.userFacingUnit())")
-                                            .font(.subheadline)
-                                            .multilineTextAlignment(.leading)
+                                    VStack(alignment: .leading){
+                                        //heading here?
                                         
-                                    }
-                                    
-                                    if firstRecord.ref_range_female_exists(){
-                                        Text("Female ref range \(firstRecord.ai_ref_range_lower_female!.truncated(toDecimalPlaces: 2)) - \(firstRecord.ai_ref_range_upper_female!.truncated(toDecimalPlaces: 2)) \(firstRecord.userFacingUnit())")
-                                            .font(.subheadline)
-                                            .multilineTextAlignment(.leading)
-                                    }
-                                    
-                                    if let reasonHighVal = firstRecord.ai_reason_for_high_value{
-                                        Text(reasonHighVal)
-                                    }
-                                    
-                                    if let reasonLowVal = firstRecord.ai_reason_for_lower_value{
-                                        Text(reasonLowVal)
+                                        //                                    if let testUse = firstRecord.ai_use{
+                                        //                                        Text("Use of \(firstRecord.userFacingTestName())")
+                                        //                                            .fontWeight(.bold)
+                                        //                                        Text(testUse)
+                                        //                                    }
+                                        
+                                        if let relatedOrgans = firstRecord.ai_related_organs{
+                                            HStack{
+                                                Text("Related Body Parts")
+                                                    .fontWeight(.bold)
+                                                    .padding([.leading,.top])
+                                                Spacer()
+                                            }
+                                            Text("\(firstRecord.userFacingTestName()) tells us about \(relatedOrgans)")
+                                                .fontWeight(.bold)
+                                                .font(.headline)
+                                                .foregroundStyle(Color.secondary)
+                                                .multilineTextAlignment(.leading)
+                                                .padding(.leading)
+                                        }
+                                        //HStack{
+                                            Text("Reference Range")
+                                                .fontWeight(.bold)
+                                                .padding([.leading,.top])
+                                         //   Spacer()
+                                        //}
+                                        
+                                        if firstRecord.ref_range_male_exists(){
+                                            Text("Male ref range \(firstRecord.ai_ref_range_lower_male!.truncated(toDecimalPlaces: 2) ) - \(firstRecord.ai_ref_range_upper_male!.truncated(toDecimalPlaces: 2)) \(firstRecord.userFacingUnit())")
+                                                .fontWeight(.bold)
+                                                .font(.headline)
+                                                .foregroundStyle(Color.secondary)
+                                                .multilineTextAlignment(.leading)
+                                                .padding(.leading)
+                                            
+                                            
+                                        }
+                                        
+                                        if firstRecord.ref_range_female_exists(){
+                                            Text("Female ref range \(firstRecord.ai_ref_range_lower_female!.truncated(toDecimalPlaces: 2)) - \(firstRecord.ai_ref_range_upper_female!.truncated(toDecimalPlaces: 2)) \(firstRecord.userFacingUnit())")
+                                                .fontWeight(.bold)
+                                                .font(.headline)
+                                                .foregroundStyle(Color.secondary)
+                                                .multilineTextAlignment(.leading)
+                                                .padding(.leading)
+                                        }
+                                        
+                                       // HStack{
+                                        Text("More about High and low \(firstRecord.userFacingTestName()) values")
+                                                .fontWeight(.bold)
+                                                .padding([.leading,.top])
+//                                            Spacer()
+//                                        }
+                                        if let reasonHighVal = firstRecord.ai_reason_for_high_value{
+                                            Text(reasonHighVal)
+                                                .fontWeight(.bold)
+                                                .font(.headline)
+                                                .foregroundStyle(Color.secondary)
+                                                .padding([.leading,.bottom])
+                                        }
+                                        
+                                        if let reasonLowVal = firstRecord.ai_reason_for_lower_value{
+                                            Text(reasonLowVal)
+                                                .fontWeight(.bold)
+                                                .font(.headline)
+                                                .foregroundStyle(Color.secondary)
+                                                .padding([.leading,.bottom])
+                                        }
                                     }
                                 }
                         }
                     }
                         
+                        Divider().padding()
                         //display information about what tests were used using simple list p150
                         if let records = selectedGroupedRecords[testName] {
                             //Text("Tests used in the above chart").fontWeight(.bold).font(.headline)
