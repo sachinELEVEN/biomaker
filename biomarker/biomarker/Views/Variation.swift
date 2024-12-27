@@ -315,85 +315,11 @@ struct GroupedTestRecordChartView: View {
                                 .padding([.horizontal,.vertical])
                         }
                         
-                        //Display ai information on this test
-                        if let records = selectedGroupedRecords[testName]{
-                            if let firstRecord = records.first {
-                                if firstRecord.ai_info_available(){
-                                    VStack(alignment: .leading){
-                                        //heading here?
-                                        
-                                        //                                    if let testUse = firstRecord.ai_use{
-                                        //                                        Text("Use of \(firstRecord.userFacingTestName())")
-                                        //                                            .fontWeight(.bold)
-                                        //                                        Text(testUse)
-                                        //                                    }
-                                        
-                                        if let relatedOrgans = firstRecord.ai_related_organs{
-                                            HStack{
-                                                Text("Related Body Parts")
-                                                    .fontWeight(.bold)
-                                                    .padding([.leading,.top])
-                                                Spacer()
-                                            }
-                                            Text("\(firstRecord.userFacingTestName()) tells us about \(relatedOrgans)")
-                                                .fontWeight(.bold)
-                                                .font(.headline)
-                                                .foregroundStyle(Color.secondary)
-                                                .multilineTextAlignment(.leading)
-                                                .padding(.leading)
-                                        }
-                                        //HStack{
-                                            Text("Reference Range")
-                                                .fontWeight(.bold)
-                                                .padding([.leading,.top])
-                                         //   Spacer()
-                                        //}
-                                        
-                                        if firstRecord.ref_range_male_exists(){
-                                            Text("Male ref range \(firstRecord.ai_ref_range_lower_male!.truncated(toDecimalPlaces: 2) ) - \(firstRecord.ai_ref_range_upper_male!.truncated(toDecimalPlaces: 2)) \(firstRecord.userFacingUnit())")
-                                                .fontWeight(.bold)
-                                                .font(.headline)
-                                                .foregroundStyle(Color.secondary)
-                                                .multilineTextAlignment(.leading)
-                                                .padding(.leading)
-                                            
-                                            
-                                        }
-                                        
-                                        if firstRecord.ref_range_female_exists(){
-                                            Text("Female ref range \(firstRecord.ai_ref_range_lower_female!.truncated(toDecimalPlaces: 2)) - \(firstRecord.ai_ref_range_upper_female!.truncated(toDecimalPlaces: 2)) \(firstRecord.userFacingUnit())")
-                                                .fontWeight(.bold)
-                                                .font(.headline)
-                                                .foregroundStyle(Color.secondary)
-                                                .multilineTextAlignment(.leading)
-                                                .padding(.leading)
-                                        }
-                                        
-                                       // HStack{
-                                        Text("More about High and low \(firstRecord.userFacingTestName()) values")
-                                                .fontWeight(.bold)
-                                                .padding([.leading,.top])
-//                                            Spacer()
-//                                        }
-                                        if let reasonHighVal = firstRecord.ai_reason_for_high_value{
-                                            Text(reasonHighVal)
-                                                .fontWeight(.bold)
-                                                .font(.headline)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding([.leading,.bottom])
-                                        }
-                                        
-                                        if let reasonLowVal = firstRecord.ai_reason_for_lower_value{
-                                            Text(reasonLowVal)
-                                                .fontWeight(.bold)
-                                                .font(.headline)
-                                                .foregroundStyle(Color.secondary)
-                                                .padding([.leading,.bottom])
-                                        }
-                                    }
-                                }
+                        if let records = selectedGroupedRecords[testName] {
+                            if let firstRecord = records.first{
+                                TestAIInfoView(testRecord: firstRecord, showUseInfo: false)
+                            }
                         }
-                    }
                         
                         Divider().padding()
                         //display information about what tests were used using simple list p150
@@ -544,5 +470,110 @@ struct GroupedTestRecordChartView: View {
                 .frame(height: 300)
             }
         }
+    }
+}
+
+
+struct TestAIInfoView: View{
+    var testRecord: BasicMedicalTestRecordv1
+    var showUseInfo: Bool = true
+    var body: some View{
+        VStack{
+            //Display ai information on this test
+           
+               
+                    if testRecord.ai_info_available(){
+                        VStack(alignment: .leading){
+                            //heading here?
+                            
+                            //                                    if let testUse = firstRecord.ai_use{
+                            //                                        Text("Use of \(firstRecord.userFacingTestName())")
+                            //                                            .fontWeight(.bold)
+                            //                                        Text(testUse)
+                            //                                    }
+                            
+                            if let testUse = testRecord.ai_use{
+                                HStack{
+                                   Text("More Info")
+                                       .fontWeight(.bold)
+                                       .padding([.leading,.top])
+                               Spacer()
+                               }
+                                Text(testUse)
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .foregroundStyle(Color.secondary)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.leading)
+                            }
+                            
+                            if let relatedOrgans = testRecord.ai_related_organs{
+                                HStack{
+                                    Text("Related Body Parts")
+                                        .fontWeight(.bold)
+                                        .padding([.leading,.top])
+                                    Spacer()
+                                }
+                                Text("\(testRecord.userFacingTestName()) tells us about \(relatedOrgans)")
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .foregroundStyle(Color.secondary)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.leading)
+                            }
+                            //HStack{
+                                Text("Reference Range")
+                                    .fontWeight(.bold)
+                                    .padding([.leading,.top])
+                             //   Spacer()
+                            //}
+                            
+                            if testRecord.ref_range_male_exists(){
+                                Text("Male ref range \(testRecord.ai_ref_range_lower_male!.truncated(toDecimalPlaces: 2) ) - \(testRecord.ai_ref_range_upper_male!.truncated(toDecimalPlaces: 2)) \(testRecord.userFacingUnit())")
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .foregroundStyle(Color.secondary)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.leading)
+                                
+                                
+                            }
+                            
+                            if testRecord.ref_range_female_exists(){
+                                Text("Female ref range \(testRecord.ai_ref_range_lower_female!.truncated(toDecimalPlaces: 2)) - \(testRecord.ai_ref_range_upper_female!.truncated(toDecimalPlaces: 2)) \(testRecord.userFacingUnit())")
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .foregroundStyle(Color.secondary)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.leading)
+                            }
+                            
+                           // HStack{
+                            Text("More about High and low \(testRecord.userFacingTestName()) values")
+                                    .fontWeight(.bold)
+                                    .padding([.leading,.top])
+//                                            Spacer()
+//                                        }
+                            if let reasonHighVal = testRecord.ai_reason_for_high_value{
+                                Text(reasonHighVal)
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .foregroundStyle(Color.secondary)
+                                    .padding([.leading,.bottom])
+                            }
+                            
+                            if let reasonLowVal = testRecord.ai_reason_for_lower_value{
+                                Text(reasonLowVal)
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .foregroundStyle(Color.secondary)
+                                    .padding([.leading,.bottom])
+                            }
+                        }
+                    }
+            
+        }
+
+        
     }
 }
