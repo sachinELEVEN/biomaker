@@ -47,7 +47,7 @@ struct CreateTestRecordView: View {
                                     .cornerRadius(20)
                                     .padding(.horizontal)
 
-                                Text("\(newRecord!.test) test record has been \(existingRecord == nil ? "added" : "updated").")
+                                Text("\(newRecord!.userFacingTestName()) test record has been \(existingRecord == nil ? "added" : "updated").")
                                     .fontWeight(.bold)
                                     .multilineTextAlignment(.leading)
                                     .foregroundStyle(Color.green)
@@ -88,7 +88,7 @@ struct CreateTestRecordView: View {
                     .padding(.bottom)
                 }.animation(.default)
             }
-            .navigationTitle(newRecord != nil ? "\(newRecord!.test) \(existingRecord == nil ? "Added" : "Updated")" : existingRecord == nil ? "Create Test Record" : "Edit Test Record")
+            .navigationTitle(newRecord != nil ? "\(newRecord!.userFacingTestName()) \(existingRecord == nil ? "Added" : "Updated")" : existingRecord == nil ? "Create Test Record" : "Edit Test Record")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

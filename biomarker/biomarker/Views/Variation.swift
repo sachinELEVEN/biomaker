@@ -120,7 +120,7 @@ struct VariationView: View {
     
     func getSelectedGroups() -> [String: [BasicMedicalTestRecordv1]] {
         // Group all test records by test name
-        let allGroupedRecords = Dictionary(grouping: sys.getAllTestRecords(), by: { $0.test })
+        let allGroupedRecords = Dictionary(grouping: sys.getAllTestRecords(), by: { $0.userFacingTestName() })
         
         // Filter the grouped records to only include the selected groups
         var selectedGroupedRecords = allGroupedRecords.filter { selectedRecords.contains($0.key) }
@@ -169,7 +169,7 @@ struct GroupedTestRecordsView: View {
     
     // Group the test records by test name
     var groupedRecords: [String: [BasicMedicalTestRecordv1]] {
-        Dictionary(grouping: testRecords, by: { $0.test })
+        Dictionary(grouping: testRecords, by: { $0.userFacingTestName() })
     }
 
     // Filtered records based on search text
@@ -261,8 +261,10 @@ struct GroupedTestRecordChartView: View {
                             if let firstRecord = records.first {
                                 //   Text(firstRecord.test) // Display the test name as the title of the chart
                                 //      .font(.headline)
+                                //this is where the additional information ai info has to be shown for this test
+                                //p150
                                 HStack{
-                                    Text(firstRecord.test)
+                                    Text(firstRecord.userFacingTestName())
                                         .font(.title2)
                                         .fontWeight(.bold)
                                     

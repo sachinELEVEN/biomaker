@@ -228,11 +228,27 @@ struct TestRecordPlainView: View{
                 HStack{
                     Text(testRecord.userFacingTestName())
                         .fontWeight(.bold)
+                        .multilineTextAlignment(.leading)
                     Spacer()
                 } .padding(.leading)
                 HStack{
+                    if (testRecord.test != testRecord.userFacingTestName()){
+                        Text(testRecord.test)
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.leading)
+                            .padding(.bottom,4)
+                            .padding(.leading)
+                            .foregroundColor(.secondary)
+                    }
+                    Spacer()
+                }
+                
+                HStack{
                     Text(testRecord.value)
+                        .fontWeight(.bold)
                     Text(testRecord.userFacingUnit())
+                        .fontWeight(.bold)
                     Spacer()
                 }.padding(.leading)
                 if testRecord.plottablereflowerlimit != nil && testRecord.plottablerefupperlimit != nil{
@@ -255,6 +271,7 @@ struct TestRecordPlainView: View{
                         Text(Utils.formatDate(testRecord.testDate() ?? Date()))
                             .font(.subheadline)
                             .foregroundStyle(Color.secondary)
+                            .padding(.top,4)
                         Spacer()
                     } .padding(.leading)
                 }
