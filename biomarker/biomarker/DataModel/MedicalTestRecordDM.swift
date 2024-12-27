@@ -271,6 +271,10 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         }
     }
     
+    func ai_info_available()->Bool{
+        return ai_properties_set != nil && ai_properties_set! == "yes"
+    }
+    
     func userFacingTestName()->String{
         return ai_common_name ?? test
     }
