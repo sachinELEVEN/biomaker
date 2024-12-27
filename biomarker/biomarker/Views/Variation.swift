@@ -173,18 +173,39 @@ struct GroupedTestRecordsView: View {
     }
 
     // Filtered records based on search text
-    var filteredRecords: [String: [BasicMedicalTestRecordv1]] {
-        if searchText.isEmpty {
-            return groupedRecords
-        } else {
-            return groupedRecords.filter { group in
-                // Check if the group name (key) matches the search text
+    @State var filteredRecords: [String: [BasicMedicalTestRecordv1]] = [:]
+//    {
+//        if searchText.isEmpty {
+//            return groupedRecords
+//        } else {
+//            return groupedRecords.filter { group in
+//                // Check if the group name (key) matches the search text
+//                group.key.lowercased().contains(searchText.lowercased()) ||
+//                // Check if any record in the group matches the search text using satisfiedsearch
+//                group.value.contains { $0.satisfiesSearch(searchStr: searchText.lowercased()) }
+//            }
+//        }
+//    }
+    
+
+    // Function to filter records on a background thread
+    func filterRecordsAsync(groupedRecords: [String: [BasicMedicalTestRecordv1]],
+                            searchText: String,
+                            completion: @escaping ([String: [BasicMedicalTestRecordv1]]) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            // Perform filtering in a background thread
+            let filtered = groupedRecords.filter { group in
                 group.key.lowercased().contains(searchText.lowercased()) ||
-                // Check if any record in the group matches the search text using satisfiedsearch
                 group.value.contains { $0.satisfiesSearch(searchStr: searchText.lowercased()) }
+            }
+            
+            // Pass the result back to the main thread
+            DispatchQueue.main.async {
+                completion(filtered)
             }
         }
     }
+
 
 
     var body: some View {
@@ -223,9 +244,29 @@ struct GroupedTestRecordsView: View {
                 .padding(.horizontal)
                 
             
-                
                 Divider().padding(.horizontal)
             }
+        }
+        
+        .onChange(of: searchText){newValue in
+            if searchText.isEmpty {
+                    filteredRecords = groupedRecords // No filtering needed
+                } else {
+                    filterRecordsAsync(groupedRecords: groupedRecords, searchText: newValue) { result in
+                        self.filteredRecords = result
+                    }
+                }
+        }
+        .onAppear{
+            if searchText.isEmpty {
+                    filteredRecords = groupedRecords // No filtering needed
+                } else {
+                    filterRecordsAsync(groupedRecords: groupedRecords, searchText: searchText) { result in
+                        self.filteredRecords = result
+                        
+                        // Update your UI here if needed
+                    }
+                }
         }
     }
 }
