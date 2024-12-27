@@ -286,6 +286,20 @@ struct GroupedTestRecordChartView: View {
                                 
                                 if firstRecord.ai_info_available(){
                                     
+                                    HStack{
+                                        imageView(systemName: "staroflife.fill",color: .primaryInvert)
+                                        Text("Powered by Biomarker Intelligence")
+                                            .foregroundStyle(Color.primaryInvert)
+                                            .fontWeight(.bold)
+                                            .multilineTextAlignment(.leading)
+                                        Spacer()
+                                    }.padding(.horizontal)
+                                        .padding(.vertical,5)
+                                        .background(Color.primary)
+                                    .background(CustomBlur(style: .prominent))
+                                    .cornerRadius(10)
+                                    .padding(.leading)
+                                    
                                     if let testUse = firstRecord.ai_use{
                                         HStack{
                                            Text("More Info")
@@ -500,6 +514,19 @@ struct TestAIInfoView: View{
                                     .fontWeight(.bold)
                                     .font(.largeTitle)
                                     .padding()
+                                
+                                HStack{
+                                    imageView(systemName: "staroflife.fill",color: .primaryInvert)
+                                    Text("Powered by Biomarker Intelligence")
+                                        .foregroundStyle(Color.primaryInvert)
+                                        .fontWeight(.bold)
+                                        .multilineTextAlignment(.leading)
+                                }.padding(.horizontal)
+                                    .padding(.vertical,5)
+                                    .background(Color.primary)
+                                .background(CustomBlur(style: .prominent))
+                                .cornerRadius(10)
+                                .padding(.leading)
                             }
                             
                             if showUseInfo{
