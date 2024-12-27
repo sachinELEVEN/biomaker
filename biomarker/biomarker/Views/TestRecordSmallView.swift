@@ -230,6 +230,13 @@ struct TestRecordView: View {
                 
             }
             
+            if(record.ai_info_available()){
+                Text("Powered by Biomarker Intelligence")
+                    .font(.caption2)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color.secondary)
+                    .padding(.leading)
+            }
            
             
         }
@@ -242,7 +249,7 @@ struct ShowTestAIInfoButtonView: View{
     var body: some View{
             HStack{
                 imageView(systemName: "staroflife.fill",color: .primaryInvert)
-                Text("More about \(record.userFacingTestName()) Electrostatic force unit of measurement")
+                Text("More about \(record.userFacingTestName())")
                     .foregroundStyle(Color.primaryInvert)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
