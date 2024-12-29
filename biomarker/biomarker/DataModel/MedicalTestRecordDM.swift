@@ -162,7 +162,7 @@ class MedicalDocument: ObservableObject,Identifiable,Codable{
         return summary
     }
     
-    func getDocOrgans(maxLength: Int = Int.max) -> [String] {
+    func getDocOrgans(maxLength: Int = Int.max) -> Set<String> {
 //        var summary = "Biomarker found \(totalTestRecordsCount()) tests in the document.\n"
         var organSet: Set<String> = Set()
         
@@ -183,7 +183,7 @@ class MedicalDocument: ObservableObject,Identifiable,Codable{
 //            return summary.prefix(maxLength) + "..."
 //        }
         //return summary
-        return organSet.sorted()
+        return organSet
     }
 
     // Helper function to split strings by multiple delimiters

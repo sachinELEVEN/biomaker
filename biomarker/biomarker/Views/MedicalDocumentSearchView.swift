@@ -31,35 +31,8 @@ struct MedicalDocumentSearchView: View{
                 .padding(.horizontal)
             ScrollView(showsIndicators: false){
                 
-                
-                //quick search functionality
-                HStack{
-                    ForEach(doc.getDocOrgans(),id:\.self){ organ in
-                        ScrollView(.horizontal, showsIndicators: false){
-                            if organ.count<15{//sometimes organs has full blown sentences like 'reflects body inflammation' so we do not want that to appear in the search bar quick options
-                                Button(action:{
-                                    searchText = organ
-                                }){
-                                    Text(organ)
-                                        .foregroundStyle(searchText.lowercased()==organ.lowercased() ? Color.primaryInvert : .primary)
-                                                                    //.fontWeight(.bold)
-                                                .multilineTextAlignment(.leading)
-                                                    .padding(.horizontal)
-                                                                        .padding(.vertical,2)
-                                                                        .background(searchText.lowercased()==organ.lowercased() ? Color.primary : Color.primaryInvert)
-                                                                        .overlay(
-                                                                                RoundedRectangle(cornerRadius: 10)
-                                                                                    .stroke(Color.primary, lineWidth: 4)
-                                                                            )
-                                                                       
-                                                                        .cornerRadius(10)
-                                }
-                                
-                            }
-                            
-                        }
-                    }
-                }.padding(.horizontal)
+                QuickSearchOptionsView(docs: [doc],searchText: $searchText)
+                .padding(.horizontal)
                     .padding(.vertical)
                 
                 
@@ -151,4 +124,94 @@ struct MedicalDocumentSearchView: View{
                 }
             }
         }
+}
+
+
+struct QuickSearchOptionsView: View{
+    var docs : [MedicalDocument]
+    @Binding var searchText: String
+    var body: some View{
+        VStack{
+            //quick search functionality
+            HStack{
+                ForEach(getQuickSearchOptions(),id:\.self){ organ in
+                    ScrollView(.horizontal, showsIndicators: false){
+                        if organ.count<15{//sometimes organs has full blown sentences like 'reflects body inflammation' so we do not want that to appear in the search bar quick options
+                            Button(action:{
+                                quickSearchOptionTapped(option: organ)
+                            }){
+                                Text(organ)
+                                    .foregroundStyle(isOptionPartOfSearchStr(option: organ) ? Color.primaryInvert : .primary)
+                                                                //.fontWeight(.bold)
+                                            .multilineTextAlignment(.leading)
+                                                .padding(.horizontal)
+                                                                    .padding(.vertical,2)
+                                                                    .background(isOptionPartOfSearchStr(option: organ) ? Color.primary : Color.primaryInvert)
+                                                                    .overlay(
+                                                                            RoundedRectangle(cornerRadius: 10)
+                                                                                .stroke(Color.primary, lineWidth: 4)
+                                                                        )
+                                                                   
+                                                                    .cornerRadius(10)
+                            }
+                            
+                        }
+                        
+                    }
+                }
+            }
+        }
+    }
+    
+    func getQuickSearchOptions()->[String]{
+        //in future you can add more options here
+        var allDocOrgansSet : Set<String> = Set()
+        for doc in docs{
+            for organ in doc.getDocOrgans(){
+                allDocOrgansSet.insert(organ)
+            }
+        }
+        
+        return allDocOrgansSet.sorted()
+    }
+    
+    func quickSearchOptionTapped(option: String){
+        if isOptionPartOfSearchStr(option: option){
+            //remove from searchText
+            //removing is a little complex
+            //lets say option is brain, then we do not want to remove in 'brainabc hello' but we want to remove brain in 'brain hello'
+            //Regex is a good thing for this
+            // Create a regular expression pattern to match the option with the given conditions
+           //this regex is select the option in a string, if the option is not followed by any other character OR if its followed by space and is at the beginning of the str, OR if option is at the end of the string and is preceeded by space OR option is in the middle is succeeded and preceded by a space
+            let pattern = "(?<=\\s)\(option)(?=\\s)|^\(option)(?=\\s)|(?<=\\s)\(option)$|^\(option)$"
+                
+            // Replace occurrences of the option matching the pattern with an empty string
+            let modifiedText = searchText.replacingOccurrences(of: pattern, with: "", options: .regularExpression)
+                
+            // Trim any leading/trailing whitespace from the result
+            searchText =  modifiedText.trimmingCharacters(in: .whitespacesAndNewlines)
+
+            //
+        }else{
+            //add to search text
+            searchText += searchText.isEmpty ? option : " \(option)"
+        }
+        
+    }
+    
+    func isOptionPartOfSearchStr(option: String)->Bool{
+        
+        let searchStrList = searchText
+            .lowercased()
+            .split { $0.isWhitespace || $0 == "," }
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        
+        if searchStrList.contains(option.lowercased()){
+            return true
+        }
+        
+        return false
+        
+    }
 }

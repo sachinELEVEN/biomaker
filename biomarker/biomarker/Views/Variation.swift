@@ -23,6 +23,16 @@ struct VariationView: View {
                     .padding(.horizontal)
 
                 ScrollView {
+                   
+                    QuickSearchOptionsView(docs: sys.medicalDocuments,searchText: $searchText)
+                    .padding(.horizontal)
+                        .padding(.vertical)
+                    
+                    Text("You can search for tests by their name, organs or body parts they are related to")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .padding([.bottom,.horizontal])
+                    
                     GroupedTestRecordsView(
                         testRecords: sys.getAllTestRecords(),
                         selectedRecords: $selectedRecords,
@@ -209,64 +219,64 @@ struct GroupedTestRecordsView: View {
 
 
     var body: some View {
-        ForEach(filteredRecords.keys.sorted(), id: \.self) { testName in
-            if let group = filteredRecords[testName] {
-                Button(action:{
-                    // Toggle selection of the row
-                    if selectedRecords.contains(testName) {
-                        selectedRecords.remove(testName)
-                    } else {
-                        selectedRecords.insert(testName)
-                    }
-                }){
-                    HStack {
-                        // Display the group name (test name)
-                        Text(testName)
-                            .multilineTextAlignment(.leading)
-                            .font(.headline)
+        VStack{
+            ForEach(filteredRecords.keys.sorted(), id: \.self) { testName in
+                if let group = filteredRecords[testName] {
+                    Button(action:{
+                        // Toggle selection of the row
+                        if selectedRecords.contains(testName) {
+                            selectedRecords.remove(testName)
+                        } else {
+                            selectedRecords.insert(testName)
+                        }
+                    }){
+                        HStack {
+                            // Display the group name (test name)
+                            Text(testName)
+                                .multilineTextAlignment(.leading)
+                                .font(.headline)
                             
-                        
-                        Spacer()
-                        
-                        // Display the number of items in the group
-                        Text("Found \(group.count) \(group.count == 1 ? "time" : "times")")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
+                            
+                            Spacer()
+                            
+                            // Display the number of items in the group
+                            Text("Found \(group.count) \(group.count == 1 ? "time" : "times")")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                        }
                     }
+                    
+                    .padding(.vertical,8)
+                    .padding(.horizontal,8)
+                    .background(selectedRecords.contains(testName) ? Color.blue.opacity(0.2) : Color.clear)
+                    
+                    .cornerRadius(10)
+                    
+                    .padding(.horizontal)
+                    
+                    
+                    Divider().padding(.horizontal)
                 }
-               
-                .padding(.vertical,8)
-                .padding(.horizontal,8)
-                .background(selectedRecords.contains(testName) ? Color.blue.opacity(0.2) : Color.clear)
-                
-                .cornerRadius(10)
-                
-                .padding(.horizontal)
-                
-            
-                Divider().padding(.horizontal)
             }
-        }
-        
-        .onChange(of: searchText){newValue in
+        }.onChange(of: searchText){newValue in
             if newValue.isEmpty {
-                    filteredRecords = groupedRecords // No filtering needed
-                } else {
-                    filterRecordsAsync(groupedRecords: groupedRecords, searchText: newValue) { result in
-                        self.filteredRecords = result
-                    }
+                filteredRecords = groupedRecords // No filtering needed
+            } else {
+                filterRecordsAsync(groupedRecords: groupedRecords, searchText: newValue) { result in
+                    self.filteredRecords = result
                 }
+            }
         }
         .onAppear{
             if searchText.isEmpty {
-                    filteredRecords = groupedRecords // No filtering needed
-                } else {
-                    filterRecordsAsync(groupedRecords: groupedRecords, searchText: searchText) { result in
-                        self.filteredRecords = result
-                        
-                        // Update your UI here if needed
-                    }
+                filteredRecords = groupedRecords // No filtering needed
+            } else {
+                filterRecordsAsync(groupedRecords: groupedRecords, searchText: searchText) { result in
+                    self.filteredRecords = result
+                    
+                    // Update your UI here if needed
                 }
+            }
         }
     }
 }
