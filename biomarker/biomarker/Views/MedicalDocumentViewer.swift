@@ -89,6 +89,7 @@ struct MedicalDocumentViewerSmall: View{
                                 Text("out of ref range")
                                     .font(.subheadline)
                                     .foregroundStyle(Color.secondary)
+                                    .multilineTextAlignment(.leading)
                             }
                         }
                     }
@@ -405,6 +406,7 @@ struct MedicalDocumentViewerDetailed: View{
                                         .font(.title)
                                         .foregroundStyle(Color.secondary)
                                     Text("out of ref range")
+                                        .multilineTextAlignment(.leading)
                                         .font(.subheadline)
                                         .foregroundStyle(Color.secondary)
                                 }
@@ -557,27 +559,29 @@ struct MedicalDocumentViewerDetailed: View{
 //                                .padding([.top,.bottom])
 //                            Spacer()
 //                        }
-                        HStack{
-                            Spacer()
-                            imageView(systemName: "staroflife.fill",color: .primaryInvert)
-                            Text("Powered by Biomarker Intelligence")
-                                .foregroundStyle(Color.primaryInvert)
-                                .fontWeight(.bold)
-                                .multilineTextAlignment(.leading)
-                            Spacer()
-                        }.padding(.horizontal)
-                            .padding(.vertical,5)
-                            .background(Color.primary)
-                        .background(CustomBlur(style: .prominent))
-                        .cornerRadius(10)
-                        //.padding(.leading)
-                        HStack{
-                            //Spacer()
-                            Text("\(doc.countOfTestsWIthAIInfo()) \(doc.countOfTestsWIthAIInfo()==1 ? "test": "tests") in this report \(doc.countOfTestsWIthAIInfo()==1 ? "has": "have") been analyzed using Biomarker Intelligence, offering insights like test purpose, its significance, and reference ranges. This does not include any medical advice, please consult your doctor.")
-                                .multilineTextAlignment(.leading)
-                                .foregroundStyle(.secondary)
-                                .padding(.top)
-                            Spacer()
+                        if doc.countOfTestsWIthAIInfo() > 0{
+                            HStack{
+                                Spacer()
+                                imageView(systemName: "staroflife.fill",color: .primaryInvert)
+                                Text("Powered by Biomarker Intelligence")
+                                    .foregroundStyle(Color.primaryInvert)
+                                    .fontWeight(.bold)
+                                    .multilineTextAlignment(.leading)
+                                Spacer()
+                            }.padding(.horizontal)
+                                .padding(.vertical,5)
+                                .background(Color.primary)
+                                .background(CustomBlur(style: .prominent))
+                                .cornerRadius(10)
+                            //.padding(.leading)
+                            HStack{
+                                //Spacer()
+                                Text("\(doc.countOfTestsWIthAIInfo()) \(doc.countOfTestsWIthAIInfo()==1 ? "test": "tests") in this report \(doc.countOfTestsWIthAIInfo()==1 ? "has": "have") been analyzed using Biomarker Intelligence, offering insights like test purpose, its significance, and reference ranges. This does not include any medical advice, please consult your doctor.")
+                                    .multilineTextAlignment(.leading)
+                                    .foregroundStyle(.secondary)
+                                    .padding(.top)
+                                Spacer()
+                            }
                         }
                                 
                             
