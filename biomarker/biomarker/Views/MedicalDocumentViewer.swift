@@ -177,6 +177,7 @@ struct MedicalDocumentViewerHandler: View{
     var size: CGSize
     var doc : MedicalDocument
     @State var showAddTestManuallyScreen = false
+    @State var showMedicalDocSearchScreen = false
     @State var testRecordPicker = 0//0- for full detail, 1 for brief, 2 for other options like share, delete, chart with ai etc
     @State var documentName = ""
     @State var documentNotes = ""
@@ -198,6 +199,15 @@ struct MedicalDocumentViewerHandler: View{
             if testRecordPicker == 0 {
                 MedicalDocumentViewerDetailed(size: size, doc: doc)
                     .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                // Your action here
+                                self.showMedicalDocSearchScreen.toggle()
+                            }) {
+                                Image(systemName: "magnifyingglass")  // SF Symbol for search icon
+                            }
+                        }
+                        
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
                                 // Your action here
@@ -246,6 +256,9 @@ struct MedicalDocumentViewerHandler: View{
 
                     .sheet(isPresented: $showAddTestManuallyScreen){
                         CreateTestRecordView(showSelf: $showAddTestManuallyScreen, document: doc)
+                    }
+                    .sheet(isPresented: $showMedicalDocSearchScreen){
+                        MedicalDocumentSearchView(showSelf: $showMedicalDocSearchScreen, doc: doc)
                     }
                     
             }
@@ -630,7 +643,7 @@ struct MedicalDocumentViewerDetailed: View{
               
                 ForEach(doc.sections){ section in
                    
-                    if getSectionTestRecords(section: section,val: testRecordPicker).count != 0{
+                    if MedicalDocumentViewerDetailed.getSectionTestRecords(section: section,val: testRecordPicker).count != 0{
                         Text(section.name.isEmpty ? "Report Section \(doc.findIndexOfSection(section: section)+1)" : section.name)
                             .fontWeight(.bold)
                             .font(.title)
@@ -639,7 +652,7 @@ struct MedicalDocumentViewerDetailed: View{
                             .padding(.bottom,4)
                     }
                     
-                    ForEach(getSectionTestRecords(section: section,val: testRecordPicker)){ testRecord in
+                    ForEach(MedicalDocumentViewerDetailed.getSectionTestRecords(section: section,val: testRecordPicker)){ testRecord in
                         VStack{
                             if testRecordPicker == 2{
                                 TestRecordPlainView(testRecord: testRecord)
@@ -668,7 +681,7 @@ struct MedicalDocumentViewerDetailed: View{
         }
     }
     
-    func getSectionTestRecords(section: MedicalDocumentSection,val: Int)->[BasicMedicalTestRecordv1]{
+   static func getSectionTestRecords(section: MedicalDocumentSection,val: Int)->[BasicMedicalTestRecordv1]{
       
         var sectionTestRecords = [BasicMedicalTestRecordv1]()
         

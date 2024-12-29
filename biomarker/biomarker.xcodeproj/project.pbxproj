@@ -26,6 +26,7 @@
 		8E28FE582CAC89DD00BE56DA /* TestRecordSmallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */; };
 		8E28FE5A2CAD2DBB00BE56DA /* Variation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE592CAD2DBB00BE56DA /* Variation.swift */; };
 		8E28FE5C2CAD8E3300BE56DA /* PDFShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */; };
+		8E2937442D21713D008CD0F1 /* MedicalDocumentSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2937432D21713D008CD0F1 /* MedicalDocumentSearchView.swift */; };
 		8E604EA92CB0665A00694510 /* TestRecordEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E604EA82CB0665A00694510 /* TestRecordEditView.swift */; };
 		8EFAC50A2CB1D15B0067ACDB /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAC5092CB1D15B0067ACDB /* sample.pdf */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,7 @@
 		8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRecordSmallView.swift; sourceTree = "<group>"; };
 		8E28FE592CAD2DBB00BE56DA /* Variation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variation.swift; sourceTree = "<group>"; };
 		8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFShareView.swift; sourceTree = "<group>"; };
+		8E2937432D21713D008CD0F1 /* MedicalDocumentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MedicalDocumentSearchView.swift; sourceTree = "<group>"; };
 		8E604EA82CB0665A00694510 /* TestRecordEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestRecordEditView.swift; sourceTree = "<group>"; };
 		8EFAC5072CB1CD2E0067ACDB /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
 		8EFAC5092CB1D15B0067ACDB /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = sample.pdf; path = "../../medical-reports/sample.pdf"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				8E28FE502CAC6E7000BE56DA /* MedicalDocumentViewer.swift */,
 				8E604EA82CB0665A00694510 /* TestRecordEditView.swift */,
 				8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */,
+				8E2937432D21713D008CD0F1 /* MedicalDocumentSearchView.swift */,
 				8E28FE592CAD2DBB00BE56DA /* Variation.swift */,
 				8E28FE572CAC89DD00BE56DA /* TestRecordSmallView.swift */,
 			);
@@ -353,6 +356,7 @@
 				8E28FE562CAC726200BE56DA /* Extensions.swift in Sources */,
 				8E28FE5A2CAD2DBB00BE56DA /* Variation.swift in Sources */,
 				8E28FE5C2CAD8E3300BE56DA /* PDFShareView.swift in Sources */,
+				8E2937442D21713D008CD0F1 /* MedicalDocumentSearchView.swift in Sources */,
 				8E28FE472CAC462500BE56DA /* APICalls.swift in Sources */,
 				8E0656022CB1ABDA00D736F5 /* ModelStorageViaFiles.swift in Sources */,
 				8E28FE182CAC426B00BE56DA /* biomarkerApp.swift in Sources */,
