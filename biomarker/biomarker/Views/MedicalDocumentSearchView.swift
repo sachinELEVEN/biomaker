@@ -41,13 +41,17 @@ struct MedicalDocumentSearchView: View{
                                     searchText = organ
                                 }){
                                     Text(organ)
-                                                .foregroundStyle(Color.primaryInvert)
+                                        .foregroundStyle(searchText.lowercased()==organ.lowercased() ? Color.primaryInvert : .primary)
                                                                     //.fontWeight(.bold)
                                                 .multilineTextAlignment(.leading)
                                                     .padding(.horizontal)
                                                                         .padding(.vertical,2)
-                                                                        .background(searchText.lowercased()==organ.lowercased() ? Color.blue : Color.primary)
-                                                                        .background(CustomBlur(style: .prominent))
+                                                                        .background(searchText.lowercased()==organ.lowercased() ? Color.primary : Color.primaryInvert)
+                                                                        .overlay(
+                                                                                RoundedRectangle(cornerRadius: 10)
+                                                                                    .stroke(Color.primary, lineWidth: 4)
+                                                                            )
+                                                                       
                                                                         .cornerRadius(10)
                                 }
                                 
