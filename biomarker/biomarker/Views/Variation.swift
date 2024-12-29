@@ -249,7 +249,7 @@ struct GroupedTestRecordsView: View {
         }
         
         .onChange(of: searchText){newValue in
-            if searchText.isEmpty {
+            if newValue.isEmpty {
                     filteredRecords = groupedRecords // No filtering needed
                 } else {
                     filterRecordsAsync(groupedRecords: groupedRecords, searchText: newValue) { result in
