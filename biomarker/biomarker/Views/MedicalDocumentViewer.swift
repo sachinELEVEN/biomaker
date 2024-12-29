@@ -560,7 +560,7 @@ struct MedicalDocumentViewerDetailed: View{
                         //.padding(.leading)
                         HStack{
                             //Spacer()
-                            Text("\(doc.countOfTestsWIthAIInfo()) \(doc.countOfTestsWIthAIInfo()==1 ? "test": "tests") in this report have been analysed with Biomarker Intelligence")
+                            Text("\(doc.countOfTestsWIthAIInfo()) \(doc.countOfTestsWIthAIInfo()==1 ? "test": "tests") in this report \(doc.countOfTestsWIthAIInfo()==1 ? "has": "have") been analyzed using Biomarker Intelligence, offering insights like test purpose, its significance, and reference ranges. This does not include any medical advice, please consult your doctor.")
                                 .multilineTextAlignment(.leading)
                                 .foregroundStyle(.secondary)
                                 .padding(.top)
