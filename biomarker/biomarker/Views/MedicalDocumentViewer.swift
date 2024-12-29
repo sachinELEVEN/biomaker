@@ -31,24 +31,71 @@ struct MedicalDocumentViewerSmall: View{
         var body : some View{
             VStack(alignment: .leading){
                 
-                HStack{
-                    imageView(systemName: "doc.text.image", color: .primary)
-                    
-                    Text("Medical Report")
-                        .fontWeight(.bold)
-                    
-                    
-                }
-                Text("\(doc.name.isEmpty ? doc.name : doc.name)")
-                    .multilineTextAlignment(.leading)
-                    .foregroundStyle(.secondary)
-                    .padding(.vertical,6)
+//                HStack{
+//                    imageView(systemName: "doc.text.image", color: .primary)
+//                    
+//                    Text("Medical Report")
+//                        .fontWeight(.bold)
+//                    
+//                    
+//                }
                 
-                PDFViewer(url: doc.pdfDocumentUrl)
-                //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
-                    .frame(width: size.width*0.85,height: (size.width*0.85)/3.5)
-                    .cornerRadius(10)
-                    .padding(.vertical)
+             
+                
+                HStack{
+                    
+                    PDFViewer(url: doc.pdfDocumentUrl)
+                    //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
+                    //1.414 is the ratio of height to width in A4 size sheet
+                        .frame(width: size.width*0.35,height: (size.width*0.35)*1.414)
+                    //.cornerRadius(10)
+                        .padding(.vertical)
+                    VStack(alignment:.leading){
+                        
+                        Text("\(doc.name.isEmpty ? doc.name : doc.name)")
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.leading)
+                            .foregroundStyle(.primary)
+                            .padding(.vertical,6)
+                        
+                        HStack{
+                            //                        Text("Tests")
+                            //                        // .fontWeight(.bold)
+                            //                            .font(.subheadline)
+                            //                            .foregroundStyle(Color.secondary)
+                            
+                            
+                            Text("\(doc.totalTestRecordsCount())")
+                                .fontWeight(.bold)
+                                .font(.title)
+                                .foregroundStyle(Color.secondary)
+                            Text("tests")
+                                .font(.subheadline)
+                                .foregroundStyle(Color.secondary)
+                        }
+                        // Spacer()
+                        if doc.totalTestOutOfRangeCount()>0{
+                            HStack{
+                                //                        Text("Out of ref range")
+                                //                        //   .fontWeight(.bold)
+                                //                            .font(.subheadline)
+                                //                            .multilineTextAlignment(.leading)
+                                //                            .foregroundStyle(Color.secondary)
+                                
+                                Text("\(doc.totalTestOutOfRangeCount())")
+                                    .fontWeight(.bold)
+                                    .font(.title)
+                                    .foregroundStyle(Color.secondary)
+                                Text("out of ref range")
+                                    .font(.subheadline)
+                                    .foregroundStyle(Color.secondary)
+                            }
+                        }
+                    }
+                    
+                    
+                }.padding(.horizontal, 5)
+                
                 
                 HStack{
                     
@@ -67,7 +114,7 @@ struct MedicalDocumentViewerSmall: View{
                 }
                 Text(doc.getDocSummary(maxLength: 200))
                     .foregroundStyle(.secondary)
-                    .padding(.vertical,6)
+                    .padding(.top,3)
                     .multilineTextAlignment(.leading)
                 
                 HStack{
@@ -84,7 +131,7 @@ struct MedicalDocumentViewerSmall: View{
                             Spacer()
                         }.padding(.bottom,2)
                         
-                        
+                        /*
                         HStack{
                             Text("Tests")
                             // .fontWeight(.bold)
@@ -108,11 +155,12 @@ struct MedicalDocumentViewerSmall: View{
                                 .font(.subheadline)
                                 .foregroundStyle(Color.secondary)
                         }
+                        */
                         
                     }
                     Spacer()
                 }.foregroundColor(.primary)
-                    .padding([.top])
+                   // .padding([.top])
             }
             .padding()
             .background(CustomBlur(style: .prominent))
@@ -298,108 +346,165 @@ struct MedicalDocumentViewerDetailed: View{
                 Button(action: {
                     showPDFViewer.toggle()
                 }){
-                    VStack{
-                        HStack{
-                            
-                            imageView(systemName: "doc.text.image", color: .primary)
-                            
-                            Text(doc.name.isEmpty ? "Medical Record" : doc.name)
-                                .multilineTextAlignment(.leading)
-                                .fontWeight(.bold)
-                                .font(.headline)
-                                .foregroundColor(.primary)
-                                .padding([.top,.bottom])
-                            
-                            Spacer()
-                            
-                        /*
-                         
-                         HStack{
-                            
-                             
-                             Button(action: {
-                                 print("Delete medical document- todo")
-                             }) {
-                                 label("Delete Report", textColor: .primaryInvert, bgColor: .red, imgName: "trash.fill", imgColor: .primaryInvert, width: system.fullWidth*0.5, radius: 10)
-                             }
-                             
-                         }
-                         */
-                        }
-                        
-//                    HStack{
-//                        Text("\(doc.name)")
-//                            .multilineTextAlignment(.leading)
-//                            .foregroundStyle(Color.secondary)
-//                            .padding([.leading,.bottom])
-//                        Spacer()
-//                    }
-                        
-                        
-                        VStack{
-                            // Spacer()
-                            
-                            
-                        }
-                        //   Spacer()
+                    
+                    HStack{
                         
                         PDFViewer(url: doc.pdfDocumentUrl)
                         //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
-                            .frame(width: size.width*0.85,height: (size.width*0.85)/1.77)
-                            .cornerRadius(20)
-                        
-                        //  Spacer()
-                        
-                        HStack{
+                        //1.414 is the ratio of height to width in A4 size sheet
+                            .frame(width: size.width*0.35,height: (size.width*0.35)*1.414)
+                        //.cornerRadius(10)
+                            .padding(.vertical)
+                        VStack(alignment:.leading){
+                            
+                            Text("\(doc.name.isEmpty ? doc.name : doc.name)")
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.leading)
+                                .foregroundStyle(.primary)
+                                .padding(.vertical,6)
+                            
+                            HStack{
+                                //                        Text("Tests")
+                                //                        // .fontWeight(.bold)
+                                //                            .font(.subheadline)
+                                //                            .foregroundStyle(Color.secondary)
+                                
+                                
+                                Text("\(doc.totalTestRecordsCount())")
+                                    .fontWeight(.bold)
+                                    .font(.title)
+                                    .foregroundStyle(Color.secondary)
+                                Text("tests")
+                                    .font(.subheadline)
+                                    .foregroundStyle(Color.secondary)
+                            }
                             // Spacer()
-                            VStack(alignment: .leading){
-                                
-                                //  Spacer()
+                            if doc.totalTestOutOfRangeCount()>0{
                                 HStack{
-                                    Text(Utils.formatDate(doc.date))
-                                        .fontWeight(.bold)
-                                        .font(.title3)
-                                        .foregroundStyle(Color.pink)
-                                        //.padding([.leading])
-                                    Spacer()
-                                }.padding(.bottom,2)
-                                
-                                
-                                HStack{
-                                    Text("Tests")
-                                        .fontWeight(.bold)
-                                        .font(.subheadline)
-                                    
-                                    
-                                    Text("\(doc.totalTestRecordsCount())")
-                                        .font(.subheadline)
-                                        .foregroundStyle(Color.secondary)
-                                }
-                                // Spacer()
-                                HStack{
-                                    Text("Out of ref range")
-                                        .fontWeight(.bold)
-                                        .font(.subheadline)
-                                        .multilineTextAlignment(.center)
+                                    //                        Text("Out of ref range")
+                                    //                        //   .fontWeight(.bold)
+                                    //                            .font(.subheadline)
+                                    //                            .multilineTextAlignment(.leading)
+                                    //                            .foregroundStyle(Color.secondary)
                                     
                                     Text("\(doc.totalTestOutOfRangeCount())")
+                                        .fontWeight(.bold)
+                                        .font(.title)
+                                        .foregroundStyle(Color.secondary)
+                                    Text("out of ref range")
                                         .font(.subheadline)
                                         .foregroundStyle(Color.secondary)
                                 }
-                               
                             }
-                            Spacer()
-                        }.foregroundColor(.primary)
-                            .padding([.leading,.top])
+                        }
                         
+                        Spacer()
                     }
+                    .frame(width: size.width*0.9)
+                    .padding(.horizontal, 5)
+                    
+//                    VStack{
+//                        HStack{
+//                            
+//                            imageView(systemName: "doc.text.image", color: .primary)
+//                            
+//                            Text(doc.name.isEmpty ? "Medical Record" : doc.name)
+//                                .multilineTextAlignment(.leading)
+//                                .fontWeight(.bold)
+//                                .font(.headline)
+//                                .foregroundColor(.primary)
+//                                .padding([.top,.bottom])
+//                            
+//                            Spacer()
+//                            
+//                        /*
+//                         
+//                         HStack{
+//                            
+//                             
+//                             Button(action: {
+//                                 print("Delete medical document- todo")
+//                             }) {
+//                                 label("Delete Report", textColor: .primaryInvert, bgColor: .red, imgName: "trash.fill", imgColor: .primaryInvert, width: system.fullWidth*0.5, radius: 10)
+//                             }
+//                             
+//                         }
+//                         */
+//                        }
+//                        
+////                    HStack{
+////                        Text("\(doc.name)")
+////                            .multilineTextAlignment(.leading)
+////                            .foregroundStyle(Color.secondary)
+////                            .padding([.leading,.bottom])
+////                        Spacer()
+////                    }
+//                        
+//                        
+//                        VStack{
+//                            // Spacer()
+//                            
+//                            
+//                        }
+//                        //   Spacer()
+//                        
+//                        PDFViewer(url: doc.pdfDocumentUrl)
+//                        //.frame(width: (size.height*0.4)/1.77,height: size.width*0.4)
+//                            .frame(width: size.width*0.85,height: (size.width*0.85)/1.77)
+//                            .cornerRadius(20)
+//                        
+//                        //  Spacer()
+//                        
+////                        HStack{
+////                            // Spacer()
+////                            VStack(alignment: .leading){
+////                                
+////                                //  Spacer()
+////                                HStack{
+////                                    Text(Utils.formatDate(doc.date))
+////                                        .fontWeight(.bold)
+////                                        .font(.title3)
+////                                        .foregroundStyle(Color.pink)
+////                                        //.padding([.leading])
+////                                    Spacer()
+////                                }.padding(.bottom,2)
+////                                
+////                                
+////                                HStack{
+////                                    Text("Tests")
+////                                        .fontWeight(.bold)
+////                                        .font(.subheadline)
+////                                    
+////                                    
+////                                    Text("\(doc.totalTestRecordsCount())")
+////                                        .font(.subheadline)
+////                                        .foregroundStyle(Color.secondary)
+////                                }
+////                                // Spacer()
+////                                HStack{
+////                                    Text("Out of ref range")
+////                                        .fontWeight(.bold)
+////                                        .font(.subheadline)
+////                                        .multilineTextAlignment(.center)
+////                                    
+////                                    Text("\(doc.totalTestOutOfRangeCount())")
+////                                        .font(.subheadline)
+////                                        .foregroundStyle(Color.secondary)
+////                                }
+////                               
+////                            }
+////                            Spacer()
+////                        }.foregroundColor(.primary)
+//                            .padding([.leading,.top])
+//                        //
+//                    }
                         
                     }
                         
                         .padding()
-                        .background(CustomBlur(style: .prominent))
-                        .cornerRadius(20)
-                        .padding()
+                       // .background(CustomBlur(style: .prominent))
+                        //.cornerRadius(20)
+                       // .padding()
                     
                     .sheet(isPresented: $showPDFViewer) {
                         NavigationView{
