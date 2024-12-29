@@ -52,7 +52,7 @@ struct MedicalDocumentViewerSmall: View{
                         .padding(.vertical)
                     VStack(alignment:.leading){
                         
-                        Text("\(doc.name.isEmpty ? doc.name : doc.name)")
+                        Text("\(doc.name.isEmpty ? "Medical Report" : doc.name)")
                             .fontWeight(.bold)
                             .multilineTextAlignment(.leading)
                             .foregroundStyle(.primary)
@@ -69,7 +69,7 @@ struct MedicalDocumentViewerSmall: View{
                                 .fontWeight(.bold)
                                 .font(.title)
                                 .foregroundStyle(Color.secondary)
-                            Text("tests")
+                            Text(doc.totalTestRecordsCount()==1 ? "test" : "tests")
                                 .font(.subheadline)
                                 .foregroundStyle(Color.secondary)
                         }
@@ -129,7 +129,7 @@ struct MedicalDocumentViewerSmall: View{
                                 .foregroundStyle(Color.pink)
                             //.padding([.leading])
                             Spacer()
-                        }.padding(.bottom,2)
+                        }.padding(.vertical,2)
                         
                         /*
                         HStack{
@@ -354,10 +354,10 @@ struct MedicalDocumentViewerDetailed: View{
                         //1.414 is the ratio of height to width in A4 size sheet
                             .frame(width: size.width*0.35,height: (size.width*0.35)*1.414)
                         //.cornerRadius(10)
-                            .padding(.vertical)
+                            //.padding(.vertical)
                         VStack(alignment:.leading){
                             
-                            Text("\(doc.name.isEmpty ? doc.name : doc.name)")
+                            Text("\(doc.name.isEmpty ? "Medical Report" : doc.name)")
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.leading)
                                 .foregroundStyle(.primary)
@@ -374,7 +374,7 @@ struct MedicalDocumentViewerDetailed: View{
                                     .fontWeight(.bold)
                                     .font(.title)
                                     .foregroundStyle(Color.secondary)
-                                Text("tests")
+                                Text(doc.totalTestRecordsCount()==1 ? "test" : "tests")
                                     .font(.subheadline)
                                     .foregroundStyle(Color.secondary)
                             }
@@ -501,7 +501,7 @@ struct MedicalDocumentViewerDetailed: View{
                         
                     }
                         
-                        .padding()
+                .padding([.horizontal,.top])
                        // .background(CustomBlur(style: .prominent))
                         //.cornerRadius(20)
                        // .padding()
@@ -523,6 +523,54 @@ struct MedicalDocumentViewerDetailed: View{
                     }
                     
                     VStack{
+                        
+                        HStack{
+                            
+                            Text("\(Utils.formatDate(doc.date))")
+                            // .fontWeight(.bold)
+                                .font(.headline)
+                                .foregroundStyle(Color.secondary)
+                                .offset(y:-20)
+                            .padding(.leading,5)
+                            
+                            Spacer()
+                        }//.padding(.bottom)
+                       // if doc.countOfTestsWIthAIInfo()>0{
+//                        HStack{
+//                            imageView(systemName: "staroflife.fill", color: .primary)
+//                            Text("Biomarker Intelligence")
+//                                .fontWeight(.bold)
+//                                .font(.title2)
+//                                .padding([.top,.bottom])
+//                            Spacer()
+//                        }
+                        HStack{
+                            Spacer()
+                            imageView(systemName: "staroflife.fill",color: .primaryInvert)
+                            Text("Powered by Biomarker Intelligence")
+                                .foregroundStyle(Color.primaryInvert)
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.leading)
+                            Spacer()
+                        }.padding(.horizontal)
+                            .padding(.vertical,5)
+                            .background(Color.primary)
+                        .background(CustomBlur(style: .prominent))
+                        .cornerRadius(10)
+                        //.padding(.leading)
+                        HStack{
+                            //Spacer()
+                            Text("\(doc.countOfTestsWIthAIInfo()) \(doc.countOfTestsWIthAIInfo()==1 ? "test": "tests") in this report have been analysed with Biomarker Intelligence")
+                                .multilineTextAlignment(.leading)
+                                .foregroundStyle(.secondary)
+                                .padding(.top)
+                            Spacer()
+                        }
+                                
+                            
+                            
+                       // }
+                        Text("")
                         HStack{
                             
                             imageView(systemName: "note.text", color: .primary)
@@ -540,9 +588,9 @@ struct MedicalDocumentViewerDetailed: View{
                             .foregroundStyle(.secondary)
                     }
                     .padding()
-                    .background(CustomBlur(style: .prominent))
-                    .cornerRadius(20)
-                    .padding()
+//                    .background(CustomBlur(style: .prominent))
+//                    .cornerRadius(20)
+//                    .padding()
                     
                     
                     VStack{
@@ -562,9 +610,9 @@ struct MedicalDocumentViewerDetailed: View{
                             .foregroundStyle(.secondary)
                     }
                     .padding()
-                    .background(CustomBlur(style: .prominent))
-                    .cornerRadius(20)
-                    .padding()
+//                    .background(CustomBlur(style: .prominent))
+//                    .cornerRadius(20)
+//                    .padding()
                 
                
             //list of testRecords

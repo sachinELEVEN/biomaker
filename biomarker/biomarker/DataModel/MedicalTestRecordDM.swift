@@ -105,6 +105,16 @@ class MedicalDocument: ObservableObject,Identifiable,Codable{
         return count
     }
     
+    func countOfTestsWIthAIInfo()->Int{
+        var count = 0
+        for section in sections{
+            for test in section.testRecords{
+                count += test.ai_info_available() ? 1 : 0
+            }
+        }
+        return count
+    }
+    
     //this is such a stupid method, but its 3:50 in the morning, and i am not spending time on arguing with myselfg
     func findIndexOfSection(section: MedicalDocumentSection)->Int{
         var index = 0;
