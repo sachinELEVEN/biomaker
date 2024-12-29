@@ -433,6 +433,7 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         if let parentSection = getParentSection(){
             //now we need to make a corpus text and find the string there
             if parentSection.name.lowercased().contains(searchStr) || parentSection.summary.lowercased().contains(searchStr) || parentSection.keyPoints.lowercased().contains(searchStr) ||
+                (test.lowercased()).contains(searchStr) ||
                 (ai_original_name?.lowercased() ?? "").contains(searchStr) ||
                 (ai_common_name?.lowercased() ?? "").contains(searchStr) ||
                 (ai_use?.lowercased() ?? "").contains(searchStr) ||
