@@ -637,6 +637,15 @@ struct TestAIInfoView: View{
                                     .padding(.leading)
                             }
                             
+                            if testRecord.ref_range_male_exists() || testRecord.ref_range_female_exists(){
+                                Text("Reference ranges can vary significantly based on the lab, testing methodology, and equipment used. Please consult your doctor for guidance.")
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .foregroundStyle(Color.secondary)
+                                    .multilineTextAlignment(.leading)
+                                    .padding([.leading,.top])
+                            }
+                            
                            // HStack{
                             Text("More about High and low \(testRecord.userFacingTestName()) values")
                                     .fontWeight(.bold)
