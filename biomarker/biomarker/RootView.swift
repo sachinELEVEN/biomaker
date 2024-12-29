@@ -15,7 +15,8 @@ struct RootTabView: View {
         TabView {
             HomeView()
                 .tabItem {
-                    Label("Home", systemImage: "doc.text.below.ecg")
+                    //doc.text.below.ecg
+                    Label("Biomarker", systemImage: "staroflife.fill")
                 }
             
 //            SearchView()
@@ -245,7 +246,7 @@ struct HomeView: View {
             }
                 
                 .padding([.horizontal])
-            .navigationTitle("Home")
+            .navigationTitle("Biomarker")
         }
     
 
