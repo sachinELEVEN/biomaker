@@ -145,8 +145,8 @@ struct QuickSearchOptionsView: View{
         VStack{
             //quick search functionality
             HStack{
+                ScrollView(.horizontal, showsIndicators: false){
                 ForEach(getQuickSearchOptions(),id:\.self){ organ in
-                    ScrollView(.horizontal, showsIndicators: false){
                         if organ.count<15{//sometimes organs has full blown sentences like 'reflects body inflammation' so we do not want that to appear in the search bar quick options
                             Button(action:{
                                 quickSearchOptionTapped(option: organ)

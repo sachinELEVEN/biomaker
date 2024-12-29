@@ -927,7 +927,7 @@
             startingLineNumber = "222"
             endingLineNumber = "222"
             landmarkName = "isOptionPartOfSearchStr(option:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -943,7 +943,7 @@
             startingLineNumber = "221"
             endingLineNumber = "221"
             landmarkName = "isOptionPartOfSearchStr(option:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -959,7 +959,7 @@
             startingLineNumber = "225"
             endingLineNumber = "225"
             landmarkName = "isOptionPartOfSearchStr(option:)"
-            landmarkType = "7">
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
