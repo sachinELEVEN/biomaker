@@ -669,7 +669,7 @@ struct TestAIInfoView: View{
                             }
                             
                            // HStack{
-                            Text("More about High and low \(testRecord.userFacingTestName()) values")
+                            Text("More about High \(testRecord.userFacingTestName()) values")
                                     .fontWeight(.bold)
                                     .padding([.leading,.top])
 //                                            Spacer()
@@ -681,6 +681,10 @@ struct TestAIInfoView: View{
                                     .foregroundStyle(Color.secondary)
                                     .padding([.leading,.bottom])
                             }
+                            
+                            Text("More about low \(testRecord.userFacingTestName()) values")
+                                    .fontWeight(.bold)
+                                    .padding([.leading,.top])
                             
                             if let reasonLowVal = testRecord.ai_reason_for_lower_value{
                                 Text(reasonLowVal)

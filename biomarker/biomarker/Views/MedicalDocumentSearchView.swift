@@ -220,11 +220,22 @@ struct QuickSearchOptionsView: View{
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
         
+        let optionStrList = option
+            .lowercased()
+            .split { $0.isWhitespace || $0 == "," }
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+        
         if searchStrList.contains(option.lowercased()){
             return true
         }
         
-        return false
+        for optionStr in optionStrList {
+                if !searchStrList.contains(optionStr) {
+                    return false
+                }
+            }
+        return true
         
     }
 }
