@@ -129,7 +129,7 @@ class MedicalDocument: ObservableObject,Identifiable,Codable{
     }
     
     //
-    func getDocSummary() -> String {
+    func getDocSummary(maxLength: Int = Int.max) -> String {
         var summary = "Biomarker found \(totalTestRecordsCount()) tests in the document.\n"
         var organSet: Set<String> = Set()
         
@@ -146,6 +146,9 @@ class MedicalDocument: ObservableObject,Identifiable,Codable{
             summary += organSet.sorted().joined(separator: ", ") // Combine organ names, sorted, and separated by commas
         }
         
+        if summary.count > maxLength{
+            return summary.prefix(maxLength) + "..."
+        }
         return summary
     }
 

@@ -65,7 +65,7 @@ struct MedicalDocumentViewerSmall: View{
                     
                     Spacer()
                 }
-                Text(doc.summary)
+                Text(doc.getDocSummary(maxLength: 200))
                     .foregroundStyle(.secondary)
                     .padding(.vertical,6)
                     .multilineTextAlignment(.leading)
