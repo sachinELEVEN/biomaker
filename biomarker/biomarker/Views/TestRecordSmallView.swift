@@ -105,6 +105,7 @@ struct TestRecordView: View {
                 .sheet(isPresented: $showAIInfoPopup){
                     ScrollView(showsIndicators: false){
                         TestAIInfoView(testRecord: record, showPopupCloseButton: true, showChart: true, showSelf: $showAIInfoPopup)
+                            .padding(.trailing)
                     }
                 }
             }
