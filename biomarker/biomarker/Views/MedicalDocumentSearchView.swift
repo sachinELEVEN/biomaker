@@ -13,6 +13,9 @@ struct MedicalDocumentSearchView: View{
     @State var testRecordPicker = 0
     var doc : MedicalDocument
     @State private var searchText = ""
+    @State private var allTestRecords: [BasicMedicalTestRecordv1] = [] // Your full list of test records
+    @State private var filteredTestRecords: [BasicMedicalTestRecordv1] = [] // Filtered list for display
+    @State private var isSearching: Bool = false // Show a loading indicator during search- not using it for now, since its local seaarch and should be fast
     var body: some View{
         VStack(alignment: .leading){
            
@@ -43,7 +46,7 @@ struct MedicalDocumentSearchView: View{
                                 .padding(.horizontal)
                     
 
-                  
+                  /*
                     ForEach(doc.sections){ section in
                        
                         if MedicalDocumentViewerDetailed.getSectionTestRecords(section: section,val: testRecordPicker).count != 0{
@@ -54,8 +57,9 @@ struct MedicalDocumentSearchView: View{
                                 .padding([.top,.top])
                                 .padding(.bottom,4)
                         }
+                        */
                         
-                        ForEach(MedicalDocumentViewerDetailed.getSectionTestRecords(section: section,val: testRecordPicker)){ testRecord in
+                        ForEach(filteredTestRecords){ testRecord in
                             VStack{
                                 if testRecordPicker == 2{
                                     TestRecordPlainView(testRecord: testRecord)
@@ -73,10 +77,45 @@ struct MedicalDocumentSearchView: View{
                                  // Text("")
                             }
                         }
-                    }
+                  //  }
 
                 }
             }
+        }.onAppear{
+            loadAllTests()
+        }
+        .onChange(of: searchText){newValue in
+            if newValue.isEmpty {
+                filteredTestRecords = allTestRecords // No filtering needed
+                } else {
+                    performSearch(searchText: newValue)
+                }
         }
     }
+    
+    private func loadAllTests() {
+        print("/MedicalDocumentSearchView /loadAllTests - Loading all tests")
+            // Simulate loading test records (replace with your actual logic)
+        filteredTestRecords.removeAll()
+        allTestRecords.removeAll()
+        for section in doc.sections{
+            for test in section.testRecords{
+                allTestRecords.append(test)
+                filteredTestRecords.append(test)
+            }
+        }
+    }
+    
+    private func performSearch(searchText: String) {
+            // Show loading indicator and perform the search on a background thread
+            isSearching = true
+            DispatchQueue.global(qos: .userInitiated).async {
+                let searchResults = allTestRecords.filter { $0.satisfiesSearch(searchStr: searchText.lowercased()) }
+                DispatchQueue.main.async {
+                    // Update the UI with the filtered results on the main thread
+                    filteredTestRecords = searchResults
+                    isSearching = false
+                }
+            }
+        }
 }
