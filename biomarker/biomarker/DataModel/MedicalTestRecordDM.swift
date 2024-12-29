@@ -128,6 +128,39 @@ class MedicalDocument: ObservableObject,Identifiable,Codable{
         }
     }
     
+    //
+    func getDocSummary() -> String {
+        var summary = "Biomarker found \(totalTestRecordsCount()) tests in the document.\n"
+        var organSet: Set<String> = Set()
+        
+        // Collect unique organs
+        for section in sections {
+            for test in section.testRecords {
+                let listOfOrgans = splitIntoListBy(test.ai_related_organs ?? "", delimiters: [",", ";"])
+                organSet.formUnion(listOfOrgans) // Add unique organs to the set
+            }
+        }
+        
+        if !organSet.isEmpty {
+            summary += "The report focuses on tests for: "
+            summary += organSet.sorted().joined(separator: ", ") // Combine organ names, sorted, and separated by commas
+        }
+        
+        return summary
+    }
+
+    // Helper function to split strings by multiple delimiters
+    func splitIntoListBy(_ input: String, delimiters: [String]) -> [String] {
+        let pattern = delimiters.map { NSRegularExpression.escapedPattern(for: $0) }.joined(separator: "|")
+        let regex = try? NSRegularExpression(pattern: pattern, options: [])
+        let matches = regex?.split(input) ?? []
+        return matches.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
+    }
+
+
+    
+    //
+    
 }
 
 //A medical document has a the original medical document reference and a list of medical records

@@ -65,7 +65,7 @@ struct MedicalDocumentViewerSmall: View{
                     
                     Spacer()
                 }
-                Text("Biomarker found \(doc.totalTestRecordsCount()) tests in the document. \(doc.summary)")
+                Text(doc.summary)
                     .foregroundStyle(.secondary)
                     .padding(.vertical,6)
                     .multilineTextAlignment(.leading)
@@ -430,7 +430,7 @@ struct MedicalDocumentViewerDetailed: View{
                             Spacer()
                         }
                         
-                        Text("Biomarker found \(doc.totalTestRecordsCount()) tests in the document. \(doc.summary)")
+                        Text(doc.getDocSummary())
                             .multilineTextAlignment(.leading)
                             .foregroundStyle(.secondary)
                     }

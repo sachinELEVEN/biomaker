@@ -34,3 +34,22 @@ extension Float {
         return String(format: "%.\(n)f", truncatedValue)
     }
 }
+
+extension NSRegularExpression {
+    func split(_ input: String) -> [String] {
+        let range = NSRange(input.startIndex..<input.endIndex, in: input)
+        let matches = matches(in: input, options: [], range: range)
+        var lastSplitIndex = input.startIndex
+        var components: [String] = []
+        
+        for match in matches {
+            if let matchRange = Range(match.range, in: input) {
+                let substring = String(input[lastSplitIndex..<matchRange.lowerBound])
+                components.append(substring)
+                lastSplitIndex = matchRange.upperBound
+            }
+        }
+        components.append(String(input[lastSplitIndex..<input.endIndex]))
+        return components
+    }
+}
