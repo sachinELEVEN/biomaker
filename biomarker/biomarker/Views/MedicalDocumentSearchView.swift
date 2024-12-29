@@ -147,27 +147,28 @@ struct QuickSearchOptionsView: View{
             HStack{
                 ScrollView(.horizontal, showsIndicators: false){
                 ForEach(getQuickSearchOptions(),id:\.self){ organ in
+                    HStack{
                         if organ.count<15{//sometimes organs has full blown sentences like 'reflects body inflammation' so we do not want that to appear in the search bar quick options
                             Button(action:{
                                 quickSearchOptionTapped(option: organ)
                             }){
                                 Text(organ)
                                     .foregroundStyle(isOptionPartOfSearchStr(option: organ) ? Color.primaryInvert : .primary)
-                                                                //.fontWeight(.bold)
-                                            .multilineTextAlignment(.leading)
-                                                .padding(.horizontal)
-                                                                    .padding(.vertical,2)
-                                                                    .background(isOptionPartOfSearchStr(option: organ) ? Color.primary : Color.primaryInvert)
-                                                                    .overlay(
-                                                                            RoundedRectangle(cornerRadius: 10)
-                                                                                .stroke(Color.primary, lineWidth: 4)
-                                                                        )
-                                                                   
-                                                                    .cornerRadius(10)
+                                //.fontWeight(.bold)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(.horizontal)
+                                    .padding(.vertical,2)
+                                    .background(isOptionPartOfSearchStr(option: organ) ? Color.primary : Color.primaryInvert)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color.primary, lineWidth: 4)
+                                    )
+                                
+                                    .cornerRadius(10)
                             }
                             
                         }
-                        
+                    }
                     }
                 }
             }
