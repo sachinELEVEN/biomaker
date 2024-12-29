@@ -604,8 +604,8 @@
             filePath = "biomarker/Views/Variation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -652,8 +652,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -700,8 +700,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -716,8 +716,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -732,8 +732,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -748,8 +748,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -764,8 +764,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "performSearch(searchText:)"
             landmarkType = "7">
             <Locations>
@@ -812,8 +812,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "performSearch(searchText:)"
             landmarkType = "7">
             <Locations>
@@ -924,8 +924,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "isOptionPartOfSearchStr(option:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -940,8 +940,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "isOptionPartOfSearchStr(option:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -956,8 +956,8 @@
             filePath = "biomarker/Views/MedicalDocumentSearchView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "isOptionPartOfSearchStr(option:)"
             landmarkType = "7">
          </BreakpointContent>

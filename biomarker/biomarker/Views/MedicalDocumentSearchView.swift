@@ -64,6 +64,17 @@ struct MedicalDocumentSearchView: View{
                                 .padding(.bottom,4)
                         }
                         */
+                    
+                    if filteredTestRecords.count == 0 {
+                        HStack{
+                            Spacer()
+                            Text("Nothing to show")
+                                .font(.title2)
+                                .foregroundStyle(Color.secondary)
+                                .padding()
+                            Spacer()
+                        }
+                    }
                         
                         ForEach(filteredTestRecords){ testRecord in
                             VStack{

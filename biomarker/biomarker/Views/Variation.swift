@@ -220,6 +220,18 @@ struct GroupedTestRecordsView: View {
 
     var body: some View {
         VStack{
+            
+            if filteredRecords.count == 0 {
+                HStack{
+                    Spacer()
+                    Text("Nothing to show")
+                        .font(.title2)
+                        .foregroundStyle(Color.secondary)
+                        .padding()
+                    Spacer()
+                }
+            }
+            
             ForEach(filteredRecords.keys.sorted(), id: \.self) { testName in
                 if let group = filteredRecords[testName] {
                     Button(action:{

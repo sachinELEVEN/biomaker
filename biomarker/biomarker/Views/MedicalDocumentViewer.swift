@@ -643,7 +643,30 @@ struct MedicalDocumentViewerDetailed: View{
                             .pickerStyle(.segmented)
                             .padding(.horizontal)
                 
-
+                if doc.totalTestRecordsCount() == 0 {
+                    HStack{
+                        Spacer()
+                        Text("Nothing to show")
+                            .font(.title2)
+                            .foregroundStyle(Color.secondary)
+                            .padding()
+                        Spacer()
+                    }
+                }else{
+                    
+                    if(testRecordPicker == 1){
+                        if (doc.totalTestOutOfRangeCount() == 0){
+                            HStack{
+                                Spacer()
+                                Text("Nothing to show")
+                                    .font(.title2)
+                                    .foregroundStyle(Color.secondary)
+                                    .padding()
+                                Spacer()
+                            }
+                        }
+                    }
+                }
               
                 ForEach(doc.sections){ section in
                    
