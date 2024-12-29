@@ -30,6 +30,35 @@ struct MedicalDocumentSearchView: View{
                 .cornerRadius(8)
                 .padding(.horizontal)
             ScrollView(showsIndicators: false){
+                
+                
+                //quick search functionality
+                HStack{
+                    ForEach(doc.getDocOrgans(),id:\.self){ organ in
+                        ScrollView(.horizontal, showsIndicators: false){
+                            if organ.count<15{//sometimes organs has full blown sentences like 'reflects body inflammation' so we do not want that to appear in the search bar quick options
+                                Button(action:{
+                                    searchText = organ
+                                }){
+                                    Text(organ)
+                                                .foregroundStyle(Color.primaryInvert)
+                                                                    //.fontWeight(.bold)
+                                                .multilineTextAlignment(.leading)
+                                                    .padding(.horizontal)
+                                                                        .padding(.vertical,2)
+                                                                        .background(searchText.lowercased()==organ.lowercased() ? Color.blue : Color.primary)
+                                                                        .background(CustomBlur(style: .prominent))
+                                                                        .cornerRadius(10)
+                                }
+                                
+                            }
+                            
+                        }
+                    }
+                }.padding(.horizontal)
+                    .padding(.vertical)
+                
+                
                 VStack(alignment:.leading){
                     Text("You can search for tests by their name, organs or body parts they are related to")
                         .font(.subheadline)

@@ -161,6 +161,30 @@ class MedicalDocument: ObservableObject,Identifiable,Codable{
         }
         return summary
     }
+    
+    func getDocOrgans(maxLength: Int = Int.max) -> [String] {
+//        var summary = "Biomarker found \(totalTestRecordsCount()) tests in the document.\n"
+        var organSet: Set<String> = Set()
+        
+        // Collect unique organs
+        for section in sections {
+            for test in section.testRecords {
+                let listOfOrgans = splitIntoListBy(test.ai_related_organs ?? "", delimiters: [",", ";"])
+                organSet.formUnion(listOfOrgans) // Add unique organs to the set
+            }
+        }
+        
+        if !organSet.isEmpty {
+            //summary += "The report focuses on tests for: "
+            summary += organSet.sorted().joined(separator: ", ") // Combine organ names, sorted, and separated by commas
+        }
+        
+//        if summary.count > maxLength{
+//            return summary.prefix(maxLength) + "..."
+//        }
+        //return summary
+        return organSet.sorted()
+    }
 
     // Helper function to split strings by multiple delimiters
     func splitIntoListBy(_ input: String, delimiters: [String]) -> [String] {
