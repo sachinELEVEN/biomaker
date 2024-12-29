@@ -430,6 +430,58 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
     ///returns a boolean value indicating whether this result matches the search key string
     func satisfiesSearch(searchStr: String)->Bool{
         //we need to get parent section's summary, name access here
+        
+        var searchCorpus = ""
+        
+        if let parentSection = getParentSection(){
+            searchCorpus += parentSection.name + "," + parentSection.summary + "," + parentSection.keyPoints
+        }
+        
+        searchCorpus += "," + test + "," + (ai_original_name ?? "") + "," + (ai_common_name ?? "") + "," + (ai_use ?? "") + "," + (ai_related_organs ?? "") + "," + (ai_reason_for_high_value ?? "") + "," + (ai_reason_for_lower_value ?? "")
+        
+        //Now we have searchCorpus string, and searchStr
+        /*
+         Our search algo is such that, we first create a corpusStrList which is created from searchCorpus by
+         delimeter , or space.
+         Similarly we will creaate searchStrList which is created from searchStr by delimeter , or space.
+         Now we have 2 list of strings.
+         Make sure we remove empty strings from the list, or string which only have spaces from the list.
+         The searchStr is said to be found in searchCorpus if every non empty element of searchStrList is present in corpusStrList.
+         */
+        // Split the corpus into a list of words, removing empty or whitespace-only strings
+            let corpusStrList = searchCorpus
+                .lowercased()
+                .split { $0.isWhitespace || $0 == "," }
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                .filter { !$0.isEmpty }
+
+            // Split the search string into a list of words, removing empty or whitespace-only strings
+            let searchStrList = searchStr
+                .lowercased()
+                .split { $0.isWhitespace || $0 == "," }
+                .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+                .filter { !$0.isEmpty }
+
+            // Check if every non-empty element of searchStrList is present in corpusStrList
+            for searchWord in searchStrList {
+                var found = false
+                for corpusWord in corpusStrList {
+                    if corpusWord.contains(searchWord) {
+                        found = true
+                        break;
+                    }
+                }
+                
+                if !found{
+                    return false
+                }
+            }
+
+            return true
+        
+        //OLD SEARCH ALGO BELOW
+        
+        /*
         if let parentSection = getParentSection(){
             //now we need to make a corpus text and find the string there
             if parentSection.name.lowercased().contains(searchStr) || parentSection.summary.lowercased().contains(searchStr) || parentSection.keyPoints.lowercased().contains(searchStr) ||
@@ -443,8 +495,11 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
                 return true
             }
         }
+         
+         return false
+        */
         
-        return false
+       
     }
     
     //returns a boolean value indicating whether deletion from system was a success or not
