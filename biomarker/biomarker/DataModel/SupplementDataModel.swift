@@ -9,7 +9,7 @@ import Foundation
 
 
 // Enum for Frequency
-enum BMSupplementFrequency: String {
+enum BMSupplementFrequency: String, CaseIterable {
     case daily = "Daily"
     case weekly = "Weekly"
     case daily2 = "2 times daily"
@@ -20,7 +20,7 @@ enum BMSupplementFrequency: String {
 
 
 // Enum for Form
-enum BMSupplementForm: String {
+enum BMSupplementForm: String, CaseIterable {
     case liquid = "Liquid"
     case capsule = "Capsule"
     case tablet = "Tablet"

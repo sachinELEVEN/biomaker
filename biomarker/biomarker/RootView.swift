@@ -29,6 +29,11 @@ struct RootTabView: View {
                     Label("Variation", systemImage: "chart.bar.fill")
                 }
             
+            AddSupplementView()
+                .tabItem {
+                    Label("Supplement", systemImage: "bolt.fill")
+                }
+            
             
 //            SettingsView()
 //                .tabItem {
