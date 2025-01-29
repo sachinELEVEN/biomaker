@@ -52,6 +52,7 @@ class BMSupplement {
     var aiCommonStrengthUnits: String? = nil
     var aiAdviceBasedUserHealthContext: String? = nil
     var aiSideEffect: String? = nil
+    var aiCategory:String? = nil//supplement category
     
     init(id: String, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm, timeOfConsumption: String,
