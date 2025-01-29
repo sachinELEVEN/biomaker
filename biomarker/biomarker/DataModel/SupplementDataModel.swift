@@ -37,11 +37,11 @@ class BMSupplement {
     var strengthUnit: String
     var frequency: BMSupplementFrequency
     var form: BMSupplementForm
-    var timeOfConsumption: String
-    var reminderTime: String
+    var timeOfConsumption: [Date]
+    var reminderTime: [Date]
     var createdAt: Date
     var history: [BMSupplement] // Track changes over time
-    var isReminderSet: Bool
+    var isReminderSet: Bool//looks useless if reminderTime is empty then obviously there is no reminder
     var userNotes: String?
     
     // AI-generated properties
@@ -55,8 +55,8 @@ class BMSupplement {
     var aiCategory:String? = nil//supplement category
     
     init(id: String, name: String, strengthNumber: String, strengthUnit: String,
-         frequency: BMSupplementFrequency, form: BMSupplementForm, timeOfConsumption: String,
-         reminderTime: String, createdAt: Date, isReminderSet: Bool, userNotes: String?) {
+         frequency: BMSupplementFrequency, form: BMSupplementForm, timeOfConsumption: [Date],
+         reminderTime: [Date], createdAt: Date, isReminderSet: Bool, userNotes: String?) {
         self.revision = 0
         self.id = id
         self.name = name

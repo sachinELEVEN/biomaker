@@ -103,4 +103,18 @@ class System: ObservableObject{
         
         return result
     }
+    
+    //MORE METHODS SPECIFICALLY FOR SUPPLEMENTSYSTEM
+    func getUserHealthContext()->String{
+        /*
+         It will be based on
+         1. user's out of ref test data- name, val, unit
+         2. user's supplement stack- name, dosage, frequency
+         3. user's additional global health note
+         
+         we wont user's supplement's user notes for now
+         
+         */
+        return ""
+    }
 }
