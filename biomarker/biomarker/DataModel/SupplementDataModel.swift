@@ -84,13 +84,18 @@ class BMSupplement {
 }
 
 // Class representing all the supplements taken by the user
-class BMSupplementStack {
+class BMSupplementStack: ObservableObject {
+    @Published var _refresh = true
+    
+    func refresh(){
+        self._refresh.toggle()
+    }
     var id: String
-    var supplements: [BMSupplement]
-    var stackHistory: [BMSupplementStack] // Track changes in the supplement stack
-    var aiSupplementStackRecommendedTime: String? = nil
-    var stackCompatibilityNote: String? = nil
-    var adviceFeedbackOnStack: String? = nil
+    @Published var supplements: [BMSupplement]
+    @Published var stackHistory: [BMSupplementStack] // Track changes in the supplement stack
+    @Published var aiSupplementStackRecommendedTime: String? = nil
+    @Published var stackCompatibilityNote: String? = nil
+    @Published var adviceFeedbackOnStack: String? = nil
     
     init(id: String, supplements: [BMSupplement]) {
         self.id = id

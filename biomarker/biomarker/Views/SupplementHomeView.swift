@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SupplementHomeView:View {
-    @ObservedObject var sys = system
+    @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
     @State var showAddSupplementScreen = false
     var body: some View {
         NavigationView{
