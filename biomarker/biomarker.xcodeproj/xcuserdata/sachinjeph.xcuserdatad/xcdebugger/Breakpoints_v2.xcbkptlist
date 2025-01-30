@@ -970,8 +970,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "canMoveToNextStep()"
             landmarkType = "7">
          </BreakpointContent>
@@ -986,8 +986,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
             landmarkName = "canMoveToNextStep()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1002,8 +1002,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "348"
-            endingLineNumber = "348"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
             landmarkName = "canMoveToNextStep()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1018,8 +1018,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "395"
-            endingLineNumber = "395"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "createSupplement()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1034,8 +1034,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
             landmarkName = "AddSupplementView"
             landmarkType = "14">
          </BreakpointContent>
@@ -1050,8 +1050,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "canMoveToNextStep()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1066,8 +1066,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1086,6 +1086,165 @@
             endingLineNumber = "72"
             landmarkName = "init(id:name:strengthNumber:strengthUnit:frequency:form:timeOfConsumption:reminderTime:createdAt:isReminderSet:userNotes:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3D527669-EA9D-4D70-8A75-61C9C9F0B0BF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "biomarker/Views/AddSupplementView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2400B113-56B0-4397-A759-8BDB4ED3F7A9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "biomarker/Views/AddSupplementView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "2400B113-56B0-4397-A759-8BDB4ED3F7A9 - b084db6d71888c13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 (Swift.Int) -&gt; SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt; in closure #5 () -&gt; SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;&gt;, &lt;&lt;opaque return type of biomarker.AddSupplementView.descriptionView(text: Swift.String) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;, SwiftUI.Spacer)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0 in biomarker.AddSupplementView.body.getter : some"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/AddSupplementView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "1636">
+               </Location>
+               <Location
+                  uuid = "2400B113-56B0-4397-A759-8BDB4ED3F7A9 - b084db6d71888c13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 (Swift.Int) -&gt; SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt; in closure #5 () -&gt; SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;&gt;, &lt;&lt;opaque return type of biomarker.AddSupplementView.descriptionView(text: Swift.String) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;, SwiftUI.Spacer)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0 in biomarker.AddSupplementView.body.getter : some"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/AddSupplementView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "1620">
+               </Location>
+               <Location
+                  uuid = "2400B113-56B0-4397-A759-8BDB4ED3F7A9 - b084db6d71888c13"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 (Swift.Int) -&gt; SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt; in closure #5 () -&gt; SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;&gt;, &lt;&lt;opaque return type of biomarker.AddSupplementView.descriptionView(text: Swift.String) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;, SwiftUI.Spacer)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0 in biomarker.AddSupplementView.body.getter : some"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/AddSupplementView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "167"
+                  endingLineNumber = "167"
+                  offsetFromSymbolStart = "1408">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4502AA31-801E-42B7-9D6C-084ADAF3C0EA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "biomarker/Views/AddSupplementView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "953A25CA-0FE6-4DD4-A954-54B40A516563"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "biomarker/Views/AddSupplementView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "953A25CA-0FE6-4DD4-A954-54B40A516563 - b084db6d718b7338"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 (Swift.Int) -&gt; SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt; in closure #5 () -&gt; SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;&gt;, &lt;&lt;opaque return type of biomarker.AddSupplementView.descriptionView(text: Swift.String) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;, SwiftUI.Spacer)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0 in biomarker.AddSupplementView.body.getter : some"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/AddSupplementView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "264">
+               </Location>
+               <Location
+                  uuid = "953A25CA-0FE6-4DD4-A954-54B40A516563 - b084db6d718b7338"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Bool) -&gt; () in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 (Swift.Int) -&gt; SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt; in closure #5 () -&gt; SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;&lt;&lt;opaque return type of SwiftUI.View.toggleStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.ToggleStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.EmptyView&gt;)&gt;&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;, SwiftUI._ConditionalContent&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;&gt;, &lt;&lt;opaque return type of biomarker.AddSupplementView.descriptionView(text: Swift.String) -&gt; some&gt;&gt;.0, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(Swift.Optional&lt;SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;)&gt;&gt;, SwiftUI.Spacer)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.onChange&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Equatable&gt;(of: &#x3c4;_1_0, perform: (&#x3c4;_1_0) -&gt; ()) -&gt; some&gt;&gt;.0 in biomarker.AddSupplementView.body.getter : some"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/AddSupplementView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "160"
+                  endingLineNumber = "160"
+                  offsetFromSymbolStart = "260">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8DE72D84-AB00-46B9-9FFB-E3B9058111FC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "biomarker/Views/AddSupplementView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

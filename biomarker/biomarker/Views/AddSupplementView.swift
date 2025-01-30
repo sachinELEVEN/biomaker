@@ -161,7 +161,15 @@ struct AddSupplementView: View {
                                                 timeOfConsumption[index] = Date()
                                                // timeOfConsumption.remove(at: index)
                                             }else{
-                                                timeOfConsumption.append(Date())
+                                                //here we will first increase the list to have atleast index+1 count of items and initialise the index item with date
+                                                for newIdx in timeOfConsumption.count...index{
+                                                    if newIdx == index{
+                                                        timeOfConsumption.append(Date())
+                                                    }else{
+                                                        timeOfConsumption.append(nil)
+                                                    }
+                                                }
+                                                
                                             }
                                         } else {
                                             // If toggled off, remove the time for this index
@@ -218,7 +226,14 @@ struct AddSupplementView: View {
                                                  reminderTime[index] = Date()
                                                 // timeOfConsumption.remove(at: index)
                                              }else{
-                                                 reminderTime.append(Date())
+                                                 //here we will first increase the list to have atleast index+1 count of items and initialise the index item with date
+                                                 for newIdx in reminderTime.count...index{
+                                                     if newIdx == index{
+                                                         reminderTime.append(Date())
+                                                     }else{
+                                                         reminderTime.append(nil)
+                                                     }
+                                                 }
                                              }
                                          } else {
                                              // If toggled off, remove the time for this index
