@@ -348,7 +348,7 @@ struct AddSupplementView: View {
                         
                     }){
                         HStack{
-                            label(currentStep == finalStep ? "Add" : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .secondary), imgName: currentStep == finalStep ? "checkmark" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
+                            label(currentStep == finalStep ? "Add" : currentStep==6 ? "Analysing..." : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .secondary), imgName: currentStep == finalStep ? "checkmark" : currentStep==6 ? "" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
                             Spacer()
                         }.padding()
                     }
