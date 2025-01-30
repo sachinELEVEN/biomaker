@@ -32,11 +32,12 @@ enum BMSupplementForm: String, CaseIterable {
 class BMSupplement {
     var revision:Int
     var id: String
+    var isFoodItem: Bool
     var name: String
     var strengthNumber: String
     var strengthUnit: String
     var frequency: BMSupplementFrequency
-    var form: BMSupplementForm
+    var form: BMSupplementForm?
     var timeOfConsumption: [Date?]
     var reminderTime: [Date?]
     var createdAt: Date
@@ -54,12 +55,14 @@ class BMSupplement {
     var aiSideEffect: String? = nil
     var aiCategory:String? = nil//supplement category
     var aiCommonName: String? = nil
+    var aiCalories: String? = nil
     
-    init(id: String, name: String, strengthNumber: String, strengthUnit: String,
-         frequency: BMSupplementFrequency, form: BMSupplementForm, timeOfConsumption: [Date?],
+    init(id: String, isFoodItem: Bool, name: String, strengthNumber: String, strengthUnit: String,
+         frequency: BMSupplementFrequency, form: BMSupplementForm?, timeOfConsumption: [Date?],
          reminderTime: [Date?], createdAt: Date, isReminderSet: Bool, userNotes: String?) {
         self.revision = 0
         self.id = id
+        self.isFoodItem = isFoodItem
         self.name = name
         self.strengthNumber = strengthNumber
         self.strengthUnit = strengthUnit

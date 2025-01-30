@@ -31,7 +31,7 @@ struct AddSupplementView: View {
         NavigationView {
             VStack {
                 if currentStep == 0 {
-                    TextField("Supplement Name eg Vitamin D3, Minoxidil", text: $name)
+                    TextField(supplementIsFoodItem ? "Food name eg Tofu, Blueberry" : "Supplement name eg Vitamin D3, Minoxidil", text: $name)
                         .padding(10)
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
@@ -45,14 +45,14 @@ struct AddSupplementView: View {
                     
                 } else if currentStep == 1 {
                     HStack {
-                        TextField("Dosage strength (numeric)", text: $strengthNumber)
+                        TextField(supplementIsFoodItem ? "Portion size" :"Dosage strength (numeric)", text: $strengthNumber)
                             .padding(10)
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
                             .padding(.trailing)
                             .keyboardType(.decimalPad)
                         Picker("Unit", selection: $strengthUnit) {
-                            ForEach([
+                            ForEach(supplementIsFoodItem ? ["g", "lbs", "oz", "mL", "piece"] : [
                                 "mg",
                                 "g",
                                 "mcg",
@@ -129,24 +129,26 @@ struct AddSupplementView: View {
                     }.padding(.top)
                         .padding(.horizontal)
                     
-                    HStack{
-                        Text("Form")
-                            .fontWeight(.bold)
-                            .font(.headline)
+                    if !supplementIsFoodItem{
+                        HStack{
+                            Text("Form")
+                                .fontWeight(.bold)
+                                .font(.headline)
                             
                             //.fontWeight(.bold)
-                        Spacer()
-                        
-                        Picker("Form", selection: $form) {
-                            ForEach(BMSupplementForm.allCases, id: \.self) { form in
-                                Text(form.rawValue).tag(form)
-                            }
-                        }.pickerStyle(MenuPickerStyle())
-                            .padding(5)
-                            .background(Color(.systemGray6))
-                            .cornerRadius(8)
-                            .padding(.trailing)
-                    }.padding()
+                            Spacer()
+                            
+                            Picker("Form", selection: $form) {
+                                ForEach(BMSupplementForm.allCases, id: \.self) { form in
+                                    Text(form.rawValue).tag(form)
+                                }
+                            }.pickerStyle(MenuPickerStyle())
+                                .padding(5)
+                                .background(Color(.systemGray6))
+                                .cornerRadius(8)
+                                .padding(.trailing)
+                        }.padding()
+                    }
 
 //                    Button("Next") {
 //                        currentStep += 1
@@ -310,6 +312,9 @@ struct AddSupplementView: View {
                         }
                         
                         if canMoveToNextStep(){
+                            if currentStep == 1 && supplementIsFoodItem{
+                                currentStep += 1 //additional step so that because we dont want to notes section for food item
+                            }
                             currentStep += 1
                         }
                         
@@ -333,6 +338,9 @@ struct AddSupplementView: View {
             .onChange(of: currentStep){ _ in
                 updateHeading()
             }
+            .onChange(of: supplementIsFoodItem){ _ in
+                updateHeading()
+            }
 
         }
     }
@@ -343,12 +351,12 @@ struct AddSupplementView: View {
         if currentStep >= finalStep{
             return false
         }
-        if heading.contains("supplement"){
+        if currentStep == 0{
             if isEmpty(text: name){
                 return false
             }
           //  heading = "Add dosage"
-        }else if heading.contains("dosage"){
+        }else if currentStep == 1{
             if !isNumber(text: strengthNumber){
                 return false
             }
@@ -373,16 +381,16 @@ struct AddSupplementView: View {
     
     func updateHeading(){
         if currentStep == 0 {
-            heading = "Add supplement"
+            heading = supplementIsFoodItem ? "Add food" : "Add supplement"
         }
         if currentStep == 1 {
-            heading = "Add dosage"
+            heading = supplementIsFoodItem ? "Add portion size" :"Add dosage"
         }
         if currentStep == 2 {
             heading = "Notes"
         }
         if currentStep == 3 {
-            heading = "Frequency and form"
+            heading = supplementIsFoodItem ? "Frequency" : "Frequency and form"
         }
         if currentStep == 4 {
             heading = "Consumption time"
@@ -406,9 +414,11 @@ struct AddSupplementView: View {
     private func createSupplement() {
         let id = UUID().uuidString
         let createdAt = Date()
-        supplement = BMSupplement(id: id, name: name, strengthNumber: strengthNumber,
+        
+        
+        supplement = BMSupplement(id: id, isFoodItem: supplementIsFoodItem, name: name, strengthNumber: strengthNumber,
                                   strengthUnit: strengthUnit, frequency: frequency,
-                                  form: form, timeOfConsumption: timeOfConsumption,
+                                  form: supplementIsFoodItem ? nil : form, timeOfConsumption: timeOfConsumption,
                                   reminderTime: reminderTime, createdAt: createdAt,
                                   isReminderSet: !reminderTime.isEmpty, userNotes: userNotes)
         // Here you can handle the created supplement object (e.g., save it to a database)
@@ -428,29 +438,30 @@ struct AddSupplementView: View {
     
     func getDescription() -> String {
         if currentStep == 0 {
-            return "Add your supplement name. You can enter either the generic name or the complete brand name of your supplement. \n\nExample: 'Vitamin C' or 'Nature's Way Vitamin C 1000mg'."
+            return supplementIsFoodItem ? "You are currently adding a food item. \n\nExample: 'Blueberry', 'Tofu' etc" :"Add your supplement name. You can enter either the generic name or the complete brand name of your supplement. \n\nExample: 'Vitamin C' or 'Nature's Way Vitamin C 1000mg'."
         }
         if currentStep == 1 {
-            return "Enter the dosage of your supplement. Specify the amount (number) and select the unit (e.g., mg, g, ml) from the options provided. \n\nExample: '500' for the amount and select 'mg' for the unit."
+            return supplementIsFoodItem ? "How much of this food do you typically eat in one sitting? \n\nExample: '100 g' of tofu or '2' tortillas." : "Enter the dosage of your supplement. Specify the amount (number) and select the unit (e.g., mg, g, ml) from the options provided. \n\nExample: '500' for the amount and select 'mg' for the unit."
         }
         if currentStep == 2 {
             return "Your notes will help Biomarker analyze your supplements better. Please tell us why you started taking it and how long you have been using it. \n\nExample: 'I started taking this for immune support and have been using it for 3 months.'"
         }
         if currentStep == 3 {
-            return "Select how often you take this supplement. Choose the frequency that best describes your routine (e.g., daily, weekly, etc.) and the form of the supplement (e.g., capsule, liquid). \n\nExample: 'Daily' for frequency and 'Capsule' for form."
+            return supplementIsFoodItem ? "Select how often do you have this food. Choose the frequency that best describes your routine (e.g., daily, weekly, etc.)" : "Select how often you take this supplement. Choose the frequency that best describes your routine (e.g., daily, weekly, etc.) and the form of the supplement (e.g., capsule, liquid). \n\nExample: 'Daily' for frequency and 'Capsule' for form."
         }
         if currentStep == 4 {
-            return "Specify the times you take this supplement. If you take it multiple times a day, please enter each time accordingly. \n\nExample: '8:00 AM' and '8:00 PM' if you take it twice a day."
+            return "Specify the times you take this \(supplementIsFoodItem ? "food item" : "supplement"). If you take it multiple times a day, please enter each time accordingly. \n\nExample: '8:00 AM' and '8:00 PM' if you take it twice a day."
         }
         if currentStep == 5 {
-            return "Set a reminder if you want Biomarker to notify you about your supplement consumption. You can choose the time for the reminder. \n\nExample: 'Set a reminder for 7:30 AM.'"
+            return "Set a reminder if you want Biomarker to notify you about your  \(supplementIsFoodItem ? "food item" : "supplement") consumption time. You can choose the time for the reminder. \n\nExample: 'Set a reminder for 7:30 AM.'"
         }
         return "Invalid step."
     }
 
     
     func descriptionView(text: String)->some View{
-        return VStack{
+        return HStack{
+            
             Text(text)
                 .multilineTextAlignment(.leading)
                 .padding()
@@ -459,6 +470,7 @@ struct AddSupplementView: View {
                 //.background(Color(.systemGray6))
                // .cornerRadius(8)
                 //.padding()
+            Spacer()
         }
     }
 
