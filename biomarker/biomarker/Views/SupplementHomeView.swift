@@ -60,6 +60,12 @@ struct SupplementHomeView:View {
                                 .multilineTextAlignment(.leading)
                                 .padding(.vertical)
                             
+                            ForEach(bmSupplementStackGL.supplements){ supp in
+                                SupplementRow(supplement: supp)
+                                
+                            }
+                            
+                            
                             Text("Schedule")
                             //.italic()
                             //.underline()
@@ -81,5 +87,55 @@ struct SupplementHomeView:View {
                 }.padding(.horizontal)
             }.navigationTitle("Supplement Stack")
         }
+    }
+}
+
+
+struct SupplementRow: View {
+    @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
+    var supplement: BMSupplement
+    
+
+    var body: some View {
+        HStack {
+            // Example icon, replace with appropriate icons
+            Image(systemName: "leaf.fill") // Use an appropriate SF Symbol or custom icon
+                .resizable()
+                .frame(width: 40, height: 40)
+                .foregroundColor(.green)
+
+            VStack(alignment: .leading) {
+                Text(supplement.name)
+                    .font(.headline)
+                    .foregroundColor(.primary)
+
+                HStack {
+                    Text("\(supplement.strengthNumber) \(supplement.strengthUnit)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+
+                    Spacer()
+
+                    Text(supplement.frequency.rawValue) // Display frequency
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+
+                Text(supplement.form?.rawValue ?? "") // Display form
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+
+                if let userNotes = supplement.userNotes, !userNotes.isEmpty {
+                    Text("Notes: \(userNotes)")
+                        .font(.caption)
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding(.leading, 8)
+        }
+        .padding()
+        .background(Color(UIColor.systemBackground))
+        .cornerRadius(8)
+        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
 }

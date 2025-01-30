@@ -29,7 +29,8 @@ enum BMSupplementForm: String, CaseIterable {
 
 
 // Class representing a particular supplement
-class BMSupplement {
+class BMSupplement: Identifiable {
+    
     var revision:Int
     var id: String
     var isFoodItem: Bool
