@@ -11,6 +11,8 @@ import SwiftUI
 
 // Main View
 struct AddSupplementView: View {
+    @State private var heading: String = "Add supplement name"
+    @State private var buttonTitle: String = "Next"
     @State private var name: String = ""
     @State private var strengthNumber: String = ""
     @State private var strengthUnit: String = "mg" // Default unit
@@ -21,21 +23,26 @@ struct AddSupplementView: View {
     @State private var userNotes: String = ""
     @State private var currentStep: Int = 0
     @State private var supplement: BMSupplement?
+    private var finalStep = 5//final step of the form where the supplement is added
 
     var body: some View {
         NavigationView {
             VStack {
                 if currentStep == 0 {
-                    TextField("Supplement Name", text: $name)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    TextField("Supplement Name eg Vitamin D3, Minoxidil", text: $name)
+                        .padding(10)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
                         .padding()
-                    Button("Next") {
-                        currentStep += 1
-                    }
+                    
+                    
                 } else if currentStep == 1 {
                     HStack {
-                        TextField("Dosage Number", text: $strengthNumber)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        TextField("Dosage strength (numeric)", text: $strengthNumber)
+                            .padding(10)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(8)
+                            .padding(.trailing)
                             .keyboardType(.decimalPad)
                         Picker("Unit", selection: $strengthUnit) {
                             ForEach([
@@ -55,38 +62,66 @@ struct AddSupplementView: View {
                                      "mg/m²",
                                      "mMol"], id: \.self) { unit in
                                 Text(unit).tag(unit)
+                                            .fontWeight(.bold)
                             }
                         }
                         .pickerStyle(MenuPickerStyle())
+                        .padding(5)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .padding(.trailing)
                     }
                     .padding()
-                    Button("Next") {
-                        currentStep += 1
-                    }
+//                    Button("Next") {
+//                        currentStep += 1
+//                    }
                 } else if currentStep == 2 {
-                    Picker("Frequency", selection: $frequency) {
-                        ForEach(BMSupplementFrequency.allCases, id: \.self) { freq in
-                            Text(freq.rawValue).tag(freq)
-                        }
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                    .padding()
-                    Picker("Form", selection: $form) {
-                        ForEach(BMSupplementForm.allCases, id: \.self) { form in
-                            Text(form.rawValue).tag(form)
-                        }
-                    }
-                    .pickerStyle(MenuPickerStyle())
-                    .padding()
-                    Button("Next") {
-                        currentStep += 1
-                    }
+                    HStack{
+                        Text("Frequency")
+                            .fontWeight(.bold)
+                            .font(.headline)
+                            //.fontWeight(.bold)
+                            Spacer()
+                        Picker("Frequency", selection: $frequency) {
+                            ForEach(BMSupplementFrequency.allCases, id: \.self) { freq in
+                                Text(freq.rawValue).tag(freq)
+                            }
+                        }.pickerStyle(MenuPickerStyle())
+                            .padding(5)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(8)
+                            .padding(.trailing)
+                    }.padding(.top)
+                        .padding(.horizontal)
+                    
+                    HStack{
+                        Text("Form")
+                            .fontWeight(.bold)
+                            .font(.headline)
+                            
+                            //.fontWeight(.bold)
+                        Spacer()
+                        
+                        Picker("Form", selection: $form) {
+                            ForEach(BMSupplementForm.allCases, id: \.self) { form in
+                                Text(form.rawValue).tag(form)
+                            }
+                        }.pickerStyle(MenuPickerStyle())
+                            .padding(5)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(8)
+                            .padding(.trailing)
+                    }.padding()
+
+//                    Button("Next") {
+//                        currentStep += 1
+//                    }
                 } else if currentStep == 3 {
                     // Time of Consumption
                     VStack {
-                        Text("Enter Time of Consumption")
+                       // Text("Enter Time of Consumption")
                         ForEach(0..<getFrequencyCount(), id: \.self) { index in
-                            DatePicker("Time \(index + 1)", selection: Binding(
+                            DatePicker("Dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "") time", selection: Binding(
                                 get: { timeOfConsumption.indices.contains(index) ? timeOfConsumption[index] : Date() },
                                 set: { if timeOfConsumption.indices.contains(index) {
                                     timeOfConsumption[index] = $0
@@ -94,18 +129,20 @@ struct AddSupplementView: View {
                                     timeOfConsumption.append($0)
                                 }}
                             ), displayedComponents: .hourAndMinute)
+                            .fontWeight(.bold)
+                            .font(.headline)
                         }
                     }
                     .padding()
-                    Button("Next") {
-                        currentStep += 1
-                    }
+//                    Button("Next") {
+//                        currentStep += 1
+//                    }
                 } else if currentStep == 4 {
                     // Reminder Time
                     VStack {
-                        Text("Enter Reminder Time")
+                       // Text("Enter Reminder Time")
                         ForEach(0..<getFrequencyCount(), id: \.self) { index in
-                            DatePicker("Reminder Time \(index + 1)", selection: Binding(
+                            DatePicker("Reminder for dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "")", selection: Binding(
                                 get: { reminderTime.indices.contains(index) ? reminderTime[index] : Date() },
                                 set: { if reminderTime.indices.contains(index) {
                                     reminderTime[index] = $0
@@ -113,26 +150,135 @@ struct AddSupplementView: View {
                                     reminderTime.append($0)
                                 }}
                             ), displayedComponents: .hourAndMinute)
+                            .fontWeight(.bold)
+                            .font(.headline)
                         }
                     }
                     .padding()
-                    Button("Next") {
-                        currentStep += 1
-                    }
+//                    Button("Next") {
+//                        currentStep += 1
+//                    }
                 } else if currentStep == 5 {
-                    TextField("User Notes", text: $userNotes)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                    Button("Finish") {
-                        createSupplement()
-                    }
+                    TextField("reason for supplement...", text: $userNotes)
+                        .padding(10)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+//                    Button("Finish") {
+//                        createSupplement()
+//                    }
                 }
+                
+                HStack{
+                    //
+                    if currentStep > 0{
+                        Button(action:{
+                            
+                            if currentStep == 0{
+                                return
+                            }
+                            
+                            currentStep -= 1
+                            
+                            
+                        }){
+                            HStack{
+                                //label(heading.contains("notes") ? "Add" : "Next", textColor: .primaryInvert, bgColor: canMoveToNextStep() ? .primary : .primary.opacity(0.3), imgName: "arrow.forward", imgColor: .primaryInvert, width: 150, radius: 10,alignment: .center)
+                                imageView(systemName: "arrow.backward.circle.fill",color: .accentColor,size: 40)
+                                Spacer()
+                            }.padding()
+                        }
+                    }
+                    
+                    //
+                    Button(action:{
+                        
+                        if currentStep == finalStep{
+                            createSupplement()
+                        }
+                        
+                        if canMoveToNextStep(){
+                            currentStep += 1
+                        }
+                        
+                        
+                        
+                        
+                    }){
+                        HStack{
+                            label(currentStep == finalStep ? "Add" : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .primary.opacity(0.3)), imgName: currentStep == finalStep ? "plus" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
+                            Spacer()
+                        }.padding()
+                    }
+                    
+                }
+                Spacer()
+                
             }
-            .navigationTitle("Add Supplement")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(heading)
+            .navigationBarTitleDisplayMode(.large)
+            .onChange(of: currentStep){ _ in
+                updateHeading()
+            }
+
         }
     }
 
+    
+    func canMoveToNextStep()->Bool{
+        
+        if currentStep >= finalStep{
+            return false
+        }
+        if heading.contains("name"){
+            if isEmpty(text: name){
+                return false
+            }
+          //  heading = "Add dosage"
+        }else if heading.contains("dosage"){
+            if !isNumber(text: strengthNumber){
+                return false
+            }
+           // heading = "Frequency and form"
+        }
+        else if heading.contains("Frequency"){
+         //   heading = "Consumption time"
+        }
+        else if heading.contains("Consumption"){
+           // heading = "Set reminder"
+        }
+        else if heading.contains("reminder"){
+           // heading = "Any notes"
+        }
+        
+//        else if heading.contains("notes"){
+//            buttonTitle = "Add"
+//        }
+        
+        return true
+    }
+    
+    func updateHeading(){
+        if currentStep == 0 {
+            heading = "Add supplement"
+        }
+        if currentStep == 1 {
+            heading = "Add dosage"
+        }
+        if currentStep == 2 {
+            heading = "Frequency and form"
+        }
+        if currentStep == 3 {
+            heading = "Consumption time"
+        }
+        if currentStep == 4 {
+            heading = "Reminder"
+        }
+        if currentStep == 5 {
+            heading = "Any notes"
+        }
+        
+    }
     private func getFrequencyCount() -> Int {
         switch frequency {
         case .daily2:
@@ -155,6 +301,15 @@ struct AddSupplementView: View {
         // Here you can handle the created supplement object (e.g., save it to a database)
         print("Supplement created: \(supplement!)")
     }
+    
+    func isEmpty(text: String) -> Bool {
+        return text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+    
+    func isNumber(text: String) -> Bool {
+        return Float(text) != nil
+    }
+
 }
 
 // Preview
