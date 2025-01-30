@@ -24,6 +24,7 @@ struct AddSupplementView: View {
     @State private var currentStep: Int = 0
     @State private var supplement: BMSupplement?
     private var finalStep = 5//final step of the form where the supplement is added
+    @State private var userNotesPlaceholderText = "Why did you start taking this supplement? How long have you been taking it?"
 
     var body: some View {
         NavigationView {
@@ -77,10 +78,25 @@ struct AddSupplementView: View {
 //                    }
                 } 
                 else if currentStep == 2 {
-                    TextField("reason for supplement...", text: $userNotes)
-                        .padding(10)
+                    ZStack{
+                        if userNotes.isEmpty {
+                                   TextEditor(text:$userNotesPlaceholderText)
+                                .fontWeight(.bold)
+                                .foregroundStyle(Color.secondary)
+                                .scrollContentBackground(.hidden)
+                                .disabled(true)
+                           }
+                        
+                        TextEditor(text: $userNotes)
+                            .scrollContentBackground(.hidden)
+                            .fontWeight(.bold)
+                            
+                    }
+                    .frame(height: system.fullHeight/4)
+                   // TextField("reason for supplement...", text: $userNotes)
+                        .padding()
                         .background(Color(.systemGray6))
-                        .cornerRadius(8)
+                        .cornerRadius(20)
                         .padding(.horizontal)
 //                    Button("Finish") {
 //                        createSupplement()
