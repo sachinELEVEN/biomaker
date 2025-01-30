@@ -88,7 +88,7 @@ class BiomarkerFileSystem{
         
         var supp2 = BMSupplement(id: "33", isFoodItem: false, name: "Thyroxine", strengthNumber: "1000", strengthUnit: "mcg", frequency: .monthly, form: .capsule, timeOfConsumption: [Date()], reminderTime: [], createdAt: Date(), isReminderSet: false, userNotes: "These are my thyroid notes")
         
-        var supp3 = BMSupplement(id: "33", isFoodItem: true, name: "Cheese", strengthNumber: "1000", strengthUnit: "mcg", frequency: .daily3, form: nil, timeOfConsumption: [Date(),Date(),Date()], reminderTime: [], createdAt: Date(), isReminderSet: false, userNotes: "These are my thyroid notes")
+        var supp3 = BMSupplement(id: "34", isFoodItem: true, name: "Cheese", strengthNumber: "1000", strengthUnit: "mcg", frequency: .daily3, form: nil, timeOfConsumption: [Date(),Date(),Date()], reminderTime: [], createdAt: Date(), isReminderSet: false, userNotes: "These are my thyroid notes")
         
         BMSupplementStackGL.addSupplement(supp)
         BMSupplementStackGL.addSupplement(supp2)

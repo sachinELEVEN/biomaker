@@ -50,6 +50,13 @@ struct SupplementHomeView:View {
                                 AddSupplementView()
                             }
                             
+                            Text("Supplement Stack Analysis")
+                            //.italic()
+                            //.underline()
+                                .fontWeight(.bold)
+                                .font(.headline)
+                                .multilineTextAlignment(.leading)
+                                .padding(.vertical)
                          
                             
                             Text("Supplements")
