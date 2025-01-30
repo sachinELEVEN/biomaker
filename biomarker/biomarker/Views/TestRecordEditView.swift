@@ -238,3 +238,19 @@ struct TestRecordEditActionView: View{
         BiomarkerFileSystem.saveSystemMedicalDocuments()
     }
 }
+
+func biomarerIntelligenceLabel()->some View{
+    HStack{
+        imageView(systemName: "staroflife.fill",color: .primaryInvert)
+        Text("Powered by Biomarker Intelligence")
+            .foregroundStyle(Color.primaryInvert)
+            .fontWeight(.bold)
+            .multilineTextAlignment(.leading)
+        Spacer()
+    }.padding(.horizontal)
+        .padding(.vertical,5)
+        .background(Color.primary)
+    .background(CustomBlur(style: .prominent))
+    .cornerRadius(10)
+    //.padding(.leading)
+}

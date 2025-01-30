@@ -98,7 +98,7 @@ class BMSupplementStack {
         self.stackHistory = []
     }
     
-    func addSupplement(_ supplement: BMSupplement) {
+    func addSupplement(_ supplement: BMSupplement)->(Bool,String){
         //here we will do checks like the same id object is not already there in the system
         var found = false
         for suppm in supplements{
@@ -107,12 +107,15 @@ class BMSupplementStack {
             }
         }
         
-        if !found{
-            supplements.append(supplement)
-            print("Supplement \(supplement.name) added to the system. Total supplement stack size: \(supplements.count)")
-        }else{
+        if found{
             print("Supplement \(supplement.name) already present in the system")
+            return (false,"An item by the name \(supplement.name) is already present in your supplement stack")
         }
+        
+        supplements.append(supplement)
+        print("Supplement \(supplement.name) added to the system. Total supplement stack size: \(supplements.count)")
+        
+        return (true,"")
     }
     
     func removeSupplement(_ supplement: BMSupplement) {

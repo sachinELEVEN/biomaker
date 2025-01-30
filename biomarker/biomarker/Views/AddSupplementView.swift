@@ -26,6 +26,7 @@ struct AddSupplementView: View {
     @State private var supplementIsFoodItem = false
     private var finalStep = 5//final step of the form where the supplement is added
     @State private var userNotesPlaceholderText = "Why did you start taking this supplement? How long have you been taking it?"
+    @State private var message : String? = nil
 
     var body: some View {
         NavigationView {
@@ -279,6 +280,24 @@ struct AddSupplementView: View {
 //                    Button("Next") {
 //                        currentStep += 1
 //                    }
+                }else if currentStep == 6{
+                    //this is shown when supplement is added locally and is being analysed by biomarker intelligence
+                    VStack(alignment: .leading){
+                        Text("\(name) is added to your supplement stack")
+                            .fontWeight(.bold)
+                            .font(.title)
+                            .multilineTextAlignment(.leading)
+                            .padding(.vertical)
+                        biomarerIntelligenceLabel()
+                            .padding(.top)
+                        Text("Biomarker Intelligence is analysing your supplement against your test results, your current supplement stack, and other health related data")
+                           // .fontWeight(.bold)
+                            .font(.headline)
+                            .multilineTextAlignment(.leading)
+                            .foregroundStyle(Color.secondary)
+                            .padding(.vertical)
+                        ActivityIndicator(shouldAnimate: .constant(true))
+                    }.padding(.horizontal)
                 }
                 
                 descriptionView(text: getDescription())
@@ -317,7 +336,7 @@ struct AddSupplementView: View {
                             }
                             currentStep += 1
                         }
-                        
+                        message = nil
                         
                         
                         
@@ -328,6 +347,13 @@ struct AddSupplementView: View {
                         }.padding()
                     }
                     
+                }
+                
+                if message != nil{
+                    Text(message!)
+                        .font(.headline)
+                        .fontWeight(.bold)
+                        .foregroundColor(.red)
                 }
                 Spacer()
                 
@@ -351,6 +377,7 @@ struct AddSupplementView: View {
         if currentStep >= finalStep{
             return false
         }
+        
         if currentStep == 0{
             if isEmpty(text: name){
                 return false
@@ -398,6 +425,9 @@ struct AddSupplementView: View {
         if currentStep == 5 {
             heading = "Set Reminder"
         }
+        if currentStep == 6 {
+            heading = ""
+        }
         
     }
     private func getFrequencyCount() -> Int {
@@ -424,7 +454,13 @@ struct AddSupplementView: View {
         // Here you can handle the created supplement object (e.g., save it to a database)
         print("Supplement created: \(supplement!)")
         if supplement != nil{
-            BMSupplementStackGL.addSupplement(supplement!)
+            let result = BMSupplementStackGL.addSupplement(supplement!)
+            if result.0{
+                currentStep = 6
+            }else{
+                //something went wrong
+                message = result.1
+            }
         }
     }
     
