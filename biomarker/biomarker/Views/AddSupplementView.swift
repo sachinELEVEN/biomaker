@@ -189,6 +189,8 @@ struct AddSupplementView: View {
 //                    }
                 }
                 
+                descriptionView(text: getDescription())
+                
                 HStack{
                     //
                     if currentStep > 0{
@@ -235,6 +237,7 @@ struct AddSupplementView: View {
                 Spacer()
                 
             }
+            .animation(.default)
             .navigationTitle(heading)
             .navigationBarTitleDisplayMode(.large)
             .onChange(of: currentStep){ _ in
@@ -250,7 +253,7 @@ struct AddSupplementView: View {
         if currentStep >= finalStep{
             return false
         }
-        if heading.contains("name"){
+        if heading.contains("supplement"){
             if isEmpty(text: name){
                 return false
             }
@@ -328,6 +331,42 @@ struct AddSupplementView: View {
     
     func isNumber(text: String) -> Bool {
         return Float(text) != nil
+    }
+    
+    func getDescription() -> String {
+        if currentStep == 0 {
+            return "Add your supplement name. You can enter either the generic name or the complete brand name of your supplement. \n\nExample: 'Vitamin C' or 'Nature's Way Vitamin C 1000mg'."
+        }
+        if currentStep == 1 {
+            return "Enter the dosage of your supplement. Specify the amount (number) and select the unit (e.g., mg, g, ml) from the options provided. \n\nExample: '500' for the amount and select 'mg' for the unit."
+        }
+        if currentStep == 2 {
+            return "Your notes will help Biomarker analyze your supplements better. Please tell us why you started taking it and how long you have been using it. \n\nExample: 'I started taking this for immune support and have been using it for 3 months.'"
+        }
+        if currentStep == 3 {
+            return "Select how often you take this supplement. Choose the frequency that best describes your routine (e.g., daily, weekly, etc.) and the form of the supplement (e.g., capsule, liquid). \n\nExample: 'Daily' for frequency and 'Capsule' for form."
+        }
+        if currentStep == 4 {
+            return "Specify the times you take this supplement. If you take it multiple times a day, please enter each time accordingly. \n\nExample: '8:00 AM' and '8:00 PM' if you take it twice a day."
+        }
+        if currentStep == 5 {
+            return "Set a reminder if you want Biomarker to notify you about your supplement consumption. You can choose the time for the reminder. \n\nExample: 'Set a reminder for 7:30 AM.'"
+        }
+        return "Invalid step."
+    }
+
+    
+    func descriptionView(text: String)->some View{
+        return VStack{
+            Text(text)
+                .multilineTextAlignment(.leading)
+                .padding()
+                .font(.subheadline)
+                .foregroundColor(Color.secondary)
+                //.background(Color(.systemGray6))
+               // .cornerRadius(8)
+                //.padding()
+        }
     }
 
 }
