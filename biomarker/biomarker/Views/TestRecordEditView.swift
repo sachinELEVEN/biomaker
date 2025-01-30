@@ -239,10 +239,10 @@ struct TestRecordEditActionView: View{
     }
 }
 
-func biomarerIntelligenceLabel()->some View{
+func biomarerIntelligenceLabel(text: String="Powered by Biomarker Intelligence")->some View{
     HStack{
         imageView(systemName: "staroflife.fill",color: .primaryInvert)
-        Text("Powered by Biomarker Intelligence")
+        Text(text)
             .foregroundStyle(Color.primaryInvert)
             .fontWeight(.bold)
             .multilineTextAlignment(.leading)

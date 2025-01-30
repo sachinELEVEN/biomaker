@@ -29,7 +29,7 @@ struct RootTabView: View {
                     Label("Variation", systemImage: "chart.bar.fill")
                 }
             
-            AddSupplementView()
+            SupplementHomeView()
                 .tabItem {
                     Label("Supplement", systemImage: "bolt.fill")
                 }

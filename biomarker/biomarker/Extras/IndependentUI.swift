@@ -55,7 +55,7 @@ struct CustomBlur: UIViewRepresentable {
     }
 }
 
-func label(_ text : String,textColor : Color = Color.secondary, bgColor : Color = Color.secondary.opacity(0.15) , imgName : String = "", imgColor : Color = .primary, width : CGFloat = 300, radius: CGFloat = 10, font: Font = Font.headline, fontWeight: Font.Weight = .bold, alignment : Alignment = .center)->some View{
+func label(_ text : String,textColor : Color = Color.secondary, bgColor : Color = Color.secondary.opacity(0.15) , imgName : String = "", imgColor : Color = .primary, width : CGFloat = 300, radius: CGFloat = 10, font: Font = Font.headline, fontWeight: Font.Weight = .bold, alignment : Alignment = .center, verticalPadding: CGFloat = 12)->some View{
     return HStack{
         
         if alignment == .center {
@@ -79,7 +79,8 @@ func label(_ text : String,textColor : Color = Color.secondary, bgColor : Color 
         
     }
     .frame(width:width)
-    .padding()
+    .padding(.horizontal)
+    .padding(.vertical,verticalPadding)
     .background(bgColor)
     .cornerRadius(radius)
    // .padding(.top,5)
