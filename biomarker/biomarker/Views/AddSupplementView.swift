@@ -75,7 +75,18 @@ struct AddSupplementView: View {
 //                    Button("Next") {
 //                        currentStep += 1
 //                    }
-                } else if currentStep == 2 {
+                } 
+                else if currentStep == 2 {
+                    TextField("reason for supplement...", text: $userNotes)
+                        .padding(10)
+                        .background(Color(.systemGray6))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+//                    Button("Finish") {
+//                        createSupplement()
+//                    }
+                }
+                else if currentStep == 3 {
                     HStack{
                         Text("Frequency")
                             .fontWeight(.bold)
@@ -116,7 +127,7 @@ struct AddSupplementView: View {
 //                    Button("Next") {
 //                        currentStep += 1
 //                    }
-                } else if currentStep == 3 {
+                } else if currentStep == 4 {
                     // Time of Consumption
                     VStack {
                        // Text("Enter Time of Consumption")
@@ -137,7 +148,7 @@ struct AddSupplementView: View {
 //                    Button("Next") {
 //                        currentStep += 1
 //                    }
-                } else if currentStep == 4 {
+                } else if currentStep == 5 {
                     // Reminder Time
                     VStack {
                        // Text("Enter Reminder Time")
@@ -157,15 +168,6 @@ struct AddSupplementView: View {
                     .padding()
 //                    Button("Next") {
 //                        currentStep += 1
-//                    }
-                } else if currentStep == 5 {
-                    TextField("reason for supplement...", text: $userNotes)
-                        .padding(10)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-//                    Button("Finish") {
-//                        createSupplement()
 //                    }
                 }
                 
@@ -206,7 +208,7 @@ struct AddSupplementView: View {
                         
                     }){
                         HStack{
-                            label(currentStep == finalStep ? "Add" : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .primary.opacity(0.3)), imgName: currentStep == finalStep ? "plus" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
+                            label(currentStep == finalStep ? "Add" : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .primary.opacity(0.3)), imgName: currentStep == finalStep ? "checkmark" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
                             Spacer()
                         }.padding()
                     }
@@ -241,15 +243,15 @@ struct AddSupplementView: View {
             }
            // heading = "Frequency and form"
         }
-        else if heading.contains("Frequency"){
-         //   heading = "Consumption time"
-        }
-        else if heading.contains("Consumption"){
-           // heading = "Set reminder"
-        }
-        else if heading.contains("reminder"){
-           // heading = "Any notes"
-        }
+//        else if heading.contains("Frequency"){
+//         //   heading = "Consumption time"
+//        }
+//        else if heading.contains("Consumption"){
+//           // heading = "Set reminder"
+//        }
+//        else if heading.contains("reminder"){
+//           // heading = "Any notes"
+//        }
         
 //        else if heading.contains("notes"){
 //            buttonTitle = "Add"
@@ -266,16 +268,16 @@ struct AddSupplementView: View {
             heading = "Add dosage"
         }
         if currentStep == 2 {
-            heading = "Frequency and form"
+            heading = "Any notes"
         }
         if currentStep == 3 {
-            heading = "Consumption time"
+            heading = "Frequency and form"
         }
         if currentStep == 4 {
-            heading = "Reminder"
+            heading = "Consumption time"
         }
         if currentStep == 5 {
-            heading = "Any notes"
+            heading = "Set Reminder"
         }
         
     }
