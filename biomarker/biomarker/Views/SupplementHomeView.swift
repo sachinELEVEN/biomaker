@@ -92,17 +92,15 @@ struct SupplementHomeView:View {
 
 
 struct SupplementRow: View {
-    @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
     var supplement: BMSupplement
-    
 
     var body: some View {
         HStack {
             // Example icon, replace with appropriate icons
-            Image(systemName: "leaf.fill") // Use an appropriate SF Symbol or custom icon
+            Image(systemName: "bolt.fill") // Use an appropriate SF Symbol or custom icon
                 .resizable()
-                .frame(width: 40, height: 40)
-                .foregroundColor(.green)
+                .frame(width: 30, height: 30)
+                .foregroundColor(.primary)
 
             VStack(alignment: .leading) {
                 Text(supplement.name)
@@ -125,17 +123,68 @@ struct SupplementRow: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
 
-                if let userNotes = supplement.userNotes, !userNotes.isEmpty {
-                    Text("Notes: \(userNotes)")
-                        .font(.caption)
+                // Display time of consumption
+                if !supplement.timeOfConsumption.isEmpty {
+                    Text("Dosage Times: \(formatTimeOfConsumption(supplement.timeOfConsumption))")
+                        .font(.subheadline)
                         .foregroundColor(.gray)
                 }
+
+                // Display next consumption date
+                if let nextDate = calculateNextConsumptionDate(supplement: supplement) {
+                    Text("Upcoming dose is on: \(nextDate, formatter: dateFormatter)")
+                        .font(.subheadline)
+                        .foregroundColor(.blue)
+                }
+
+//                if let userNotes = supplement.userNotes, !userNotes.isEmpty {
+//                    Text("Notes: \(userNotes)")
+//                        .font(.caption)
+//                        .foregroundColor(.gray)
+//                }
             }
             .padding(.leading, 8)
         }
         .padding()
-        .background(Color(UIColor.systemBackground))
-        .cornerRadius(8)
-        .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+        Divider().padding(.horizontal)
+       // .background(Color(UIColor.systemBackground))
+        //.cornerRadius(8)
+        //.shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+    }
+
+    // Function to format time of consumption
+    private func formatTimeOfConsumption(_ times: [Date?]) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a" // Format for time
+        
+        return times.compactMap { $0 }.map { formatter.string(from: $0) }.joined(separator: ", ")
+    }
+
+
+    // Function to calculate the next consumption date
+    private func calculateNextConsumptionDate(supplement: BMSupplement) -> Date? {
+        let calendar = Calendar.current
+        let now = Date()
+        let createdAt = supplement.createdAt
+
+        // Calculate the next date based on frequency
+        var nextDate: Date?
+
+        switch supplement.frequency {
+        case .daily:
+            nextDate = calendar.date(byAdding: .day, value: 1, to: now)
+        case .weekly:
+            nextDate = calendar.date(byAdding: .weekOfYear, value: 1, to: now)
+        case .daily2:
+            nextDate = calendar.date(byAdding: .day, value: 1, to: now)
+        case .daily3:
+            nextDate = calendar.date(byAdding: .day, value: 1, to: now)
+        case .monthly:
+            nextDate = calendar.date(byAdding: .month, value: 1, to: now)
+        case .oneTime:
+            nextDate = createdAt // Assuming it's a one-time supplement
+        }
+
+        return nextDate
     }
 }

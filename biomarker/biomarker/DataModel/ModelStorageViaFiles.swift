@@ -82,6 +82,18 @@ class BiomarkerFileSystem{
         print("/BiomarkerFileSystem: loadModelDataFromFile")
         let loadedDocuments = loadMedicalDocuments()
         system.medicalDocuments = loadedDocuments
+        
+        //Mock data for supplements
+        var supp = BMSupplement(id: "32", isFoodItem: false, name: "Vitamin D3", strengthNumber: "1000", strengthUnit: "IU", frequency: .daily3, form: .capsule, timeOfConsumption: [Date(),Date(),Date()], reminderTime: [], createdAt: Date(), isReminderSet: false, userNotes: "These are my notes")
+        
+        var supp2 = BMSupplement(id: "33", isFoodItem: false, name: "Thyroxine", strengthNumber: "1000", strengthUnit: "mcg", frequency: .monthly, form: .capsule, timeOfConsumption: [Date()], reminderTime: [], createdAt: Date(), isReminderSet: false, userNotes: "These are my thyroid notes")
+        
+        var supp3 = BMSupplement(id: "33", isFoodItem: true, name: "Cheese", strengthNumber: "1000", strengthUnit: "mcg", frequency: .daily3, form: nil, timeOfConsumption: [Date(),Date(),Date()], reminderTime: [], createdAt: Date(), isReminderSet: false, userNotes: "These are my thyroid notes")
+        
+        BMSupplementStackGL.addSupplement(supp)
+        BMSupplementStackGL.addSupplement(supp2)
+        BMSupplementStackGL.addSupplement(supp3)
+        
     }
 
 }

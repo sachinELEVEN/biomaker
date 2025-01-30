@@ -48,7 +48,7 @@ class BMSupplement: Identifiable {
     
     // AI-generated properties
     var aiContainsWhichChemicals: String? = nil
-    var aiUsageCommonReason: String? = nil
+    var aiUsageCommonReasonForUseAndAdvantage: String? = nil
     var aiAdditionalInfo: String? = nil
     var aiCommonStrengthNumber: String? = nil
     var aiCommonStrengthUnits: String? = nil

@@ -53,3 +53,11 @@ extension NSRegularExpression {
         return components
     }
 }
+
+// Date Formatter for displaying dates
+let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .medium // Set the date style (e.g., short, medium, long)
+    formatter.timeStyle = .short   // Set the time style (e.g., short, medium, long)
+    return formatter
+}()
