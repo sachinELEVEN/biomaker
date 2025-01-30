@@ -53,6 +53,7 @@ class BMSupplement {
     var aiAdviceBasedUserHealthContext: String? = nil
     var aiSideEffect: String? = nil
     var aiCategory:String? = nil//supplement category
+    var aiCommonName: String? = nil
     
     init(id: String, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm, timeOfConsumption: [Date?],
@@ -95,7 +96,20 @@ class BMSupplementStack {
     }
     
     func addSupplement(_ supplement: BMSupplement) {
-        supplements.append(supplement)
+        //here we will do checks like the same id object is not already there in the system
+        var found = false
+        for suppm in supplements{
+            if suppm.id == supplement.id || suppm.name == supplement.name{
+                found = true
+            }
+        }
+        
+        if !found{
+            supplements.append(supplement)
+            print("Supplement \(supplement.name) added to the system. Total supplement stack size: \(supplements.count)")
+        }else{
+            print("Supplement \(supplement.name) already present in the system")
+        }
     }
     
     func removeSupplement(_ supplement: BMSupplement) {

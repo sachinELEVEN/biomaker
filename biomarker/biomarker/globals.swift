@@ -8,6 +8,7 @@
 import Foundation
 
 let system = System()
+let BMSupplementStackGL = BMSupplementStack(id:"supplement_stack_id_1", supplements: [])
 
 let mockPdfUrl = URL(string: "file:///sample/Documents/sample.pdf")
 

@@ -407,6 +407,9 @@ struct AddSupplementView: View {
                                   isReminderSet: !reminderTime.isEmpty, userNotes: userNotes)
         // Here you can handle the created supplement object (e.g., save it to a database)
         print("Supplement created: \(supplement!)")
+        if supplement != nil{
+            BMSupplementStackGL.addSupplement(supplement!)
+        }
     }
     
     func isEmpty(text: String) -> Bool {
