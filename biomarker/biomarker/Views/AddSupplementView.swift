@@ -23,6 +23,7 @@ struct AddSupplementView: View {
     @State private var userNotes: String = ""
     @State private var currentStep: Int = 0
     @State private var supplement: BMSupplement?
+    @State private var supplementIsFoodItem = false
     private var finalStep = 5//final step of the form where the supplement is added
     @State private var userNotesPlaceholderText = "Why did you start taking this supplement? How long have you been taking it?"
 
@@ -34,8 +35,13 @@ struct AddSupplementView: View {
                         .padding(10)
                         .background(Color(.systemGray6))
                         .cornerRadius(8)
-                        .padding()
+                        .padding([.horizontal,.top])
                     
+                    Toggle("Treat as a food item", isOn: $supplementIsFoodItem)
+                        .fontWeight(.bold)
+                        .font(.headline)
+                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                        .padding([.horizontal,.bottom])
                     
                 } else if currentStep == 1 {
                     HStack {
