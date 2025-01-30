@@ -18,8 +18,8 @@ struct AddSupplementView: View {
     @State private var strengthUnit: String = "mg" // Default unit
     @State private var frequency: BMSupplementFrequency = .daily
     @State private var form: BMSupplementForm = .capsule
-    @State private var timeOfConsumption: [Date] = []
-    @State private var reminderTime: [Date] = []
+    @State private var timeOfConsumption: [Date?] = []
+    @State private var reminderTime: [Date?] = []
     @State private var userNotes: String = ""
     @State private var currentStep: Int = 0
     @State private var supplement: BMSupplement?
@@ -148,41 +148,110 @@ struct AddSupplementView: View {
                 } else if currentStep == 4 {
                     // Time of Consumption
                     VStack {
-                       // Text("Enter Time of Consumption")
+                       // Text("Enter Reminder Time")
+                        
                         ForEach(0..<getFrequencyCount(), id: \.self) { index in
-                            DatePicker("Dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "") time", selection: Binding(
-                                get: { timeOfConsumption.indices.contains(index) ? timeOfConsumption[index] : Date() },
-                                set: { if timeOfConsumption.indices.contains(index) {
-                                    timeOfConsumption[index] = $0
-                                } else {
-                                    timeOfConsumption.append($0)
-                                }}
-                            ), displayedComponents: .hourAndMinute)
-                            .fontWeight(.bold)
-                            .font(.headline)
+                            HStack {
+                                Toggle(isOn: Binding(
+                                    get: { timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil },
+                                    set: { isOn in
+                                        if isOn {
+                                            // If toggled on, add a default time (current time or any default value)
+                                            if timeOfConsumption.indices.contains(index) {
+                                                timeOfConsumption[index] = Date()
+                                               // timeOfConsumption.remove(at: index)
+                                            }else{
+                                                timeOfConsumption.append(Date())
+                                            }
+                                        } else {
+                                            // If toggled off, remove the time for this index
+                                            if timeOfConsumption.indices.contains(index) {
+                                                timeOfConsumption[index] = nil
+                                               // timeOfConsumption.remove(at: index)
+                                            }
+                                        }
+                                    }
+                                )) {
+                                    Text("Dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "") time")
+                                        .fontWeight(.bold)
+                                        .font(.headline)
+                                }
+                                .toggleStyle(SwitchToggleStyle(tint: .blue)) // Optional: Customize toggle color
+                            }
+                            
+                            if timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil {
+                                DatePicker(" ", selection: Binding(
+                                    get: { timeOfConsumption[index]! },
+                                    set: { timeOfConsumption[index] = $0 }
+                                ), displayedComponents: .hourAndMinute)
+                                .fontWeight(.bold)
+                                .font(.headline)
+                                .padding(.bottom)
+                            } else {
+//                                Text("Set time")
+//                                    .fontWeight(.bold)
+//                                    .font(.headline)
+//                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
+                            }
                         }
                     }
+
+
                     .padding()
 //                    Button("Next") {
 //                        currentStep += 1
 //                    }
                 } else if currentStep == 5 {
                     // Reminder Time
-                    VStack {
-                       // Text("Enter Reminder Time")
-                        ForEach(0..<getFrequencyCount(), id: \.self) { index in
-                            DatePicker("Reminder for dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "")", selection: Binding(
-                                get: { reminderTime.indices.contains(index) ? reminderTime[index] : Date() },
-                                set: { if reminderTime.indices.contains(index) {
-                                    reminderTime[index] = $0
-                                } else {
-                                    reminderTime.append($0)
-                                }}
-                            ), displayedComponents: .hourAndMinute)
-                            .fontWeight(.bold)
-                            .font(.headline)
-                        }
-                    }
+                    //"Reminder for dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "")"
+                    VStack{
+                        // Text("Enter Reminder Time")
+                         
+                         ForEach(0..<getFrequencyCount(), id: \.self) { index in
+                             HStack {
+                                 Toggle(isOn: Binding(
+                                     get: { reminderTime.indices.contains(index) && reminderTime[index] != nil },
+                                     set: { isOn in
+                                         if isOn {
+                                             // If toggled on, add a default time (current time or any default value)
+                                             if reminderTime.indices.contains(index) {
+                                                 reminderTime[index] = Date()
+                                                // timeOfConsumption.remove(at: index)
+                                             }else{
+                                                 reminderTime.append(Date())
+                                             }
+                                         } else {
+                                             // If toggled off, remove the time for this index
+                                             if reminderTime.indices.contains(index) {
+                                                 //reminderTime.remove(at: index)
+                                                 reminderTime[index] = nil
+                                             }
+                                         }
+                                     }
+                                 )) {
+                                     Text("Reminder for dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "")")
+                                         .fontWeight(.bold)
+                                         .font(.headline)
+                                 }
+                                 .toggleStyle(SwitchToggleStyle(tint: .blue)) // Optional: Customize toggle color
+                             }
+                             
+                             if reminderTime.indices.contains(index) && reminderTime[index] != nil {
+                                 DatePicker(" ", selection: Binding(
+                                     get: { reminderTime[index]! },
+                                     set: { reminderTime[index] = $0 }
+                                 ), displayedComponents: .hourAndMinute)
+                                 .fontWeight(.bold)
+                                 .font(.headline)
+                                 .padding(.bottom)
+                             } else {
+ //                                Text("Set time")
+ //                                    .fontWeight(.bold)
+ //                                    .font(.headline)
+ //                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
+                             }
+                         }
+                     }
                     .padding()
 //                    Button("Next") {
 //                        currentStep += 1
@@ -228,7 +297,7 @@ struct AddSupplementView: View {
                         
                     }){
                         HStack{
-                            label(currentStep == finalStep ? "Add" : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .primary.opacity(0.3)), imgName: currentStep == finalStep ? "checkmark" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
+                            label(currentStep == finalStep ? "Add" : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .secondary), imgName: currentStep == finalStep ? "checkmark" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
                             Spacer()
                         }.padding()
                     }
