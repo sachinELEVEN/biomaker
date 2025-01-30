@@ -252,9 +252,9 @@ struct SupplementScheduleView: View {
             let schedule = createSupplementSchedule()
             
            // List {
-                ForEach(schedule.keys.sorted(), id: \.self) { date in
-                    Section(header: Text(dateFormatter.string(from: date))) {
-                        ForEach(schedule[date] ?? [], id: \.id) { supplement in
+                ForEach(schedule.keys.sorted(), id: \.self) { key in
+                    Section(header: Text(key)) {
+                        ForEach(schedule[key] ?? [], id: \.id) { supplement in
                             Text(supplement.name)
                         }
                     }
@@ -266,8 +266,8 @@ struct SupplementScheduleView: View {
     }
 
     // Function to create a schedule of supplements
-    private func createSupplementSchedule() -> [Date: [BMSupplement]] {
-        var schedule: [Date: [BMSupplement]] = [:]
+    private func createSupplementSchedule() -> [String: [BMSupplement]] {
+        var schedule: [String: [BMSupplement]] = [:]
         let calendar = Calendar.current
         let now = Date()
 
@@ -282,16 +282,20 @@ struct SupplementScheduleView: View {
 
             // Add the supplement to the schedule for the next dates
             while nextDate <= calendar.date(byAdding: .day, value: selectedDays, to: now)! {
-                if schedule[nextDate] != nil {
-                    schedule[nextDate]?.append(supplement)
+                if schedule[scheduleKey(nextDate)] != nil {
+                    schedule[scheduleKey(nextDate)]?.append(supplement)
                 } else {
-                    schedule[nextDate] = [supplement]
+                    schedule[scheduleKey(nextDate)] = [supplement]
                 }
                 nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
             }
         }
 
         return schedule
+    }
+    
+    func scheduleKey(_ date : Date)->String{
+        return dateFormatter.string(from: date)
     }
 
     // Function to calculate the next consumption date based on frequency
