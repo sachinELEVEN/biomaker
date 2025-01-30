@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SupplementHomeView:View {
+    @ObservedObject var sys = system
     @State var showAddSupplementScreen = false
     var body: some View {
         NavigationView{
