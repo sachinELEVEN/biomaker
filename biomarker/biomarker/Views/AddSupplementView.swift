@@ -98,7 +98,7 @@ struct AddSupplementView: View {
                    // TextField("reason for supplement...", text: $userNotes)
                         .padding()
                         .background(Color(.systemGray6))
-                        .cornerRadius(20)
+                        .cornerRadius(10)
                         .padding(.horizontal)
 //                    Button("Finish") {
 //                        createSupplement()
