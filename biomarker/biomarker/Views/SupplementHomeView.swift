@@ -235,12 +235,12 @@ struct SupplementScheduleView: View {
                     Spacer()
                 Picker("Frequency", selection: $selectedFrequency) {
                                Text("All").tag("All") // Tag for "All"
-                               Text("Daily").tag("Daily")
-                               Text("Weekly").tag("Weekly")
+                               Text("One time").tag("One time")
+                               Text("1 time Daily").tag("1 time Daily")
                                Text("2 times daily").tag("2 times daily")
                                Text("3 times daily").tag("3 times daily")
+                               Text("Weekly").tag("Weekly")
                                Text("Monthly").tag("Monthly")
-                               Text("One time").tag("One time")
                            }.pickerStyle(MenuPickerStyle())
                     .padding(5)
                     .background(Color(.systemGray6))

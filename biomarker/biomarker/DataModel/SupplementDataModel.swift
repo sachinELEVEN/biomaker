@@ -11,7 +11,7 @@ import Foundation
 // Enum for Frequency
 enum BMSupplementFrequency: String, CaseIterable {
     case oneTime = "One time"
-    case daily = "Daily"
+    case daily = "1 time Daily"
     case daily2 = "2 times daily"
     case daily3 = "3 times daily"
     case weekly = "Weekly"
