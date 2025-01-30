@@ -81,15 +81,17 @@ struct AddSupplementView: View {
                     ZStack{
                         if userNotes.isEmpty {
                                    TextEditor(text:$userNotesPlaceholderText)
-                                .fontWeight(.bold)
+                                .font(.headline)
+                               // .fontWeight(.bold)
                                 .foregroundStyle(Color.secondary)
+                            
                                 .scrollContentBackground(.hidden)
                                 .disabled(true)
                            }
                         
                         TextEditor(text: $userNotes)
                             .scrollContentBackground(.hidden)
-                            .fontWeight(.bold)
+                            .font(.headline)
                             
                     }
                     .frame(height: system.fullHeight/4)
@@ -284,7 +286,7 @@ struct AddSupplementView: View {
             heading = "Add dosage"
         }
         if currentStep == 2 {
-            heading = "Any notes"
+            heading = "Notes"
         }
         if currentStep == 3 {
             heading = "Frequency and form"
