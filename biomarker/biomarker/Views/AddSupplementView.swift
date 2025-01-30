@@ -456,6 +456,7 @@ struct AddSupplementView: View {
         if supplement != nil{
             let result = BMSupplementStackGL.addSupplement(supplement!)
             if result.0{
+                //send a request to server for analysing the supplemt
                 currentStep = 6
             }else{
                 //something went wrong
@@ -491,7 +492,7 @@ struct AddSupplementView: View {
         if currentStep == 5 {
             return "Set a reminder if you want Biomarker to notify you about your  \(supplementIsFoodItem ? "food item" : "supplement") consumption time. You can choose the time for the reminder. \n\nExample: 'Set a reminder for 7:30 AM.'"
         }
-        return "Invalid step."
+        return ""
     }
 
     
