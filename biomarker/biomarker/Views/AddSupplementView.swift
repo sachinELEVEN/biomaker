@@ -283,7 +283,13 @@ struct AddSupplementView: View {
                 }else if currentStep == 6{
                     //this is shown when supplement is added locally and is being analysed by biomarker intelligence
                     VStack(alignment: .leading){
-                        Text("\(name) is added to your supplement stack")
+                        Group{
+                            Text("\(name) is added to your ")
+                            + Text("supplement stack")
+                                .italic()
+                                .underline()
+                        }
+                                       
                             .fontWeight(.bold)
                             .font(.title)
                             .multilineTextAlignment(.leading)
