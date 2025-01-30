@@ -341,8 +341,10 @@ struct AddSupplementView: View {
                                 currentStep += 1 //additional step so that because we dont want to notes section for food item
                             }
                             currentStep += 1
+                            
+                            message = nil
                         }
-                        message = nil
+                       
                         
                         
                         
