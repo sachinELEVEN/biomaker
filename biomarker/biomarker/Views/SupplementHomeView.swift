@@ -134,8 +134,8 @@ struct SupplementRow: View {
                 }
 
                 // Display next consumption date
-                if let nextDate = SupplementScheduleView.calculateNextConsumptionDate(supplement: supplement) {
-                    Text("Upcoming dose is on: \(nextDate, formatter: dateFormatter)")
+                if SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360).count > 0 {
+                    Text("Upcoming dose is on: \(SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360)[0], formatter: dateFormatter)")
                         .font(.subheadline)
                         .foregroundColor(.blue)
                 }
@@ -267,20 +267,21 @@ struct SupplementScheduleView: View {
 //                continue
 //            }
 
-            var nextDate = SupplementScheduleView.calculateNextConsumptionDate(supplement: supplement)
-            if nextDate != nil{
+            let nextDates = SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: selectedDays)
+            
                 // Add the supplement to the schedule for the next dates
-                while nextDate! <= calendar.date(byAdding: .day, value: selectedDays, to: now)! {
-                    if schedule[scheduleKey(nextDate!)] != nil {
-                        schedule[scheduleKey(nextDate!)]?.append(supplement)
-                    } else {
-                        schedule[scheduleKey(nextDate!)] = [supplement]
+                for nextDate in nextDates{
+                        if schedule[scheduleKey(nextDate)] != nil {
+                            schedule[scheduleKey(nextDate)]?.append(supplement)
+                        } else {
+                            schedule[scheduleKey(nextDate)] = [supplement]
+                        }
                     }
                     //Update the next date of this supplement
-                    nextDate = calendar.date(byAdding: .day, value: selectedDays, to: nextDate!)!
+                  //  nextDate = calendar.date(byAdding: .day, value: selectedDays, to: nextDate!)!
                 }
-            }
-        }
+            
+        
 
         return schedule
     }
@@ -290,37 +291,50 @@ struct SupplementScheduleView: View {
     }
 
     // Function to calculate the next consumption date based on frequency
-    public static func calculateNextConsumptionDate(supplement: BMSupplement) -> Date? {
+    //returns a list of dates of conumption for this supplement starting from date 'from' in the next 'inNext' number of days
+    public static func calculateNextConsumptionDates(supplement: BMSupplement, from: Date, inNext: Int) -> [Date] {
         let calendar = Calendar.current
         let now = Date()
         let createdAt = supplement.createdAt
 
         // Calculate the next date based on frequency
-        var nextDate: Date?
-        var dateOfSupplement = supplement.timeOfConsumption[0]
+
+        let dateOfSupplement = supplement.timeOfConsumption[0]
         
-        guard let dateOfSupplement = dateOfSupplement else{
+        guard var nextDate = dateOfSupplement else{
             //we dont have information about its time of consumption so will not display it in the schedule
             //let insanelyFutureDate = Calendar.current.date(from: DateComponents(year: 2099, month: 12, day: 31))
             //return insanelyFutureDate!
-            return nil
+            return []
         }
-        switch supplement.frequency {
-        case .daily:
-            nextDate = calendar.date(byAdding: .day, value: 1, to: dateOfSupplement)
-        case .weekly:
-            nextDate = calendar.date(byAdding: .day, value: 7, to: dateOfSupplement)
-        case .daily2:
-            nextDate = calendar.date(byAdding: .day, value: 1, to: dateOfSupplement)
-        case .daily3:
-            nextDate = calendar.date(byAdding: .day, value: 1, to: dateOfSupplement)
-        case .monthly:
-            nextDate = calendar.date(byAdding: .day, value: 30, to: dateOfSupplement)
-        case .oneTime:
-            nextDate = createdAt // Assuming it's a one-time supplement
+        var result = [Date]()
+        
+        while nextDate <= calendar.date(byAdding: .day, value: inNext - supplement.frequency.intervalInDays, to: from)!{
+            switch supplement.frequency {
+            case .daily:
+                nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
+                if nextDate>=now{ result.append(nextDate) }
+            case .weekly:
+                nextDate = calendar.date(byAdding: .day, value: 7, to: nextDate)!
+                if nextDate>=now{ result.append(nextDate) }
+            case .daily2:
+                nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
+                if nextDate>=now{ result.append(nextDate) }
+            case .daily3:
+                nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
+                if nextDate>=now{ result.append(nextDate) }
+            case .monthly:
+                nextDate = calendar.date(byAdding: .day, value: 30, to: nextDate)!
+                if nextDate>=now{ result.append(nextDate) }
+            case .oneTime:
+                nextDate = createdAt // Assuming it's a one-time supplement
+            }
+       
+            
+            
         }
 
-        return nextDate
+        return result
     }
 }
 

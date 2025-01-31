@@ -16,7 +16,26 @@ enum BMSupplementFrequency: String, CaseIterable {
     case daily3 = "3 times daily"
     case weekly = "Weekly"
     case monthly = "Monthly"
+
+    // Computed property to return the interval in days
+    var intervalInDays: Int {
+        switch self {
+        case .oneTime:
+            return Int.max // Indicates a one-time supplement
+        case .daily:
+            return 1
+        case .daily2:
+            return 1 // Can be interpreted as 1 day, but taken twice
+        case .daily3:
+            return 1 // Can be interpreted as 1 day, but taken three times
+        case .weekly:
+            return 7
+        case .monthly:
+            return 30
+        }
+    }
 }
+
 
 
 // Enum for Form
