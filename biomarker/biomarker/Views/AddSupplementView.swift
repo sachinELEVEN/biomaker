@@ -19,14 +19,15 @@ struct AddSupplementView: View {
     @State private var frequency: BMSupplementFrequency = .daily
     @State private var form: BMSupplementForm = .capsule
     @State private var timeOfConsumption: [Date?] = []
-    @State private var reminderTime: [Date?] = []
+    @State private var reminderTime: [Date?] = []//not going to use
     @State private var userNotes: String = ""
     @State private var currentStep: Int = 0
     @State private var supplement: BMSupplement?
     @State private var supplementIsFoodItem = false
-    private var finalStep = 5//final step of the form where the supplement is added
+    private var finalStep = 6//5th was the previous final step but now reminder is on the same screen as dosage//final step of the form where the supplement is added
     @State private var userNotesPlaceholderText = "Why did you start taking this supplement? How long have you been taking it?"
     @State private var message : String? = nil
+    @State private var allowReminding5MinBeforeDosage = false
 
     var body: some View {
         NavigationView {
@@ -211,6 +212,19 @@ struct AddSupplementView: View {
 //                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
                             }
                         }
+                        
+                        if timeOfConsumption.count > 0 && timeOfConsumption.contains(where: { $0 != nil }) {
+                            
+                            //Only show reminder when at least on the date is set
+                            Toggle("Remind me 5 minutes before supplement time", isOn: $allowReminding5MinBeforeDosage)
+                                .fontWeight(.bold)
+                                .font(.headline)
+                                .toggleStyle(SwitchToggleStyle(tint: .blue))
+                                .padding([.horizontal,.bottom])
+                        }
+
+                        
+                        
                     }
 
 
@@ -221,6 +235,7 @@ struct AddSupplementView: View {
                 } else if currentStep == 5 {
                     // Reminder Time
                     //"Reminder for dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "")"
+                    /*
                     VStack{
                         // Text("Enter Reminder Time")
                          
@@ -277,6 +292,7 @@ struct AddSupplementView: View {
                          }
                      }
                     .padding()
+                    */
 //                    Button("Next") {
 //                        currentStep += 1
 //                    }
@@ -458,7 +474,7 @@ struct AddSupplementView: View {
                                   strengthUnit: strengthUnit, frequency: frequency,
                                   form: supplementIsFoodItem ? nil : form, timeOfConsumption: timeOfConsumption,
                                   reminderTime: reminderTime, createdAt: createdAt,
-                                  isReminderSet: !reminderTime.isEmpty, userNotes: userNotes)
+                                  is5MinReminderSet: allowReminding5MinBeforeDosage, userNotes: userNotes)
         // Here you can handle the created supplement object (e.g., save it to a database)
         print("Supplement created: \(supplement!)")
         if supplement != nil{

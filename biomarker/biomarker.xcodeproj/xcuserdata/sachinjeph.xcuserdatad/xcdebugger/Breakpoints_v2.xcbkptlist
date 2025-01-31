@@ -970,8 +970,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "402"
-            endingLineNumber = "402"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "canMoveToNextStep()"
             landmarkType = "7">
          </BreakpointContent>
@@ -986,8 +986,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "405"
-            endingLineNumber = "405"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
             landmarkName = "canMoveToNextStep()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1002,8 +1002,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "412"
-            endingLineNumber = "412"
+            startingLineNumber = "428"
+            endingLineNumber = "428"
             landmarkName = "canMoveToNextStep()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1018,8 +1018,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "474"
-            endingLineNumber = "474"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "createSupplement()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1034,8 +1034,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "475"
-            endingLineNumber = "475"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
             landmarkName = "AddSupplementView"
             landmarkType = "14">
          </BreakpointContent>
@@ -1050,8 +1050,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "canMoveToNextStep()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1066,8 +1066,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1084,7 +1084,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "96"
             endingLineNumber = "96"
-            landmarkName = "init(id:isFoodItem:name:strengthNumber:strengthUnit:frequency:form:timeOfConsumption:reminderTime:createdAt:isReminderSet:userNotes:)"
+            landmarkName = "init(id:isFoodItem:name:strengthNumber:strengthUnit:frequency:form:timeOfConsumption:reminderTime:createdAt:is5MinReminderSet:userNotes:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -1130,8 +1130,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1146,8 +1146,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1224,8 +1224,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1272,8 +1272,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1320,8 +1320,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1336,8 +1336,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
+            startingLineNumber = "363"
+            endingLineNumber = "363"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1368,8 +1368,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "464"
-            endingLineNumber = "464"
+            startingLineNumber = "480"
+            endingLineNumber = "480"
             landmarkName = "createSupplement()"
             landmarkType = "7">
          </BreakpointContent>

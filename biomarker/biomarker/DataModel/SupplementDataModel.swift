@@ -62,7 +62,7 @@ class BMSupplement: Identifiable {
     var reminderTime: [Date?]
     var createdAt: Date
     var history: [BMSupplement] // Track changes over time
-    var isReminderSet: Bool//looks useless if reminderTime is empty then obviously there is no reminder
+    var is5MinReminderSet: Bool//
     var userNotes: String?
     
     // AI-generated properties
@@ -79,7 +79,7 @@ class BMSupplement: Identifiable {
     
     init(id: String, isFoodItem: Bool, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm?, timeOfConsumption: [Date?],
-         reminderTime: [Date?], createdAt: Date, isReminderSet: Bool, userNotes: String?) {
+         reminderTime: [Date?], createdAt: Date, is5MinReminderSet: Bool, userNotes: String?) {
         self.revision = 0
         self.id = id
         self.isFoodItem = isFoodItem
@@ -92,7 +92,7 @@ class BMSupplement: Identifiable {
         self.reminderTime = reminderTime
         self.createdAt = createdAt
         self.history = []
-        self.isReminderSet = isReminderSet
+        self.is5MinReminderSet = is5MinReminderSet
         self.userNotes = userNotes
     }
     
