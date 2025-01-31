@@ -39,7 +39,7 @@ class BMSupplement: Identifiable {
     var strengthUnit: String
     var frequency: BMSupplementFrequency
     var form: BMSupplementForm?
-    var timeOfConsumption: [Date?]
+    var timeOfConsumption: [Date?]//date and time of the last consumption
     var reminderTime: [Date?]
     var createdAt: Date
     var history: [BMSupplement] // Track changes over time

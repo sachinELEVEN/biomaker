@@ -189,7 +189,7 @@ struct AddSupplementView: View {
                                         }
                                     }
                                 )) {
-                                    Text("Dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "") time")
+                                    Text("Last Dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "") date & time")
                                         .fontWeight(.bold)
                                         .font(.headline)
                                 }
@@ -200,7 +200,7 @@ struct AddSupplementView: View {
                                 DatePicker(" ", selection: Binding(
                                     get: { timeOfConsumption[index]! },
                                     set: { timeOfConsumption[index] = $0 }
-                                ), displayedComponents: .hourAndMinute)
+                                ), displayedComponents: [.hourAndMinute,.date])
                                 .fontWeight(.bold)
                                 .font(.headline)
                                 .padding(.bottom)
@@ -495,7 +495,7 @@ struct AddSupplementView: View {
             return supplementIsFoodItem ? "Select how often do you have this food. Choose the frequency that best describes your routine (e.g., daily, weekly, etc.)" : "Select how often you take this supplement. Choose the frequency that best describes your routine (e.g., daily, weekly, etc.) and the form of the supplement (e.g., capsule, liquid). \n\nExample: 'Daily' for frequency and 'Capsule' for form."
         }
         if currentStep == 4 {
-            return "Specify the times you take this \(supplementIsFoodItem ? "food item" : "supplement"). If you take it multiple times a day, please enter each time accordingly. \n\nExample: '8:00 AM' and '8:00 PM' if you take it twice a day."
+            return "Specify the last date and time you take this \(supplementIsFoodItem ? "food item" : "supplement"). If you take it multiple times a day, please enter each time accordingly. \n\nExample: '8:00 AM' and '8:00 PM' if you take it twice a day.\n\nBiomarker will accordingly create schedule for this \(supplementIsFoodItem ? "food item" : "supplement")"
         }
         if currentStep == 5 {
             return "Set a reminder if you want Biomarker to notify you about your  \(supplementIsFoodItem ? "food item" : "supplement") consumption time. You can choose the time for the reminder. \n\nExample: 'Set a reminder for 7:30 AM.'"
