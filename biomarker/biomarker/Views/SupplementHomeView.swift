@@ -204,6 +204,18 @@ struct SupplementScheduleView: View {
                + Text(" items")
                     .fontWeight(.bold)
                     .font(.headline)
+                
+                if selectedFrequency.lowercased() != "all"{
+                    + Text(" which you consume ")
+                        .fontWeight(.bold)
+                        .font(.headline)
+                    
+                    + Text(selectedFrequency.lowercased())
+                        .fontWeight(.bold)
+                        .font(.headline)
+                        .italic() // Make it italic
+                        .foregroundColor(.pink)
+                }
 
                 Spacer()
             }.multilineTextAlignment(.leading)
@@ -336,7 +348,7 @@ struct SupplementScheduleView: View {
         let calendar = Calendar.current
         let now = Date()
 
-        for supplement in bmSupplementStackGL.supplements.filter({ selectedFrequency == "All" || $0.frequency.rawValue == selectedFrequency }){
+        for supplement in bmSupplementStackGL.supplements.filter({ (selectedFrequency == "All" || $0.frequency.rawValue == selectedFrequency)  && $0.supplementType == supplementType}){
             // Filter by frequency if selected
             
 //            if let selectedFrequency = selectedFrequency, supplement.frequency != selectedFrequency {
