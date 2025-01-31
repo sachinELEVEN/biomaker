@@ -176,7 +176,7 @@ struct SupplementScheduleView: View {
     var body: some View {
         VStack {
             HStack{
-                Text("Schedule for next \(periodDesc())")
+                Text("Schedule for the next \(periodDesc())")
                 
                     .fontWeight(.bold)
                     .font(.headline)
