@@ -200,7 +200,7 @@ struct SupplementScheduleView: View {
             HStack{
                 Text("Consumption Frequency")
                     .fontWeight(.bold)
-                    .font(.headline)
+                    .font(.subheadline)
                     //.fontWeight(.bold)
                     Spacer()
                 Picker("Frequency", selection: $selectedFrequency) {
@@ -225,8 +225,8 @@ struct SupplementScheduleView: View {
             let schedule = createSupplementSchedule()
             
            // List {
-            ForEach(schedule.keys.compactMap({ dateFormatter.date(from: $0) }).sorted(), id: \.self) { date in
-                let dateString = dateFormatter.string(from: date) // Convert back to string for display
+            ForEach(schedule.keys.compactMap({ dateFormatter_D_MMMM_YYYY.date(from: $0) }).sorted(), id: \.self) { date in
+                let dateString = dateFormatter_D_MMMM_YYYY.string(from: date) // Convert back to string for display
                 Section(header: Text(dateString)) {
                     ForEach(schedule[dateString] ?? [], id: \.id) { supplement in
                         Text(supplement.name)
@@ -287,7 +287,7 @@ struct SupplementScheduleView: View {
     }
     
     func scheduleKey(_ date : Date)->String{
-        return dateFormatter.string(from: date)
+        return dateFormatter_D_MMMM_YYYY.string(from: date)
     }
 
     // Function to calculate the next consumption date based on frequency
