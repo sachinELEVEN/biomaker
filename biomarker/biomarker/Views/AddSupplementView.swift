@@ -478,6 +478,19 @@ struct AddSupplementView: View {
         //We need to do some preprocessing of timeOfConsumption where we need to use the date of the first non-nil value in the list of dates timeOfConsumption. and set that date part to the rest of the elements in timeOfConsumption. Note- we only need to set the date part, for hour and minute part we do not touch them as each item in timeOfConsumption will have their own hour and minute
         preprocessTimeOfConsumption(timeOfConsumption)
         
+        var allValsInTimeOfConsumptionAreNil = true
+        for time in timeOfConsumption{
+            if time != nil{
+                allValsInTimeOfConsumptionAreNil = false
+                break;
+            }
+        }
+        
+        if allValsInTimeOfConsumptionAreNil{
+            print("Setting allowReminding5MinBeforeDosage to false as no dosage time was set")
+            allowReminding5MinBeforeDosage = false
+        }
+        
         supplement = BMSupplement(id: id, isFoodItem: supplementIsFoodItem, name: name, strengthNumber: strengthNumber,
                                   strengthUnit: strengthUnit, frequency: frequency,
                                   form: supplementIsFoodItem ? nil : form, timeOfConsumption: timeOfConsumption,

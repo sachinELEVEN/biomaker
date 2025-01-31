@@ -1018,10 +1018,10 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "498"
-            endingLineNumber = "498"
-            landmarkName = "createSupplement()"
-            landmarkType = "7">
+            startingLineNumber = "511"
+            endingLineNumber = "511"
+            landmarkName = "AddSupplementView"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1034,10 +1034,10 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "524"
-            endingLineNumber = "524"
-            landmarkName = "AddSupplementView"
-            landmarkType = "14">
+            startingLineNumber = "537"
+            endingLineNumber = "537"
+            landmarkName = "isEmpty(text:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1368,8 +1368,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "488"
-            endingLineNumber = "488"
+            startingLineNumber = "501"
+            endingLineNumber = "501"
             landmarkName = "createSupplement()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1680,14 +1680,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "399A62EF-8637-4EB8-BF65-4BA9C5D31503"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "481"
-            endingLineNumber = "481"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
             landmarkName = "createSupplement()"
             landmarkType = "7">
             <Locations>
@@ -1736,6 +1736,21 @@
                   endingLineNumber = "481"
                   offsetFromSymbolStart = "604">
                </Location>
+               <Location
+                  uuid = "399A62EF-8637-4EB8-BF65-4BA9C5D31503 - f63cd777239517fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "biomarker.AddSupplementView.createSupplement() -&gt; ()"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/AddSupplementView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "494"
+                  endingLineNumber = "494"
+                  offsetFromSymbolStart = "1532">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -1743,7 +1758,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "802364EA-B8D6-4C51-A539-2215A56B293D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "biomarker/Views/AddSupplementView.swift"
@@ -1753,20 +1768,52 @@
             endingLineNumber = "479"
             landmarkName = "createSupplement()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "802364EA-B8D6-4C51-A539-2215A56B293D - f63cd7772395158b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "biomarker.AddSupplementView.createSupplement() -&gt; ()"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/AddSupplementView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "479"
+                  endingLineNumber = "479"
+                  offsetFromSymbolStart = "444">
+               </Location>
+               <Location
+                  uuid = "802364EA-B8D6-4C51-A539-2215A56B293D - f63cd7772395158b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "biomarker.AddSupplementView.createSupplement() -&gt; ()"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/AddSupplementView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "479"
+                  endingLineNumber = "479"
+                  offsetFromSymbolStart = "628">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "32DD23EB-07C6-40CC-82EF-F5856441E1DD"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "483"
-            endingLineNumber = "483"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
             landmarkName = "createSupplement()"
             landmarkType = "7">
             <Locations>
@@ -1800,6 +1847,21 @@
                   endingLineNumber = "483"
                   offsetFromSymbolStart = "1416">
                </Location>
+               <Location
+                  uuid = "32DD23EB-07C6-40CC-82EF-F5856441E1DD - f63cd777239517b8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "biomarker.AddSupplementView.createSupplement() -&gt; ()"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/AddSupplementView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "496"
+                  endingLineNumber = "496"
+                  offsetFromSymbolStart = "2380">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -1813,8 +1875,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "520"
-            endingLineNumber = "520"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -1861,8 +1923,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "515"
-            endingLineNumber = "515"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -1909,8 +1971,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "511"
-            endingLineNumber = "511"
+            startingLineNumber = "524"
+            endingLineNumber = "524"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -1987,8 +2049,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "514"
-            endingLineNumber = "514"
+            startingLineNumber = "527"
+            endingLineNumber = "527"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -2035,8 +2097,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "516"
-            endingLineNumber = "516"
+            startingLineNumber = "529"
+            endingLineNumber = "529"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -2119,6 +2181,22 @@
             endingLineNumber = "293"
             landmarkName = "SupplementScheduleView"
             landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0FE63EB6-1DF9-4613-A65F-334DFF83AF50"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "biomarker/Views/AddSupplementView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
+            landmarkName = "createSupplement()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
