@@ -276,7 +276,8 @@ struct SupplementScheduleView: View {
                     } else {
                         schedule[scheduleKey(nextDate!)] = [supplement]
                     }
-                    nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate!)!
+                    //Update the next date of this supplement
+                    nextDate = calendar.date(byAdding: .day, value: selectedDays, to: nextDate!)!
                 }
             }
         }
@@ -300,7 +301,7 @@ struct SupplementScheduleView: View {
         
         guard let dateOfSupplement = dateOfSupplement else{
             //we dont have information about its time of consumption so will not display it in the schedule
-            let insanelyFutureDate = Calendar.current.date(from: DateComponents(year: 2099, month: 12, day: 31))
+            //let insanelyFutureDate = Calendar.current.date(from: DateComponents(year: 2099, month: 12, day: 31))
             //return insanelyFutureDate!
             return nil
         }
@@ -308,13 +309,13 @@ struct SupplementScheduleView: View {
         case .daily:
             nextDate = calendar.date(byAdding: .day, value: 1, to: dateOfSupplement)
         case .weekly:
-            nextDate = calendar.date(byAdding: .weekOfYear, value: 1, to: dateOfSupplement)
+            nextDate = calendar.date(byAdding: .day, value: 7, to: dateOfSupplement)
         case .daily2:
             nextDate = calendar.date(byAdding: .day, value: 1, to: dateOfSupplement)
         case .daily3:
             nextDate = calendar.date(byAdding: .day, value: 1, to: dateOfSupplement)
         case .monthly:
-            nextDate = calendar.date(byAdding: .month, value: 1, to: dateOfSupplement)
+            nextDate = calendar.date(byAdding: .day, value: 30, to: dateOfSupplement)
         case .oneTime:
             nextDate = createdAt // Assuming it's a one-time supplement
         }
