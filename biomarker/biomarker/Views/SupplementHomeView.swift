@@ -172,18 +172,43 @@ struct SupplementScheduleView: View {
     
     @State private var selectedDays: Int = 7 // Default to 7 days
     @State private var selectedFrequency: String = "All"// No filter by default
+    @State private var supplementType: BMSupplementType = .supplement
 
     var body: some View {
         VStack {
-            HStack{
-                Text("Schedule for the next \(periodDesc())")
-                
+            HStack {
+                Text("Schedule for the next ")
                     .fontWeight(.bold)
                     .font(.headline)
-                    .multilineTextAlignment(.leading)
-                    .padding(.vertical)
+                   // .multilineTextAlignment(.leading)
+                    //.padding(.vertical)
+
+                + Text(periodDesc())
+                    .fontWeight(.bold)
+                    .font(.headline)
+                    .italic() // Make it italic
+                    .foregroundColor(.pink) // Set the color to pink
+
+               +  Text(" for your ")
+                    .fontWeight(.bold)
+                    .font(.headline)
+                   // .multilineTextAlignment(.leading)
+                    //.padding(.vertical)
+
+               + Text(supplementType.rawValue)
+                    .fontWeight(.bold)
+                    .font(.headline)
+                    .italic() // Make it italic
+                    .foregroundColor(.pink) // Set the color to pink
+
+               + Text(" items")
+                    .fontWeight(.bold)
+                    .font(.headline)
+
                 Spacer()
-            }
+            }.multilineTextAlignment(.leading)
+                .padding(.vertical)
+
             
             // Picker for selecting the number of days
             Picker("Select Schedule Duration", selection: $selectedDays) {
@@ -193,9 +218,17 @@ struct SupplementScheduleView: View {
                 Text("1 Month").tag(30)
             }
             .pickerStyle(SegmentedPickerStyle())
-            .padding(.vertical)
+            .padding(.top)
 
+            // Picker for selecting the number of days
+            Picker("Select Supplement Type", selection: $supplementType) {
+               // Text("Both").tag("Both")
+                Text(BMSupplementType.supplement.rawValue).tag(BMSupplementType.supplement)
+                Text(BMSupplementType.food.rawValue).tag(BMSupplementType.food)
 
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding(.bottom)
             
             HStack{
                 Text("Consumption Frequency")

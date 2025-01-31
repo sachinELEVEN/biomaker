@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum BMSupplementType: String, CaseIterable{
+    case supplement = "Supplement"
+    case food = "Food"
+}
 
 // Enum for Frequency
 enum BMSupplementFrequency: String, CaseIterable {
