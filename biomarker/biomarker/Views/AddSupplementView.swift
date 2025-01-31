@@ -24,7 +24,7 @@ struct AddSupplementView: View {
     @State private var currentStep: Int = 0
     @State private var supplement: BMSupplement?
     @State private var supplementIsFoodItem = false
-    private var finalStep = 6//5th was the previous final step but now reminder is on the same screen as dosage//final step of the form where the supplement is added
+    private var finalStep = 4//5th was the previous final step but now reminder is on the same screen as dosage//final step of the form where the supplement is added
     @State private var userNotesPlaceholderText = "Why did you start taking this supplement? How long have you been taking it?"
     @State private var message : String? = nil
     @State private var allowReminding5MinBeforeDosage = false
@@ -230,11 +230,11 @@ struct AddSupplementView: View {
                             
                             
                             
-                        }
+                        }.padding()
                     }
 
 
-                    .padding()
+                    
 //                    Button("Next") {
 //                        currentStep += 1
 //                    }
@@ -475,6 +475,8 @@ struct AddSupplementView: View {
         let id = UUID().uuidString
         let createdAt = Date()
         
+        //We need to do some preprocessing of timeOfConsumption where we need to use the date of the first non-nil value in the list of dates timeOfConsumption. and set that date part to the rest of the elements in timeOfConsumption. Note- we only need to set the date part, for hour and minute part we do not touch them as each item in timeOfConsumption will have their own hour and minute
+        preprocessTimeOfConsumption(timeOfConsumption)
         
         supplement = BMSupplement(id: id, isFoodItem: supplementIsFoodItem, name: name, strengthNumber: strengthNumber,
                                   strengthUnit: strengthUnit, frequency: frequency,
@@ -491,6 +493,31 @@ struct AddSupplementView: View {
             }else{
                 //something went wrong
                 message = result.1
+            }
+        }
+    }
+    
+    func preprocessTimeOfConsumption(_ timeOfConsumption: [Date?]) {
+        // Find the first non-nil date
+        guard let firstNonNilDate = timeOfConsumption.compactMap({ $0 }).first else {
+            return // No non-nil dates found, nothing to do
+        }
+        
+        // Extract the date components from the first non-nil date
+        let calendar = Calendar.current
+        let firstDateComponents = calendar.dateComponents([.year, .month, .day], from: firstNonNilDate)
+
+        // Update the date part of each non-nil date in the array
+        for index in timeOfConsumption.indices {
+            if let currentDate = timeOfConsumption[index] {
+                // Create a new date with the same hour and minute but the date from firstNonNilDate
+                var newDateComponents = calendar.dateComponents(in: TimeZone.current, from: currentDate)
+                newDateComponents.year = firstDateComponents.year
+                newDateComponents.month = firstDateComponents.month
+                newDateComponents.day = firstDateComponents.day
+                
+                // Set the new date back to the array
+                self.timeOfConsumption[index] = calendar.date(from: newDateComponents)
             }
         }
     }
