@@ -157,74 +157,80 @@ struct AddSupplementView: View {
 //                    }
                 } else if currentStep == 4 {
                     // Time of Consumption
-                    VStack {
-                       // Text("Enter Reminder Time")
-                        
-                        ForEach(0..<getFrequencyCount(), id: \.self) { index in
-                            HStack {
-                                Toggle(isOn: Binding(
-                                    get: { timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil },
-                                    set: { isOn in
-                                        if isOn {
-                                            // If toggled on, add a default time (current time or any default value)
-                                            if timeOfConsumption.indices.contains(index) {
-                                                timeOfConsumption[index] = Date()
-                                               // timeOfConsumption.remove(at: index)
-                                            }else{
-                                                //here we will first increase the list to have atleast index+1 count of items and initialise the index item with date
-                                                for newIdx in timeOfConsumption.count...index{
-                                                    if newIdx == index{
-                                                        timeOfConsumption.append(Date())
-                                                    }else{
-                                                        timeOfConsumption.append(nil)
+                    ScrollView(showsIndicators: false){
+                        VStack {
+                            // Text("Enter Reminder Time")
+                            
+                            ForEach(0..<getFrequencyCount(), id: \.self) { index in
+                                HStack {
+                                    Toggle(isOn: Binding(
+                                        get: { timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil },
+                                        set: { isOn in
+                                            if isOn {
+                                                // If toggled on, add a default time (current time or any default value)
+                                                if timeOfConsumption.indices.contains(index) {
+                                                    timeOfConsumption[index] = Date()
+                                                    // timeOfConsumption.remove(at: index)
+                                                }else{
+                                                    //here we will first increase the list to have atleast index+1 count of items and initialise the index item with date
+                                                    for newIdx in timeOfConsumption.count...index{
+                                                        if newIdx == index{
+                                                            timeOfConsumption.append(Date())
+                                                        }else{
+                                                            timeOfConsumption.append(nil)
+                                                        }
                                                     }
+                                                    
                                                 }
-                                                
-                                            }
-                                        } else {
-                                            // If toggled off, remove the time for this index
-                                            if timeOfConsumption.indices.contains(index) {
-                                                timeOfConsumption[index] = nil
-                                               // timeOfConsumption.remove(at: index)
+                                            } else {
+                                                // If toggled off, remove the time for this index
+                                                if timeOfConsumption.indices.contains(index) {
+                                                    timeOfConsumption[index] = nil
+                                                    // timeOfConsumption.remove(at: index)
+                                                }
                                             }
                                         }
+                                    )) {
+                                        Text("Dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "") time")
+                                            .fontWeight(.bold)
+                                            .font(.headline)
                                     }
-                                )) {
-                                    Text("Last Dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "") date & time")
-                                        .fontWeight(.bold)
-                                        .font(.headline)
+                                    .toggleStyle(SwitchToggleStyle(tint: .blue)) // Optional: Customize toggle color
                                 }
-                                .toggleStyle(SwitchToggleStyle(tint: .blue)) // Optional: Customize toggle color
+                                
+                                if timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil {
+                                    DatePicker(" ", selection: Binding(
+                                        get: { timeOfConsumption[index]! },
+                                        set: { timeOfConsumption[index] = $0 }
+                                    ), displayedComponents: isFirstNonNilIndex(in: timeOfConsumption, index: index) ? [.hourAndMinute,.date] : [.hourAndMinute])
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .padding(.bottom)
+                                } else {
+                                    //                                Text("Set time")
+                                    //                                    .fontWeight(.bold)
+                                    //                                    .font(.headline)
+                                    //                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
+                                }
                             }
                             
-                            if timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil {
-                                DatePicker(" ", selection: Binding(
-                                    get: { timeOfConsumption[index]! },
-                                    set: { timeOfConsumption[index] = $0 }
-                                ), displayedComponents: [.hourAndMinute,.date])
-                                .fontWeight(.bold)
-                                .font(.headline)
-                                .padding(.bottom)
-                            } else {
-//                                Text("Set time")
-//                                    .fontWeight(.bold)
-//                                    .font(.headline)
-//                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
+                            if timeOfConsumption.count > 0 && timeOfConsumption.contains(where: { $0 != nil }) {
+                                
+                                //Only show reminder when at least on the date is set
+                                Toggle("Remind me 5 min before time", isOn: $allowReminding5MinBeforeDosage)
+                                    .fontWeight(.bold)
+                                    .font(.headline)
+                                    .toggleStyle(SwitchToggleStyle(tint: .blue))
+                                    .padding()
+                                    .background(Color(.systemGray6))
+                                    .cornerRadius(10)
+                                    .padding([.top,.bottom])
+                                
                             }
-                        }
-                        
-                        if timeOfConsumption.count > 0 && timeOfConsumption.contains(where: { $0 != nil }) {
                             
-                            //Only show reminder when at least on the date is set
-                            Toggle("Remind me 5 minutes before supplement time", isOn: $allowReminding5MinBeforeDosage)
-                                .fontWeight(.bold)
-                                .font(.headline)
-                                .toggleStyle(SwitchToggleStyle(tint: .blue))
-                                .padding([.horizontal,.bottom])
+                            
+                            
                         }
-
-                        
-                        
                     }
 
 
@@ -511,7 +517,7 @@ struct AddSupplementView: View {
             return supplementIsFoodItem ? "Select how often do you have this food. Choose the frequency that best describes your routine (e.g., daily, weekly, etc.)" : "Select how often you take this supplement. Choose the frequency that best describes your routine (e.g., daily, weekly, etc.) and the form of the supplement (e.g., capsule, liquid). \n\nExample: 'Daily' for frequency and 'Capsule' for form."
         }
         if currentStep == 4 {
-            return "Specify the last date and time you take this \(supplementIsFoodItem ? "food item" : "supplement"). If you take it multiple times a day, please enter each time accordingly. \n\nExample: '8:00 AM' and '8:00 PM' if you take it twice a day.\n\nBiomarker will accordingly create schedule for this \(supplementIsFoodItem ? "food item" : "supplement")"
+            return "Specify the last date and time you took this \(supplementIsFoodItem ? "food item" : "supplement"). If you take it multiple times a day, please enter each time accordingly. \n\nExample: '8:00 AM' and '8:00 PM' if you take it twice a day.\n\nBiomarker will accordingly create schedule for this \(supplementIsFoodItem ? "food item" : "supplement")"
         }
         if currentStep == 5 {
             return "Set a reminder if you want Biomarker to notify you about your  \(supplementIsFoodItem ? "food item" : "supplement") consumption time. You can choose the time for the reminder. \n\nExample: 'Set a reminder for 7:30 AM.'"

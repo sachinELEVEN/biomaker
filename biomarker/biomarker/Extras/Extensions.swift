@@ -61,3 +61,26 @@ let dateFormatter: DateFormatter = {
     formatter.timeStyle = .short   // Set the time style (e.g., short, medium, long)
     return formatter
 }()
+
+
+//To create a method that takes an index and returns a Boolean indicating whether the supplied index is the first non-nil index in an array of optionals, you can implement it as follows:
+func isFirstNonNilIndex<T>(in array: [T?], index: Int) -> Bool {
+    // Check if the index is within bounds
+    guard index >= 0 && index < array.count else {
+        return false
+    }
+    
+    // Check if the element at the given index is non-nil
+    if array[index] != nil {
+        // Check if there are any non-nil elements before this index
+        for i in 0..<index {
+            if array[i] != nil {
+                return false // Found a non-nil element before the given index
+            }
+        }
+        return true // This index is the first non-nil index
+    }
+    
+    return false // The element at the given index is nil
+}
+
