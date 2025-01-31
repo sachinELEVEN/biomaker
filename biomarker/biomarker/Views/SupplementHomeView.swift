@@ -251,14 +251,15 @@ struct SupplementScheduleView: View {
             let schedule = createSupplementSchedule()
             
            // List {
-                ForEach(schedule.keys.sorted(), id: \.self) { key in
-                    Section(header: Text(key)) {
-                        ForEach(schedule[key] ?? [], id: \.id) { supplement in
-                            Text(supplement.name)
-                        }
+            ForEach(schedule.keys.compactMap({ dateFormatter.date(from: $0) }).sorted(), id: \.self) { date in
+                let dateString = dateFormatter.string(from: date) // Convert back to string for display
+                Section(header: Text(dateString)) {
+                    ForEach(schedule[dateString] ?? [], id: \.id) { supplement in
+                        Text(supplement.name)
                     }
-               // }
+                }
             }
+
           //  .navigationTitle("Upcoming Schedule")
            
         }
