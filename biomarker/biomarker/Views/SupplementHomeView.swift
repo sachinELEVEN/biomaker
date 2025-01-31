@@ -225,13 +225,20 @@ struct SupplementScheduleView: View {
             let schedule = createSupplementSchedule()
             
            // List {
+            if schedule.keys.count == 0{
+                Text("No supplements to show")
+                    .fontWeight(.bold)
+                    .font(.headline)
+                    .foregroundStyle(Color.secondary)
+                    .padding(.vertical)
+            }
             ForEach(schedule.keys.compactMap({ dateFormatter_D_MMMM_YYYY.date(from: $0) }).sorted(), id: \.self) { date in
                 let dateString = dateFormatter_D_MMMM_YYYY.string(from: date) // Convert back to string for display
-                Section(header: Text(dateString)) {
+               // Section(header: Text(dateString)) {
                     ForEach(schedule[dateString] ?? [], id: \.id) { supplement in
                         Text(supplement.name)
                     }
-                }
+               // }
             }
 
           //  .navigationTitle("Upcoming Schedule")
