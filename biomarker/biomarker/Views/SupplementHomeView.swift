@@ -73,13 +73,7 @@ struct SupplementHomeView:View {
                             }
                             
                             
-                            Text("Schedule")
-                            //.italic()
-                            //.underline()
-                                .fontWeight(.bold)
-                                .font(.headline)
-                                .multilineTextAlignment(.leading)
-                                .padding(.vertical)
+                            
                             
                             SupplementScheduleView()
                             
@@ -207,6 +201,16 @@ struct SupplementScheduleView: View {
 
     var body: some View {
         VStack {
+            HStack{
+                Text("Schedule for next \(periodDesc())")
+                
+                    .fontWeight(.bold)
+                    .font(.headline)
+                    .multilineTextAlignment(.leading)
+                    .padding(.vertical)
+                Spacer()
+            }
+            
             // Picker for selecting the number of days
             Picker("Select Schedule Duration", selection: $selectedDays) {
                 Text("3 Days").tag(3)
@@ -215,20 +219,12 @@ struct SupplementScheduleView: View {
                 Text("1 Month").tag(30)
             }
             .pickerStyle(SegmentedPickerStyle())
-            .padding()
+            .padding(.vertical)
 
-            // Picker for filtering by frequency
-//            Picker("Filter by Frequency", selection: $selectedFrequency) {
-//               // Text("All").tag(nil as BMSupplementFrequency?) // Tag for nil
-//                ForEach(BMSupplementFrequency.allCases, id: \.self) { frequency in
-//                    Text(frequency.rawValue).tag(frequency.rawValue) // Tag for each frequency
-//                }
-//            }
-//            .pickerStyle(SegmentedPickerStyle())
-//            .padding()
+
             
             HStack{
-                Text("Frequency")
+                Text("Consumption Frequency")
                     .fontWeight(.bold)
                     .font(.headline)
                     //.fontWeight(.bold)
@@ -248,6 +244,9 @@ struct SupplementScheduleView: View {
                     .padding(.trailing)
             }//.padding(.top)
                 .padding(.horizontal)
+                .background(Color(.systemGray6))
+                .cornerRadius(10)
+                
 
             let schedule = createSupplementSchedule()
             
@@ -265,6 +264,21 @@ struct SupplementScheduleView: View {
         }
     }
 
+    func periodDesc()->String{
+        if selectedDays == 3{
+            return "3 days"
+        }
+        if selectedDays == 7{
+            return "week"
+        }
+        if selectedDays == 14{
+            return "2 weeks"
+        }
+        if selectedDays == 30{
+            return "1 month"
+        }
+        return ""
+    }
     // Function to create a schedule of supplements
     private func createSupplementSchedule() -> [String: [BMSupplement]] {
         var schedule: [String: [BMSupplement]] = [:]
