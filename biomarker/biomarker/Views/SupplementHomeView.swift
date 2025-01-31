@@ -240,7 +240,6 @@ struct SupplementScheduleView: View {
                             .fontWeight(.bold)
                             .font(.title3)
                             .padding(.top)
-                        Divider().padding(.leading)
                     }
                     
                    // Section(header: Text(dateString)) {
@@ -255,10 +254,10 @@ struct SupplementScheduleView: View {
                             ForEach(schedule[dateString] ?? [], id: \.id) { supplement in
                                 HStack {
                                     VStack(alignment: .leading) {
-                                        Text(supplement.name)
-                                            .font(.headline)
-                                            .fontWeight(.bold)
-                                            .padding(.bottom, 5)
+                                            Text(supplement.name)
+                                                .font(.headline)
+                                                .fontWeight(.bold)
+                                                .padding(.bottom, 5)
                                         
                                         // Display all the times
                                         SupplementTimeView(supplement: supplement)
@@ -393,7 +392,9 @@ struct SupplementTimeView: View {
                     if let suppTime = supp {
                         Text(timeFormatter.string(from: suppTime))
                             .padding(8)
+                            .font(.caption)
                             .background(Color(.systemGray6))
+                            .foregroundColor(.secondary)
                             .cornerRadius(10)
                             .padding(.trailing,3)
                     } else {
