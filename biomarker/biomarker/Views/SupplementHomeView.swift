@@ -209,7 +209,9 @@ struct SupplementScheduleView: View {
                                Text("1 time Daily").tag("1 time Daily")
                                Text("2 times daily").tag("2 times daily")
                                Text("3 times daily").tag("3 times daily")
+                               Text("Once every 2 days").tag("Once every 2 days")
                                Text("Weekly").tag("Weekly")
+                               Text("Once every 2 weeks").tag("Once every 2 weeks")
                                Text("Monthly").tag("Monthly")
                            }.pickerStyle(MenuPickerStyle())
                     .padding(5)
@@ -352,26 +354,14 @@ struct SupplementScheduleView: View {
         
         while nextDate <= calendar.date(byAdding: .day, value: inNext - supplement.frequency.intervalInDays, to: from)!{
             switch supplement.frequency {
-            case .daily:
-                nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
-                if nextDate>=now{ result.append(nextDate) }
-            case .weekly:
-                nextDate = calendar.date(byAdding: .day, value: 7, to: nextDate)!
-                if nextDate>=now{ result.append(nextDate) }
-            case .daily2:
-                nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
-                if nextDate>=now{ result.append(nextDate) }
-            case .daily3:
-                nextDate = calendar.date(byAdding: .day, value: 1, to: nextDate)!
-                if nextDate>=now{ result.append(nextDate) }
-            case .monthly:
-                nextDate = calendar.date(byAdding: .day, value: 30, to: nextDate)!
-                if nextDate>=now{ result.append(nextDate) }
             case .oneTime:
                 nextDate = createdAt // Assuming it's a one-time supplement
+            default:
+                nextDate = calendar.date(byAdding: .day, value: supplement.frequency.intervalInDays, to: nextDate)!
+                if nextDate >= now {
+                    result.append(nextDate)
+                }
             }
-       
-            
             
         }
 

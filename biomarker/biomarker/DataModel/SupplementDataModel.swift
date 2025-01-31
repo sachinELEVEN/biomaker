@@ -14,7 +14,9 @@ enum BMSupplementFrequency: String, CaseIterable {
     case daily = "1 time Daily"
     case daily2 = "2 times daily"
     case daily3 = "3 times daily"
+    case onceIn2Days = "Once every 2 days"
     case weekly = "Weekly"
+    case onceIn2Weeks = "Once every 2 weeks"
     case monthly = "Monthly"
 
     // Computed property to return the interval in days
@@ -32,6 +34,10 @@ enum BMSupplementFrequency: String, CaseIterable {
             return 7
         case .monthly:
             return 30
+        case .onceIn2Days:
+            return 2
+        case .onceIn2Weeks:
+            return 14
         }
     }
 }
