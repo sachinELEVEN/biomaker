@@ -338,6 +338,11 @@ struct AddSupplementView: View {
                             if currentStep == 0{
                                 return
                             }
+                            if currentStep == 6{
+                                currentStep -= 2
+                                //because we want to move straigght from 6 to 4 as the separate reminder set screen 5 is now no longer in use
+                                return
+                            }
                             
                             currentStep -= 1
                             
