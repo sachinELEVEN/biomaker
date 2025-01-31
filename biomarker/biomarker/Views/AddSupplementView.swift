@@ -502,7 +502,7 @@ struct AddSupplementView: View {
             allowReminding5MinBeforeDosage = false
         }
         
-        supplement = BMSupplement(id: id, isFoodItem: supplementIsFoodItem, name: name, strengthNumber: strengthNumber,
+        supplement = BMSupplement(id: id, supplementType: supplementIsFoodItem ? .food : .supplement, name: name, strengthNumber: strengthNumber,
                                   strengthUnit: strengthUnit, frequency: frequency,
                                   form: supplementIsFoodItem ? nil : form, timeOfConsumption: timeOfConsumption,
                                   reminderTime: reminderTime, createdAt: createdAt,

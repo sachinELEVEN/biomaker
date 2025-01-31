@@ -62,7 +62,6 @@ class BMSupplement: Identifiable {
     
     var revision:Int
     var id: String
-    var isFoodItem: Bool
     var name: String
     var strengthNumber: String
     var strengthUnit: String
@@ -74,6 +73,7 @@ class BMSupplement: Identifiable {
     var history: [BMSupplement] // Track changes over time
     var is5MinReminderSet: Bool//
     var userNotes: String?
+    var supplementType: BMSupplementType
     
     // AI-generated properties
     var aiContainsWhichChemicals: String? = nil
@@ -87,12 +87,11 @@ class BMSupplement: Identifiable {
     var aiCommonName: String? = nil
     var aiCalories: String? = nil
     
-    init(id: String, isFoodItem: Bool, name: String, strengthNumber: String, strengthUnit: String,
+    init(id: String, supplementType : BMSupplementType, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm?, timeOfConsumption: [Date?],
          reminderTime: [Date?], createdAt: Date, is5MinReminderSet: Bool, userNotes: String?) {
         self.revision = 0
         self.id = id
-        self.isFoodItem = isFoodItem
         self.name = name
         self.strengthNumber = strengthNumber
         self.strengthUnit = strengthUnit
@@ -104,6 +103,7 @@ class BMSupplement: Identifiable {
         self.history = []
         self.is5MinReminderSet = is5MinReminderSet
         self.userNotes = userNotes
+        self.supplementType = supplementType
     }
     
     //this should be called whenever it is modified
