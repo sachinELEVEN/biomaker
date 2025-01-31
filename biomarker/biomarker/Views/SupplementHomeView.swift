@@ -81,7 +81,8 @@ struct SupplementHomeView:View {
                            if bmSupplementStackGL.supplements.filter({ supp in
                                 supp.supplementType == supplementType
                            }).count == 0 {
-                               HStack{Spacer
+                               HStack{
+                                   Spacer()
                                    Text("Nothing to show")
                                        .fontWeight(.bold)
                                        .font(.headline)
