@@ -68,6 +68,13 @@ let dateFormatter: DateFormatter = {
     return formatter
 }()
 
+let timeFormatter : DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "h:mm a" // Format for time
+    return formatter
+}()
+
+
 
 //To create a method that takes an index and returns a Boolean indicating whether the supplied index is the first non-nil index in an array of optionals, you can implement it as follows:
 func isFirstNonNilIndex<T>(in array: [T?], index: Int) -> Bool {

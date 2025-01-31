@@ -234,18 +234,53 @@ struct SupplementScheduleView: View {
             }
             ForEach(schedule.keys.compactMap({ dateFormatter_D_MMMM_YYYY.date(from: $0) }).sorted(), id: \.self) { date in
                 let dateString = dateFormatter_D_MMMM_YYYY.string(from: date) // Convert back to string for display
-               // Section(header: Text(dateString)) {
-                    ForEach(schedule[dateString] ?? [], id: \.id) { supplement in
-                        Text(supplement.name)
+                VStack(alignment: .leading){
+                    HStack{
+                        Text(dateString == dateFormatter_D_MMMM_YYYY.string(from: Date()) ? "Today" : dateString)
+                            .fontWeight(.bold)
+                            .font(.title3)
+                            .padding(.top)
+                        Divider().padding(.leading)
                     }
-               // }
+                    
+                   // Section(header: Text(dateString)) {
+                    HStack(alignment: .top) { // Use HStack to place the rectangle and VStack side by side
+                        Rectangle()
+                            .fill(Color.primary) // Set the color of the rectangle
+                            .frame(width: 10) // Set the width of the rectangle
+                            .cornerRadius(10)
+                            .edgesIgnoringSafeArea(.vertical) // Make it span the full height
+
+                        VStack(alignment: .leading) {
+                            ForEach(schedule[dateString] ?? [], id: \.id) { supplement in
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(supplement.name)
+                                            .font(.headline)
+                                            .fontWeight(.bold)
+                                            .padding(.bottom, 5)
+                                        
+                                        // Display all the times
+                                        SupplementTimeView(supplement: supplement)
+                                    }
+                                    
+                                    Spacer()
+                                }
+                            }
+                        }
+                        .padding(.leading) // Add padding to the VStack
+                    }
+
+                    
+                  //  }
+                }
             }
 
           //  .navigationTitle("Upcoming Schedule")
            
         }
     }
-
+    
     func periodDesc()->String{
         if selectedDays == 3{
             return "3 days"
@@ -346,4 +381,26 @@ struct SupplementScheduleView: View {
 }
 
 
-
+struct SupplementTimeView: View {
+    var supplement: BMSupplement
+    var now = Date()
+    var body: some View {
+        ScrollView(.horizontal,showsIndicators: false){
+            HStack {
+                ForEach(supplement.timeOfConsumption.sorted(by: { d1, d2 in
+                    d1 ?? now < d2 ?? now
+                }), id: \.self) { supp in
+                    if let suppTime = supp {
+                        Text(timeFormatter.string(from: suppTime))
+                            .padding(8)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                            .padding(.trailing,3)
+                    } else {
+                        // Text("No time set") // Optional: Handle nil case
+                    }
+                }
+            }
+        }
+    }
+}
