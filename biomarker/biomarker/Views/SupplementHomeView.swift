@@ -205,17 +205,17 @@ struct SupplementScheduleView: View {
                     .fontWeight(.bold)
                     .font(.headline)
                 
-                if selectedFrequency.lowercased() != "all"{
-                    + Text(" which you consume ")
+               
+                + Text(selectedFrequency.lowercased() != "all" ? " which you consume " : "")
                         .fontWeight(.bold)
                         .font(.headline)
                     
-                    + Text(selectedFrequency.lowercased())
+                + Text(selectedFrequency.lowercased() != "all" ? selectedFrequency.lowercased() : "")
                         .fontWeight(.bold)
                         .font(.headline)
                         .italic() // Make it italic
                         .foregroundColor(.pink)
-                }
+              
 
                 Spacer()
             }.multilineTextAlignment(.leading)
