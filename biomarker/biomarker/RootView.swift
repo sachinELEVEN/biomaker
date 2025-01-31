@@ -218,12 +218,14 @@ struct HomeView: View {
                         
                             Text("You have \(sys.medicalDocuments.count) medical \(sys.medicalDocuments.count==1 ? "document" : "documents") containing \(sys.totalTestRecordsCount()) tests")
                             .fontWeight(.bold)
-                            .padding()
+                            .foregroundStyle(Color.secondary)
+                            .padding(.vertical)
+                            
                         
                             Button(action:{
                                 showPdfUploadScreen.toggle()
                             }){
-                                label("Add Medical Report (PDF)", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: geo.size.width*0.8, radius: 10)
+                                label("Add Medical Report (PDF)", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: geo.size.width*0.8, radius: 10, verticalPadding: 5)
                             }
                             .sheet(isPresented: $showPdfUploadScreen){
                                 PDFUploaderView(showSelf: $showPdfUploadScreen)
