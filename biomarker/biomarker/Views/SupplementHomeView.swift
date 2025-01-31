@@ -11,6 +11,7 @@ import SwiftUI
 struct SupplementHomeView:View {
     @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
     @State var showAddSupplementScreen = false
+    @State private var supplementType: BMSupplementType = .supplement
     var body: some View {
         NavigationView{
             GeometryReader{ geo in
@@ -67,9 +68,29 @@ struct SupplementHomeView:View {
                                 .multilineTextAlignment(.leading)
                                 .padding(.vertical)
                             
-                            ForEach(bmSupplementStackGL.supplements){ supp in
+                            // Picker for selecting the number of days
+                            Picker("Select Supplement Type", selection: $supplementType) {
+                               // Text("Both").tag("Both")
+                                Text(BMSupplementType.supplement.rawValue).tag(BMSupplementType.supplement)
+                                Text(BMSupplementType.food.rawValue).tag(BMSupplementType.food)
+
+                            }
+                            .pickerStyle(SegmentedPickerStyle())
+                            .padding(.bottom)
+                            
+                           if bmSupplementStackGL.supplements.filter({ supp in
+                                supp.supplementType == supplementType
+                           }).count == 0 {
+                               Text("Nothing to show")
+                                   .fontWeight(.bold)
+                                   .font(.headline)
+                                   .foregroundStyle(Color.secondary)
+                                   .padding(.vertical)
+                           }
+                            ForEach(bmSupplementStackGL.supplements.filter({ supp in
+                                supp.supplementType == supplementType
+                            })){ supp in
                                 SupplementRow(supplement: supp)
-                                
                             }
                             
                             
@@ -89,6 +110,7 @@ struct SupplementHomeView:View {
                     }
                 }.padding(.horizontal)
             }.navigationTitle("Supplement Stack")
+                .animation(.default)
         }
     }
 }
