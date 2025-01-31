@@ -81,11 +81,13 @@ struct SupplementHomeView:View {
                            if bmSupplementStackGL.supplements.filter({ supp in
                                 supp.supplementType == supplementType
                            }).count == 0 {
-                               Text("Nothing to show")
-                                   .fontWeight(.bold)
-                                   .font(.headline)
-                                   .foregroundStyle(Color.secondary)
-                                   .padding(.vertical)
+                               HStack{Spacer
+                                   Text("Nothing to show")
+                                       .fontWeight(.bold)
+                                       .font(.headline)
+                                       .foregroundStyle(Color.secondary)
+                                       .padding(.vertical)
+                               }
                            }
                             ForEach(bmSupplementStackGL.supplements.filter({ supp in
                                 supp.supplementType == supplementType
