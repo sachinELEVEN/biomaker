@@ -114,6 +114,10 @@ struct SupplementRow: View {
                     Text("\(supplement.strengthNumber) \(supplement.strengthUnit)")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
+                    
+                    Text(supplement.form?.rawValue ?? "") // Display form
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
 
                     Spacer()
 
@@ -121,23 +125,27 @@ struct SupplementRow: View {
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
-
-                Text(supplement.form?.rawValue ?? "") // Display form
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+             
 
                 // Display time of consumption
                 if !supplement.timeOfConsumption.isEmpty {
-                    Text("Dosage Times: \(formatTimeOfConsumption(supplement.timeOfConsumption))")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
+//                    Text("Dosage Times: \(formatTimeOfConsumption(supplement.timeOfConsumption))")
+//                        .font(.subheadline)
+//                        .foregroundColor(.gray)
+                    SupplementTimeView(supplement: supplement)
+                        .padding(.bottom,3)
                 }
 
                 // Display next consumption date
                 if SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360).count > 0 {
-                    Text("Upcoming dose is on: \(SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360)[0], formatter: dateFormatter)")
+                    Text("Upcoming dose is on")
                         .font(.subheadline)
-                        .foregroundColor(.blue)
+                        .foregroundColor(.secondary)
+                    + Text(" \(SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360)[0], formatter: dateFormatter_D_MMMM_YYYY)")
+                        .font(.subheadline)
+                        .foregroundColor(.pink)
+                        //.italic()
+                        .bold()
                 }
 
 //                if let userNotes = supplement.userNotes, !userNotes.isEmpty {
