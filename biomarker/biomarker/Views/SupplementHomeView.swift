@@ -394,7 +394,9 @@ struct SupplementScheduleView: View {
         let createdAt = supplement.createdAt
 
         // Calculate the next date based on frequency
-
+        if supplement.timeOfConsumption.count == 0{
+            return []
+        }
         let dateOfSupplement = supplement.timeOfConsumption[0]
         
         guard var nextDate = dateOfSupplement else{
