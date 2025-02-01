@@ -120,32 +120,26 @@ class APIService {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        
+       let credentials = "2930hrifnef4df3983hr@9RHIOWWN"
         // Encode the supplement information to JSON
         // Set the HTTP body directly from the JSON string
-       // Create the multipart form data
-        var body = Data()
+       // Create the JSON body on the fly
+          let payload: [String: Any] = [
+              "supplementinformation": supplementInformation,
+              "credentials": credentials
+          ]
        
-       // Generate the boundary string
-        let boundary = "Boundary-\(UUID().uuidString)"
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
-           
-        // Add credentials and isScannedDocument
-        let credentials = "2930hrifnef4df3983hr@9RHIOWWN"
-
-        // Append boundary and form data for credentials
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"credentials\"\r\n\r\n".data(using: .utf8)!)
-        body.append("\(credentials)\r\n".data(using: .utf8)!)
-
-        // Append boundary and form data for isScannedDocument
-        body.append("--\(boundary)\r\n".data(using: .utf8)!)
-        body.append("Content-Disposition: form-data; name=\"supplementinformation\"\r\n\r\n".data(using: .utf8)!)
-        body.append("\(supplementInformation)\r\n".data(using: .utf8)!)
-
-        request.httpBody = body
-           
-        
+       do {
+               // Convert the dictionary to JSON data
+               let jsonData = try JSONSerialization.data(withJSONObject: payload, options: [])
+               
+               // Set the httpBody of the request
+               request.httpBody = jsonData
+           } catch {
+               print("Error encoding supplement information: \(error)")
+               completion(false, nil)
+               return
+           }
         
         // Create the URLSession data task
         let task = URLSession.shared.dataTask(with: request) { data, response, error in

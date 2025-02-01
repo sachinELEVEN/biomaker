@@ -124,7 +124,7 @@ class UserHealthContext {
        //we dont want the newly added supplement to be part of the supplement stack context
        context += getUserSupplementStackContext(supplementsToIgnore: [supplement])
         
-        return ""
+        return context
     }
     
     static func getUserSupplementStackContext(supplementsToIgnore: [BMSupplement])->String{
