@@ -336,6 +336,11 @@ struct AddSupplementView: View {
                 }else if currentStep == 7{
                     //supplement has been added to the stack and analysis by the llm is compelte so show the page
                     //TODO- SHOW SUPPLEMENT DETAILED VIEW
+                    if supplement != nil{
+                        NavigationView{
+                            SupplementDetailView(showSelf: .constant(true), supplement: supplement!)
+                        }
+                    }
                 }
                 
                 descriptionView(text: getDescription())

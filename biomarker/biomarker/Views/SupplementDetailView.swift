@@ -53,6 +53,23 @@ struct SupplementDetailView: View {
                         
                         
                     aiInfoView(header: "Rating", description: supplement.aiRating)//should be in format x/10
+                    
+                    if supplement.aiRating != nil && Float(supplement.aiRating!) != nil{
+                        ZStack(alignment: .leading) {
+                                       // Background rectangle
+                                       Rectangle()
+                                           .fill(Color.secondary) // Default color for the background
+                                           .frame(height: 30) // Height of the progress bar
+                                           .cornerRadius(20) // Optional: Rounded corners
+
+                                       // Filled rectangle based on the number
+                                       Rectangle()
+                                .fill(colorForNumber(Float(supplement.aiRating!)!)) // Set the fill color based on the number
+                                .frame(width: min(CGFloat(Float(supplement.aiRating!)!) / 10 * geo.size.width, geo.size.width/1.2), height: 30) // Calculate width based on the number
+                                           .cornerRadius(20) // Optional: Rounded corners
+                        }.padding(.horizontal)
+                    }
+                    
                     aiInfoView(header: "Report", description: supplement.aiReport)
                     aiInfoView(header: "Recommendation", description: supplement.aiAdviceBasedUserHealthContext)
                     aiInfoView(header: "Common reason for usage", description: supplement.aiUsageCommonReasonForUseAndAdvantage)
@@ -72,7 +89,7 @@ struct SupplementDetailView: View {
                     + Text(" \(supplement.createdAt, formatter: dateFormatter_D_MMMM_YYYY)")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-                        .multilineTextAlignment(.leading)
+                        //.multilineTextAlignment(.leading)
                     //.italic()
                         .bold()
                     
@@ -124,6 +141,20 @@ struct SupplementDetailView: View {
         }//.padding(.bottom,1)
         .padding([.horizontal])
     }
+    
+    // Function to determine the color based on the number
+       private func colorForNumber(_ number: Float) -> Color {
+           switch number {
+           case 0..<3:
+               return .red // Highlight red for 0 to 2
+           case 3..<7:
+               return .yellow // Highlight yellow for 3 to 6
+           case 7...10:
+               return .green // Highlight green for 7 to 10
+           default:
+               return .secondary // Default color
+           }
+       }
     
     func analyseSupplementWithLLM(){
         
