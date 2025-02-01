@@ -84,6 +84,7 @@ class UserHealthContext {
                 supplement.aiCommonStrengthNumberAndUnits = response?["ai_common_dosage_strength"] as? String ?? nil
                 supplement.aiUsageCommonReasonForUseAndAdvantage = response?["ai_common_reason_for_use_and_advantages"] as? String ?? nil
                 supplement.aiAnalysisStage = .completed
+                supplement.aiSupplementValid = response?["ai_is_valid"] as? String ?? nil
                 //Assign values to the supplement
                 DispatchQueue.main.async {
                     BMSupplementStackGL.refresh()

@@ -44,8 +44,13 @@ struct SupplementDetailView: View {
                         }.padding([.bottom,.horizontal])
                         
                         if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
-                            biomarerIntelligenceLabel()
-                                .padding()
+                            if supplement.isSupplementValid(){
+                                biomarerIntelligenceLabel()
+                                    .padding()
+                            }else{
+                                biomarerIntelligenceLabel(text: "Biomarker couldn't find any information on \(supplement.name).")
+                                    .padding()
+                            }
                         }
                         
                         if supplement.aiAnalysisStage == .never{

@@ -94,8 +94,8 @@ class BMSupplement: Identifiable {
     var aiCalories: String? = nil//present in supplement analysis report
     var aiRating: String? = nil//rating out of 10 //present in supplement analysis report
     var aiReport: String? = nil//present in supplement analysis report
+    var aiSupplementValid: String?//present in the supplement analysis report
     var aiAnalysisStage : BMSupplementAIAnalysisStage = .never
-    
     
     init(id: String, supplementType : BMSupplementType, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm?, timeOfConsumption: [Date?],
@@ -114,6 +114,13 @@ class BMSupplement: Identifiable {
         self.is5MinReminderSet = is5MinReminderSet
         self.userNotes = userNotes
         self.supplementType = supplementType
+    }
+    
+    func isSupplementValid()->Bool{
+        if aiSupplementValid != nil && aiSupplementValid == "no"{
+            return false
+        }
+        return true
     }
     
     //this should be called whenever it is modified
