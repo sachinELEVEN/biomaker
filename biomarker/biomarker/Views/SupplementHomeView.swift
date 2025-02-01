@@ -13,6 +13,7 @@ struct SupplementHomeView:View {
     @State var showAddSupplementScreen = false
     @State private var supplementType: BMSupplementType = .supplement
     @State var showSupplementDetailView: Bool = false
+    @State var supplementViewToShowInDetail: BMSupplement? = nil
     var body: some View {
         NavigationView{
             GeometryReader{ geo in
@@ -95,21 +96,26 @@ struct SupplementHomeView:View {
                             ForEach(bmSupplementStackGL.supplements.filter({ supp in
                                 supp.supplementType == supplementType
                             })){ supp in
-//                                Button(action:{
-//                                    showSupplementDetailView = true
-//                                }){
-                                NavigationLink(destination: SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supp),isActive: $showSupplementDetailView) {
                                     VStack{
-                                        SupplementRow(supplement: supp)
+                                        Button(action:{
+                                            supplementViewToShowInDetail = supp
+                                            showSupplementDetailView = true
+                                        }){
+                                            SupplementRow(supplement: supp)
+                                        }
                                         Divider().padding(.horizontal)
                                     }
-                                }
-//                                        .sheet(isPresented: $showSupplementDetailView){
-//                                            SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supp)
-//                                        }
-                               // }
+                                
+
                             }
-                            
+                            if supplementViewToShowInDetail != nil{
+                                NavigationLink(destination: SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supplementViewToShowInDetail!),isActive: $showSupplementDetailView) {
+                                    Text("")
+                                }
+//                                    .navigationDestination(isPresented: $showSupplementDetailView){
+//                                        SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supplementViewToShowInDetail!)
+//                                    }
+                            }
                             
                             
                             
