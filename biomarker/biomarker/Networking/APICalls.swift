@@ -123,16 +123,29 @@ class APIService {
         
         // Encode the supplement information to JSON
         // Set the HTTP body directly from the JSON string
-        do {
-            // Convert the string to Data
-            if let jsonData = supplementInformation.data(using: .utf8) {
-                request.httpBody = jsonData
-            } else {
-                print("/generateSupplementReportWithLLM: Error converting string to Data")
-                completion(false, nil)
-                return
-            }
-        }
+       // Create the multipart form data
+        var body = Data()
+       
+       // Generate the boundary string
+        let boundary = "Boundary-\(UUID().uuidString)"
+        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+           
+        // Add credentials and isScannedDocument
+        let credentials = "2930hrifnef4df3983hr@9RHIOWWN"
+
+        // Append boundary and form data for credentials
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"credentials\"\r\n\r\n".data(using: .utf8)!)
+        body.append("\(credentials)\r\n".data(using: .utf8)!)
+
+        // Append boundary and form data for isScannedDocument
+        body.append("--\(boundary)\r\n".data(using: .utf8)!)
+        body.append("Content-Disposition: form-data; name=\"supplementinformation\"\r\n\r\n".data(using: .utf8)!)
+        body.append("\(supplementInformation)\r\n".data(using: .utf8)!)
+
+        request.httpBody = body
+           
+        
         
         // Create the URLSession data task
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
