@@ -66,6 +66,10 @@ class UserHealthContext {
             if !success{
                 print("Failed to analyse the reponse")
                 supplement.aiAnalysisStage = .failed
+                DispatchQueue.main.async {
+                    BMSupplementStackGL.refresh()
+                }
+                
                 completion(false,nil)
             }else{
                 print("/analyzeSupplementWithLLM: Successfully analysed the supplement compatibility")
@@ -81,7 +85,9 @@ class UserHealthContext {
                 supplement.aiUsageCommonReasonForUseAndAdvantage = response?["ai_common_reason_for_use_and_advantages"] as? String ?? nil
                 supplement.aiAnalysisStage = .completed
                 //Assign values to the supplement
-                BMSupplementStackGL.refresh()
+                DispatchQueue.main.async {
+                    BMSupplementStackGL.refresh()
+                }
                 
                 completion(true,response)
             }
