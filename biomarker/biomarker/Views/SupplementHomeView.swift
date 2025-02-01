@@ -12,6 +12,7 @@ struct SupplementHomeView:View {
     @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
     @State var showAddSupplementScreen = false
     @State private var supplementType: BMSupplementType = .supplement
+    @State var showSupplementDetailView: Bool = false
     var body: some View {
         NavigationView{
             GeometryReader{ geo in
@@ -94,7 +95,16 @@ struct SupplementHomeView:View {
                             ForEach(bmSupplementStackGL.supplements.filter({ supp in
                                 supp.supplementType == supplementType
                             })){ supp in
-                                SupplementRow(supplement: supp)
+                                Button(action:{
+                                    showSupplementDetailView = true
+                                }){
+                                    VStack{
+                                    SupplementRow(supplement: supp)
+                                    }
+                                        .sheet(isPresented: $showSupplementDetailView){
+                                            SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supp)
+                                        }
+                                }
                             }
                             
                             
@@ -121,6 +131,7 @@ struct SupplementHomeView:View {
 
 
 struct SupplementRow: View {
+    @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
     var supplement: BMSupplement
 
     var body: some View {
@@ -130,12 +141,12 @@ struct SupplementRow: View {
                 .resizable()
                 .frame(width: 30, height: 30)
                 .foregroundColor(.primary)
-
+            
             VStack(alignment: .leading) {
                 Text(supplement.name)
                     .font(.headline)
                     .foregroundColor(.primary)
-
+                
                 HStack {
                     Text("\(supplement.strengthNumber) \(supplement.strengthUnit)")
                         .font(.subheadline)
@@ -144,24 +155,24 @@ struct SupplementRow: View {
                     Text(supplement.form?.rawValue ?? "") // Display form
                         .font(.subheadline)
                         .foregroundColor(.secondary)
-
+                    
                     Spacer()
-
+                    
                     Text(supplement.frequency.rawValue) // Display frequency
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
-             
-
+                
+                
                 // Display time of consumption
                 if !supplement.timeOfConsumption.isEmpty {
-//                    Text("Dosage Times: \(formatTimeOfConsumption(supplement.timeOfConsumption))")
-//                        .font(.subheadline)
-//                        .foregroundColor(.gray)
+                    //                    Text("Dosage Times: \(formatTimeOfConsumption(supplement.timeOfConsumption))")
+                    //                        .font(.subheadline)
+                    //                        .foregroundColor(.gray)
                     SupplementTimeView(supplement: supplement)
                         .padding(.bottom,3)
                 }
-
+                
                 // Display next consumption date
                 if SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360).count > 0 {
                     Text("Upcoming dose is on")
@@ -170,15 +181,15 @@ struct SupplementRow: View {
                     + Text(" \(SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360)[0], formatter: dateFormatter_D_MMMM_YYYY)")
                         .font(.subheadline)
                         .foregroundColor(.pink)
-                        //.italic()
+                    //.italic()
                         .bold()
                 }
-
-//                if let userNotes = supplement.userNotes, !userNotes.isEmpty {
-//                    Text("Notes: \(userNotes)")
-//                        .font(.caption)
-//                        .foregroundColor(.gray)
-//                }
+                
+                //                if let userNotes = supplement.userNotes, !userNotes.isEmpty {
+                //                    Text("Notes: \(userNotes)")
+                //                        .font(.caption)
+                //                        .foregroundColor(.gray)
+                //                }
             }
             .padding(.leading, 8)
         }
@@ -452,6 +463,7 @@ struct SupplementScheduleView: View {
 
 
 struct SupplementTimeView: View {
+    @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
     var supplement: BMSupplement
     var now = Date()
     var body: some View {

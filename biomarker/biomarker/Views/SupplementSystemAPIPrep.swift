@@ -118,6 +118,7 @@ class UserHealthContext {
         context += userGeneralHealthNotesContext()
         
         //STEP3: Past test record information
+       //THIS NEEDS ENHANCEMENT- WE MUST NOT SEND DUPLICATE TEST ENTRIES
         context += getTestRecordsContext()
         
         //STEP4: EXISTING SUPPLEMENT USER IS TAKING
@@ -195,6 +196,7 @@ class UserHealthContext {
     //This function will return a string which denotes the user test record information.
     //This will be useful for ai to better analyse user's health
     //We will provide the list of test for which user's test values are in range and for which it is out of ref range
+    //THIS NEEDS ENHANCEMENT- WE MUST NOT SEND DUPLICATE TEST ENTRIES
     static func getTestRecordsContext()->String{
         /*
          The context will be of type

@@ -32,6 +32,7 @@
 		8E8450EB2D4AC6A300882C3D /* AddSupplementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8450EA2D4AC6A300882C3D /* AddSupplementView.swift */; };
 		8EA9F36A2D4C0A5A00F547B9 /* SupplementHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9F3692D4C0A5A00F547B9 /* SupplementHomeView.swift */; };
 		8EA9F36C2D4E72B700F547B9 /* SupplementSystemAPIPrep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9F36B2D4E72B700F547B9 /* SupplementSystemAPIPrep.swift */; };
+		8EA9F36E2D4EB47300F547B9 /* SupplementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9F36D2D4EB47300F547B9 /* SupplementDetailView.swift */; };
 		8EFAC50A2CB1D15B0067ACDB /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAC5092CB1D15B0067ACDB /* sample.pdf */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		8E8450EA2D4AC6A300882C3D /* AddSupplementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSupplementView.swift; sourceTree = "<group>"; };
 		8EA9F3692D4C0A5A00F547B9 /* SupplementHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementHomeView.swift; sourceTree = "<group>"; };
 		8EA9F36B2D4E72B700F547B9 /* SupplementSystemAPIPrep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementSystemAPIPrep.swift; sourceTree = "<group>"; };
+		8EA9F36D2D4EB47300F547B9 /* SupplementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementDetailView.swift; sourceTree = "<group>"; };
 		8EFAC5072CB1CD2E0067ACDB /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
 		8EFAC5092CB1D15B0067ACDB /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = sample.pdf; path = "../../medical-reports/sample.pdf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,6 +212,7 @@
 				8EA9F36B2D4E72B700F547B9 /* SupplementSystemAPIPrep.swift */,
 				8E8450EA2D4AC6A300882C3D /* AddSupplementView.swift */,
 				8EA9F3692D4C0A5A00F547B9 /* SupplementHomeView.swift */,
+				8EA9F36D2D4EB47300F547B9 /* SupplementDetailView.swift */,
 				8E604EA82CB0665A00694510 /* TestRecordEditView.swift */,
 				8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */,
 				8E2937432D21713D008CD0F1 /* MedicalDocumentSearchView.swift */,
@@ -359,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8EA9F36E2D4EB47300F547B9 /* SupplementDetailView.swift in Sources */,
 				8E28FE582CAC89DD00BE56DA /* TestRecordSmallView.swift in Sources */,
 				8E28FE492CAC465C00BE56DA /* System.swift in Sources */,
 				8E28FE1A2CAC426B00BE56DA /* RootView.swift in Sources */,
