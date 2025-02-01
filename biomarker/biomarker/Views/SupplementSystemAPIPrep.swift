@@ -31,6 +31,35 @@ class UserHealthContext {
             return ""
     }
     
+    static func analyseSupplementWithLLM(_ supplement: BMSupplement){
+        
+        var problemStatement = """
+                 You are a top level doctor and are tasked with analyzing a newly added supplement or food item that a user intends to incorporate into their diet. Additionally, you will be provided with relevant information about the user's health. Based on this information, please prepare a report in JSON format that adheres to the following structure:
+                 
+                 {
+                     "ai_report": "<Provide a detailed report on the supplement, commenting on its compatibility with the user's health, its potential impact based on the provided information, and its general effectiveness in the population.>",
+                     "ai_common_reason_for_use_and_advantages": "<Fill this field with common reasons for using the supplement and its advantages.>",
+                     "ai_common_dosage_strength": "<Specify the common dosage strength and units for this supplement.>",
+                     "ai_advice": "<Provide any advice relevant to this supplement for the user.>",
+                     "ai_side_effects": "<List any associated side effects of the supplement.>",
+                     "ai_common_name": "<Provide the common name for this supplement.>",
+                     "ai_category": "<Specify any category you want to assign to this supplement.>",
+                     "ai_calories": "<Indicate the calories for the dosage of the supplement the user is taking.>"
+                 }
+
+                 Make sure you strictly just return the json and nothing else.
+        """
+        
+        
+        let context = prepareSupplementAnalaysisContext(supplement)
+        
+        let promptToLLM = problemStatement + "\n\n" + context
+        
+        //MAKE A REQUEST TO THE SERVER WITH THIS PROMPT
+        
+        
+    }
+    
    static func prepareSupplementAnalaysisContext(_ supplement: BMSupplement)->String{
         /*
          This is context will contain the following details
@@ -46,6 +75,22 @@ class UserHealthContext {
          2. Past test record information (this i will add, leave it to me)
          3. Current supplement stack (this i will add leave it to me)
          
+         Expectation from the LLM
+         
+         You are a top level doctor and are tasked with analyzing a newly added supplement or food item that a user intends to incorporate into their diet. Additionally, you will be provided with relevant information about the user's health. Based on this information, please prepare a report in JSON format that adheres to the following structure:
+         
+         {
+             "ai_report": "<Provide a detailed report on the supplement, commenting on its compatibility with the user's health, its potential impact based on the provided information, and its general effectiveness in the population.>",
+             "ai_common_reason_for_use_and_advantages": "<Fill this field with common reasons for using the supplement and its advantages.>",
+             "ai_common_dosage_strength": "<Specify the common dosage strength and units for this supplement.>",
+             "ai_advice": "<Provide any advice relevant to this supplement for the user.>",
+             "ai_side_effects": "<List any associated side effects of the supplement.>",
+             "ai_common_name": "<Provide the common name for this supplement.>",
+             "ai_category": "<Specify any category you want to assign to this supplement.>",
+             "ai_calories": "<Indicate the calories for the dosage of the supplement the user is taking.>"
+         }
+
+         Make sure you strictly just return the json and nothing else.
          
          */
        
