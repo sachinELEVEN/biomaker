@@ -332,6 +332,9 @@ struct AddSupplementView: View {
                             .padding(.vertical)
                         ActivityIndicator(shouldAnimate: .constant(true))
                     }.padding(.horizontal)
+                }else if currentStep == 7{
+                    //supplement has been added to the stack and analysis by the llm is compelte so show the page
+                    //TODO- SHOW SUPPLEMENT DETAILED VIEW
                 }
                 
                 descriptionView(text: getDescription())
@@ -521,10 +524,15 @@ struct AddSupplementView: View {
                 
                 UserHealthContext.analyzeSupplementWithLLM(supplement!) { success, response in
                     if success{
+                        currentStep = 7
+                        //Assign values to the supplement
                         
                     }else{
                         print("Failed to analyse the reponse")
-                        message = "The \(supplementIsFoodItem ? "food item" : "supplement") has been added to your stack. However Biomarker was unable to analyze the \(supplementIsFoodItem ? "food item" : "supplement"), and you can request an analysis later from the supplement details page."
+                        //WE WILL PROBABLY NOT SHOW THIS MESSAGE BECAUSE WE IMEEDIATELY MOVE TO THE SCREEN 7- WHICH IS SUPPLEMENT DETAILED VIEW
+                        //message = "The \(supplementIsFoodItem ? "food item" : "supplement") has been added to your stack. However Biomarker was unable to analyze the \(supplementIsFoodItem ? "food item" : "supplement"), and you can request an analysis later from the supplement details page."
+                        
+                        currentStep = 7
                     }
                 }
                 
