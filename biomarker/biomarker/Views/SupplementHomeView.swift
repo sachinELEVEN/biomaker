@@ -225,6 +225,7 @@ struct SupplementRow: View {
                             .cornerRadius(10)
                             .padding(.horizontal,3)
                             .padding(.vertical,3)
+                            .foregroundColor(.white)
                     }
                     
                 }
