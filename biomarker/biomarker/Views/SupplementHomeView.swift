@@ -193,6 +193,37 @@ struct SupplementRow: View {
                 //                        .font(.caption)
                 //                        .foregroundColor(.gray)
                 //                }
+                
+                HStack{
+                    if supplement.aiCategory != nil && !supplement.aiCategory!.isJustWhitespace(){
+                        Text("\(supplement.aiCategory!)")
+                            .multilineTextAlignment(.leading)
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .padding(.vertical,5)
+                            .padding(.horizontal)
+                            .background(Color.primary)
+                            .foregroundColor(.primaryInvert)
+                            .cornerRadius(10)
+                            .padding(.horizontal,3)
+                            .padding(.vertical,3)
+                    }
+                    
+                    if supplement.aiRating != nil && Float(supplement.aiRating!) != nil{
+                        Text("\(supplement.aiRating!)/10")
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .padding(.vertical,5)
+                            .padding(.horizontal)
+                            .background(SupplementDetailView.colorForNumber(Float(supplement.aiRating!)!))
+                            .cornerRadius(10)
+                            .padding(.horizontal,3)
+                            .padding(.vertical,3)
+                    }
+                    
+                }
+                
+                
             }
             .padding(.leading, 8)
         }

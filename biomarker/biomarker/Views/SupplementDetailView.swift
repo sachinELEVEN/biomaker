@@ -70,7 +70,7 @@ struct SupplementDetailView: View {
                         
                         //AI data being displayed
                         if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
-                            descriptionView(" Please consult your doctor or a qualified healthcare professional for any advice regarding your supplements, food choices, and dosage recommendations.")
+                            descriptionView("Please consult your doctor or a qualified healthcare professional for any advice regarding your supplements, food choices, and dosage recommendations.")
                         }
                         
                         
@@ -86,7 +86,7 @@ struct SupplementDetailView: View {
                                 
                                 // Filled rectangle based on the number
                                 Rectangle()
-                                    .fill(colorForNumber(Float(supplement.aiRating!)!)) // Set the fill color based on the number
+                                    .fill(SupplementDetailView.colorForNumber(Float(supplement.aiRating!)!)) // Set the fill color based on the number
                                     .frame(width: min(CGFloat(Float(supplement.aiRating!)!) / 10 * geo.size.width, geo.size.width/1.2), height: 30) // Calculate width based on the number
                                     .cornerRadius(20) // Optional: Rounded corners
                             }.padding(.horizontal)
@@ -156,11 +156,11 @@ struct SupplementDetailView: View {
     }
     
     // Function to determine the color based on the number
-       private func colorForNumber(_ number: Float) -> Color {
+       static func colorForNumber(_ number: Float) -> Color {
            switch number {
-           case 0..<3:
+           case 0..<4:
                return .red // Highlight red for 0 to 2
-           case 3..<7:
+           case 4..<7:
                return .yellow // Highlight yellow for 3 to 6
            case 7...10:
                return .green // Highlight green for 7 to 10
