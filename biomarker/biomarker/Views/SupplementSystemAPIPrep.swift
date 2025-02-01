@@ -31,7 +31,7 @@ class UserHealthContext {
             return ""
     }
     
-    static func analyzeSupplementWithLLM(_ supplement: BMSupplement, completion: @escaping (Bool) -> Void){
+    static func analyzeSupplementWithLLM(_ supplement: BMSupplement, completion: @escaping (Bool, [String: Any]?) -> Void){
         
         /*
          This prompt will be added by the server as
@@ -64,9 +64,10 @@ class UserHealthContext {
         //MAKE A REQUEST TO THE SERVER WITH THIS PROMPT
         APIService.generateSupplementReportWithLLM(supplementInformation: context) { success, response in
             if !success{
-                completion(false)
+                completion(false,nil)
             }else{
-                completion(true)
+                print("/analyzeSupplementWithLLM: Successfully analysed the supplement compatibility->",response)
+                completion(true,response)
             }
         }
         
