@@ -21,6 +21,20 @@ struct SupplementDetailView: View {
                 ScrollView(showsIndicators: false){
                     SupplementRow(supplement: supplement)
                     
+                    HStack{
+                        //some footer information
+                        Text("\(supplement.name) was added to your stack on")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        + Text(" \(supplement.createdAt, formatter: dateFormatter_D_MMMM_YYYY)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        //.multilineTextAlignment(.leading)
+                        //.italic()
+                            .bold()
+                     Spacer()
+                    }.padding([.bottom,.horizontal])
+                    
                     if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
                         biomarerIntelligenceLabel()
                             .padding()
@@ -82,16 +96,6 @@ struct SupplementDetailView: View {
                         .padding(.bottom)
                     
                    
-                    //some footer information
-                    Text("\(supplement.name) was added to your stack on")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    + Text(" \(supplement.createdAt, formatter: dateFormatter_D_MMMM_YYYY)")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        //.multilineTextAlignment(.leading)
-                    //.italic()
-                        .bold()
                     
                     
                     

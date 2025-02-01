@@ -345,75 +345,77 @@ struct AddSupplementView: View {
                 
                 descriptionView(text: getDescription())
                 
-                HStack{
-                    //
-                    if currentStep > 0{
+                if currentStep != 7{
+                    HStack{
+                        //
+                        if currentStep > 0{
+                            Button(action:{
+                                
+                                if currentStep == 0{
+                                    return
+                                }
+                                if currentStep == 6{
+                                    currentStep -= 2
+                                    //because we want to move straigght from 6 to 4 as the separate reminder set screen 5 is now no longer in use
+                                    return
+                                }
+                                
+                                currentStep -= 1
+                                
+                                
+                            }){
+                                HStack{
+                                    //label(heading.contains("notes") ? "Add" : "Next", textColor: .primaryInvert, bgColor: canMoveToNextStep() ? .primary : .primary.opacity(0.3), imgName: "arrow.forward", imgColor: .primaryInvert, width: 150, radius: 10,alignment: .center)
+                                    imageView(systemName: "arrow.backward.circle.fill",color: .accentColor,size: 40)
+                                    Spacer()
+                                }.padding()
+                            }
+                        }
+                        
+                        //
                         Button(action:{
                             
-                            if currentStep == 0{
-                                return
-                            }
-                            if currentStep == 6{
-                                currentStep -= 2
-                                //because we want to move straigght from 6 to 4 as the separate reminder set screen 5 is now no longer in use
+                            if analysisInProgress{
+                                print("Cannot request a supplement analysis as the last one is in progress")
                                 return
                             }
                             
-                            currentStep -= 1
+                            if currentStep == finalStep{
+                                createSupplement()
+                            }
+                            
+                            if canMoveToNextStep(){
+                                if currentStep == 1 && supplementIsFoodItem{
+                                    currentStep += 1 //additional step so that because we dont want to notes section for food item
+                                }
+                                currentStep += 1
+                                
+                                message = nil
+                            }
+                            
+                            
                             
                             
                         }){
                             HStack{
-                                //label(heading.contains("notes") ? "Add" : "Next", textColor: .primaryInvert, bgColor: canMoveToNextStep() ? .primary : .primary.opacity(0.3), imgName: "arrow.forward", imgColor: .primaryInvert, width: 150, radius: 10,alignment: .center)
-                                imageView(systemName: "arrow.backward.circle.fill",color: .accentColor,size: 40)
+                                label(currentStep == finalStep ? "Add" : currentStep==6 ? "Analysing..." : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .secondary), imgName: currentStep == finalStep ? "checkmark" : currentStep==6 ? "" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
                                 Spacer()
                             }.padding()
                         }
+                        
                     }
                     
-                    //
-                    Button(action:{
+                    if message != nil{
+                        Text(message!)
+                            .font(.subheadline)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.red)
+                            .cornerRadius(10)
+                            .padding()
                         
-                        if analysisInProgress{
-                            print("Cannot request a supplement analysis as the last one is in progress")
-                            return
-                        }
-                        
-                        if currentStep == finalStep{
-                            createSupplement()
-                        }
-                        
-                        if canMoveToNextStep(){
-                            if currentStep == 1 && supplementIsFoodItem{
-                                currentStep += 1 //additional step so that because we dont want to notes section for food item
-                            }
-                            currentStep += 1
-                            
-                            message = nil
-                        }
-                       
-                        
-                        
-                        
-                    }){
-                        HStack{
-                            label(currentStep == finalStep ? "Add" : currentStep==6 ? "Analysing..." : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .secondary), imgName: currentStep == finalStep ? "checkmark" : currentStep==6 ? "" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
-                            Spacer()
-                        }.padding()
                     }
-                    
-                }
-                
-                if message != nil{
-                    Text(message!)
-                        .font(.subheadline)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.red)
-                        .cornerRadius(10)
-                        .padding()
-                        
                 }
                 Spacer()
                 
