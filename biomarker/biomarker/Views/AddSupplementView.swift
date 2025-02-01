@@ -325,11 +325,11 @@ struct AddSupplementView: View {
                             .padding(.vertical)
                         biomarerIntelligenceLabel()
                             .padding(.top)
-                        Text("Biomarker Intelligence is analysing your supplement against your test results, your current supplement stack, and other health related data")
+                        Text("Biomarker Intelligence is analysing \(name) against your test results, your current supplement stack, and other health related data, and generating a detailed supplement report")
                            // .fontWeight(.bold)
                             .font(.headline)
                             .multilineTextAlignment(.leading)
-                            .foregroundStyle(Color.secondary)
+                            .foregroundStyle(Color.pink)
                             .padding(.vertical)
                         ActivityIndicator(shouldAnimate: .constant(true))
                     }.padding(.horizontal)
@@ -348,7 +348,7 @@ struct AddSupplementView: View {
                 if currentStep != 7{
                     HStack{
                         //
-                        if currentStep > 0{
+                        if currentStep > 0 && currentStep < 6{
                             Button(action:{
                                 
                                 if currentStep == 0{
