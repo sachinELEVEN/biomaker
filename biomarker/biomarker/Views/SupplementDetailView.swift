@@ -44,12 +44,76 @@ struct SupplementDetailView: View {
                             .padding(.bottom)
                     }
                     
+                    //Reminder and dosage information- in edit options
+                    
+                    //AI data being displayed
+                    if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
+                        descriptionView(" Please consult your doctor or a qualified healthcare professional for any advice regarding your supplements, food choices, and dosage recommendations.")
+                    }
+                        
+                        
+                    aiInfoView(header: "Rating", description: supplement.aiRating)//should be in format x/10
+                    aiInfoView(header: "Report", description: supplement.aiReport)
+                    aiInfoView(header: "Recommendation", description: supplement.aiAdviceBasedUserHealthContext)
+                    aiInfoView(header: "Common reason for usage", description: supplement.aiUsageCommonReasonForUseAndAdvantage)
+                    aiInfoView(header: "Side effects", description: supplement.aiSideEffect)
+                    aiInfoView(header: "Common Dosage", description: supplement.aiCommonStrengthNumberAndUnits)
+                    
+                    aiInfoView(header: "Calories", description: supplement.aiCalories)
+                    aiInfoView(header: "Common Name", description: supplement.aiCommonName)
+                    aiInfoView(header: "Category", description: supplement.aiCategory)
+                        .padding(.bottom)
+                    
+                   
+                    
+                    
+                    
+                    
+                    
                 }
             }.navigationTitle("\(supplement.supplementType == .food ? "Food" : "Supplement") Report")
         }
        // .background(Color(UIColor.systemBackground))
         //.cornerRadius(8)
         //.shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+    }
+    
+    func aiInfoView(header: String, description: String?)->some View{
+        return VStack{
+            if description != nil{
+                headerView(header)
+               descriptionView(description!)
+            }else{
+                //for testing
+                headerView(header)
+                descriptionView("Thyroxine (levothyroxine) is used to replace missing thyroid hormone in individuals with hypothyroidism.  Advantages include improved metabolism, weight management, energy levels, and mood.")
+            }
+        }
+    }
+    
+    func headerView(_ text: String)->some View{
+        return  HStack{
+            Text(text)
+                .font(.title2)
+                .fontWeight(.bold)
+            
+            Spacer()
+            
+        }//.padding(.bottom,1)
+        .padding([.top,.horizontal])
+    }
+    
+    func descriptionView(_ text: String)->some View{
+        return  HStack{
+            Text(text)
+                .font(.headline)
+                //.fontWeight(.bold)
+                .foregroundColor(.secondary)
+            
+            Spacer()
+            
+        }//.padding(.bottom,1)
+        .padding([.horizontal])
     }
     
     func analyseSupplementWithLLM(){
