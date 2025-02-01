@@ -14,94 +14,103 @@ struct SupplementDetailView: View {
     @Binding var showSelf : Bool
     var supplement: BMSupplement
     @State var analysisInProgress = false
+    @State private var isAnimating = false
 
     var body: some View {
         GeometryReader{ geo in
-            VStack{
-                ScrollView(showsIndicators: false){
-                    SupplementRow(supplement: supplement)
-                    
-                    HStack{
-                        //some footer information
-                        Text("\(supplement.name) was added to your stack on")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        + Text(" \(supplement.createdAt, formatter: dateFormatter_D_MMMM_YYYY)")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        //.multilineTextAlignment(.leading)
-                        //.italic()
-                            .bold()
-                     Spacer()
-                    }.padding([.bottom,.horizontal])
-                    
-                    if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
-                        biomarerIntelligenceLabel()
-                            .padding()
-                    }
-                    
-                    if supplement.aiAnalysisStage == .never{
-                        Button(action:{analyseSupplementWithLLM()}){
-                            label("Analyse with Biomarker Intelligence", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
+            ZStack {
+               
+                    LinearGradient(gradient: Gradient(colors: [Color.brightPurple.opacity(isAnimating ? 0.2 : 0), Color.brightpurple.opacity(isAnimating ? 0 : 0.2)]), startPoint: .topLeading, endPoint: .topTrailing)
+                        .edgesIgnoringSafeArea(.all)
+                        .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true), value: isAnimating)
+                       .opacity(analysisInProgress ? 1 : 0)//for some reason if i put this gradient in if condition on basis analysisInProgress, then animation gets stuck, not giving it too much attention for now
+               
+                VStack{
+                    ScrollView(showsIndicators: false){
+                        SupplementRow(supplement: supplement)
+                        
+                        HStack{
+                            //some footer information
+                            Text("\(supplement.name) was added to your stack on")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            + Text(" \(supplement.createdAt, formatter: dateFormatter_D_MMMM_YYYY)")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            //.multilineTextAlignment(.leading)
+                            //.italic()
+                                .bold()
+                            Spacer()
+                        }.padding([.bottom,.horizontal])
+                        
+                        if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
+                            biomarerIntelligenceLabel()
+                                .padding()
                         }
-                    }
-                    
-                    if supplement.aiAnalysisStage == .failed{
-                        Button(action:{analyseSupplementWithLLM()}){
-                            label("Analyse with Biomarker Intelligence", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
+                        
+                        if supplement.aiAnalysisStage == .never{
+                            Button(action:{analyseSupplementWithLLM()}){
+                                label("\(analysisInProgress ? "Analysing":"Analyse") with Biomarker Intelligence", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
+                            }
                         }
-                        Text("\(supplement.name)'s analysis failed last time, tap to try again")
-                            .fontWeight(.bold)
-                            .font(.caption)
-                            .foregroundStyle(Color.secondary)
-                            .padding(.top,3)
+                        
+                        if supplement.aiAnalysisStage == .failed{
+                            Button(action:{analyseSupplementWithLLM()}){
+                                label("\(analysisInProgress ? "Analysing":"Analyse") with Biomarker Intelligence", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
+                            }
+                            Text("\(supplement.name)'s analysis failed last time, tap to try again")
+                                .fontWeight(.bold)
+                                .font(.caption)
+                                .foregroundStyle(Color.secondary)
+                                .padding(.top,3)
+                                .padding(.bottom)
+                        }
+                        
+                        //Reminder and dosage information- in edit options
+                        
+                        //AI data being displayed
+                        if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
+                            descriptionView(" Please consult your doctor or a qualified healthcare professional for any advice regarding your supplements, food choices, and dosage recommendations.")
+                        }
+                        
+                        
+                        aiInfoView(header: "Rating", description: supplement.aiRating)//should be in format x/10
+                        
+                        if supplement.aiRating != nil && Float(supplement.aiRating!) != nil{
+                            ZStack(alignment: .leading) {
+                                // Background rectangle
+                                Rectangle()
+                                    .fill(Color.secondary) // Default color for the background
+                                    .frame(height: 30) // Height of the progress bar
+                                    .cornerRadius(20) // Optional: Rounded corners
+                                
+                                // Filled rectangle based on the number
+                                Rectangle()
+                                    .fill(colorForNumber(Float(supplement.aiRating!)!)) // Set the fill color based on the number
+                                    .frame(width: min(CGFloat(Float(supplement.aiRating!)!) / 10 * geo.size.width, geo.size.width/1.2), height: 30) // Calculate width based on the number
+                                    .cornerRadius(20) // Optional: Rounded corners
+                            }.padding(.horizontal)
+                        }
+                        
+                        aiInfoView(header: "Report", description: supplement.aiReport)
+                        aiInfoView(header: "Recommendation", description: supplement.aiAdviceBasedUserHealthContext)
+                        aiInfoView(header: "Common reason for usage", description: supplement.aiUsageCommonReasonForUseAndAdvantage)
+                        aiInfoView(header: "Side effects", description: supplement.aiSideEffect)
+                        aiInfoView(header: "Common Dosage", description: supplement.aiCommonStrengthNumberAndUnits)
+                        
+                        aiInfoView(header: "Calories", description: supplement.aiCalories)
+                        aiInfoView(header: "Common Name", description: supplement.aiCommonName)
+                        aiInfoView(header: "Category", description: supplement.aiCategory)
                             .padding(.bottom)
-                    }
-                    
-                    //Reminder and dosage information- in edit options
-                    
-                    //AI data being displayed
-                    if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
-                        descriptionView(" Please consult your doctor or a qualified healthcare professional for any advice regarding your supplements, food choices, and dosage recommendations.")
-                    }
                         
                         
-                    aiInfoView(header: "Rating", description: supplement.aiRating)//should be in format x/10
-                    
-                    if supplement.aiRating != nil && Float(supplement.aiRating!) != nil{
-                        ZStack(alignment: .leading) {
-                                       // Background rectangle
-                                       Rectangle()
-                                           .fill(Color.secondary) // Default color for the background
-                                           .frame(height: 30) // Height of the progress bar
-                                           .cornerRadius(20) // Optional: Rounded corners
-
-                                       // Filled rectangle based on the number
-                                       Rectangle()
-                                .fill(colorForNumber(Float(supplement.aiRating!)!)) // Set the fill color based on the number
-                                .frame(width: min(CGFloat(Float(supplement.aiRating!)!) / 10 * geo.size.width, geo.size.width/1.2), height: 30) // Calculate width based on the number
-                                           .cornerRadius(20) // Optional: Rounded corners
-                        }.padding(.horizontal)
+                        
+                        
+                        
+                        
                     }
-                    
-                    aiInfoView(header: "Report", description: supplement.aiReport)
-                    aiInfoView(header: "Recommendation", description: supplement.aiAdviceBasedUserHealthContext)
-                    aiInfoView(header: "Common reason for usage", description: supplement.aiUsageCommonReasonForUseAndAdvantage)
-                    aiInfoView(header: "Side effects", description: supplement.aiSideEffect)
-                    aiInfoView(header: "Common Dosage", description: supplement.aiCommonStrengthNumberAndUnits)
-                    
-                    aiInfoView(header: "Calories", description: supplement.aiCalories)
-                    aiInfoView(header: "Common Name", description: supplement.aiCommonName)
-                    aiInfoView(header: "Category", description: supplement.aiCategory)
-                        .padding(.bottom)
-                    
-                   
-                    
-                    
-                    
-                    
-                }
-            }.navigationTitle("\(supplement.supplementType == .food ? "Food" : "Supplement") Report")
+                }.navigationTitle("\(supplement.supplementType == .food ? "Food" : "Supplement") Report")
+            }
         }
        // .background(Color(UIColor.systemBackground))
         //.cornerRadius(8)
@@ -166,10 +175,19 @@ struct SupplementDetailView: View {
             print("Cannot request a supplement analysis as the last one is in progress")
             return
         }
-        
         analysisInProgress = true
+        isAnimating = true
+        
+        
         UserHealthContext.analyzeSupplementWithLLM(supplement) { success, response in
-            analysisInProgress = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                //putting thing in here because we do not want abrupt stops in animation in case completion handler gets called very quicky
+                //side effect is that we will show anlaying with biomarker for a few moments longer, but its fine
+                isAnimating = false
+                analysisInProgress = false
+            })
+            
+            
             if success{
             
                 
