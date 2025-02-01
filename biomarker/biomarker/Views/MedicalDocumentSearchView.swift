@@ -199,7 +199,7 @@ struct QuickSearchOptionsView: View{
             let pattern = "(?<=\\s)\(option)(?=\\s)|^\(option)(?=\\s)|(?<=\\s)\(option)$|^\(option)$"
                 
             // Replace occurrences of the option matching the pattern with an empty string
-            let modifiedText = searchText.replacingOccurrences(of: pattern, with: "", options: .regularExpression)
+            let modifiedText = searchText.replacingOccurrences(of: pattern, with: "", options: [.regularExpression,.caseInsensitive])
                 
             // Trim any leading/trailing whitespace from the result
             searchText =  modifiedText.trimmingCharacters(in: .whitespacesAndNewlines)
