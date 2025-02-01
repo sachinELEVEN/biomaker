@@ -65,7 +65,16 @@ struct SupplementDetailView: View {
                         .padding(.bottom)
                     
                    
-                    
+                    //some footer information
+                    Text("\(supplement.name) was added to your stack on")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    + Text(" \(supplement.createdAt, formatter: dateFormatter_D_MMMM_YYYY)")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.leading)
+                    //.italic()
+                        .bold()
                     
                     
                     
@@ -85,8 +94,8 @@ struct SupplementDetailView: View {
                descriptionView(description!)
             }else{
                 //for testing
-                headerView(header)
-                descriptionView("Thyroxine (levothyroxine) is used to replace missing thyroid hormone in individuals with hypothyroidism.  Advantages include improved metabolism, weight management, energy levels, and mood.")
+//                headerView(header)
+//                descriptionView("Thyroxine (levothyroxine) is used to replace missing thyroid hormone in individuals with hypothyroidism.  Advantages include improved metabolism, weight management, energy levels, and mood.")
             }
         }
     }
