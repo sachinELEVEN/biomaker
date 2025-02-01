@@ -29,405 +29,395 @@ struct AddSupplementView: View {
     @State private var message : String? = nil
     @State private var allowReminding5MinBeforeDosage = false
     @State var analysisInProgress = false
-
+    @State private var isAnimating = false
     var body: some View {
         NavigationView {
-            VStack {
-                if currentStep == 0 {
-                    TextField(supplementIsFoodItem ? "Food name eg Tofu, Blueberry" : "Supplement name eg Vitamin D3, Minoxidil", text: $name)
-                        .padding(10)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(8)
-                        .padding([.horizontal,.top])
-                    
-                    Toggle("Treat as a food item", isOn: $supplementIsFoodItem)
-                        .fontWeight(.bold)
-                        .font(.headline)
-                        .toggleStyle(SwitchToggleStyle(tint: .blue))
-                        .padding([.horizontal,.bottom])
-                    
-                } else if currentStep == 1 {
-                    HStack {
-                        TextField(supplementIsFoodItem ? "Portion size" :"Dosage strength (numeric)", text: $strengthNumber)
+            ZStack {
+                // Background dimming effect
+                if currentStep == 6{
+                    LinearGradient(gradient: Gradient(colors: [Color.brightPurple.opacity(isAnimating ? 0.2 : 0), Color.brightpurple.opacity(isAnimating ? 0 : 0.2)]), startPoint: .topLeading, endPoint: .topTrailing)
+                        .edgesIgnoringSafeArea(.all)
+                        .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true), value: isAnimating)
+                }
+                VStack {
+                    if currentStep == 0 {
+                        TextField(supplementIsFoodItem ? "Food name eg Tofu, Blueberry" : "Supplement name eg Vitamin D3, Minoxidil", text: $name)
                             .padding(10)
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
-                            .padding(.trailing)
-                            .keyboardType(.decimalPad)
-                        Picker("Unit", selection: $strengthUnit) {
-                            ForEach(supplementIsFoodItem ? ["g", "lbs", "oz", "mL", "piece"] : [
-                                "mg",
-                                "g",
-                                "mcg",
-                                "mL",
-                                "IU",
-                                     "L",
-                                     "tsp",
-                                     "tbsp",
-                                     "gtt",
-                                     "kg",
-                                     "IU",
-                                     "MEq",
-                                     "%",
-                                     "mg/m²",
-                                     "mMol"], id: \.self) { unit in
-                                Text(unit).tag(unit)
-                                            .fontWeight(.bold)
-                            }
-                        }
-                        .pickerStyle(MenuPickerStyle())
-                        .padding(5)
-                        .background(Color(.systemGray6))
-                        .cornerRadius(8)
-                        .padding(.trailing)
-                    }
-                    .padding()
-//                    Button("Next") {
-//                        currentStep += 1
-//                    }
-                } 
-                else if currentStep == 2 {
-                    ZStack{
-                        if userNotes.isEmpty {
-                                   TextEditor(text:$userNotesPlaceholderText)
-                                .font(.headline)
-                               // .fontWeight(.bold)
-                                .foregroundStyle(Color.secondary)
-                            
-                                .scrollContentBackground(.hidden)
-                                .disabled(true)
-                           }
+                            .padding([.horizontal,.top])
                         
-                        TextEditor(text: $userNotes)
-                            .scrollContentBackground(.hidden)
-                            .font(.headline)
-                            
-                    }
-                    .frame(height: system.fullHeight/4)
-                   // TextField("reason for supplement...", text: $userNotes)
-                        .padding()
-                        .background(Color(.systemGray6))
-                        .cornerRadius(10)
-                        .padding(.horizontal)
-//                    Button("Finish") {
-//                        createSupplement()
-//                    }
-                }
-                else if currentStep == 3 {
-                    HStack{
-                        Text("Frequency")
+                        Toggle("Treat as a food item", isOn: $supplementIsFoodItem)
                             .fontWeight(.bold)
                             .font(.headline)
-                            //.fontWeight(.bold)
-                            Spacer()
-                        Picker("Frequency", selection: $frequency) {
-                            ForEach(BMSupplementFrequency.allCases, id: \.self) { freq in
-                                Text(freq.rawValue).tag(freq)
+                            .toggleStyle(SwitchToggleStyle(tint: .blue))
+                            .padding([.horizontal,.bottom])
+                        
+                    } else if currentStep == 1 {
+                        HStack {
+                            TextField(supplementIsFoodItem ? "Portion size" :"Dosage strength (numeric)", text: $strengthNumber)
+                                .padding(10)
+                                .background(Color(.systemGray6))
+                                .cornerRadius(8)
+                                .padding(.trailing)
+                                .keyboardType(.decimalPad)
+                            Picker("Unit", selection: $strengthUnit) {
+                                ForEach(supplementIsFoodItem ? ["g", "lbs", "oz", "mL", "piece"] : [
+                                    "mg",
+                                    "g",
+                                    "mcg",
+                                    "mL",
+                                    "IU",
+                                    "L",
+                                    "tsp",
+                                    "tbsp",
+                                    "gtt",
+                                    "kg",
+                                    "IU",
+                                    "MEq",
+                                    "%",
+                                    "mg/m²",
+                                    "mMol"], id: \.self) { unit in
+                                        Text(unit).tag(unit)
+                                            .fontWeight(.bold)
+                                    }
                             }
-                        }.pickerStyle(MenuPickerStyle())
+                            .pickerStyle(MenuPickerStyle())
                             .padding(5)
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
                             .padding(.trailing)
-                    }.padding(.top)
-                        .padding(.horizontal)
-                    
-                    if !supplementIsFoodItem{
-                        HStack{
-                            Text("Form")
-                                .fontWeight(.bold)
+                        }
+                        .padding()
+                        //                    Button("Next") {
+                        //                        currentStep += 1
+                        //                    }
+                    }
+                    else if currentStep == 2 {
+                        ZStack{
+                            if userNotes.isEmpty {
+                                TextEditor(text:$userNotesPlaceholderText)
+                                    .font(.headline)
+                                // .fontWeight(.bold)
+                                    .foregroundStyle(Color.secondary)
+                                
+                                    .scrollContentBackground(.hidden)
+                                    .disabled(true)
+                            }
+                            
+                            TextEditor(text: $userNotes)
+                                .scrollContentBackground(.hidden)
                                 .font(.headline)
                             
+                        }
+                        .frame(height: system.fullHeight/4)
+                        // TextField("reason for supplement...", text: $userNotes)
+                        .padding()
+                        .background(Color(.systemGray6))
+                        .cornerRadius(10)
+                        .padding(.horizontal)
+                        //                    Button("Finish") {
+                        //                        createSupplement()
+                        //                    }
+                    }
+                    else if currentStep == 3 {
+                        HStack{
+                            Text("Frequency")
+                                .fontWeight(.bold)
+                                .font(.headline)
                             //.fontWeight(.bold)
                             Spacer()
-                            
-                            Picker("Form", selection: $form) {
-                                ForEach(BMSupplementForm.allCases, id: \.self) { form in
-                                    Text(form.rawValue).tag(form)
+                            Picker("Frequency", selection: $frequency) {
+                                ForEach(BMSupplementFrequency.allCases, id: \.self) { freq in
+                                    Text(freq.rawValue).tag(freq)
                                 }
                             }.pickerStyle(MenuPickerStyle())
                                 .padding(5)
                                 .background(Color(.systemGray6))
                                 .cornerRadius(8)
                                 .padding(.trailing)
-                        }.padding()
-                    }
-
-//                    Button("Next") {
-//                        currentStep += 1
-//                    }
-                } else if currentStep == 4 {
-                    // Time of Consumption
-                    ScrollView(showsIndicators: false){
-                        VStack {
-                            // Text("Enter Reminder Time")
-                            
-                            ForEach(0..<getFrequencyCount(), id: \.self) { index in
-                                VStack{
-                                    HStack {
-                                        Toggle(isOn: Binding(
-                                            get: { timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil },
-                                            set: { isOn in
-                                                if isOn {
-                                                    // If toggled on, add a default time (current time or any default value)
-                                                    if timeOfConsumption.indices.contains(index) {
-                                                        timeOfConsumption[index] = Date()
-                                                        // timeOfConsumption.remove(at: index)
-                                                    }else{
-                                                        //here we will first increase the list to have atleast index+1 count of items and initialise the index item with date
-                                                        for newIdx in timeOfConsumption.count...index{
-                                                            if newIdx == index{
-                                                                timeOfConsumption.append(Date())
-                                                            }else{
-                                                                timeOfConsumption.append(nil)
-                                                            }
-                                                        }
-                                                        
-                                                    }
-                                                } else {
-                                                    // If toggled off, remove the time for this index
-                                                    if timeOfConsumption.indices.contains(index) {
-                                                        timeOfConsumption[index] = nil
-                                                        // timeOfConsumption.remove(at: index)
-                                                    }
-                                                }
-                                            }
-                                        )) {
-                                            Text("Dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "") time")
-                                                .fontWeight(.bold)
-                                                .font(.headline)
-                                        }
-                                        .toggleStyle(SwitchToggleStyle(tint: .blue)) // Optional: Customize toggle color
-                                    }
-                                    
-                                    if timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil {
-                                        DatePicker(" ", selection: Binding(
-                                            get: { timeOfConsumption[index]! },
-                                            set: { timeOfConsumption[index] = $0 }
-                                        ), displayedComponents: isFirstNonNilIndex(in: timeOfConsumption, index: index) ? [.hourAndMinute,.date] : [.hourAndMinute])
-                                        .fontWeight(.bold)
-                                        .font(.headline)
-                                        // .padding(.bottom)
-                                    } else {
-                                        //                                Text("Set time")
-                                        //                                    .fontWeight(.bold)
-                                        //                                    .font(.headline)
-                                        //                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
-                                    }
-                                } .padding()
-                                    .background(Color(.systemGray6))
-                                    .cornerRadius(10)
-                                    .padding([.bottom])
-                                
-                            }
-                            
-                            if timeOfConsumption.count > 0 && timeOfConsumption.contains(where: { $0 != nil }) {
-                                
-                                //Only show reminder when at least on the date is set
-                                Toggle("Remind me 5 min before time", isOn: $allowReminding5MinBeforeDosage)
+                        }.padding(.top)
+                            .padding(.horizontal)
+                        
+                        if !supplementIsFoodItem{
+                            HStack{
+                                Text("Form")
                                     .fontWeight(.bold)
                                     .font(.headline)
-                                    .toggleStyle(SwitchToggleStyle(tint: .blue))
-                                    .padding()
-                                    .background(Color(.systemGray6))
-                                    .cornerRadius(10)
-                                    .padding([.top,.bottom])
                                 
-                            }
-                            
-                            
-                            
-                        }.padding()
-                    }
-
-
-                    
-//                    Button("Next") {
-//                        currentStep += 1
-//                    }
-                } else if currentStep == 5 {
-                    // Reminder Time
-                    //"Reminder for dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "")"
-                    /*
-                    VStack{
-                        // Text("Enter Reminder Time")
+                                //.fontWeight(.bold)
+                                Spacer()
+                                
+                                Picker("Form", selection: $form) {
+                                    ForEach(BMSupplementForm.allCases, id: \.self) { form in
+                                        Text(form.rawValue).tag(form)
+                                    }
+                                }.pickerStyle(MenuPickerStyle())
+                                    .padding(5)
+                                    .background(Color(.systemGray6))
+                                    .cornerRadius(8)
+                                    .padding(.trailing)
+                            }.padding()
+                        }
+                        
+                        //                    Button("Next") {
+                        //                        currentStep += 1
+                        //                    }
+                    } else if currentStep == 4 {
+                        // Time of Consumption
+                        ScrollView(showsIndicators: false){
+                            VStack {
+                                // Text("Enter Reminder Time")
+                                
+                                ForEach(0..<getFrequencyCount(), id: \.self) { index in
+                                    VStack{
+                                        HStack {
+                                            Toggle(isOn: Binding(
+                                                get: { timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil },
+                                                set: { isOn in
+                                                    if isOn {
+                                                        // If toggled on, add a default time (current time or any default value)
+                                                        if timeOfConsumption.indices.contains(index) {
+                                                            timeOfConsumption[index] = Date()
+                                                            // timeOfConsumption.remove(at: index)
+                                                        }else{
+                                                            //here we will first increase the list to have atleast index+1 count of items and initialise the index item with date
+                                                            for newIdx in timeOfConsumption.count...index{
+                                                                if newIdx == index{
+                                                                    timeOfConsumption.append(Date())
+                                                                }else{
+                                                                    timeOfConsumption.append(nil)
+                                                                }
+                                                            }
+                                                            
+                                                        }
+                                                    } else {
+                                                        // If toggled off, remove the time for this index
+                                                        if timeOfConsumption.indices.contains(index) {
+                                                            timeOfConsumption[index] = nil
+                                                            // timeOfConsumption.remove(at: index)
+                                                        }
+                                                    }
+                                                }
+                                            )) {
+                                                Text("Dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "") time")
+                                                    .fontWeight(.bold)
+                                                    .font(.headline)
+                                            }
+                                            .toggleStyle(SwitchToggleStyle(tint: .blue)) // Optional: Customize toggle color
+                                        }
+                                        
+                                        if timeOfConsumption.indices.contains(index) && timeOfConsumption[index] != nil {
+                                            DatePicker(" ", selection: Binding(
+                                                get: { timeOfConsumption[index]! },
+                                                set: { timeOfConsumption[index] = $0 }
+                                            ), displayedComponents: isFirstNonNilIndex(in: timeOfConsumption, index: index) ? [.hourAndMinute,.date] : [.hourAndMinute])
+                                            .fontWeight(.bold)
+                                            .font(.headline)
+                                            // .padding(.bottom)
+                                        } else {
+                                            //                                Text("Set time")
+                                            //                                    .fontWeight(.bold)
+                                            //                                    .font(.headline)
+                                            //                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
+                                        }
+                                    } .padding()
+                                        .background(Color(.systemGray6))
+                                        .cornerRadius(10)
+                                        .padding([.bottom])
+                                    
+                                }
+                                
+                                if timeOfConsumption.count > 0 && timeOfConsumption.contains(where: { $0 != nil }) {
+                                    
+                                    //Only show reminder when at least on the date is set
+                                    Toggle("Remind me 5 min before time", isOn: $allowReminding5MinBeforeDosage)
+                                        .fontWeight(.bold)
+                                        .font(.headline)
+                                        .toggleStyle(SwitchToggleStyle(tint: .blue))
+                                        .padding()
+                                        .background(Color(.systemGray6))
+                                        .cornerRadius(10)
+                                        .padding([.top,.bottom])
+                                    
+                                }
+                                
+                                
+                                
+                            }.padding()
+                        }
+                        
+                        
+                        
+                        //                    Button("Next") {
+                        //                        currentStep += 1
+                        //                    }
+                    } else if currentStep == 5 {
+                        // Reminder Time
+                        //"Reminder for dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "")"
+                        /*
+                         VStack{
+                         // Text("Enter Reminder Time")
                          
                          ForEach(0..<getFrequencyCount(), id: \.self) { index in
-                             HStack {
-                                 Toggle(isOn: Binding(
-                                     get: { reminderTime.indices.contains(index) && reminderTime[index] != nil },
-                                     set: { isOn in
-                                         if isOn {
-                                             // If toggled on, add a default time (current time or any default value)
-                                             if reminderTime.indices.contains(index) {
-                                                 reminderTime[index] = Date()
-                                                // timeOfConsumption.remove(at: index)
-                                             }else{
-                                                 //here we will first increase the list to have atleast index+1 count of items and initialise the index item with date
-                                                 for newIdx in reminderTime.count...index{
-                                                     if newIdx == index{
-                                                         reminderTime.append(Date())
-                                                     }else{
-                                                         reminderTime.append(nil)
-                                                     }
-                                                 }
-                                             }
-                                         } else {
-                                             // If toggled off, remove the time for this index
-                                             if reminderTime.indices.contains(index) {
-                                                 //reminderTime.remove(at: index)
-                                                 reminderTime[index] = nil
-                                             }
-                                         }
-                                     }
-                                 )) {
-                                     Text("Reminder for dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "")")
-                                         .fontWeight(.bold)
-                                         .font(.headline)
-                                 }
-                                 .toggleStyle(SwitchToggleStyle(tint: .blue)) // Optional: Customize toggle color
-                             }
-                             
-                             if reminderTime.indices.contains(index) && reminderTime[index] != nil {
-                                 DatePicker(" ", selection: Binding(
-                                     get: { reminderTime[index]! },
-                                     set: { reminderTime[index] = $0 }
-                                 ), displayedComponents: .hourAndMinute)
-                                 .fontWeight(.bold)
-                                 .font(.headline)
-                                 .padding(.bottom)
-                             } else {
- //                                Text("Set time")
- //                                    .fontWeight(.bold)
- //                                    .font(.headline)
- //                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
-                             }
+                         HStack {
+                         Toggle(isOn: Binding(
+                         get: { reminderTime.indices.contains(index) && reminderTime[index] != nil },
+                         set: { isOn in
+                         if isOn {
+                         // If toggled on, add a default time (current time or any default value)
+                         if reminderTime.indices.contains(index) {
+                         reminderTime[index] = Date()
+                         // timeOfConsumption.remove(at: index)
+                         }else{
+                         //here we will first increase the list to have atleast index+1 count of items and initialise the index item with date
+                         for newIdx in reminderTime.count...index{
+                         if newIdx == index{
+                         reminderTime.append(Date())
+                         }else{
+                         reminderTime.append(nil)
                          }
-                     }
-                    .padding()
-                    */
-//                    Button("Next") {
-//                        currentStep += 1
-//                    }
-                }else if currentStep == 6{
-                    //this is shown when supplement is added locally and is being analysed by biomarker intelligence
-                    VStack(alignment: .leading){
-                        Group{
-                            Text("\(name) is added to your ")
-                            + Text("supplement stack")
-                                .italic()
-                                .underline()
-                        }
-                                       
-                            .fontWeight(.bold)
-                            .font(.title)
-                            .multilineTextAlignment(.leading)
-                            .padding(.vertical)
-                        biomarerIntelligenceLabel()
-                            .padding(.top)
-                        Text("Biomarker Intelligence is analysing \(name) against your test results, your current supplement stack, and other health related data, and generating a detailed supplement report")
-                           // .fontWeight(.bold)
-                            .font(.headline)
-                            .multilineTextAlignment(.leading)
-                            .foregroundStyle(Color.pink)
-                            .padding(.vertical)
-                        ActivityIndicator(shouldAnimate: .constant(true))
-                    }.padding(.horizontal)
-                }else if currentStep == 7{
-                    //supplement has been added to the stack and analysis by the llm is compelte so show the page
-                    //TODO- SHOW SUPPLEMENT DETAILED VIEW
-                    if supplement != nil{
-                        NavigationView{
-                            SupplementDetailView(showSelf: .constant(true), supplement: supplement!)
+                         }
+                         }
+                         } else {
+                         // If toggled off, remove the time for this index
+                         if reminderTime.indices.contains(index) {
+                         //reminderTime.remove(at: index)
+                         reminderTime[index] = nil
+                         }
+                         }
+                         }
+                         )) {
+                         Text("Reminder for dosage\(getFrequencyCount() > 1 ? " \(index+1)" : "")")
+                         .fontWeight(.bold)
+                         .font(.headline)
+                         }
+                         .toggleStyle(SwitchToggleStyle(tint: .blue)) // Optional: Customize toggle color
+                         }
+                         
+                         if reminderTime.indices.contains(index) && reminderTime[index] != nil {
+                         DatePicker(" ", selection: Binding(
+                         get: { reminderTime[index]! },
+                         set: { reminderTime[index] = $0 }
+                         ), displayedComponents: .hourAndMinute)
+                         .fontWeight(.bold)
+                         .font(.headline)
+                         .padding(.bottom)
+                         } else {
+                         //                                Text("Set time")
+                         //                                    .fontWeight(.bold)
+                         //                                    .font(.headline)
+                         //                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
+                         }
+                         }
+                         }
+                         .padding()
+                         */
+                        //                    Button("Next") {
+                        //                        currentStep += 1
+                        //                    }
+                    }else if currentStep == 6{
+                        //this is shown when supplement is added locally and is being analysed by biomarker intelligence
+                        AnalyzingReportView(name: name)
+                            .onAppear{
+                                isAnimating = true
+                            }
+                    }else if currentStep == 7{
+                        //supplement has been added to the stack and analysis by the llm is compelte so show the page
+                        //TODO- SHOW SUPPLEMENT DETAILED VIEW
+                        if supplement != nil{
+                            NavigationView{
+                                SupplementDetailView(showSelf: .constant(true), supplement: supplement!)
+                            }
                         }
                     }
-                }
-                
-                descriptionView(text: getDescription())
-                
-                if currentStep != 7{
-                    HStack{
-                        //
-                        if currentStep > 0 && currentStep < 6{
+                    
+                    descriptionView(text: getDescription())
+                    
+                    if currentStep != 7{
+                        HStack{
+                            //
+                            if currentStep > 0 && currentStep < 6{
+                                Button(action:{
+                                    
+                                    if currentStep == 0{
+                                        return
+                                    }
+                                    if currentStep == 6{
+                                        currentStep -= 2
+                                        //because we want to move straigght from 6 to 4 as the separate reminder set screen 5 is now no longer in use
+                                        return
+                                    }
+                                    
+                                    currentStep -= 1
+                                    
+                                    
+                                }){
+                                    HStack{
+                                        //label(heading.contains("notes") ? "Add" : "Next", textColor: .primaryInvert, bgColor: canMoveToNextStep() ? .primary : .primary.opacity(0.3), imgName: "arrow.forward", imgColor: .primaryInvert, width: 150, radius: 10,alignment: .center)
+                                        imageView(systemName: "arrow.backward.circle.fill",color: .accentColor,size: 40)
+                                        Spacer()
+                                    }.padding()
+                                }
+                            }
+                            
+                            //
                             Button(action:{
                                 
-                                if currentStep == 0{
-                                    return
-                                }
-                                if currentStep == 6{
-                                    currentStep -= 2
-                                    //because we want to move straigght from 6 to 4 as the separate reminder set screen 5 is now no longer in use
+                                if analysisInProgress{
+                                    print("Cannot request a supplement analysis as the last one is in progress")
                                     return
                                 }
                                 
-                                currentStep -= 1
+                                if currentStep == finalStep{
+                                    createSupplement()
+                                }
+                                
+                                if canMoveToNextStep(){
+                                    if currentStep == 1 && supplementIsFoodItem{
+                                        currentStep += 1 //additional step so that because we dont want to notes section for food item
+                                    }
+                                    currentStep += 1
+                                    
+                                    message = nil
+                                }
+                                
+                                
                                 
                                 
                             }){
                                 HStack{
-                                    //label(heading.contains("notes") ? "Add" : "Next", textColor: .primaryInvert, bgColor: canMoveToNextStep() ? .primary : .primary.opacity(0.3), imgName: "arrow.forward", imgColor: .primaryInvert, width: 150, radius: 10,alignment: .center)
-                                    imageView(systemName: "arrow.backward.circle.fill",color: .accentColor,size: 40)
+                                    label(currentStep == finalStep ? "Add" : currentStep==6 ? "Analysing..." : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .secondary), imgName: currentStep == finalStep ? "checkmark" : currentStep==6 ? "" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
                                     Spacer()
                                 }.padding()
                             }
+                            
                         }
                         
-                        //
-                        Button(action:{
+                        if message != nil{
+                            Text(message!)
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.red)
+                                .cornerRadius(10)
+                                .padding()
                             
-                            if analysisInProgress{
-                                print("Cannot request a supplement analysis as the last one is in progress")
-                                return
-                            }
-                            
-                            if currentStep == finalStep{
-                                createSupplement()
-                            }
-                            
-                            if canMoveToNextStep(){
-                                if currentStep == 1 && supplementIsFoodItem{
-                                    currentStep += 1 //additional step so that because we dont want to notes section for food item
-                                }
-                                currentStep += 1
-                                
-                                message = nil
-                            }
-                            
-                            
-                            
-                            
-                        }){
-                            HStack{
-                                label(currentStep == finalStep ? "Add" : currentStep==6 ? "Analysing..." : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .secondary), imgName: currentStep == finalStep ? "checkmark" : currentStep==6 ? "" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
-                                Spacer()
-                            }.padding()
                         }
-                        
                     }
+                    Spacer()
                     
-                    if message != nil{
-                        Text(message!)
-                            .font(.subheadline)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.red)
-                            .cornerRadius(10)
-                            .padding()
-                        
-                    }
                 }
-                Spacer()
-                
-            }
-            .animation(.default)
-            .navigationTitle(heading)
-            .navigationBarTitleDisplayMode(.large)
-            .onChange(of: currentStep){ _ in
-                updateHeading()
-            }
-            .onChange(of: supplementIsFoodItem){ _ in
-                updateHeading()
+                .animation(.default)
+                .navigationTitle(heading)
+                .navigationBarTitleDisplayMode(.large)
+                .onChange(of: currentStep){ _ in
+                    updateHeading()
+                }
+                .onChange(of: supplementIsFoodItem){ _ in
+                    updateHeading()
+                }
             }
 
         }
@@ -637,3 +627,52 @@ struct AddSupplementView_Previews: PreviewProvider {
         AddSupplementView()
     }
 }
+
+
+
+
+struct AnalyzingReportView: View {
+    var name: String
+
+    @State private var isAnimating = false
+
+    var body: some View {
+        ZStack {
+            // Background dimming effect
+//            LinearGradient(gradient: Gradient(colors: [Color.brightPurple.opacity(isAnimating ? 0.2 : 0), Color.brightpurple.opacity(isAnimating ? 0 : 0.2)]), startPoint: .topLeading, endPoint: .topTrailing)
+//                .edgesIgnoringSafeArea(.all)
+//                .animation(Animation.easeInOut(duration: 1).repeatForever(autoreverses: true), value: isAnimating)
+
+            VStack(alignment: .leading) {
+                Group {
+                    Text("\(name) is added to your ")
+                    + Text("supplement stack")
+                        .italic()
+                        .underline()
+                }
+                .fontWeight(.bold)
+                .font(.title)
+                .multilineTextAlignment(.leading)
+                .padding(.vertical)
+
+                biomarerIntelligenceLabel()
+                    .padding(.top)
+
+                Text("Biomarker Intelligence is analyzing \(name) against your test results, your current supplement stack, and other health-related data, and generating a detailed supplement report.")
+                    .font(.headline)
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(.brightpurple)
+                    .padding(.vertical)
+
+                ActivityIndicator(shouldAnimate: .constant(true))
+                Spacer()
+            }
+            .padding()
+        }
+        .onAppear {
+           // isAnimating.toggle() // Start the animation when the view appears
+        }
+    }
+
+}
+
