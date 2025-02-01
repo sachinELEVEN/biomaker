@@ -5,9 +5,12 @@ class APIService {
     static func uploadMedicalDocumentAndFetchDetails(medicalDocument: MedicalDocument, isScannedDocument: Bool, completion: @escaping ([String: [BasicMedicalTestRecordv1]]?, Error?) -> Void) {
         
         // API endpoint
-        var useProdUrl = true
-        var urlString = useProdUrl ? "https://backend.brainsphere.in/biomarker_report_analyser" : "http://localhost:3000/biomarker_report_analyser"
-        guard let url = URL(string: urlString) else { return }
+        let useProdUrl = true
+        let urlString = useProdUrl ? "https://backend.brainsphere.in/biomarker_report_analyser" : "http://localhost:3000/biomarker_report_analyser"
+        guard let url = URL(string: urlString) else {
+            print("/uploadMedicalDocumentAndFetchDetails: invalid url")
+            return
+        }
         
         // Create a URLRequest
         var request = URLRequest(url: url)
@@ -95,4 +98,81 @@ class APIService {
         }
         task.resume()
     }
+    
+    ///SUPPLEMENT ANALYSER USING GPT
+    
+
+    // Function to call the API
+    func generateSupplementReportWithLLM(supplementInformation: String, completion: @escaping (Bool, [String: Any]?) -> Void) {
+        
+        
+        // API endpoint
+        let useProdUrl = true
+        let urlString = useProdUrl ? "https://backend.brainsphere.in/biomarker-supplement-analyser" : "http://localhost:3000/biomarker-supplement-analyser"
+        guard let url = URL(string: urlString) else {
+            print("/generateSupplementReportWithLLM: invalid url")
+            completion(false, nil)
+            return
+        }
+        
+        // Create the URL request
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        
+        // Encode the supplement information to JSON
+        // Set the HTTP body directly from the JSON string
+        do {
+            // Convert the string to Data
+            if let jsonData = supplementInformation.data(using: .utf8) {
+                request.httpBody = jsonData
+            } else {
+                print("/generateSupplementReportWithLLM: Error converting string to Data")
+                completion(false, nil)
+                return
+            }
+        }
+        
+        // Create the URLSession data task
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            // Check for errors
+            if let error = error {
+                print("Error making request: \(error)")
+                completion(false, nil)
+                return
+            }
+            
+            // Check for a valid response
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("Server error: \(response.debugDescription)")
+                completion(false, nil)
+                return
+            }
+            
+            // Check for data
+            guard let data = data else {
+                print("No data received")
+                completion(false, nil)
+                return
+            }
+            
+            // Decode the JSON response
+            do {
+                if let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    completion(true, jsonResponse) // Return success and the JSON response
+                } else {
+                    print("Invalid JSON format")
+                    completion(false, nil)
+                }
+            } catch {
+                print("Error decoding JSON: \(error)")
+                completion(false, nil)
+            }
+        }
+        
+        // Start the data task
+        task.resume()
+    }
+    ///
 }
