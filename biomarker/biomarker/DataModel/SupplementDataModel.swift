@@ -79,14 +79,14 @@ class BMSupplement: Identifiable {
     var aiContainsWhichChemicals: String? = nil
     var aiUsageCommonReasonForUseAndAdvantage: String? = nil
     var aiAdditionalInfo: String? = nil
-    var aiCommonStrengthNumber: String? = nil
-    var aiCommonStrengthUnits: String? = nil
+    var aiCommonStrengthNumberAndUnits: String? = nil
     var aiAdviceBasedUserHealthContext: String? = nil
     var aiSideEffect: String? = nil
     var aiCategory:String? = nil//supplement category
     var aiCommonName: String? = nil
     var aiCalories: String? = nil
     var aiRating: String? = nil//rating out of 10
+    var aiReport: String? = nil
     
     init(id: String, supplementType : BMSupplementType, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm?, timeOfConsumption: [Date?],

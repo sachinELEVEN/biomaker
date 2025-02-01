@@ -204,7 +204,7 @@ class UserHealthContext {
          
          */
         
-        if system.totalTestRecordsCount() > 0 {
+        if system.totalTestRecordsCount() == 0 {
             print("No user test record context available as no. of test records are 0")
             return ""
         }

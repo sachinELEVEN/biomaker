@@ -28,6 +28,7 @@ struct AddSupplementView: View {
     @State private var userNotesPlaceholderText = "Why did you start taking this supplement? How long have you been taking it?"
     @State private var message : String? = nil
     @State private var allowReminding5MinBeforeDosage = false
+    @State var analysisInProgress = false
 
     var body: some View {
         NavigationView {
@@ -368,6 +369,11 @@ struct AddSupplementView: View {
                     //
                     Button(action:{
                         
+                        if analysisInProgress{
+                            print("Cannot request a supplement analysis as the last one is in progress")
+                            return
+                        }
+                        
                         if currentStep == finalStep{
                             createSupplement()
                         }
@@ -521,11 +527,22 @@ struct AddSupplementView: View {
             let result = BMSupplementStackGL.addSupplement(supplement!)
             if result.0{
                 //send a request to server for analysing the supplement
-                
+                analysisInProgress = true
                 UserHealthContext.analyzeSupplementWithLLM(supplement!) { success, response in
+                    analysisInProgress = false
                     if success{
                         currentStep = 7
+                        supplement!.aiRating = response?["ai_rating"] as? String ?? nil
+                        supplement!.aiReport = response?["ai_report"] as? String ?? nil
+                        supplement!.aiCommonName = response?["ai_common_name"] as? String ?? nil
+                        supplement!.aiCategory = response?["ai_category"] as? String ?? nil
+                        supplement!.aiCalories = response?["ai_calories"] as? String ?? nil
+                        supplement!.aiSideEffect = response?["ai_side_effects"] as? String ?? nil
+                        supplement!.aiAdviceBasedUserHealthContext = response?["ai_advice"] as? String ?? nil
+                        supplement!.aiCommonStrengthNumberAndUnits = response?["ai_common_dosage_strength"] as? String ?? nil
+                        supplement!.aiUsageCommonReasonForUseAndAdvantage = response?["ai_common_reason_for_use_and_advantages"] as? String ?? nil
                         //Assign values to the supplement
+                        BMSupplementStackGL.refresh()
                         
                     }else{
                         print("Failed to analyse the reponse")
