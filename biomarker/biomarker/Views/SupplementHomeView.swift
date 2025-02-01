@@ -88,6 +88,7 @@ struct SupplementHomeView:View {
                                        .font(.headline)
                                        .foregroundStyle(Color.secondary)
                                        .padding(.vertical)
+                                   Spacer()
                                }
                            }
                             ForEach(bmSupplementStackGL.supplements.filter({ supp in
