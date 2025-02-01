@@ -142,6 +142,7 @@ struct SupplementHomeView:View {
 struct SupplementRow: View {
     @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
     var supplement: BMSupplement
+    var showRating: Bool = true
 
     var body: some View {
         HStack {
@@ -215,7 +216,7 @@ struct SupplementRow: View {
                             .padding(.vertical,3)
                     }
                     
-                    if supplement.aiRating != nil && Float(supplement.aiRating!) != nil{
+                    if showRating && supplement.aiRating != nil && Float(supplement.aiRating!) != nil{
                         Text("\(supplement.aiRating!)/10")
                             .font(.caption)
                             .fontWeight(.bold)

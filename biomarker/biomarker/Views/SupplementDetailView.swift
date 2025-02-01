@@ -27,7 +27,7 @@ struct SupplementDetailView: View {
                
                 VStack{
                     ScrollView(showsIndicators: false){
-                        SupplementRow(supplement: supplement)
+                        SupplementRow(supplement: supplement, showRating: false)
                         
                         HStack{
                             //some footer information
@@ -124,7 +124,7 @@ struct SupplementDetailView: View {
     
     func aiInfoView(header: String, description: String?)->some View{
         return VStack{
-            if description != nil{
+            if description != nil && description?.isJustWhitespace() == false{
                 headerView(header)
                descriptionView(description!)
             }else{
