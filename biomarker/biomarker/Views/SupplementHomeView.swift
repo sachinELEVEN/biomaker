@@ -95,16 +95,19 @@ struct SupplementHomeView:View {
                             ForEach(bmSupplementStackGL.supplements.filter({ supp in
                                 supp.supplementType == supplementType
                             })){ supp in
-                                Button(action:{
-                                    showSupplementDetailView = true
-                                }){
+//                                Button(action:{
+//                                    showSupplementDetailView = true
+//                                }){
+                                NavigationLink(destination: SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supp),isActive: $showSupplementDetailView) {
                                     VStack{
-                                    SupplementRow(supplement: supp)
+                                        SupplementRow(supplement: supp)
+                                        Divider().padding(.horizontal)
                                     }
-                                        .sheet(isPresented: $showSupplementDetailView){
-                                            SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supp)
-                                        }
                                 }
+//                                        .sheet(isPresented: $showSupplementDetailView){
+//                                            SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supp)
+//                                        }
+                               // }
                             }
                             
                             
@@ -194,7 +197,6 @@ struct SupplementRow: View {
             .padding(.leading, 8)
         }
         .padding()
-        Divider().padding(.horizontal)
        // .background(Color(UIColor.systemBackground))
         //.cornerRadius(8)
         //.shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)

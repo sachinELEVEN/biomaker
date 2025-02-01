@@ -532,17 +532,6 @@ struct AddSupplementView: View {
                     analysisInProgress = false
                     if success{
                         currentStep = 7
-                        supplement!.aiRating = response?["ai_rating"] as? String ?? nil
-                        supplement!.aiReport = response?["ai_report"] as? String ?? nil
-                        supplement!.aiCommonName = response?["ai_common_name"] as? String ?? nil
-                        supplement!.aiCategory = response?["ai_category"] as? String ?? nil
-                        supplement!.aiCalories = response?["ai_calories"] as? String ?? nil
-                        supplement!.aiSideEffect = response?["ai_side_effects"] as? String ?? nil
-                        supplement!.aiAdviceBasedUserHealthContext = response?["ai_advice"] as? String ?? nil
-                        supplement!.aiCommonStrengthNumberAndUnits = response?["ai_common_dosage_strength"] as? String ?? nil
-                        supplement!.aiUsageCommonReasonForUseAndAdvantage = response?["ai_common_reason_for_use_and_advantages"] as? String ?? nil
-                        //Assign values to the supplement
-                        BMSupplementStackGL.refresh()
                         
                     }else{
                         print("Failed to analyse the reponse")

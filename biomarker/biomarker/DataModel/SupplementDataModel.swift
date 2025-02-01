@@ -12,6 +12,13 @@ enum BMSupplementType: String, CaseIterable{
     case food = "Food"
 }
 
+enum BMSupplementAIAnalysisStage:String{
+    case never
+    case failed
+    case completed
+    case outdated
+}
+
 // Enum for Frequency
 enum BMSupplementFrequency: String, CaseIterable {
     case oneTime = "One time"
@@ -77,16 +84,18 @@ class BMSupplement: Identifiable {
     
     // AI-generated properties
     var aiContainsWhichChemicals: String? = nil
-    var aiUsageCommonReasonForUseAndAdvantage: String? = nil
+    var aiUsageCommonReasonForUseAndAdvantage: String? = nil//present in supplement analysis report
     var aiAdditionalInfo: String? = nil
-    var aiCommonStrengthNumberAndUnits: String? = nil
-    var aiAdviceBasedUserHealthContext: String? = nil
-    var aiSideEffect: String? = nil
-    var aiCategory:String? = nil//supplement category
-    var aiCommonName: String? = nil
-    var aiCalories: String? = nil
-    var aiRating: String? = nil//rating out of 10
-    var aiReport: String? = nil
+    var aiCommonStrengthNumberAndUnits: String? = nil//present in supplement analysis report
+    var aiAdviceBasedUserHealthContext: String? = nil//present in supplement analysis report
+    var aiSideEffect: String? = nil//present in supplement analysis report
+    var aiCategory:String? = nil//supplement category //present in supplement analysis report
+    var aiCommonName: String? = nil//present in supplement analysis report
+    var aiCalories: String? = nil//present in supplement analysis report
+    var aiRating: String? = nil//rating out of 10 //present in supplement analysis report
+    var aiReport: String? = nil//present in supplement analysis report
+    var aiAnalysisStage : BMSupplementAIAnalysisStage = .never
+    
     
     init(id: String, supplementType : BMSupplementType, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm?, timeOfConsumption: [Date?],

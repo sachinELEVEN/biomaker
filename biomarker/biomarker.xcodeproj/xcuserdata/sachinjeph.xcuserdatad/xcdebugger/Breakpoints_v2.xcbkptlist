@@ -1018,8 +1018,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "564"
-            endingLineNumber = "564"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
             landmarkName = "AddSupplementView"
             landmarkType = "14">
          </BreakpointContent>
@@ -1034,8 +1034,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "590"
-            endingLineNumber = "590"
+            startingLineNumber = "579"
+            endingLineNumber = "579"
             landmarkName = "isEmpty(text:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1082,8 +1082,8 @@
             filePath = "biomarker/DataModel/SupplementDataModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "unknown"
             landmarkType = "0">
             <Locations>
@@ -1352,8 +1352,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "408"
-            endingLineNumber = "408"
+            startingLineNumber = "410"
+            endingLineNumber = "410"
             landmarkName = "createSupplementSchedule()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1384,8 +1384,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "463"
-            endingLineNumber = "463"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "unknown"
             landmarkType = "0">
          </BreakpointContent>
@@ -1400,8 +1400,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1463,8 +1463,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1526,8 +1526,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "417"
-            endingLineNumber = "417"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "createSupplementSchedule()"
             landmarkType = "7">
             <Locations>
@@ -1574,8 +1574,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
+            startingLineNumber = "421"
+            endingLineNumber = "421"
             landmarkName = "createSupplementSchedule()"
             landmarkType = "7">
             <Locations>
@@ -1622,8 +1622,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "416"
-            endingLineNumber = "416"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "createSupplementSchedule()"
             landmarkType = "7">
             <Locations>
@@ -1859,8 +1859,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "586"
-            endingLineNumber = "586"
+            startingLineNumber = "575"
+            endingLineNumber = "575"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -1907,8 +1907,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "581"
-            endingLineNumber = "581"
+            startingLineNumber = "570"
+            endingLineNumber = "570"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -1955,8 +1955,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "577"
-            endingLineNumber = "577"
+            startingLineNumber = "566"
+            endingLineNumber = "566"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -2033,8 +2033,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "580"
-            endingLineNumber = "580"
+            startingLineNumber = "569"
+            endingLineNumber = "569"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -2081,8 +2081,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "582"
-            endingLineNumber = "582"
+            startingLineNumber = "571"
+            endingLineNumber = "571"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -2129,8 +2129,8 @@
             filePath = "biomarker/DataModel/SupplementDataModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "addRevision()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2145,8 +2145,8 @@
             filePath = "biomarker/DataModel/SupplementDataModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "addRevision()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2161,8 +2161,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "437"
-            endingLineNumber = "437"
+            startingLineNumber = "439"
+            endingLineNumber = "439"
             landmarkName = "calculateNextConsumptionDates(supplement:from:inNext:)"
             landmarkType = "7">
             <Locations>
@@ -2257,8 +2257,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
+            startingLineNumber = "330"
+            endingLineNumber = "330"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2321,8 +2321,8 @@
             filePath = "biomarker/Views/SupplementSystemAPIPrep.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "getUserSupplementStackContext(supplementsToIgnore:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2433,28 +2433,28 @@
             filePath = "biomarker/Views/SupplementSystemAPIPrep.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "getSuppplementDetailsContext(supplement:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "C97A2C34-A747-417D-A675-D8F8ED2C5071 - 55edc28ec65b199"
+                  uuid = "C97A2C34-A747-417D-A675-D8F8ED2C5071 - 866dbccb6257c185"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "static biomarker.UserHealthContext.getSuppplementDetailsContext(supplement: biomarker.BMSupplement) -&gt; Swift.String"
+                  symbolName = "static biomarker.UserHealthContext.getTestRecordsContext() -&gt; Swift.String"
                   moduleName = "biomarker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "191"
-                  endingLineNumber = "191"
-                  offsetFromSymbolStart = "3948">
+                  startingLineNumber = "209"
+                  endingLineNumber = "209"
+                  offsetFromSymbolStart = "96">
                </Location>
                <Location
-                  uuid = "C97A2C34-A747-417D-A675-D8F8ED2C5071 - 55edc28ec65b1b6"
+                  uuid = "C97A2C34-A747-417D-A675-D8F8ED2C5071 - 55edc28ec65bfc6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -2464,8 +2464,8 @@
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "192"
-                  endingLineNumber = "192"
+                  startingLineNumber = "208"
+                  endingLineNumber = "208"
                   offsetFromSymbolStart = "3948">
                </Location>
             </Locations>
@@ -2481,42 +2481,10 @@
             filePath = "biomarker/Views/SupplementSystemAPIPrep.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
             landmarkName = "userGeneralHealthNotesContext()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "E78ED434-1C52-4D5A-B4C2-5381738B49B0 - a8b52c2f0c5238d9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static biomarker.UserHealthContext.userGeneralHealthNotesContext() -&gt; Swift.String"
-                  moduleName = "biomarker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "239"
-                  endingLineNumber = "239"
-                  offsetFromSymbolStart = "560">
-               </Location>
-               <Location
-                  uuid = "E78ED434-1C52-4D5A-B4C2-5381738B49B0 - a8b52c2f0c523817"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static biomarker.UserHealthContext.userGeneralHealthNotesContext() -&gt; Swift.String"
-                  moduleName = "biomarker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "241"
-                  endingLineNumber = "241"
-                  offsetFromSymbolStart = "560">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2529,13 +2497,13 @@
             filePath = "biomarker/Views/SupplementSystemAPIPrep.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "210"
-            endingLineNumber = "210"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "getTestRecordsContext()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "70E284AF-C01C-42AA-BB85-E420157DF279 - 866dbccb6257c1a4"
+                  uuid = "70E284AF-C01C-42AA-BB85-E420157DF279 - 866dbccb6257c376"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -2545,12 +2513,12 @@
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "208"
-                  endingLineNumber = "208"
-                  offsetFromSymbolStart = "232">
+                  startingLineNumber = "226"
+                  endingLineNumber = "226"
+                  offsetFromSymbolStart = "1252">
                </Location>
                <Location
-                  uuid = "70E284AF-C01C-42AA-BB85-E420157DF279 - 866dbccb6257c166"
+                  uuid = "70E284AF-C01C-42AA-BB85-E420157DF279 - 866dbccb6257c376"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -2560,8 +2528,8 @@
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "210"
-                  endingLineNumber = "210"
+                  startingLineNumber = "226"
+                  endingLineNumber = "226"
                   offsetFromSymbolStart = "228">
                </Location>
             </Locations>
@@ -2577,8 +2545,8 @@
             filePath = "biomarker/Views/SupplementSystemAPIPrep.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "getTestRecordsContext()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2593,42 +2561,10 @@
             filePath = "biomarker/Views/SupplementSystemAPIPrep.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "242"
+            endingLineNumber = "242"
             landmarkName = "getTestRecordsContext()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "96A4E72F-635C-4872-A7B7-5425967B27B9 - 866dbccb6257c3b4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static biomarker.UserHealthContext.getTestRecordsContext() -&gt; Swift.String"
-                  moduleName = "biomarker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "224"
-                  endingLineNumber = "224"
-                  offsetFromSymbolStart = "1256">
-               </Location>
-               <Location
-                  uuid = "96A4E72F-635C-4872-A7B7-5425967B27B9 - 866dbccb6257c376"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static biomarker.UserHealthContext.getTestRecordsContext() -&gt; Swift.String"
-                  moduleName = "biomarker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "226"
-                  endingLineNumber = "226"
-                  offsetFromSymbolStart = "1252">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2641,28 +2577,28 @@
             filePath = "biomarker/Views/SupplementSystemAPIPrep.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "getUserSupplementStackContext(supplementsToIgnore:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "77F71716-9049-4E4C-B2B9-4B63EF7899F3 - 75da50506d4cafc9"
+                  uuid = "77F71716-9049-4E4C-B2B9-4B63EF7899F3 - 55edc28ec65b3a6"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "static biomarker.UserHealthContext.getUserSupplementStackContext(supplementsToIgnore: Swift.Array&lt;biomarker.BMSupplement&gt;) -&gt; Swift.String"
+                  symbolName = "static biomarker.UserHealthContext.getSuppplementDetailsContext(supplement: biomarker.BMSupplement) -&gt; Swift.String"
                   moduleName = "biomarker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "159"
-                  endingLineNumber = "159"
-                  offsetFromSymbolStart = "1372">
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
+                  offsetFromSymbolStart = "1036">
                </Location>
                <Location
-                  uuid = "77F71716-9049-4E4C-B2B9-4B63EF7899F3 - 75da50506d4cae26"
+                  uuid = "77F71716-9049-4E4C-B2B9-4B63EF7899F3 - 75da50506d4ca816"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -2672,8 +2608,8 @@
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "160"
-                  endingLineNumber = "160"
+                  startingLineNumber = "176"
+                  endingLineNumber = "176"
                   offsetFromSymbolStart = "1372">
                </Location>
             </Locations>
@@ -2689,13 +2625,28 @@
             filePath = "biomarker/Views/SupplementSystemAPIPrep.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "getUserSupplementStackContext(supplementsToIgnore:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "28ADF721-43C4-49F9-B539-6DA0E2E20562 - 75da50506d4cacd1"
+                  uuid = "28ADF721-43C4-49F9-B539-6DA0E2E20562 - 55edc28ec65b533"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static biomarker.UserHealthContext.getSuppplementDetailsContext(supplement: biomarker.BMSupplement) -&gt; Swift.String"
+                  moduleName = "biomarker"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "165"
+                  endingLineNumber = "165"
+                  offsetFromSymbolStart = "452">
+               </Location>
+               <Location
+                  uuid = "28ADF721-43C4-49F9-B539-6DA0E2E20562 - 75da50506d4ca91e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -2705,12 +2656,12 @@
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
                   offsetFromSymbolStart = "464">
                </Location>
                <Location
-                  uuid = "28ADF721-43C4-49F9-B539-6DA0E2E20562 - 75da50506d4cacd1"
+                  uuid = "28ADF721-43C4-49F9-B539-6DA0E2E20562 - 75da50506d4ca91e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -2720,38 +2671,8 @@
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "592">
-               </Location>
-               <Location
-                  uuid = "28ADF721-43C4-49F9-B539-6DA0E2E20562 - 75da50506d4caf2e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static biomarker.UserHealthContext.getUserSupplementStackContext(supplementsToIgnore: Swift.Array&lt;biomarker.BMSupplement&gt;) -&gt; Swift.String"
-                  moduleName = "biomarker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "464">
-               </Location>
-               <Location
-                  uuid = "28ADF721-43C4-49F9-B539-6DA0E2E20562 - 75da50506d4caf2e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static biomarker.UserHealthContext.getUserSupplementStackContext(supplementsToIgnore: Swift.Array&lt;biomarker.BMSupplement&gt;) -&gt; Swift.String"
-                  moduleName = "biomarker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
+                  startingLineNumber = "168"
+                  endingLineNumber = "168"
                   offsetFromSymbolStart = "592">
                </Location>
             </Locations>
@@ -2767,28 +2688,28 @@
             filePath = "biomarker/Views/SupplementSystemAPIPrep.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "prepareSupplementAnalaysisContext(_:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "9E8086AB-94A5-4179-92F4-0E46CC570F35 - df2eca43abe8c10e"
+                  uuid = "9E8086AB-94A5-4179-92F4-0E46CC570F35 - 75da50506d4cac17"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "static biomarker.UserHealthContext.prepareSupplementAnalaysisContext(biomarker.BMSupplement) -&gt; Swift.String"
+                  symbolName = "static biomarker.UserHealthContext.getUserSupplementStackContext(supplementsToIgnore: Swift.Array&lt;biomarker.BMSupplement&gt;) -&gt; Swift.String"
                   moduleName = "biomarker"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "127"
-                  endingLineNumber = "127"
-                  offsetFromSymbolStart = "408">
+                  startingLineNumber = "145"
+                  endingLineNumber = "145"
+                  offsetFromSymbolStart = "336">
                </Location>
                <Location
-                  uuid = "9E8086AB-94A5-4179-92F4-0E46CC570F35 - df2eca43abe8c121"
+                  uuid = "9E8086AB-94A5-4179-92F4-0E46CC570F35 - df2eca43abe8fed1"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -2798,8 +2719,8 @@
                   urlString = "file:///Users/sachinjeph/Desktop/biomarker/repo/biomarker/biomarker/Views/SupplementSystemAPIPrep.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "128"
-                  endingLineNumber = "128"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
                   offsetFromSymbolStart = "408">
                </Location>
             </Locations>
