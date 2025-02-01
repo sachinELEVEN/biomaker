@@ -31,8 +31,14 @@ class UserHealthContext {
             return ""
     }
     
-    static func analyseSupplementWithLLM(_ supplement: BMSupplement){
+    static func analyzeSupplementWithLLM(_ supplement: BMSupplement, completion: @escaping (Bool) -> Void){
         
+        /*
+         This prompt will be added by the server as
+         1. it reduces the payload on the client side
+         2. easier to iterate
+         3. we do validation of the required output on the server side
+         
         var problemStatement = """
                  You are a top level doctor and are tasked with analyzing a newly added supplement or food item that a user intends to incorporate into their diet. Additionally, you will be provided with relevant information about the user's health. Based on this information, please prepare a report in JSON format that adheres to the following structure:
                  
@@ -49,13 +55,20 @@ class UserHealthContext {
 
                  Make sure you strictly just return the json and nothing else.
         """
-        
+        */
         
         let context = prepareSupplementAnalaysisContext(supplement)
         
-        let promptToLLM = problemStatement + "\n\n" + context
+      //  let promptToLLM = problemStatement + "\n\n" + context
         
         //MAKE A REQUEST TO THE SERVER WITH THIS PROMPT
+        APIService.generateSupplementReportWithLLM(supplementInformation: context) { success, response in
+            if !success{
+                completion(false)
+            }else{
+                completion(true)
+            }
+        }
         
         
     }

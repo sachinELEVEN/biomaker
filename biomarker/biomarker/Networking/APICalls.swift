@@ -103,7 +103,7 @@ class APIService {
     
 
     // Function to call the API
-    func generateSupplementReportWithLLM(supplementInformation: String, completion: @escaping (Bool, [String: Any]?) -> Void) {
+   static func generateSupplementReportWithLLM(supplementInformation: String, completion: @escaping (Bool, [String: Any]?) -> Void) {
         
         
         // API endpoint

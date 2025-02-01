@@ -86,6 +86,7 @@ class BMSupplement: Identifiable {
     var aiCategory:String? = nil//supplement category
     var aiCommonName: String? = nil
     var aiCalories: String? = nil
+    var aiRating: String? = nil//rating out of 10
     
     init(id: String, supplementType : BMSupplementType, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm?, timeOfConsumption: [Date?],
