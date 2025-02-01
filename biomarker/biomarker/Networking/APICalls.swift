@@ -107,7 +107,7 @@ class APIService {
         
         
         // API endpoint
-        let useProdUrl = true
+        let useProdUrl = false
         let urlString = useProdUrl ? "https://backend.brainsphere.in/biomarker-supplement-analyser" : "http://localhost:3000/biomarker-supplement-analyser"
         guard let url = URL(string: urlString) else {
             print("/generateSupplementReportWithLLM: invalid url")

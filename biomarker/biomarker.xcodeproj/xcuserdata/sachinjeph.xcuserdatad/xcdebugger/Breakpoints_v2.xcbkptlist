@@ -1018,10 +1018,10 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "522"
-            endingLineNumber = "522"
-            landmarkName = "createSupplement()"
-            landmarkType = "7">
+            startingLineNumber = "533"
+            endingLineNumber = "533"
+            landmarkName = "AddSupplementView"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1034,10 +1034,10 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "548"
-            endingLineNumber = "548"
-            landmarkName = "AddSupplementView"
-            landmarkType = "14">
+            startingLineNumber = "559"
+            endingLineNumber = "559"
+            landmarkName = "isEmpty(text:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1859,8 +1859,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "544"
-            endingLineNumber = "544"
+            startingLineNumber = "555"
+            endingLineNumber = "555"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -1907,8 +1907,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "539"
-            endingLineNumber = "539"
+            startingLineNumber = "550"
+            endingLineNumber = "550"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -1955,8 +1955,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "535"
-            endingLineNumber = "535"
+            startingLineNumber = "546"
+            endingLineNumber = "546"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -2033,8 +2033,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "538"
-            endingLineNumber = "538"
+            startingLineNumber = "549"
+            endingLineNumber = "549"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>
@@ -2081,8 +2081,8 @@
             filePath = "biomarker/Views/AddSupplementView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "540"
-            endingLineNumber = "540"
+            startingLineNumber = "551"
+            endingLineNumber = "551"
             landmarkName = "preprocessTimeOfConsumption(_:)"
             landmarkType = "7">
             <Locations>

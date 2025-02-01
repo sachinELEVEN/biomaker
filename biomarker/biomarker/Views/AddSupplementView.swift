@@ -512,7 +512,18 @@ struct AddSupplementView: View {
         if supplement != nil{
             let result = BMSupplementStackGL.addSupplement(supplement!)
             if result.0{
-                //send a request to server for analysing the supplemt
+                //send a request to server for analysing the supplement
+                
+                UserHealthContext.analyzeSupplementWithLLM(supplement!) { success, response in
+                    if success{
+                        
+                    }else{
+                        print("Failed to analyse the reponse")
+                        message = "Unable to analyze the \(supplementIsFoodItem ? "food item" : "supplement") with Biomarker Intelligence. The item has been added to your stack, and you can request an analysis later from the supplement details page."
+                    }
+                }
+                
+                
                 currentStep = 6
             }else{
                 //something went wrong
