@@ -1,0 +1,183 @@
+//
+//  SupplementSystemAPIPrep.swift
+//  biomarker
+//
+//  Created by sachin jeph on 01/02/25.
+//
+
+import Foundation
+
+/*
+ Here we will prepare the various apis we use in the supplement system
+ Currently - we have 2 Supplement system APIs
+ 1. Individual Supplement APIs
+ 2. Full Supplement Stack analysis
+ */
+
+class UserHealthContext {
+    
+    //MORE METHODS SPECIFICALLY FOR SUPPLEMENTSYSTEM
+    //MAYBE THIS TAKES IN A ENUM LIKE SUPPLEMENTCONTEXT, OR SUPPLEMENTSTACK CONTEXT ETC AND SIMPLE RETURNS THAT
+    func getUserHealthContext()->String{//THIS SHOULD MOVE TO USERHEALTHCONTEXT CLASS
+            /*
+             It will be based on
+             1. user's out of ref test data- name, val, unit
+             2. user's supplement stack- name, dosage, frequency
+             3. user's additional global health note
+             
+             we wont user's supplement's user notes for now
+             
+             */
+            return ""
+    }
+    
+   static func prepareSupplementAnalaysisContext(_ supplement: BMSupplement)->String{
+        /*
+         This is context will contain the following details
+         1. Supplement Details
+         - name
+         - strength num and units
+         - frequency of usage
+         - form
+         - list of time of consumption(only provide the time part and not the date part)
+         - supplement userNotes
+         
+         3. User general health notes
+         2. Past test record information (this i will add, leave it to me)
+         3. Current supplement stack (this i will add leave it to me)
+         
+         
+         */
+       
+        
+        
+        var context = ""
+       //STEP1: SUPPLEMENT INFORMATION
+       context += getSuppplementDetailsContext(supplement: supplement)
+        
+        //STEP2: USER GENERAL HEALTH NOTES FROM USER
+        context += userGeneralHealthNotesContext()
+        
+        //STEP3: Past test record information
+        context += getTestRecordsContext()
+        
+        //STEP4: EXISTING SUPPLEMENT USER IS TAKING
+       //we dont want the newly added supplement to be part of the supplement stack context
+       context += getUserSupplementStackContext(supplementsToIgnore: [supplement])
+        
+        return ""
+    }
+    
+    static func getUserSupplementStackContext(supplementsToIgnore: [BMSupplement])->String{
+        /*
+         You will be provided with a list of existing supplements that the user is currently taking. Your task is to analyze these supplements to assess whether the new supplement the user intends to add to their diet may interfere with or interact with the existing ones. Consider any potential reactions or effects that could arise from this new addition. Please keep these factors in mind while generating your report.
+         
+         Information of the supplement will be
+         supplement name: dosage and strength
+         */
+        
+        // Create the final list excluding the supplements to ignore
+        let supplementToConsider = BMSupplementStackGL.supplements.filter { supplement in
+            !supplementsToIgnore.contains(where: { $0.id == supplement.id })
+        }
+
+        
+        var context = ""
+        
+        if supplementToConsider.count > 0 {
+        context = """
+        \n****
+        You will be provided with a list of existing supplements that the user is currently taking. Your task is to analyze these supplements to assess whether the new supplement the user intends to add to their diet may interfere with or interact with the existing ones. Consider any potential reactions or effects that could arise from this new addition. Please keep these factors in mind while generating your report.
+        """
+            for supplement in supplementToConsider{
+                var row = "\n-Name: \(supplement.name)"
+                row += "\n-Dosage strength: \(supplement.strengthNumber) \(supplement.strengthUnit)"
+                context += row
+            }
+           
+        }
+        
+        return context
+    }
+    
+    static func getSuppplementDetailsContext(supplement: BMSupplement)->String{
+        
+        var dosageTimes = ""
+        
+        // Assuming timeOfConsumption is an array of optional Date objects
+        for timeOfConsumption in supplement.timeOfConsumption {
+            if let time = timeOfConsumption { // Safely unwrap the optional
+                
+                // Append the formatted time to dosageTimes
+                if !dosageTimes.isEmpty {
+                    dosageTimes += ", " // Add a comma if dosageTimes is not empty
+                }
+                dosageTimes += timeFormatter.string(from: time) // Append the formatted time
+            }
+        }
+        
+        
+        let context = """
+    \n****
+    \(supplement.supplementType == .food ? "FOOD" : "SUPPLEMENT") DETAILS
+    Here are the \(supplement.supplementType == .food ? "food" : "supplement") details of the supplement user is planning to add to his supplement stack.
+        -Name: \(supplement.name)
+        -Dosage strength: \(supplement.strengthNumber) \(supplement.strengthUnit)
+        -Frequency of use: \(supplement.frequency.rawValue)
+        \(supplement.form != nil ? "-form: \(supplement.form!.rawValue)" : "")
+        -Time of dosage(s): \(dosageTimes)
+        \(supplement.userNotes != nil && supplement.userNotes!.isJustWhitespace()==false ? "-User notes on supplement: \(supplement.userNotes!)":"")
+    """
+        
+        return context
+    }
+    
+    
+    //This function will return a string which denotes the user test record information.
+    //This will be useful for ai to better analyse user's health
+    //We will provide the list of test for which user's test values are in range and for which it is out of ref range
+    static func getTestRecordsContext()->String{
+        /*
+         The context will be of type
+         Here are some medical test records for the users, I will first provide a list of test information.
+         Where each row follows the below format-
+         Row format = Test name : <test value> : <units> : <true if test value is out of ref range and false it is in ref range>
+         
+         */
+        
+        if system.totalTestRecordsCount() > 0 {
+            print("No user test record context available as no. of test records are 0")
+            return ""
+        }
+        
+        var context = """
+        \n****
+        USER MEDICAL TEST RECORDS
+        Here are some medical test records for the users, I will first provide a list of test information. Where each row follows the below format-
+        Row format = Test name : <test value> : <units> : <true if test value is out of ref range and false it is in ref range>
+        """
+        
+        for test in system.getAllTestRecords(){
+            let row = "\n" + test.userFacingTestName() + " : " + test.value + " : " + test.userFacingUnit() + " : " + test.isOutOfRange().description
+            context.append(row)
+        }
+        
+        return context
+    }
+    
+    static func userGeneralHealthNotesContext()->String{
+        var context = ""
+        if !system.userHealthNotes().isJustWhitespace(){
+            //add a prefix text saying this is general health information about the user. keep in mind when creating your report for supplement
+            context += """
+            \n****
+            USER GENERAL HEALTH NOTES FROM USER
+            Here is some health related information provided by the user, keep this in mind when you are creating the report.
+            \n\(system.userHealthNotes())
+        """
+        }
+        
+        return context
+    }
+    
+}

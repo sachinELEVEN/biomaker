@@ -97,3 +97,8 @@ func isFirstNonNilIndex<T>(in array: [T?], index: Int) -> Bool {
     return false // The element at the given index is nil
 }
 
+extension String{
+    func isJustWhitespace() -> Bool {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+}
