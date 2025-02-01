@@ -392,9 +392,14 @@ struct AddSupplementView: View {
                 
                 if message != nil{
                     Text(message!)
-                        .font(.headline)
+                        .font(.subheadline)
                         .fontWeight(.bold)
-                        .foregroundColor(.red)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.red)
+                        .cornerRadius(10)
+                        .padding()
+                        
                 }
                 Spacer()
                 
@@ -519,7 +524,7 @@ struct AddSupplementView: View {
                         
                     }else{
                         print("Failed to analyse the reponse")
-                        message = "Unable to analyze the \(supplementIsFoodItem ? "food item" : "supplement") with Biomarker Intelligence. The item has been added to your stack, and you can request an analysis later from the supplement details page."
+                        message = "The \(supplementIsFoodItem ? "food item" : "supplement") has been added to your stack. However Biomarker was unable to analyze the \(supplementIsFoodItem ? "food item" : "supplement"), and you can request an analysis later from the supplement details page."
                     }
                 }
                 
