@@ -59,6 +59,18 @@ struct SupplementDetailView: View {
                             }
                         }
                         
+                        if supplement.aiAnalysisStage == .outdated{
+                            Button(action:{analyseSupplementWithLLM()}){
+                                label("\(analysisInProgress ? "Analysing":"Analyse") with Biomarker Intelligence", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
+                            }
+                            Text("You have made changes to \(supplement.name)'s record since the last analysis. Tap to perform the analysis again.")
+                                .fontWeight(.bold)
+                                .font(.caption)
+                                .foregroundStyle(Color.secondary)
+                                .padding(.top,3)
+                                .padding(.bottom)
+                        }
+                        
                         if supplement.aiAnalysisStage == .failed{
                             Button(action:{analyseSupplementWithLLM()}){
                                 label("\(analysisInProgress ? "Analysing":"Analyse") with Biomarker Intelligence", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
