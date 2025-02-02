@@ -123,8 +123,9 @@ struct SupplementDetailView: View {
                             .padding(.bottom)
                         
                         
-                        Divider().padding()
+                        Divider().padding(.horizontal)
                         aiInfoView(header: "Your notes", description: supplement.userNotes)
+                            .padding(.bottom)
                         
                         
                         

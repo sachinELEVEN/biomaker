@@ -87,6 +87,9 @@ struct AddSupplementView: View {
                             .background(Color(.systemGray6))
                             .cornerRadius(8)
                             .padding(.trailing)
+                            .onAppear{
+                                strengthUnit = supplementIsFoodItem ? "g" : "mg"
+                            }
                         }
                         .padding()
                         //                    Button("Next") {
@@ -583,7 +586,7 @@ struct AddSupplementView: View {
     
     func getDescription() -> String {
         if currentStep == 0 {
-            return supplementIsFoodItem ? "You are currently adding a food item. \n\nExample: 'Blueberry', 'Tofu' etc" :"Add your supplement name. You can enter either the generic name or the complete brand name of your supplement. \n\nExample: 'Vitamin C' or 'Nature's Way Vitamin C 1000mg'."
+            return supplementIsFoodItem ? "You are currently adding a food item.\nExample: 'Blueberry', 'Tofu' etc" :"Add your supplement name. You can enter either the generic name or the complete brand name of your supplement. \n\nExample: 'Vitamin C' or 'Nature's Way Vitamin C 1000mg'."
         }
         if currentStep == 1 {
             return supplementIsFoodItem ? "How much of this food do you typically eat in one sitting? \n\nExample: '100 g' of tofu or '2' tortillas." : "Enter the dosage of your supplement. Specify the amount (number) and select the unit (e.g., mg, g, ml) from the options provided. \n\nExample: '500' for the amount and select 'mg' for the unit."
