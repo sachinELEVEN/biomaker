@@ -291,7 +291,9 @@ class BMSupplementStack: ObservableObject, Codable {
     }
     
     func removeSupplement(_ supplement: BMSupplement) {
+        print("/removeSupplement: Removing supplement with name: \(supplement.name)")
         supplements.removeAll { $0.id == supplement.id }
+        BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
     }
     
     func setSupplementStackRecommendedTime() {

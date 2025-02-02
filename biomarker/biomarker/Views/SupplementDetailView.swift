@@ -16,6 +16,7 @@ struct SupplementDetailView: View {
     @State var analysisInProgress = false
     @State private var isAnimating = false
     @State var showSupplementEditView = false
+    @State var showActionSheet = false
 
     var body: some View {
         GeometryReader{ geo in
@@ -126,10 +127,55 @@ struct SupplementDetailView: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {
                                 // Your action here
+                               // self.showSupplementEditView.toggle()//view history of this supplement
+                            }) {
+                                Image(systemName: "clock.arrow.circlepath")  // SF Symbol for search icon
+                            }
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                // Your action here
                                 self.showSupplementEditView.toggle()
                             }) {
                                 Image(systemName: "slider.horizontal.3")  // SF Symbol for search icon
                             }
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                // Your action here
+                                self.showActionSheet.toggle()
+                            }) {
+                                Image(systemName: "info.circle")  // SF Symbol for info icon
+                            }
+                            .actionSheet(isPresented: $showActionSheet) {
+                                ActionSheet(
+                                    title: Text("Actions"),
+                                    message: Text(""),
+                                    buttons: [
+//                                        .default(Text("Share Original Document (PDF)")) {
+//                                            // Navigate to chart view for separate tracking
+//                                            //mergeSelectedGroups = false
+//                                           // navigateToChartView()
+//                                            //print("Each Test Separately")
+//        //                                        showUpdateTestManuallyScreen.toggle()
+//                                            isSharePresented.toggle()
+//                                           // SharePDFView(pdfURL: doc.pdfDocumentUrl,width: system.fullWidth*0.2)
+//                                        },
+                                        .destructive(Text("Delete Supplement and its History")) {
+        //                                        deleteTestRecord()
+                                            //system.medicalDocuments
+                                            //system.deleteDocument(document: doc)
+                                            BMSupplementStackGL.removeSupplement(supplement)
+                                            BiomarkerFileSystem.saveSystemMedicalDocuments()
+                                            self.showSelf.toggle()
+                                        },
+                                        .cancel()
+                                    ]
+                                )
+                            }
+//                            .sheet(isPresented: $isSharePresented) {
+//                                ShareSheet(activityItems: [doc.pdfDocumentUrl])
+//                            }
                         }
                         
                     }

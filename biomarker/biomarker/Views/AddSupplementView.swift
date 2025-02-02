@@ -346,7 +346,7 @@ struct AddSupplementView: View {
                         //TODO- SHOW SUPPLEMENT DETAILED VIEW
                         if (isEditMode() && supplementToEdit != nil) || (!isEditMode() && supplement != nil){
                             NavigationView{
-                                SupplementDetailView(showSelf: .constant(true), supplement: isEditMode() ? supplementToEdit! : supplement!)
+                                SupplementDetailView(showSelf: $showSelf, supplement: isEditMode() ? supplementToEdit! : supplement!)
                             }
                         }
                     }
