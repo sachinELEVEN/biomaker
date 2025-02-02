@@ -149,7 +149,7 @@ struct SupplementRow: View {
             // Example icon, replace with appropriate icons
             Image(systemName: "bolt.fill") // Use an appropriate SF Symbol or custom icon
                 .resizable()
-                .frame(width: 30, height: 30)
+                .frame(width: 20, height: 40)
                 .foregroundColor(.primary)
             
             VStack(alignment: .leading) {
