@@ -115,6 +115,7 @@ struct SupplementDetailView: View {
                         
                     }
                 }.navigationTitle("\(supplement.supplementType == .food ? "Food" : "Supplement") Report")
+                    .animation(.default)
             }
         }
        // .background(Color(UIColor.systemBackground))
