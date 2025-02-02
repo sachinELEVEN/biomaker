@@ -348,12 +348,12 @@ struct SupplementScheduleView: View {
                                Text("Monthly").tag("Monthly")
                            }.pickerStyle(MenuPickerStyle())
                     .padding(5)
-                    .background(Color(.systemGray6))
+                    .background(Color.secondary.opacity(0.2))
                     .cornerRadius(8)
                     .padding(.trailing)
             }//.padding(.top)
                 .padding(.horizontal)
-                .background(Color(.systemGray6))
+                .background(Color.secondary.opacity(0.2))
                 .cornerRadius(10)
                 
 
@@ -519,7 +519,7 @@ struct SupplementTimeView: View {
                         Text(timeFormatter.string(from: suppTime))
                             .padding(8)
                             .font(.caption)
-                            .background(Color(.systemGray6))
+                            .background(Color.secondary.opacity(0.2))
                             .foregroundColor(.secondary)
                             .cornerRadius(10)
                             .padding(.trailing,3)

@@ -26,7 +26,7 @@ struct MedicalDocumentSearchView: View{
             
             TextField("Search tests in this medical document", text: $searchText)
                 .padding(10)
-                .background(Color(.systemGray6))
+                .background(Color.secondary.opacity(0.2))
                 .cornerRadius(8)
                 .padding(.horizontal)
             ScrollView(showsIndicators: false){

@@ -18,7 +18,7 @@ struct VariationView: View {
                 // Search bar
                 TextField("Search tests...", text: $searchText)
                     .padding(10)
-                    .background(Color(.systemGray6))
+                    .background(Color.secondary.opacity(0.2))
                     .cornerRadius(8)
                     .padding(.horizontal)
 
