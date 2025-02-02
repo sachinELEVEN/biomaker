@@ -281,29 +281,77 @@ struct SupplementDetailView: View {
 }
 
 
+
 struct SupplementHistoryView: View {
     @ObservedObject var bmSupplementStackGL = BMSupplementStackGL // Ensure this is an instance
     @Binding var showSelf: Bool
     var supplement: BMSupplement
 
     var body: some View {
-        NavigationView{
-            ScrollView(showsIndicators: false){
-                VStack {
-                    // Assuming bmSupplementStackGL.supplements is an array of BMSupplement
-                    ForEach(getHistoryList(), id: \.id) { supp in
-                        SupplementRow(supplement: supp, showDateOfCreation: true, useHistoryViewMode: true)
-                    }.navigationTitle("Change History")
-                        .navigationBarTitleDisplayMode(.large)
+        NavigationView {
+            ScrollView(showsIndicators: false) {
+                HStack(alignment: .top) { // Align items to the top
+//                    VStack {
+//                        // Draw the vertical line on the left
+//                        ForEach(getHistoryList().indices, id: \.self) { index in
+//                            if index != 0 { // Avoid drawing a line for the first item
+////                                Rectangle()
+////                                    .fill(Color.pink) // Line color
+////                                    .frame(width: 10, height: 150) // Line width and height
+////                                    .cornerRadius(10)
+////                                    .cornerRadius(2) // Rounded corners for the line
+////                                   // .padding(.top, 10) // Space above the line
+////                                   // .padding(.leading,50)
+////                                    .offset(x:20)
+////                                    .offset(y:75)
+//                                Text("\(getHistoryList().count - index)")
+//                                                    .fontWeight(.bold)
+//                                                    .padding()
+//                                                    .clipShape(Circle()) // Clip to a circle
+//                                                    .background(Color.orange)
+//                                                    //.padding()
+//                            }
+//                        }
+//                    }
+                  //  .padding(.trailing, 10) // Space between line and supplements
+
+                    VStack(alignment: .leading, spacing: 0) { // No spacing to connect items visually
+                        // Assuming bmSupplementStackGL.supplements is an array of BMSupplement
+                        let historyList = getHistoryList()
+                        ForEach(historyList, id: \.id) { supp in
+                            VStack{
+                            SupplementRow(supplement: supp, showDateOfCreation: true, useHistoryViewMode: true,showImg: true)
+                            
+//                            if(supp.id == supplement.id){
+//                                Text("Latest")
+//                                    .multilineTextAlignment(.leading)
+//                                    .font(.caption)
+//                                    .fontWeight(.bold)
+//                                    .padding(.vertical,5)
+//                                    .padding(.horizontal,5)
+//                                    .background(Color.pink)
+//                                    .foregroundColor(.white)
+//                                    .cornerRadius(10)
+//                                    .padding(.horizontal,3)
+//                                    //.padding(.bottom,3)
+//                            }
+                        }
+                              //  .padding(.vertical, 5) // Add some vertical padding for spacing
+                            Divider().padding([.horizontal,.bottom])
+                            
+                        }
+                    }
                 }
+                .navigationTitle("Change History")
+                .navigationBarTitleDisplayMode(.large)
             }
         }
     }
     
-    func getHistoryList()->[BMSupplement]{
-        //sorting history objects by date- latest at top
+    func getHistoryList() -> [BMSupplement] {
+        // Sorting history objects by date - latest at top
         var res = supplement.history.sorted(by: { $0.createdAt > $1.createdAt })
-        res.insert(supplement, at: 0)//we know the current version is the latest one, so putting it at the top
+        res.insert(supplement, at: 0) // We know the current version is the latest one, so putting it at the top
         return res
     }
 }

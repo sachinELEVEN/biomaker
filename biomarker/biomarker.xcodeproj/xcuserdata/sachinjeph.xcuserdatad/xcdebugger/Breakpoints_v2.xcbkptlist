@@ -973,7 +973,7 @@
             startingLineNumber = "513"
             endingLineNumber = "513"
             landmarkName = "updateHeading()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -989,7 +989,7 @@
             startingLineNumber = "516"
             endingLineNumber = "516"
             landmarkName = "updateHeading()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1005,7 +1005,7 @@
             startingLineNumber = "523"
             endingLineNumber = "523"
             landmarkName = "updateHeading()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1020,8 +1020,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "643"
             endingLineNumber = "643"
-            landmarkName = "isEmpty(text:)"
-            landmarkType = "9">
+            landmarkName = "AddSupplementView"
+            landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1037,7 +1037,7 @@
             startingLineNumber = "669"
             endingLineNumber = "669"
             landmarkName = "getDescription()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1052,8 +1052,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "502"
             endingLineNumber = "502"
-            landmarkName = "body"
-            landmarkType = "24">
+            landmarkName = "canMoveToNextStep()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1352,8 +1352,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
             landmarkName = "createSupplementSchedule()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1371,7 +1371,7 @@
             startingLineNumber = "616"
             endingLineNumber = "616"
             landmarkName = "createSupplement()"
-            landmarkType = "9">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1384,8 +1384,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "534"
-            endingLineNumber = "534"
+            startingLineNumber = "537"
+            endingLineNumber = "537"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -1400,8 +1400,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1463,8 +1463,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -1526,8 +1526,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "488"
-            endingLineNumber = "488"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
             landmarkName = "scheduleKey(_:)"
             landmarkType = "7">
             <Locations>
@@ -1574,8 +1574,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "493"
+            endingLineNumber = "493"
             landmarkName = "SupplementScheduleView"
             landmarkType = "14">
             <Locations>
@@ -1622,8 +1622,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "scheduleKey(_:)"
             landmarkType = "7">
             <Locations>
@@ -1673,7 +1673,7 @@
             startingLineNumber = "603"
             endingLineNumber = "603"
             landmarkName = "createSupplement()"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "399A62EF-8637-4EB8-BF65-4BA9C5D31503 - f63cd77723951549"
@@ -1766,7 +1766,7 @@
             startingLineNumber = "588"
             endingLineNumber = "588"
             landmarkName = "createSupplement()"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "802364EA-B8D6-4C51-A539-2215A56B293D - f63cd7772395158b"
@@ -1814,7 +1814,7 @@
             startingLineNumber = "604"
             endingLineNumber = "604"
             landmarkName = "createSupplement()"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "32DD23EB-07C6-40CC-82EF-F5856441E1DD - f63cd77723951507"
@@ -1877,7 +1877,7 @@
             startingLineNumber = "665"
             endingLineNumber = "665"
             landmarkName = "getDescription()"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "8B67E17F-1F68-4247-AA64-26075A869B91 - e1ccf4525da0f4d"
@@ -1925,7 +1925,7 @@
             startingLineNumber = "660"
             endingLineNumber = "660"
             landmarkName = "getDescription()"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "855C1859-654C-44AD-829D-8A781F639AB1 - e1ccf4525da0e2a"
@@ -1973,7 +1973,7 @@
             startingLineNumber = "656"
             endingLineNumber = "656"
             landmarkName = "getDescription()"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "26343A31-6634-4E3C-B731-FAA5CF6EAA0E - e1ccf4525da0ea6"
@@ -2051,7 +2051,7 @@
             startingLineNumber = "659"
             endingLineNumber = "659"
             landmarkName = "getDescription()"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "66C3F320-224F-4929-8B50-E048133EA452 - e1ccf4525da0e0b"
@@ -2099,7 +2099,7 @@
             startingLineNumber = "661"
             endingLineNumber = "661"
             landmarkName = "getDescription()"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "377FAE80-76D6-4825-828C-6B6506016CDC - e1ccf4525da0fc9"
@@ -2144,8 +2144,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "508"
-            endingLineNumber = "508"
+            startingLineNumber = "511"
+            endingLineNumber = "511"
             landmarkName = "calculateNextConsumptionDates(supplement:from:inNext:)"
             landmarkType = "7">
             <Locations>
@@ -2195,7 +2195,7 @@
             startingLineNumber = "599"
             endingLineNumber = "599"
             landmarkName = "createSupplement()"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "0FE63EB6-1DF9-4613-A65F-334DFF83AF50 - f63cd777239516d5"
@@ -2240,8 +2240,8 @@
             filePath = "biomarker/Views/SupplementHomeView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "399"
-            endingLineNumber = "399"
+            startingLineNumber = "402"
+            endingLineNumber = "402"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -2670,7 +2670,7 @@
             startingLineNumber = "621"
             endingLineNumber = "621"
             landmarkName = "preprocessTimeOfConsumption(_:)"
-            landmarkType = "9">
+            landmarkType = "7">
             <Locations>
                <Location
                   uuid = "6B8914D3-4AB5-4BE3-AA80-F4D29B5D90EE - f63cd77723951337"

@@ -144,14 +144,17 @@ struct SupplementRow: View {
     var showRating: Bool = true
     var showDateOfCreation: Bool = false
     var useHistoryViewMode: Bool = false
+    var showImg: Bool = true
 
     var body: some View {
         HStack {
-            // Example icon, replace with appropriate icons
-            Image(systemName: "bolt.fill") // Use an appropriate SF Symbol or custom icon
-                .resizable()
-                .frame(width: 20, height: 40)
-                .foregroundColor(.primary)
+            if showImg{
+                // Example icon, replace with appropriate icons
+                Image(systemName: "bolt.fill") // Use an appropriate SF Symbol or custom icon
+                    .resizable()
+                    .frame(width: 20, height: 40)
+                    .foregroundColor(.primary)
+            }
             
             VStack(alignment: .leading) {
                 Text(supplement.name)
