@@ -69,6 +69,7 @@ struct SupplementDetailView: View {
                                 .foregroundStyle(Color.secondary)
                                 .padding(.top,3)
                                 .padding(.bottom)
+                                .padding(.horizontal)
                         }
                         
                         if supplement.aiAnalysisStage == .failed{
@@ -81,6 +82,7 @@ struct SupplementDetailView: View {
                                 .foregroundStyle(Color.secondary)
                                 .padding(.top,3)
                                 .padding(.bottom)
+                                .padding(.horizontal)
                         }
                         
                         //Reminder and dosage information- in edit options
