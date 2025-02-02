@@ -66,7 +66,7 @@ enum BMSupplementForm: String, CaseIterable, Codable {
 
 // Class representing a particular supplement
 class BMSupplement: Identifiable, Codable {
-    var revision: Int
+    var revision: Int//dont think we are using it
     var id: String
     var name: String
     var strengthNumber: String
