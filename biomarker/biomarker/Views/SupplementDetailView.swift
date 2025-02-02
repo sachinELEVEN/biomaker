@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Charts
 
 
 struct SupplementDetailView: View {
@@ -79,11 +80,11 @@ struct SupplementDetailView: View {
                         
                         //AI data being displayed
                         if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
-                            descriptionView("Please consult your doctor or a qualified healthcare professional for any advice regarding your supplements, food choices, and dosage recommendations.")
+                            SupplementDetailView.descriptionView("Please consult your doctor or a qualified healthcare professional for any advice regarding your supplements, food choices, and dosage recommendations.")
                         }
                         
                         
-                        aiInfoView(header: "Rating", description: supplement.aiRating)//should be in format x/10
+                        SupplementDetailView.aiInfoView(header: "Rating", description: supplement.aiRating)//should be in format x/10
                         
                         if supplement.aiRating != nil && Float(supplement.aiRating!) != nil{
                             ZStack(alignment: .leading) {
@@ -101,20 +102,20 @@ struct SupplementDetailView: View {
                             }.padding(.horizontal)
                         }
                         
-                        aiInfoView(header: "Report", description: supplement.aiReport)
-                        aiInfoView(header: "Recommendation", description: supplement.aiAdviceBasedUserHealthContext)
-                        aiInfoView(header: "Common reason for usage", description: supplement.aiUsageCommonReasonForUseAndAdvantage)
-                        aiInfoView(header: "Side effects", description: supplement.aiSideEffect)
-                        aiInfoView(header: "Common Dosage", description: supplement.aiCommonStrengthNumberAndUnits)
+                        SupplementDetailView.aiInfoView(header: "Report", description: supplement.aiReport)
+                        SupplementDetailView.aiInfoView(header: "Recommendation", description: supplement.aiAdviceBasedUserHealthContext)
+                        SupplementDetailView.aiInfoView(header: "Common reason for usage", description: supplement.aiUsageCommonReasonForUseAndAdvantage)
+                        SupplementDetailView.aiInfoView(header: "Side effects", description: supplement.aiSideEffect)
+                        SupplementDetailView.aiInfoView(header: "Common Dosage", description: supplement.aiCommonStrengthNumberAndUnits)
                         
-                        aiInfoView(header: "Calories", description: supplement.aiCalories)
-                        aiInfoView(header: "Common Name", description: supplement.aiCommonName)
-                        aiInfoView(header: "Category", description: supplement.aiCategory)
+                        SupplementDetailView.aiInfoView(header: "Calories", description: supplement.aiCalories)
+                        SupplementDetailView.aiInfoView(header: "Common Name", description: supplement.aiCommonName)
+                        SupplementDetailView.aiInfoView(header: "Category", description: supplement.aiCategory)
                             .padding(.bottom)
                         
                         
                         Divider().padding(.horizontal)
-                        aiInfoView(header: "Your notes", description: supplement.userNotes)
+                        SupplementDetailView.aiInfoView(header: "Your notes", description: supplement.userNotes)
                             .padding(.bottom)
                         
                             .sheet(isPresented: $showSupplementEditView){
@@ -194,7 +195,7 @@ struct SupplementDetailView: View {
         //.shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
     }
     
-    func aiInfoView(header: String, description: String?)->some View{
+   static func aiInfoView(header: String, description: String?)->some View{
         return VStack{
             if description != nil && description?.isJustWhitespace() == false{
                 headerView(header)
@@ -207,7 +208,7 @@ struct SupplementDetailView: View {
         }
     }
     
-    func headerView(_ text: String)->some View{
+    static func headerView(_ text: String)->some View{
         return  HStack{
             Text(text)
                 .font(.title2)
@@ -219,7 +220,7 @@ struct SupplementDetailView: View {
         .padding([.top,.horizontal])
     }
     
-    func descriptionView(_ text: String)->some View{
+    static func descriptionView(_ text: String)->some View{
         return  HStack{
             Text(text)
                 .font(.headline)
@@ -291,8 +292,11 @@ struct SupplementHistoryView: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 //left to right chart from oldes to newest
+                SupplementDetailView.aiInfoView(header: "Variation of dosage", description: "See how you dosage has varied across time for \(supplement.name)")
+                    .padding([.leading])
                 SupplementChartView(supplements: getHistoryList().reversed())
-                .frame(width: 300,height:300)
+                    .padding([.horizontal,.bottom])
+                
                 // Align items to the top
 //                    VStack {
 //                        // Draw the vertical line on the left
@@ -361,44 +365,58 @@ struct SupplementHistoryView: View {
 
 
 
+import SwiftUI
+import Charts
+
 struct SupplementChartView: View {
-    var supplements: [BMSupplement]
+    let supplements: [BMSupplement]
+    var lineWidth: CGFloat = 10.0  // Customizable line width
+
+    var segmentedData: [(startDate: Date, endDate: Date, dosageStrength: Double)] {
+        let sorted = supplements.sorted { $0.createdAt < $1.createdAt }
+        var result: [(startDate: Date, endDate: Date, dosageStrength: Double)] = []
+
+        for i in 0..<sorted.count - 1 {
+            result.append((startDate: sorted[i].createdAt,
+                           endDate: sorted[i + 1].createdAt,
+                           dosageStrength: Double(sorted[i].strengthNumber) ?? 0))
+        }
+        
+        // Ensure the last supplement is plotted up to "now"
+        if let last = sorted.last {
+            result.append((startDate: last.createdAt,
+                           endDate: Date(), // Extend to current date
+                           dosageStrength: Double(last.strengthNumber) ?? 0))
+        }
+        
+        return result
+    }
 
     var body: some View {
-        GeometryReader { geometry in
-            let minDate = supplements.map { $0.createdAt }.min() ?? Date()
-            let maxDate = supplements.map { $0.createdAt }.max() ?? Date()
-            let dateRange = maxDate.timeIntervalSince(minDate)
+        Chart {
+            ForEach(segmentedData, id: \.startDate) { segment in
+                LineMark(
+                    x: .value("Date", segment.startDate),
+                    y: .value("Dosage", segment.dosageStrength)
+                )
+                .lineStyle(StrokeStyle(lineWidth: lineWidth)) // Custom line width
+                .foregroundStyle(.pink)
 
-            // Draw the chart
-            ZStack {
-                // Draw the x and y axes
-                Path { path in
-                    // Y-axis
-                    path.move(to: CGPoint(x: 30, y: 0))
-                    path.addLine(to: CGPoint(x: 30, y: geometry.size.height))
-                    
-                    // X-axis
-                    path.move(to: CGPoint(x: 30, y: geometry.size.height))
-                    path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height))
-                }
-                .stroke(Color.black, lineWidth: 2)
-
-                // Draw horizontal lines for each supplement
-                ForEach(supplements, id: \.id) { supplement in
-                    let xPosition = CGFloat(supplement.createdAt.timeIntervalSince(minDate) / dateRange) * (geometry.size.width - 30) + 30 // Adjust for x-axis
-                    let yPosition = geometry.size.height - CGFloat(Double(supplement.strengthNumber) ?? 0) * (geometry.size.height / 10) // Scale to fit the height
-
-                    Path { path in
-                        path.move(to: CGPoint(x: xPosition, y: yPosition))
-                        path.addLine(to: CGPoint(x: xPosition, y: geometry.size.height)) // Draw vertical line down to the bottom
-                    }
-                    .stroke(Color.pink, lineWidth: 20) // Line color and width
-                }
+                LineMark(
+                    x: .value("Date", segment.endDate),
+                    y: .value("Dosage", segment.dosageStrength)
+                )
+                .lineStyle(StrokeStyle(lineWidth: lineWidth)) // Custom line width
+                .foregroundStyle(.pink)
             }
         }
+        .chartXAxis {
+            AxisMarks(position: .bottom)
+        }
+        .chartYAxis {
+            AxisMarks(position: .leading)
+        }
+        .frame(height: 300)
         .padding()
     }
 }
-
-
