@@ -170,6 +170,7 @@ class UserHealthContext {
         if supplementToConsider.count > 0 {
         context = """
         \n****
+        USER EXISTING SUPPLEMENTS
         You will be provided with a list of existing supplements that the user is currently taking. Your task is to analyze these supplements to assess whether the new supplement the user intends to add to their diet may interfere with or interact with the existing ones. Consider any potential reactions or effects that could arise from this new addition. Please keep these factors in mind while generating your report.
         """
             for supplement in supplementToConsider{
