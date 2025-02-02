@@ -16,6 +16,7 @@ struct SupplementDetailView: View {
     @State var analysisInProgress = false
     @State private var isAnimating = false
     @State var showSupplementEditView = false
+    @State var showSupplementHistoryView = false
     @State var showActionSheet = false
 
     var body: some View {
@@ -120,6 +121,11 @@ struct SupplementDetailView: View {
                                 AddSupplementView(showSelf: $showSupplementEditView, supplementToEdit: supplement)
                             }
                         
+                            .sheet(isPresented: $showSupplementHistoryView){
+                                SupplementHistoryView(showSelf: $showSupplementHistoryView, supplement: supplement)
+                            }
+                        
+                        
                         
                     }.animation(.default, value: 1)
                 }.navigationTitle("\(supplement.supplementType == .food ? "Food" : "Supplement") Report")
@@ -128,6 +134,7 @@ struct SupplementDetailView: View {
                             Button(action: {
                                 // Your action here
                                // self.showSupplementEditView.toggle()//view history of this supplement
+                                showSupplementHistoryView.toggle()
                             }) {
                                 Image(systemName: "clock.arrow.circlepath")  // SF Symbol for search icon
                             }
@@ -271,4 +278,29 @@ struct SupplementDetailView: View {
         }
     }
 
+}
+
+
+struct SupplementHistoryView: View {
+    @ObservedObject var bmSupplementStackGL = BMSupplementStackGL // Ensure this is an instance
+    @Binding var showSelf: Bool
+    var supplement: BMSupplement
+
+    var body: some View {
+        ScrollView(showsIndicators: false){
+            VStack {
+                // Assuming bmSupplementStackGL.supplements is an array of BMSupplement
+                ForEach(getHistoryList(), id: \.id) { supp in
+                    SupplementRow(supplement: supp, showDateOfCreation: true)
+                }.navigationTitle("History")
+            }
+        }
+    }
+    
+    func getHistoryList()->[BMSupplement]{
+        //sorting history objects by date- latest at top
+        var res = bmSupplementStackGL.supplements.sorted(by: { $0.createdAt > $1.createdAt })
+        res.insert(supplement, at: 0)//we know the current version is the latest one, so putting it at the top
+        return res
+    }
 }
