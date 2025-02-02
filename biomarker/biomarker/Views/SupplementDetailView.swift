@@ -48,7 +48,7 @@ struct SupplementDetailView: View {
                                 biomarerIntelligenceLabel()
                                     .padding()
                             }else{
-                                biomarerIntelligenceLabel(text: "Biomarker couldn't find any information on \(supplement.name).")
+                                biomarerIntelligenceLabel(text: "Biomarker couldn't find any specific information on \(supplement.name).")
                                     .padding()
                             }
                         }
