@@ -299,7 +299,7 @@ struct SupplementHistoryView: View {
     
     func getHistoryList()->[BMSupplement]{
         //sorting history objects by date- latest at top
-        var res = bmSupplementStackGL.supplements.sorted(by: { $0.createdAt > $1.createdAt })
+        var res = supplement.history.sorted(by: { $0.createdAt > $1.createdAt })
         res.insert(supplement, at: 0)//we know the current version is the latest one, so putting it at the top
         return res
     }

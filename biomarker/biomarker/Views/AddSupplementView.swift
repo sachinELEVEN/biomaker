@@ -90,7 +90,9 @@ struct AddSupplementView: View {
                             .cornerRadius(8)
                             .padding(.trailing)
                             .onAppear{
-                                strengthUnit = supplementIsFoodItem ? "g" : "mg"
+                                if !isEditMode(){
+                                    strengthUnit = supplementIsFoodItem ? "g" : "mg"
+                                }
                             }
                         }
                         .padding()
