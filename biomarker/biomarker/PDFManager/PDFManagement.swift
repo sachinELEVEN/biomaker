@@ -152,7 +152,7 @@ struct PDFUploaderView: View {
                                             ActivityIndicator(shouldAnimate: .constant(true))
                                         }
                                         
-                                        label(processingButtonText(), textColor: .primaryInvert, bgColor: .primary, imgName: "doc.text.image", imgColor: .primaryInvert, width: 300, radius: 10)
+                                        label(processingButtonText(), textColor: .primaryInvert, bgColor: .primary, imgName: "doc.plaintext.fill", imgColor: .primaryInvert, width: 300, radius: 10)
                                     }
                                     
                                     
@@ -186,7 +186,7 @@ struct PDFUploaderView: View {
                                     .foregroundStyle(Color.secondary)
                                 //successfully document processed
                                 NavigationLink(destination: MedicalDocumentViewerHandler(size: geo.size, doc: tempMedicalDocument!)){
-                                    label("View Your Medical Record", textColor: .white, bgColor: .blue, imgName: "doc.text.image", imgColor: .white, width: 300, radius: 10)
+                                    label("View Your Medical Record", textColor: .white, bgColor: .blue, imgName: "doc.plaintext.fill", imgColor: .white, width: 300, radius: 10)
                                 }
                             }
                             
@@ -202,7 +202,7 @@ struct PDFUploaderView: View {
                                 reset()
                                 showDocumentPicker.toggle()
                             }){
-                                label("Select Medical Record (PDF)", textColor: .primary, bgColor: .secondary.opacity(0.15), imgName: "doc.text.image", imgColor: .primary, width: 300, radius: 10)
+                                label("Select Medical Record (PDF)", textColor: .primary, bgColor: .secondary.opacity(0.15), imgName: "doc.plaintext.fill", imgColor: .primary, width: 300, radius: 10)
                             }
                         }
                         

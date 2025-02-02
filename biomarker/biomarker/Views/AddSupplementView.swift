@@ -414,7 +414,7 @@ struct AddSupplementView: View {
                 }
                 //.ignoresSafeArea()
                 .edgesIgnoringSafeArea(.bottom)
-                .animation(.default)
+                .animation(.default, value: 1)
                 .navigationTitle(heading)
                 .navigationBarTitleDisplayMode(.large)
                 .onChange(of: currentStep){ _ in
