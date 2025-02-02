@@ -17,7 +17,7 @@ struct AddSupplementView: View {
     @State private var strengthNumber: String = ""
     @State private var strengthUnit: String = "mg" // Default unit
     @State private var frequency: BMSupplementFrequency = .daily
-    @State private var form: BMSupplementForm = .capsule
+    @State private var form: BMSupplementForm = .capsule//not used for food items
     @State private var timeOfConsumption: [Date?] = []
     @State private var reminderTime: [Date?] = []//not going to use
     @State private var userNotes: String = ""
@@ -30,6 +30,10 @@ struct AddSupplementView: View {
     @State private var allowReminding5MinBeforeDosage = false
     @State var analysisInProgress = false
     @State private var isAnimating = false
+    var supplementToEdit: BMSupplement?
+    init(supplementToEditL: BMSupplement? = nil){
+        supplementToEdit = supplementToEditL
+    }
     var body: some View {
         NavigationView {
             ZStack {
@@ -404,7 +408,7 @@ struct AddSupplementView: View {
                                 
                             }){
                                 HStack{
-                                    label(currentStep == finalStep ? "Add" : currentStep==6 ? "Analysing..." : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .secondary), imgName: currentStep == finalStep ? "checkmark" : currentStep==6 ? "" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
+                                    label(currentStep == finalStep ? (isEditMode() ? "Save changes" : "Add") : currentStep==6 ? "Analysing..." : "Next", textColor: currentStep == finalStep ? .white : .primaryInvert, bgColor: currentStep == finalStep ? .blue : (canMoveToNextStep() ? .primary : .secondary), imgName: currentStep == finalStep ? "checkmark" : currentStep==6 ? "" : "arrow.forward", imgColor: currentStep == finalStep ? .white : .primaryInvert, width: 150, radius: 10,alignment: .center)
                                     Spacer()
                                 }.padding()
                             }
@@ -435,6 +439,26 @@ struct AddSupplementView: View {
                     updateHeading()
                 }
                 .onChange(of: supplementIsFoodItem){ _ in
+                    updateHeading()
+                }
+                .onAppear{
+                    //see if this screen is opened in edit mode if yes, then set the properties accordingly
+                    guard let supp = supplementToEdit else {
+                        return
+                    }
+                    
+                    print("/AddSupplementView is opened in edit mode")
+                    //setting the data model for previous data
+                    name = supp.name
+                    strengthNumber = supp.strengthNumber
+                    strengthUnit = supp.strengthUnit
+                    frequency = supp.frequency
+                    form = supp.form ?? .capsule
+                    userNotes = supp.userNotes ?? ""
+                    supplementIsFoodItem = supp.supplementType == .food ? true : false
+                    timeOfConsumption = supp.timeOfConsumption
+                    reminderTime = supp.reminderTime
+                    allowReminding5MinBeforeDosage = supp.is5MinReminderSet
                     updateHeading()
                 }
             }
@@ -479,10 +503,10 @@ struct AddSupplementView: View {
     
     func updateHeading(){
         if currentStep == 0 {
-            heading = supplementIsFoodItem ? "Add food" : "Add supplement"
+            heading = supplementIsFoodItem ? (isEditMode() ? "Change food" : "Add food") : (isEditMode() ?  "Change supplement" : "Add supplement")
         }
         if currentStep == 1 {
-            heading = supplementIsFoodItem ? "Add portion size" :"Add dosage"
+            heading = supplementIsFoodItem ? "Add portion size" : (isEditMode() ? "Change dosage" : "Add dosage")
         }
         if currentStep == 2 {
             heading = "Notes"
@@ -511,6 +535,10 @@ struct AddSupplementView: View {
             return 1
         }
     }
+    
+    func isEditMode()->Bool{
+        return supplementToEdit != nil ? true : false
+    }
 
     private func createSupplement() {
         let id = UUID().uuidString
@@ -532,6 +560,45 @@ struct AddSupplementView: View {
             allowReminding5MinBeforeDosage = false
         }
         
+        //check if its the edit flow here- i know this function could use some cleanup but going with this for now otherwise use the create new supplement flow
+        //EDIT SUPPLEMENT HERE
+        if let supp = supplementToEdit {
+            
+            print("/AddSupplementView: Saving the edited value")
+            
+            //update aistage if any of the following properties has changed- name, strengthNumber, strengthUnit, frequency, form, userNotes, supplementType, timeOfConsumption
+            //as only when these properties are changed we need to do ai analysis again
+            if(supp.name != name || supp.strengthUnit != strengthUnit || supp.strengthNumber != strengthNumber || supp.frequency != frequency || supp.form != form || supp.userNotes != userNotes || supp.supplementType != (supplementIsFoodItem ? .food : .supplement) || supp.timeOfConsumption != timeOfConsumption){
+                supp.aiAnalysisStage = .outdated
+                print("/edit mode supplement's aiAnalysis stage changed to .outdated")
+            }
+            
+            
+            supp.name = name
+            supp.strengthNumber = strengthNumber
+            supp.strengthUnit = strengthUnit
+            supp.frequency = frequency
+            supp.form = supplementIsFoodItem ? nil : form
+            supp.userNotes = userNotes
+            supp.supplementType = supplementIsFoodItem ? .food : .supplement
+            supp.timeOfConsumption = timeOfConsumption
+            supp.reminderTime = reminderTime
+            supp.is5MinReminderSet = allowReminding5MinBeforeDosage
+            
+            //Save updated model to the storage
+            BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
+            currentStep = 6
+            BMSupplementStackGL.refresh()
+            
+            //TODO
+            //we need to save the history object as well in this revision
+            
+           return
+        }
+        
+        print("Trying to add new supplement to the stack****")
+        
+        //CREATE NEW SUPPLEMENT FLOW BELOW
         supplement = BMSupplement(id: id, supplementType: supplementIsFoodItem ? .food : .supplement, name: name, strengthNumber: strengthNumber,
                                   strengthUnit: strengthUnit, frequency: frequency,
                                   form: supplementIsFoodItem ? nil : form, timeOfConsumption: timeOfConsumption,
@@ -646,12 +713,6 @@ struct AddSupplementView: View {
 
 }
 
-// Preview
-struct AddSupplementView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddSupplementView()
-    }
-}
 
 
 
