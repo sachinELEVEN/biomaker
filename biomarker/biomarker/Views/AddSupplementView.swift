@@ -562,33 +562,9 @@ struct AddSupplementView: View {
         //EDIT SUPPLEMENT HERE
         if let supp = supplementToEdit {
             
-            print("/AddSupplementView: Saving the edited value")
+            supp.saveEditChanges(supplementTypeL: supplementIsFoodItem ? .food : .supplement, nameL: name, strengthNumberL: strengthNumber, strengthUnitL: strengthUnit, frequencyL: frequency, formL: supplementIsFoodItem ? nil : form, timeOfConsumptionL: timeOfConsumption, reminderTimeL: reminderTime, createdAtL: createdAt, is5MinReminderSetL: allowReminding5MinBeforeDosage, userNotesL: userNotes)
+
             
-            //update aistage if any of the following properties has changed- name, strengthNumber, strengthUnit, frequency, form, userNotes, supplementType, timeOfConsumption
-            //as only when these properties are changed we need to do ai analysis again
-            if(supp.name != name || supp.strengthUnit != strengthUnit || supp.strengthNumber != strengthNumber || supp.frequency != frequency || supp.form != form || supp.userNotes != userNotes || supp.supplementType != (supplementIsFoodItem ? .food : .supplement) || supp.timeOfConsumption != timeOfConsumption){
-                supp.aiAnalysisStage = .outdated
-                print("/edit mode supplement's aiAnalysis stage changed to .outdated")
-            }
-            
-            
-            supp.name = name
-            supp.strengthNumber = strengthNumber
-            supp.strengthUnit = strengthUnit
-            supp.frequency = frequency
-            supp.form = supplementIsFoodItem ? nil : form
-            supp.userNotes = userNotes
-            supp.supplementType = supplementIsFoodItem ? .food : .supplement
-            supp.timeOfConsumption = timeOfConsumption
-            supp.reminderTime = reminderTime
-            supp.is5MinReminderSet = allowReminding5MinBeforeDosage
-            
-            //Save updated model to the storage
-            BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
-            BMSupplementStackGL.refresh()
-            
-            //TODO
-            //we need to save the history object as well in this revision
             //here we will close the edit screen once edits are done
             showSelf = false
            return

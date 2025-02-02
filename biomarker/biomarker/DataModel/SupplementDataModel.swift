@@ -17,6 +17,7 @@ enum BMSupplementAIAnalysisStage: String, Codable {
     case failed
     case completed
     case outdated
+    case history//when supplement object is part of history
 }
 
 // Enum for Frequency
@@ -74,7 +75,7 @@ class BMSupplement: Identifiable, Codable {
     var form: BMSupplementForm?
     var timeOfConsumption: [Date?]//date and time of the last consumption
     var reminderTime: [Date?]
-    var createdAt: Date
+    var createdAt: Date//denotes the date when this particular revision was created
     var history: [BMSupplement]// Track changes over time
     var is5MinReminderSet: Bool
     var userNotes: String?
@@ -119,8 +120,64 @@ class BMSupplement: Identifiable, Codable {
         return aiSupplementValid != "no"
     }
 
-    func addRevision() {
+    
+    func saveEditChanges(supplementTypeL: BMSupplementType, nameL: String, strengthNumberL: String, strengthUnitL: String,
+                     frequencyL: BMSupplementFrequency, formL: BMSupplementForm?, timeOfConsumptionL: [Date?],
+                     reminderTimeL: [Date?], createdAtL: Date, is5MinReminderSetL: Bool, userNotesL: String?) {
         // Increase revision and track changes in history
+        
+
+        
+        //update aistage if any of the following properties has changed- name, strengthNumber, strengthUnit, frequency, form, userNotes, supplementType, timeOfConsumption
+        //as only when these properties are changed we need to do ai analysis again
+        if(self.name != nameL || self.strengthUnit != strengthUnitL || self.strengthNumber != strengthNumberL || self.frequency != frequencyL || self.form != formL || self.userNotes != userNotesL || self.supplementType != supplementTypeL || self.timeOfConsumption != timeOfConsumptionL){
+            
+            print("/saveEditChanges: Saving the history object first")
+            let historyObjId = UUID().uuidString
+            //create a clone of the current state of the object and save it to the history
+            let historyObj = BMSupplement(id: historyObjId, supplementType: self.supplementType, name: self.name, strengthNumber: self.strengthNumber, strengthUnit: self.strengthUnit, frequency: self.frequency, form: self.form, timeOfConsumption: self.timeOfConsumption, reminderTime: self.reminderTime, createdAt: self.createdAt, is5MinReminderSet: self.is5MinReminderSet, userNotes: self.userNotes)
+            //now setting the optional ai props to the history obj
+            //Chances are there are redundant and will not be used ever but we are just covering our basis
+            historyObj.aiContainsWhichChemicals = self.aiContainsWhichChemicals
+            historyObj.aiUsageCommonReasonForUseAndAdvantage = self.aiUsageCommonReasonForUseAndAdvantage
+            historyObj.aiAdditionalInfo = self.aiAdditionalInfo
+            historyObj.aiCommonStrengthNumberAndUnits = self.aiCommonStrengthNumberAndUnits
+            historyObj.aiAdviceBasedUserHealthContext = self.aiAdviceBasedUserHealthContext
+            historyObj.aiSideEffect = self.aiSideEffect
+            historyObj.aiCategory = self.aiCategory
+            historyObj.aiCommonName = self.aiCommonName
+            historyObj.aiCalories = self.aiCalories
+            historyObj.aiRating = self.aiRating
+            historyObj.aiReport = self.aiReport
+            historyObj.aiSupplementValid = self.aiSupplementValid
+            historyObj.aiAnalysisStage = .history
+            self.history.append(historyObj)
+            
+            print("/edit mode supplement's aiAnalysis stage changed to .outdated")
+            self.aiAnalysisStage = .outdated
+        }
+        
+        //update the current object and save the edit
+        print("/saveEditChanges: Saving the edited value")
+        
+        
+        self.name = nameL
+        self.strengthNumber = strengthNumberL
+        self.strengthUnit = strengthUnitL
+        self.frequency = frequencyL
+        self.form = formL
+        self.userNotes = userNotesL
+        self.supplementType = supplementTypeL
+        self.timeOfConsumption = timeOfConsumptionL
+        self.reminderTime = reminderTimeL
+        self.is5MinReminderSet = is5MinReminderSetL
+        self.createdAt = createdAtL//updating the date
+        
+        //Save updated model to the storage
+        BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
+        BMSupplementStackGL.refresh()
+        
+        
     }
 
     // MARK: - Codable Conformance
