@@ -412,6 +412,8 @@ struct AddSupplementView: View {
                     Spacer()
                     
                 }
+                //.ignoresSafeArea()
+                .edgesIgnoringSafeArea(.bottom)
                 .animation(.default)
                 .navigationTitle(heading)
                 .navigationBarTitleDisplayMode(.large)
@@ -531,15 +533,21 @@ struct AddSupplementView: View {
                 UserHealthContext.analyzeSupplementWithLLM(supplement!) { success, response in
                     analysisInProgress = false
                     if success{
-                        currentStep = 7
+                        
                         
                     }else{
                         print("Failed to analyse the reponse")
                         //WE WILL PROBABLY NOT SHOW THIS MESSAGE BECAUSE WE IMEEDIATELY MOVE TO THE SCREEN 7- WHICH IS SUPPLEMENT DETAILED VIEW
                         //message = "The \(supplementIsFoodItem ? "food item" : "supplement") has been added to your stack. However Biomarker was unable to analyze the \(supplementIsFoodItem ? "food item" : "supplement"), and you can request an analysis later from the supplement details page."
                         
-                        currentStep = 7
                     }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        //putting thing in here because we do not want abrupt stops in animation in case completion handler gets called very quicky
+                        //side effect is that we will show anlaying with biomarker for a few moments longer, but its fine
+                        currentStep = 7
+                        isAnimating = false
+                    })
                 }
                 
                 
