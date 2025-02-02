@@ -301,6 +301,15 @@ struct MedicalDocumentViewerHandler: View{
                                 footer: Text("You can add detailed notes about this medical document to help you reflect on any factors that may have influenced your test results at the time")) {
                             TextEditor(text: $documentNotes)
                                 .frame(height: system.fullHeight/4) // Adjust height as needed for longer text input
+                                .toolbar {
+                                    ToolbarItem(placement: .keyboard) {
+                                       // Spacer()
+                                        Button("Close keyboard") {
+                                            //console.log
+                                            UIApplication.shared.endEditing()
+                                        }
+                                    }
+                                }
                                // .padding(.vertical)
                             //                            .overlay(
                             //                                RoundedRectangle(cornerRadius: 8)

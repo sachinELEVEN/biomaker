@@ -97,12 +97,14 @@ struct AddSupplementView: View {
                         //                    }
                     }
                     else if currentStep == 2 {
+                        ScrollView(showsIndicators: false){
+                            VStack{
                         ZStack{
                             if userNotes.isEmpty {
                                 TextEditor(text:$userNotesPlaceholderText)
                                     .font(.headline)
                                 // .fontWeight(.bold)
-                                    //.background(Color.secondary.opacity(0.1))
+                                //.background(Color.secondary.opacity(0.1))
                                     .foregroundStyle(Color.secondary)
                                     .scrollContentBackground(.hidden)
                                     .disabled(true)
@@ -111,6 +113,15 @@ struct AddSupplementView: View {
                             TextEditor(text: $userNotes)
                                 .scrollContentBackground(.hidden)
                                 .font(.headline)
+                                .toolbar {
+                                    ToolbarItem(placement: .keyboard) {
+                                       // Spacer()
+                                        Button("Close keyboard") {
+                                            //console.log
+                                            UIApplication.shared.endEditing()
+                                        }
+                                    }
+                                }
                             
                         }
                         .frame(height: system.fullHeight/4)
@@ -119,6 +130,9 @@ struct AddSupplementView: View {
                         .background(Color.secondary.opacity(0.1))
                         .cornerRadius(10)
                         .padding(.horizontal)
+                        
+                    }
+                }
                         //                    Button("Finish") {
                         //                        createSupplement()
                         //                    }
