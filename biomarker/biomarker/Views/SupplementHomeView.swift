@@ -143,6 +143,7 @@ struct SupplementRow: View {
     var supplement: BMSupplement
     var showRating: Bool = true
     var showDateOfCreation: Bool = false
+    var useHistoryViewMode: Bool = false
 
     var body: some View {
         HStack {
@@ -184,17 +185,19 @@ struct SupplementRow: View {
                 }
                 
                 // Display next consumption date
-                if SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360).count > 0 {
-                    Group{
-                        Text("Upcoming dose is on")
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                        + Text(" \(SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360)[0], formatter: dateFormatter_D_MMMM_YYYY)")
-                            .font(.subheadline)
-                            .foregroundColor(.pink)
-                        //.italic()
-                            .bold()
-                    }.multilineTextAlignment(.leading)
+                if !useHistoryViewMode{
+                    if SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360).count > 0 {
+                        Group{
+                            Text("Upcoming dose is on")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                            + Text(" \(SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360)[0], formatter: dateFormatter_D_MMMM_YYYY)")
+                                .font(.subheadline)
+                                .foregroundColor(.pink)
+                            //.italic()
+                                .bold()
+                        }.multilineTextAlignment(.leading)
+                    }
                 }
                 
                 //                if let userNotes = supplement.userNotes, !userNotes.isEmpty {
@@ -236,7 +239,7 @@ struct SupplementRow: View {
                 if showDateOfCreation{
                     HStack{
                         //some footer information
-                        Text("\(supplement.name) was added to your stack on")
+                        Text("\(supplement.name) was \(useHistoryViewMode ? "last changed" : "added to your stack") on")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                         + Text(" \(supplement.createdAt, formatter: dateFormatter_D_MMMM_YYYY)")

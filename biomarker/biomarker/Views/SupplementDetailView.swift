@@ -287,12 +287,15 @@ struct SupplementHistoryView: View {
     var supplement: BMSupplement
 
     var body: some View {
-        ScrollView(showsIndicators: false){
-            VStack {
-                // Assuming bmSupplementStackGL.supplements is an array of BMSupplement
-                ForEach(getHistoryList(), id: \.id) { supp in
-                    SupplementRow(supplement: supp, showDateOfCreation: true)
-                }.navigationTitle("History")
+        NavigationView{
+            ScrollView(showsIndicators: false){
+                VStack {
+                    // Assuming bmSupplementStackGL.supplements is an array of BMSupplement
+                    ForEach(getHistoryList(), id: \.id) { supp in
+                        SupplementRow(supplement: supp, showDateOfCreation: true, useHistoryViewMode: true)
+                    }.navigationTitle("Change History")
+                        .navigationBarTitleDisplayMode(.large)
+                }
             }
         }
     }
