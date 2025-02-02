@@ -285,6 +285,8 @@ struct SupplementScheduleView: View {
     @State private var selectedDays: Int = 7 // Default to 7 days
     @State private var selectedFrequency: String = "All"// No filter by default
     @State private var supplementType: BMSupplementType = .supplement
+    @State var supplementViewToShowInDetail: BMSupplement? = nil
+    @State var showSupplementDetailView = false
 
     var body: some View {
         VStack {
@@ -412,17 +414,22 @@ struct SupplementScheduleView: View {
                         VStack(alignment: .leading) {
                             ForEach(schedule[dateString] ?? [], id: \.id) { supplement in
                                 HStack {
-                                    VStack(alignment: .leading) {
+                                    Button(action:{
+                                        supplementViewToShowInDetail = supplement
+                                        showSupplementDetailView = true
+                                    }){
+                                        VStack(alignment: .leading) {
                                             Text(supplement.name)
                                                 .font(.headline)
                                                 .fontWeight(.bold)
                                                 .padding(.bottom, 5)
+                                            
+                                            // Display all the times
+                                            SupplementTimeView(supplement: supplement)
+                                        }
                                         
-                                        // Display all the times
-                                        SupplementTimeView(supplement: supplement)
+                                        Spacer()
                                     }
-                                    
-                                    Spacer()
                                 }
                             }
                         }
@@ -431,6 +438,12 @@ struct SupplementScheduleView: View {
 
                     
                   //  }
+                }
+            }
+            
+            if supplementViewToShowInDetail != nil{
+                NavigationLink(destination: SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supplementViewToShowInDetail!),isActive: $showSupplementDetailView) {
+                    Text("")
                 }
             }
 
