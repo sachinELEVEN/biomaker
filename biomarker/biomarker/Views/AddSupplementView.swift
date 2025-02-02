@@ -43,7 +43,7 @@ struct AddSupplementView: View {
                     if currentStep == 0 {
                         TextField(supplementIsFoodItem ? "Food name eg Tofu, Blueberry" : "Supplement name eg Vitamin D3, Minoxidil", text: $name)
                             .padding(10)
-                            .background(Color(.systemGray6))
+                            .background(Color.secondary.opacity(0.1))
                             .cornerRadius(8)
                             .padding([.horizontal,.top])
                         
@@ -57,7 +57,7 @@ struct AddSupplementView: View {
                         HStack {
                             TextField(supplementIsFoodItem ? "Portion size" :"Dosage strength (numeric)", text: $strengthNumber)
                                 .padding(10)
-                                .background(Color(.systemGray6))
+                                .background(Color.secondary.opacity(0.1))
                                 .cornerRadius(8)
                                 .padding(.trailing)
                                 .keyboardType(.decimalPad)
@@ -84,7 +84,7 @@ struct AddSupplementView: View {
                             }
                             .pickerStyle(MenuPickerStyle())
                             .padding(5)
-                            .background(Color(.systemGray6))
+                            .background(Color.secondary.opacity(0.1))
                             .cornerRadius(8)
                             .padding(.trailing)
                             .onAppear{
@@ -102,8 +102,8 @@ struct AddSupplementView: View {
                                 TextEditor(text:$userNotesPlaceholderText)
                                     .font(.headline)
                                 // .fontWeight(.bold)
+                                    //.background(Color.secondary.opacity(0.1))
                                     .foregroundStyle(Color.secondary)
-                                
                                     .scrollContentBackground(.hidden)
                                     .disabled(true)
                             }
@@ -116,7 +116,7 @@ struct AddSupplementView: View {
                         .frame(height: system.fullHeight/4)
                         // TextField("reason for supplement...", text: $userNotes)
                         .padding()
-                        .background(Color(.systemGray6))
+                        .background(Color.secondary.opacity(0.1))
                         .cornerRadius(10)
                         .padding(.horizontal)
                         //                    Button("Finish") {
@@ -136,7 +136,7 @@ struct AddSupplementView: View {
                                 }
                             }.pickerStyle(MenuPickerStyle())
                                 .padding(5)
-                                .background(Color(.systemGray6))
+                                .background(Color.secondary.opacity(0.1))
                                 .cornerRadius(8)
                                 .padding(.trailing)
                         }.padding(.top)
@@ -157,7 +157,7 @@ struct AddSupplementView: View {
                                     }
                                 }.pickerStyle(MenuPickerStyle())
                                     .padding(5)
-                                    .background(Color(.systemGray6))
+                                    .background(Color.secondary.opacity(0.1))
                                     .cornerRadius(8)
                                     .padding(.trailing)
                             }.padding()
@@ -225,7 +225,7 @@ struct AddSupplementView: View {
                                             //                                    .foregroundColor(.gray) // Optional: Change color to indicate it's not set
                                         }
                                     } .padding()
-                                        .background(Color(.systemGray6))
+                                        .background(Color.secondary.opacity(0.1))
                                         .cornerRadius(10)
                                         .padding([.bottom])
                                     
@@ -239,7 +239,7 @@ struct AddSupplementView: View {
                                         .font(.headline)
                                         .toggleStyle(SwitchToggleStyle(tint: .blue))
                                         .padding()
-                                        .background(Color(.systemGray6))
+                                        .background(Color.secondary.opacity(0.1))
                                         .cornerRadius(10)
                                         .padding([.top,.bottom])
                                     
