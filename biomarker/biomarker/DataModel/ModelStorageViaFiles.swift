@@ -95,5 +95,50 @@ class BiomarkerFileSystem{
         BMSupplementStackGL.addSupplement(supp3)
         
     }
+    
+    
+    //MARK:- SAVING SUPPLEMENT SYSTEM DATA BELOW
+    // Function to save supplement data to local JSON file
+    func saveSupplementSystemDataToLocal(supplementStack: BMSupplementStack) {
+        let fileManager = FileManager.default
+        guard let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            print("Could not find documents directory.")
+            return
+        }
+        
+        let fileURL = documentsDirectory.appendingPathComponent("supplement_system.json")
+        
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = .prettyPrinted // Optional: for pretty printing
+            let jsonData = try encoder.encode(supplementStack)
+            try jsonData.write(to: fileURL)
+            print("Supplement data saved to \(fileURL.path)")
+        } catch {
+            print("Error saving supplement data: \(error)")
+        }
+    }
+
+    // Function to load supplement data from local JSON file
+    func loadSupplementSystemDataFromLocal() -> BMSupplementStack? {
+        let fileManager = FileManager.default
+        guard let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            print("Could not find documents directory.")
+            return nil
+        }
+        
+        let fileURL = documentsDirectory.appendingPathComponent("supplement_system.json")
+        
+        do {
+            let data = try Data(contentsOf: fileURL)
+            let decoder = JSONDecoder()
+            let supplementStack = try decoder.decode(BMSupplementStack.self, from: data)
+            print("Supplement data loaded from \(fileURL.path)")
+            return supplementStack
+        } catch {
+            print("Error loading supplement data: \(error)")
+            return nil
+        }
+    }
 
 }
