@@ -130,9 +130,9 @@ struct SupplementDetailView: View {
                         
                         
                         
-                    }
+                    }.animation(.default, value: 1)
                 }.navigationTitle("\(supplement.supplementType == .food ? "Food" : "Supplement") Report")
-                    .animation(.default)
+                    
             }
         }
        // .background(Color(UIColor.systemBackground))
