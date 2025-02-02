@@ -238,13 +238,16 @@ class UserHealthContext {
         \n****
         USER MEDICAL TEST RECORDS
         Here are some medical test records for the users, I will first provide a list of test information. Where each row follows the below format-
-        Row format = Test name : <test value> : <units> : <true if test value is out of ref range and false it is in ref range>
+        Row format = Test name : <test value> : <units> : <true if test value is out of ref range and false it is in ref range> : <Date when the test was conduced>
         """
         
         for test in system.getAllTestRecords(){
-            let row = "\n" + test.userFacingTestName() + " : " + test.value + " : " + test.userFacingUnit() + " : " + test.isOutOfRange().description
+            let testDate = test.testDate() != nil ? dateFormatter_D_MMMM_YYYY.string(from: test.testDate()!) : "NA"
+            let row = "\n" + test.userFacingTestName() + " : " + test.value + " : " + test.userFacingUnit() + " : " + test.isOutOfRange().description + " : " + testDate
             context.append(row)
         }
+        
+        context += "\nKeep in mind today's date is \(dateFormatter_D_MMMM_YYYY.string(from: Date()))"
         
         return context
     }
