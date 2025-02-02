@@ -18,7 +18,7 @@ struct SupplementHomeView:View {
         NavigationView{
             GeometryReader{ geo in
                 VStack(alignment: .leading){
-                   
+                    
                     ScrollView(showsIndicators: false){
                         VStack(alignment: .leading){
                             
@@ -42,16 +42,16 @@ struct SupplementHomeView:View {
                             
                             HStack{
                                 Spacer()
-                            Button(action:{
-                                showAddSupplementScreen.toggle()
-                            }){
-                                label("Add a supplement", textColor: .primaryInvert, bgColor: .primary, imgName: "bolt.fill", imgColor: .primaryInvert, width: geo.size.width*0.8, radius: 10,verticalPadding: 5)
-                            }
+                                Button(action:{
+                                    showAddSupplementScreen.toggle()
+                                }){
+                                    label("Add a supplement", textColor: .primaryInvert, bgColor: .primary, imgName: "bolt.fill", imgColor: .primaryInvert, width: geo.size.width*0.8, radius: 10,verticalPadding: 5)
+                                }
                                 Spacer()
                             }.padding(.top)
-                            .sheet(isPresented: $showAddSupplementScreen){
-                                AddSupplementView()
-                            }
+                                .sheet(isPresented: $showAddSupplementScreen){
+                                    AddSupplementView()
+                                }
                             
                             Text("Supplement Stack Analysis")
                             //.italic()
@@ -60,7 +60,7 @@ struct SupplementHomeView:View {
                                 .font(.headline)
                                 .multilineTextAlignment(.leading)
                                 .padding(.vertical)
-                         
+                            
                             
                             Text("Supplements")
                             //.italic()
@@ -72,49 +72,49 @@ struct SupplementHomeView:View {
                             
                             // Picker for selecting the number of days
                             Picker("Select Supplement Type", selection: $supplementType) {
-                               // Text("Both").tag("Both")
+                                // Text("Both").tag("Both")
                                 Text(BMSupplementType.supplement.rawValue).tag(BMSupplementType.supplement)
                                 Text(BMSupplementType.food.rawValue).tag(BMSupplementType.food)
-
+                                
                             }
                             .pickerStyle(SegmentedPickerStyle())
                             .padding(.bottom)
                             
-                           if bmSupplementStackGL.supplements.filter({ supp in
+                            if bmSupplementStackGL.supplements.filter({ supp in
                                 supp.supplementType == supplementType
-                           }).count == 0 {
-                               HStack{
-                                   Spacer()
-                                   Text("Nothing to show")
-                                       .fontWeight(.bold)
-                                       .font(.headline)
-                                       .foregroundStyle(Color.secondary)
-                                       .padding(.vertical)
-                                   Spacer()
-                               }
-                           }
+                            }).count == 0 {
+                                HStack{
+                                    Spacer()
+                                    Text("Nothing to show")
+                                        .fontWeight(.bold)
+                                        .font(.headline)
+                                        .foregroundStyle(Color.secondary)
+                                        .padding(.vertical)
+                                    Spacer()
+                                }
+                            }
                             ForEach(bmSupplementStackGL.supplements.filter({ supp in
                                 supp.supplementType == supplementType
                             })){ supp in
-                                    VStack{
-                                        Button(action:{
-                                            supplementViewToShowInDetail = supp
-                                            showSupplementDetailView = true
-                                        }){
-                                            SupplementRow(supplement: supp)
-                                        }
-                                        Divider().padding(.horizontal)
+                                VStack{
+                                    Button(action:{
+                                        supplementViewToShowInDetail = supp
+                                        showSupplementDetailView = true
+                                    }){
+                                        SupplementRow(supplement: supp)
                                     }
+                                    Divider().padding(.horizontal)
+                                }
                                 
-
+                                
                             }
                             if supplementViewToShowInDetail != nil{
                                 NavigationLink(destination: SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supplementViewToShowInDetail!),isActive: $showSupplementDetailView) {
                                     Text("")
                                 }
-//                                    .navigationDestination(isPresented: $showSupplementDetailView){
-//                                        SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supplementViewToShowInDetail!)
-//                                    }
+                                //                                    .navigationDestination(isPresented: $showSupplementDetailView){
+                                //                                        SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supplementViewToShowInDetail!)
+                                //                                    }
                             }
                             
                             
@@ -129,11 +129,10 @@ struct SupplementHomeView:View {
                                 .font(.headline)
                                 .multilineTextAlignment(.leading)
                                 .padding(.vertical)
-                        }
+                        }.animation(.default)//putting animation in the outside of this causes wierd issue with navigation tile bar getting a flickerring effect on scroll
                     }
-                }.padding(.horizontal)
-            }.navigationTitle("Supplement Stack")
-                .animation(.default)
+                }.padding(.horizontal)          
+            }.navigationTitle("Supplement Stack")      
         }
     }
 }
@@ -185,14 +184,16 @@ struct SupplementRow: View {
                 
                 // Display next consumption date
                 if SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360).count > 0 {
-                    Text("Upcoming dose is on")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    + Text(" \(SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360)[0], formatter: dateFormatter_D_MMMM_YYYY)")
-                        .font(.subheadline)
-                        .foregroundColor(.pink)
-                    //.italic()
-                        .bold()
+                    Group{
+                        Text("Upcoming dose is on")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        + Text(" \(SupplementScheduleView.calculateNextConsumptionDates(supplement: supplement, from: Date(), inNext: 360)[0], formatter: dateFormatter_D_MMMM_YYYY)")
+                            .font(.subheadline)
+                            .foregroundColor(.pink)
+                        //.italic()
+                            .bold()
+                    }.multilineTextAlignment(.leading)
                 }
                 
                 //                if let userNotes = supplement.userNotes, !userNotes.isEmpty {
