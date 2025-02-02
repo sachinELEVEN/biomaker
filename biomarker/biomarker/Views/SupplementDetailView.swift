@@ -46,13 +46,13 @@ struct SupplementDetailView: View {
                         
                         if supplement.aiAnalysisStage == .never{
                             Button(action:{analyseSupplementWithLLM()}){
-                                label("\(analysisInProgress ? "Analysing":"Analyse") with Biomarker Intelligence", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
+                                label("\(analysisInProgress ? "Analysing":"Analyse with Biomarker Intelligence")", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
                             }
                         }
                         
                         if supplement.aiAnalysisStage == .outdated{
                             Button(action:{analyseSupplementWithLLM()}){
-                                label("\(analysisInProgress ? "Analysing":"Analyse") with Biomarker Intelligence", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
+                                label("\(analysisInProgress ? "Analysing":"Analyse with Biomarker Intelligence")", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
                             }
                             Text("You have made changes to \(supplement.name)'s record since the last analysis. Tap to perform the analysis again.")
                                 .fontWeight(.bold)
@@ -65,7 +65,7 @@ struct SupplementDetailView: View {
                         
                         if supplement.aiAnalysisStage == .failed{
                             Button(action:{analyseSupplementWithLLM()}){
-                                label("\(analysisInProgress ? "Analysing":"Analyse") with Biomarker Intelligence", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
+                                label("\(analysisInProgress ? "Analysing":"Analyse with Biomarker Intelligence")", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: geo.size.width/1.2, radius: 10)
                             }
                             Text("\(supplement.name)'s analysis failed last time, tap to try again")
                                 .fontWeight(.bold)
