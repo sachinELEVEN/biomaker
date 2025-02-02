@@ -76,6 +76,8 @@ struct SupplementDetailView: View {
                                 .padding(.horizontal)
                         }
                         
+                        SupplementChartViewContainer(supplement: supplement)
+                        
                         //Reminder and dosage information- in edit options
                         
                         //AI data being displayed
@@ -292,39 +294,12 @@ struct SupplementHistoryView: View {
         NavigationView {
             ScrollView(showsIndicators: false) {
                 //left to right chart from oldes to newest
-                SupplementDetailView.aiInfoView(header: "Variation of dosage", description: "See how you dosage has varied across time for \(supplement.name)")
-                    .padding([.leading])
-                SupplementChartView(supplements: getHistoryList().reversed())
-                    .padding([.horizontal,.bottom])
+                SupplementChartViewContainer(supplement: supplement)
                 
-                // Align items to the top
-//                    VStack {
-//                        // Draw the vertical line on the left
-//                        ForEach(getHistoryList().indices, id: \.self) { index in
-//                            if index != 0 { // Avoid drawing a line for the first item
-////                                Rectangle()
-////                                    .fill(Color.pink) // Line color
-////                                    .frame(width: 10, height: 150) // Line width and height
-////                                    .cornerRadius(10)
-////                                    .cornerRadius(2) // Rounded corners for the line
-////                                   // .padding(.top, 10) // Space above the line
-////                                   // .padding(.leading,50)
-////                                    .offset(x:20)
-////                                    .offset(y:75)
-//                                Text("\(getHistoryList().count - index)")
-//                                                    .fontWeight(.bold)
-//                                                    .padding()
-//                                                    .clipShape(Circle()) // Clip to a circle
-//                                                    .background(Color.orange)
-//                                                    //.padding()
-//                            }
-//                        }
-//                    }
-                  //  .padding(.trailing, 10) // Space between line and supplements
 
                     VStack(alignment: .leading, spacing: 0) { // No spacing to connect items visually
                         // Assuming bmSupplementStackGL.supplements is an array of BMSupplement
-                        let historyList = getHistoryList()
+                        let historyList = SupplementHistoryView.getHistoryList(supplement: supplement)
                         ForEach(historyList, id: \.id) { supp in
                             VStack{
                             SupplementRow(supplement: supp, showDateOfCreation: true, useHistoryViewMode: true,showImg: true)
@@ -355,7 +330,7 @@ struct SupplementHistoryView: View {
         }
     }
     
-    func getHistoryList() -> [BMSupplement] {
+    static func getHistoryList(supplement: BMSupplement) -> [BMSupplement] {
         // Sorting history objects by date - latest at top
         var res = supplement.history.sorted(by: { $0.createdAt > $1.createdAt })
         res.insert(supplement, at: 0) // We know the current version is the latest one, so putting it at the top
@@ -364,9 +339,18 @@ struct SupplementHistoryView: View {
 }
 
 
-
-import SwiftUI
-import Charts
+struct SupplementChartViewContainer: View {
+    @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
+    var supplement: BMSupplement
+    var body: some View {
+        VStack{
+            SupplementDetailView.aiInfoView(header: "Variation of dosage", description: "See how you dosage has varied across time for \(supplement.name)")
+                .padding([.leading])
+            SupplementChartView(supplements: SupplementHistoryView.getHistoryList(supplement: supplement).reversed())
+                .padding([.horizontal,.bottom])
+        }
+    }
+}
 
 struct SupplementChartView: View {
     let supplements: [BMSupplement]
@@ -399,14 +383,14 @@ struct SupplementChartView: View {
                     x: .value("Date", segment.startDate),
                     y: .value("Dosage", segment.dosageStrength)
                 )
-                .lineStyle(StrokeStyle(lineWidth: lineWidth)) // Custom line width
+                .lineStyle(StrokeStyle(lineWidth: lineWidth,lineCap: .round)) // Custom line width
                 .foregroundStyle(.pink)
 
                 LineMark(
                     x: .value("Date", segment.endDate),
                     y: .value("Dosage", segment.dosageStrength)
                 )
-                .lineStyle(StrokeStyle(lineWidth: lineWidth)) // Custom line width
+                .lineStyle(StrokeStyle(lineWidth: lineWidth,lineCap: .round)) // Custom line width
                 .foregroundStyle(.pink)
             }
         }
@@ -416,7 +400,7 @@ struct SupplementChartView: View {
         .chartYAxis {
             AxisMarks(position: .leading)
         }
-        .frame(height: 300)
+        .frame(height: supplements.count>1 ? 200 : 150)
         .padding()
     }
 }
