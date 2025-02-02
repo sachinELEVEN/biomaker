@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum BMSupplementType: String, CaseIterable{
+enum BMSupplementType: String, CaseIterable, Codable {
     case supplement = "Supplement"
     case food = "Food"
 }
 
-enum BMSupplementAIAnalysisStage:String{
+enum BMSupplementAIAnalysisStage: String, Codable {
     case never
     case failed
     case completed
@@ -20,7 +20,7 @@ enum BMSupplementAIAnalysisStage:String{
 }
 
 // Enum for Frequency
-enum BMSupplementFrequency: String, CaseIterable {
+enum BMSupplementFrequency: String, CaseIterable, Codable {
     case oneTime = "One time"
     case daily = "1 time Daily"
     case daily2 = "2 times daily"
@@ -53,10 +53,8 @@ enum BMSupplementFrequency: String, CaseIterable {
     }
 }
 
-
-
 // Enum for Form
-enum BMSupplementForm: String, CaseIterable {
+enum BMSupplementForm: String, CaseIterable, Codable {
     case liquid = "Liquid"
     case capsule = "Capsule"
     case tablet = "Tablet"
@@ -64,10 +62,10 @@ enum BMSupplementForm: String, CaseIterable {
 }
 
 
+
 // Class representing a particular supplement
-class BMSupplement: Identifiable {
-    
-    var revision:Int
+class BMSupplement: Identifiable, Codable {
+    var revision: Int
     var id: String
     var name: String
     var strengthNumber: String
@@ -77,27 +75,27 @@ class BMSupplement: Identifiable {
     var timeOfConsumption: [Date?]//date and time of the last consumption
     var reminderTime: [Date?]
     var createdAt: Date
-    var history: [BMSupplement] // Track changes over time
-    var is5MinReminderSet: Bool//
+    var history: [BMSupplement]// Track changes over time
+    var is5MinReminderSet: Bool
     var userNotes: String?
     var supplementType: BMSupplementType
     
     // AI-generated properties
-    var aiContainsWhichChemicals: String? = nil
-    var aiUsageCommonReasonForUseAndAdvantage: String? = nil//present in supplement analysis report
-    var aiAdditionalInfo: String? = nil
-    var aiCommonStrengthNumberAndUnits: String? = nil//present in supplement analysis report
-    var aiAdviceBasedUserHealthContext: String? = nil//present in supplement analysis report
-    var aiSideEffect: String? = nil//present in supplement analysis report
-    var aiCategory:String? = nil//supplement category //present in supplement analysis report
-    var aiCommonName: String? = nil//present in supplement analysis report
-    var aiCalories: String? = nil//present in supplement analysis report
-    var aiRating: String? = nil//rating out of 10 //present in supplement analysis report
-    var aiReport: String? = nil//present in supplement analysis report
-    var aiSupplementValid: String?//present in the supplement analysis report
-    var aiAnalysisStage : BMSupplementAIAnalysisStage = .never
-    
-    init(id: String, supplementType : BMSupplementType, name: String, strengthNumber: String, strengthUnit: String,
+    var aiContainsWhichChemicals: String?
+    var aiUsageCommonReasonForUseAndAdvantage: String?//present in supplement analysis report
+    var aiAdditionalInfo: String?
+    var aiCommonStrengthNumberAndUnits: String?//present in supplement analysis report
+    var aiAdviceBasedUserHealthContext: String?//present in supplement analysis report
+    var aiSideEffect: String?//present in supplement analysis report
+    var aiCategory: String?//present in supplement analysis report
+    var aiCommonName: String?//present in supplement analysis report
+    var aiCalories: String?//present in supplement analysis report
+    var aiRating: String?//present in supplement analysis report
+    var aiReport: String?//present in supplement analysis report
+    var aiSupplementValid: String?//present in supplement analysis report
+    var aiAnalysisStage: BMSupplementAIAnalysisStage
+
+    init(id: String, supplementType: BMSupplementType, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm?, timeOfConsumption: [Date?],
          reminderTime: [Date?], createdAt: Date, is5MinReminderSet: Bool, userNotes: String?) {
         self.revision = 0
@@ -114,29 +112,94 @@ class BMSupplement: Identifiable {
         self.is5MinReminderSet = is5MinReminderSet
         self.userNotes = userNotes
         self.supplementType = supplementType
+        self.aiAnalysisStage = .never
     }
-    
-    func isSupplementValid()->Bool{
-        if aiSupplementValid != nil && aiSupplementValid == "no"{
-            return false
-        }
-        return true
+
+    func isSupplementValid() -> Bool {
+        return aiSupplementValid != "no"
     }
-    
-    //this should be called whenever it is modified
-    func addRevision(){
-        //increases revision adds to history and removes repeated fields from the history entires like the ai fields. Goal of history is to track variation in dosage/frequency-> so only keep those in the history
+
+    func addRevision() {
+        // Increase revision and track changes in history
     }
-    
+
+    // MARK: - Codable Conformance
+    private enum CodingKeys: String, CodingKey {
+        case revision, id, name, strengthNumber, strengthUnit, frequency, form, timeOfConsumption, reminderTime, createdAt, history, is5MinReminderSet, userNotes, supplementType, aiContainsWhichChemicals, aiUsageCommonReasonForUseAndAdvantage, aiAdditionalInfo, aiCommonStrengthNumberAndUnits, aiAdviceBasedUserHealthContext, aiSideEffect, aiCategory, aiCommonName, aiCalories, aiRating, aiReport, aiSupplementValid, aiAnalysisStage
+    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        revision = try container.decode(Int.self, forKey: .revision)
+        id = try container.decode(String.self, forKey: .id)
+        name = try container.decode(String.self, forKey: .name)
+        strengthNumber = try container.decode(String.self, forKey: .strengthNumber)
+        strengthUnit = try container.decode(String.self, forKey: .strengthUnit)
+        frequency = try container.decode(BMSupplementFrequency.self, forKey: .frequency)
+        form = try container.decodeIfPresent(BMSupplementForm.self, forKey: .form)
+        timeOfConsumption = try container.decode([[Date]?].self, forKey: .timeOfConsumption).map { $0?.first }
+        reminderTime = try container.decode([[Date]?].self, forKey: .reminderTime).map { $0?.first }
+        createdAt = try container.decode(Date.self, forKey: .createdAt)
+        history = try container.decode([BMSupplement].self, forKey: .history)
+        is5MinReminderSet = try container.decode(Bool.self, forKey: .is5MinReminderSet)
+        userNotes = try container.decodeIfPresent(String.self, forKey: .userNotes)
+        supplementType = try container.decode(BMSupplementType.self, forKey: .supplementType)
+        aiContainsWhichChemicals = try container.decodeIfPresent(String.self, forKey: .aiContainsWhichChemicals)
+        aiUsageCommonReasonForUseAndAdvantage = try container.decodeIfPresent(String.self, forKey: .aiUsageCommonReasonForUseAndAdvantage)
+        aiAdditionalInfo = try container.decodeIfPresent(String.self, forKey: .aiAdditionalInfo)
+        aiCommonStrengthNumberAndUnits = try container.decodeIfPresent(String.self, forKey: .aiCommonStrengthNumberAndUnits)
+        aiAdviceBasedUserHealthContext = try container.decodeIfPresent(String.self, forKey: .aiAdviceBasedUserHealthContext)
+        aiSideEffect = try container.decodeIfPresent(String.self, forKey: .aiSideEffect)
+        aiCategory = try container.decodeIfPresent(String.self, forKey: .aiCategory)
+        aiCommonName = try container.decodeIfPresent(String.self, forKey: .aiCommonName)
+        aiCalories = try container.decodeIfPresent(String.self, forKey: .aiCalories)
+        aiRating = try container.decodeIfPresent(String.self, forKey: .aiRating)
+        aiReport = try container.decodeIfPresent(String.self, forKey: .aiReport)
+        aiSupplementValid = try container.decodeIfPresent(String.self, forKey: .aiSupplementValid)
+        aiAnalysisStage = try container.decode(BMSupplementAIAnalysisStage.self, forKey: .aiAnalysisStage)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(revision, forKey: .revision)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(strengthNumber, forKey: .strengthNumber)
+        try container.encode(strengthUnit, forKey: .strengthUnit)
+        try container.encode(frequency, forKey: .frequency)
+        try container.encodeIfPresent(form, forKey: .form)
+        try container.encode(timeOfConsumption.map { [$0] }, forKey: .timeOfConsumption)
+        try container.encode(reminderTime.map { [$0] }, forKey: .reminderTime)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encode(history, forKey: .history)
+        try container.encode(is5MinReminderSet, forKey: .is5MinReminderSet)
+        try container.encodeIfPresent(userNotes, forKey: .userNotes)
+        try container.encode(supplementType, forKey: .supplementType)
+        try container.encodeIfPresent(aiContainsWhichChemicals, forKey: .aiContainsWhichChemicals)
+        try container.encodeIfPresent(aiUsageCommonReasonForUseAndAdvantage, forKey: .aiUsageCommonReasonForUseAndAdvantage)
+        try container.encodeIfPresent(aiAdditionalInfo, forKey: .aiAdditionalInfo)
+        try container.encodeIfPresent(aiCommonStrengthNumberAndUnits, forKey: .aiCommonStrengthNumberAndUnits)
+        try container.encodeIfPresent(aiAdviceBasedUserHealthContext, forKey: .aiAdviceBasedUserHealthContext)
+        try container.encodeIfPresent(aiSideEffect, forKey: .aiSideEffect)
+        try container.encodeIfPresent(aiCategory, forKey: .aiCategory)
+        try container.encodeIfPresent(aiCommonName, forKey: .aiCommonName)
+        try container.encodeIfPresent(aiCalories, forKey: .aiCalories)
+        try container.encodeIfPresent(aiRating, forKey: .aiRating)
+        try container.encodeIfPresent(aiReport, forKey: .aiReport)
+        try container.encodeIfPresent(aiSupplementValid, forKey: .aiSupplementValid)
+        try container.encode(aiAnalysisStage, forKey: .aiAnalysisStage)
+    }
 }
 
+
 // Class representing all the supplements taken by the user
-class BMSupplementStack: ObservableObject {
+class BMSupplementStack: ObservableObject, Codable {
     @Published var _refresh = true
     
     func refresh(){
         self._refresh.toggle()
     }
+    
     var id: String
     @Published var supplements: [BMSupplement]
     @Published var stackHistory: [BMSupplementStack] // Track changes in the supplement stack
@@ -174,8 +237,35 @@ class BMSupplementStack: ObservableObject {
         supplements.removeAll { $0.id == supplement.id }
     }
     
-    func setSupplementStackRecommendedTime(){
+    func setSupplementStackRecommendedTime() {
+        // Implement logic to modify each supplement's timeOfConsumption
         //we will read aiSupplementStackRecommendedTime which will be a Map of supplement and their timings in a day and modify each supplement's timeOfConsumption
     }
+    
+    // Custom CodingKeys to exclude `_refresh`
+    enum CodingKeys: String, CodingKey {
+        case id, supplements, stackHistory, aiSupplementStackRecommendedTime, stackCompatibilityNote, adviceFeedbackOnStack
+    }
+    
+    // Custom encoding to handle @Published properties
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(supplements, forKey: .supplements)
+        try container.encode(stackHistory, forKey: .stackHistory)
+        try container.encode(aiSupplementStackRecommendedTime, forKey: .aiSupplementStackRecommendedTime)
+        try container.encode(stackCompatibilityNote, forKey: .stackCompatibilityNote)
+        try container.encode(adviceFeedbackOnStack, forKey: .adviceFeedbackOnStack)
+    }
+    
+    // Custom decoding to handle @Published properties
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(String.self, forKey: .id)
+        supplements = try container.decode([BMSupplement].self, forKey: .supplements)
+        stackHistory = try container.decode([BMSupplementStack].self, forKey: .stackHistory)
+        aiSupplementStackRecommendedTime = try container.decodeIfPresent(String.self, forKey: .aiSupplementStackRecommendedTime)
+        stackCompatibilityNote = try container.decodeIfPresent(String.self, forKey: .stackCompatibilityNote)
+        adviceFeedbackOnStack = try container.decodeIfPresent(String.self, forKey: .adviceFeedbackOnStack)
+    }
 }
-
