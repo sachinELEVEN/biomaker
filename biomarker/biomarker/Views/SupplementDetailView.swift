@@ -116,7 +116,7 @@ struct SupplementDetailView: View {
                             .padding(.bottom)
                         
                             .sheet(isPresented: $showSupplementEditView){
-                                AddSupplementView(supplementToEditL: supplement)
+                                AddSupplementView(showSelf: $showSupplementEditView, supplementToEdit: supplement)
                             }
                         
                         

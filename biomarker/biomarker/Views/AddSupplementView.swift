@@ -11,29 +11,27 @@ import SwiftUI
 
 // Main View
 struct AddSupplementView: View {
-    @State private var heading: String = "Add supplement name"
-    @State private var buttonTitle: String = "Next"
-    @State private var name: String = ""
-    @State private var strengthNumber: String = ""
-    @State private var strengthUnit: String = "mg" // Default unit
-    @State private var frequency: BMSupplementFrequency = .daily
-    @State private var form: BMSupplementForm = .capsule//not used for food items
-    @State private var timeOfConsumption: [Date?] = []
-    @State private var reminderTime: [Date?] = []//not going to use
-    @State private var userNotes: String = ""
-    @State private var currentStep: Int = 0
-    @State private var supplement: BMSupplement?
-    @State private var supplementIsFoodItem = false
-    private var finalStep = 4//5th was the previous final step but now reminder is on the same screen as dosage//final step of the form where the supplement is added
-    @State private var userNotesPlaceholderText = "Why did you start taking this supplement? How long have you been taking it?"
-    @State private var message : String? = nil
-    @State private var allowReminding5MinBeforeDosage = false
-    @State var analysisInProgress = false
-    @State private var isAnimating = false
+    @Binding var showSelf : Bool
     var supplementToEdit: BMSupplement?
-    init(supplementToEditL: BMSupplement? = nil){
-        supplementToEdit = supplementToEditL
-    }
+    @State  var heading: String = "Add supplement name"
+    @State  var buttonTitle: String = "Next"
+    @State  var name: String = ""
+    @State  var strengthNumber: String = ""
+    @State  var strengthUnit: String = "mg" // Default unit
+    @State  var frequency: BMSupplementFrequency = .daily
+    @State  var form: BMSupplementForm = .capsule//not used for food items
+    @State  var timeOfConsumption: [Date?] = []
+    @State  var reminderTime: [Date?] = []//not going to use
+    @State  var userNotes: String = ""
+    @State  var currentStep: Int = 0
+    @State  var supplement: BMSupplement?
+    @State  var supplementIsFoodItem = false
+     var finalStep = 4//5th was the previous final step but now reminder is on the same screen as dosage//final step of the form where the supplement is added
+    @State  var userNotesPlaceholderText = "Why did you start taking this supplement? How long have you been taking it?"
+    @State  var message : String? = nil
+    @State  var allowReminding5MinBeforeDosage = false
+    @State var analysisInProgress = false
+    @State  var isAnimating = false
     var body: some View {
         NavigationView {
             ZStack {
@@ -346,9 +344,9 @@ struct AddSupplementView: View {
                     }else if currentStep == 7{
                         //supplement has been added to the stack and analysis by the llm is compelte so show the page
                         //TODO- SHOW SUPPLEMENT DETAILED VIEW
-                        if supplement != nil{
+                        if (isEditMode() && supplementToEdit != nil) || (!isEditMode() && supplement != nil){
                             NavigationView{
-                                SupplementDetailView(showSelf: .constant(true), supplement: supplement!)
+                                SupplementDetailView(showSelf: .constant(true), supplement: isEditMode() ? supplementToEdit! : supplement!)
                             }
                         }
                     }
@@ -587,12 +585,12 @@ struct AddSupplementView: View {
             
             //Save updated model to the storage
             BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
-            currentStep = 6
             BMSupplementStackGL.refresh()
             
             //TODO
             //we need to save the history object as well in this revision
-            
+            //here we will close the edit screen once edits are done
+            showSelf = false
            return
         }
         

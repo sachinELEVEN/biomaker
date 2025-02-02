@@ -50,7 +50,7 @@ struct SupplementHomeView:View {
                                 Spacer()
                             }.padding(.top)
                                 .sheet(isPresented: $showAddSupplementScreen){
-                                    AddSupplementView()
+                                    AddSupplementView(showSelf: .constant(true))
                                 }
                             
                             Text("Supplement Stack Analysis")
