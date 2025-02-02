@@ -290,7 +290,10 @@ struct SupplementHistoryView: View {
     var body: some View {
         NavigationView {
             ScrollView(showsIndicators: false) {
-                HStack(alignment: .top) { // Align items to the top
+                //left to right chart from oldes to newest
+                SupplementChartView(supplements: getHistoryList().reversed())
+                .frame(width: 300,height:300)
+                // Align items to the top
 //                    VStack {
 //                        // Draw the vertical line on the left
 //                        ForEach(getHistoryList().indices, id: \.self) { index in
@@ -341,7 +344,7 @@ struct SupplementHistoryView: View {
                             
                         }
                     }
-                }
+                
                 .navigationTitle("Change History")
                 .navigationBarTitleDisplayMode(.large)
             }
@@ -355,3 +358,47 @@ struct SupplementHistoryView: View {
         return res
     }
 }
+
+
+
+struct SupplementChartView: View {
+    var supplements: [BMSupplement]
+
+    var body: some View {
+        GeometryReader { geometry in
+            let minDate = supplements.map { $0.createdAt }.min() ?? Date()
+            let maxDate = supplements.map { $0.createdAt }.max() ?? Date()
+            let dateRange = maxDate.timeIntervalSince(minDate)
+
+            // Draw the chart
+            ZStack {
+                // Draw the x and y axes
+                Path { path in
+                    // Y-axis
+                    path.move(to: CGPoint(x: 30, y: 0))
+                    path.addLine(to: CGPoint(x: 30, y: geometry.size.height))
+                    
+                    // X-axis
+                    path.move(to: CGPoint(x: 30, y: geometry.size.height))
+                    path.addLine(to: CGPoint(x: geometry.size.width, y: geometry.size.height))
+                }
+                .stroke(Color.black, lineWidth: 2)
+
+                // Draw horizontal lines for each supplement
+                ForEach(supplements, id: \.id) { supplement in
+                    let xPosition = CGFloat(supplement.createdAt.timeIntervalSince(minDate) / dateRange) * (geometry.size.width - 30) + 30 // Adjust for x-axis
+                    let yPosition = geometry.size.height - CGFloat(Double(supplement.strengthNumber) ?? 0) * (geometry.size.height / 10) // Scale to fit the height
+
+                    Path { path in
+                        path.move(to: CGPoint(x: xPosition, y: yPosition))
+                        path.addLine(to: CGPoint(x: xPosition, y: geometry.size.height)) // Draw vertical line down to the bottom
+                    }
+                    .stroke(Color.pink, lineWidth: 20) // Line color and width
+                }
+            }
+        }
+        .padding()
+    }
+}
+
+
