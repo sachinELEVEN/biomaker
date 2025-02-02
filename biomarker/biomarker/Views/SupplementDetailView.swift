@@ -15,6 +15,7 @@ struct SupplementDetailView: View {
     var supplement: BMSupplement
     @State var analysisInProgress = false
     @State private var isAnimating = false
+    @State var showSupplementEditView = false
 
     var body: some View {
         GeometryReader{ geo in
@@ -27,21 +28,8 @@ struct SupplementDetailView: View {
                
                 VStack{
                     ScrollView(showsIndicators: false){
-                        SupplementRow(supplement: supplement, showRating: false)
+                        SupplementRow(supplement: supplement, showRating: false, showDateOfCreation: true)
                         
-                        HStack{
-                            //some footer information
-                            Text("\(supplement.name) was added to your stack on")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            + Text(" \(supplement.createdAt, formatter: dateFormatter_D_MMMM_YYYY)")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            //.multilineTextAlignment(.leading)
-                            //.italic()
-                                .bold()
-                            Spacer()
-                        }.padding([.bottom,.horizontal])
                         
                         if supplement.aiAnalysisStage == .completed || supplement.aiAnalysisStage == .outdated{
                             if supplement.isSupplementValid(){
@@ -127,11 +115,24 @@ struct SupplementDetailView: View {
                         aiInfoView(header: "Your notes", description: supplement.userNotes)
                             .padding(.bottom)
                         
-                        
+                            .sheet(isPresented: $showSupplementEditView){
+                                AddSupplementView()
+                            }
                         
                         
                     }.animation(.default, value: 1)
                 }.navigationTitle("\(supplement.supplementType == .food ? "Food" : "Supplement") Report")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                // Your action here
+                                self.showSupplementEditView.toggle()
+                            }) {
+                                Image(systemName: "slider.horizontal.3")  // SF Symbol for search icon
+                            }
+                        }
+                        
+                    }
                     
             }
         }

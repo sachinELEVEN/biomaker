@@ -142,6 +142,7 @@ struct SupplementRow: View {
     @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
     var supplement: BMSupplement
     var showRating: Bool = true
+    var showDateOfCreation: Bool = false
 
     var body: some View {
         HStack {
@@ -230,6 +231,23 @@ struct SupplementRow: View {
                             .foregroundColor(.white)
                     }
                     
+                }
+                
+                if showDateOfCreation{
+                    HStack{
+                        //some footer information
+                        Text("\(supplement.name) was added to your stack on")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        + Text(" \(supplement.createdAt, formatter: dateFormatter_D_MMMM_YYYY)")
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                        //.multilineTextAlignment(.leading)
+                        //.italic()
+                            .bold()
+                        Spacer()
+                    }.padding(.bottom)
+                        .padding(.top,3)
                 }
                 
                 
