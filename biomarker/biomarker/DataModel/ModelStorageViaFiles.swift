@@ -120,7 +120,9 @@ class BiomarkerFileSystem{
         workItem?.cancel()
         
         if !useDebouncer {
-            saveMedicalDocuments(system.medicalDocuments)
+            if fileTypeToSave == .supplementSystem{
+                saveSupplementSystemDataToLocal()
+            }
             print("/saveToStorage Changes persisted to disk without debouncer for \(fileTypeToSave)")
             return
         }

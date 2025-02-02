@@ -69,7 +69,7 @@ class UserHealthContext {
                 DispatchQueue.main.async {
                     BMSupplementStackGL.refresh()
                 }
-                
+                BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
                 completion(false,nil)
             }else{
                 print("/analyzeSupplementWithLLM: Successfully analysed the supplement compatibility")
@@ -89,7 +89,7 @@ class UserHealthContext {
                 DispatchQueue.main.async {
                     BMSupplementStackGL.refresh()
                 }
-                
+                BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
                 completion(true,response)
             }
         }

@@ -229,7 +229,7 @@ class BMSupplementStack: ObservableObject, Codable {
         
         supplements.append(supplement)
         print("Supplement \(supplement.name) added to the system. Total supplement stack size: \(supplements.count)")
-        
+        BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
         return (true,"")
     }
     
