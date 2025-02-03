@@ -296,11 +296,18 @@ class BMSupplementStack: ObservableObject, Codable {
 //        var summary = "Biomarker found \(totalTestRecordsCount()) tests in the document.\n"
         var categoriesSet: Set<String> = Set()
         
-        // Collect unique organs
+        // Collect unique categories
             for supp in supplements {
                 let listOfCategories = Utils.splitIntoListBy(supp.aiCategory ?? "", delimiters: [",", ";"])
                 categoriesSet.formUnion(listOfCategories) // Add unique organs to the set
             }
+        
+        //we also want the frequencies to show up in the quick search options
+        var allFrequencies : [String] = []
+        for freq in BMSupplementFrequency.allCases{
+            allFrequencies.append(freq.rawValue)
+        }
+        categoriesSet.formUnion(allFrequencies)
         
         
 //        if !categoriesSet.isEmpty {
