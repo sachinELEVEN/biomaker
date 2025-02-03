@@ -439,6 +439,42 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
         
         searchCorpus += "," + test + "," + (ai_original_name ?? "") + "," + (ai_common_name ?? "") + "," + (ai_use ?? "") + "," + (ai_related_organs ?? "") + "," + (ai_reason_for_high_value ?? "") + "," + (ai_reason_for_lower_value ?? "")
         
+        return SearchFlow.search(searchCorpus: searchCorpus, searchKey: searchStr)
+        
+    }
+    
+    //returns a boolean value indicating whether deletion from system was a success or not
+    func deleteFromSystem()->Bool{
+        guard let section = getParentSection() else{
+            print("/deleteFromSystem- Failed to remove test as it does not have a parent section. This means this test is just a standalone test and not part of the system")
+            return false
+        }
+        
+        var didDelete = false
+        section.testRecords.removeAll { record in
+            if (record.id == self.id){
+                didDelete = true
+                return true
+            }
+            return false
+        }
+        
+        if didDelete{
+            print("deleteFromSystem- test record removed from system")
+            system.refresh()
+        }
+        return didDelete
+        
+                
+    }
+    
+}
+
+
+//USE THIS CLASS TO PERFORM SEARCH
+class SearchFlow{
+    //returns a boolean value indicating whether searchkey lies in the searchcorpus
+    static func search(searchCorpus: String, searchKey: String)->Bool{
         //Now we have searchCorpus string, and searchStr
         /*
          Our search algo is such that, we first create a corpusStrList which is created from searchCorpus by
@@ -456,7 +492,7 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
                 .filter { !$0.isEmpty }
 
             // Split the search string into a list of words, removing empty or whitespace-only strings
-            let searchStrList = searchStr
+            let searchStrList = searchKey
                 .lowercased()
                 .split { $0.isWhitespace || $0 == "," }
                 .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
@@ -498,34 +534,5 @@ class BasicMedicalTestRecordv1: Codable, Identifiable {
          
          return false
         */
-        
-       
     }
-    
-    //returns a boolean value indicating whether deletion from system was a success or not
-    func deleteFromSystem()->Bool{
-        guard let section = getParentSection() else{
-            print("/deleteFromSystem- Failed to remove test as it does not have a parent section. This means this test is just a standalone test and not part of the system")
-            return false
-        }
-        
-        var didDelete = false
-        section.testRecords.removeAll { record in
-            if (record.id == self.id){
-                didDelete = true
-                return true
-            }
-            return false
-        }
-        
-        if didDelete{
-            print("deleteFromSystem- test record removed from system")
-            system.refresh()
-        }
-        return didDelete
-        
-                
-    }
-    
 }
-
