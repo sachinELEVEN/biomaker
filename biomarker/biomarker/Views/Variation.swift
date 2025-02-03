@@ -11,97 +11,119 @@ struct VariationView: View {
     @State private var searchText = ""                   // Text to filter records
     @State private var showVariationCharts = false
     @State private var mergeSelectedGroups = false
+    @State private var searchScope: BMScopes = .medicaltest
 
     var body: some View {
         NavigationView {
             VStack {
                 // Search bar
-                TextField("Search tests...", text: $searchText)
+                TextField(isSearchScopeMedicalRecord() ? "Search tests..." : "Search supplements and food", text: $searchText)
                     .padding(10)
                     .background(Color.secondary.opacity(0.2))
                     .cornerRadius(8)
                     .padding(.horizontal)
 
                 ScrollView {
+                    
+                    // Picker for selecting the number of days
+                    Picker(" ", selection: $searchScope) {
+                        // Text("Both").tag("Both")
+                        Text(BMScopes.medicaltest.rawValue).tag(BMScopes.medicaltest)
+                        Text(BMScopes.supplement.rawValue).tag(BMScopes.supplement)
+                        
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal)
                    
                     QuickSearchOptionsView(docs: sys.medicalDocuments,searchText: $searchText)
                     .padding(.horizontal)
                         .padding(.vertical)
                     
-                    Text("You can search for tests by their name, organs or body parts they are related to")
+                    Text(isSearchScopeMedicalRecord() ? "You can search for tests by their name, organs or body parts they are related to" : "You can search for your supplements and food items by name, category, dosage etc")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .padding([.bottom,.horizontal])
                     
-                    GroupedTestRecordsView(
-                        testRecords: sys.getAllTestRecords(),
-                        selectedRecords: $selectedRecords,
-                        searchText: searchText // Pass the search text
-                    )
+                    if isSearchScopeMedicalRecord(){
+                        GroupedTestRecordsView(
+                            testRecords: sys.getAllTestRecords(),
+                            selectedRecords: $selectedRecords,
+                            searchText: searchText // Pass the search text
+                        )
+                    }else{
+                        //supplement search view
+                        VStack{
+                            SearchSupplementView(searchText: searchText)
+                        }//.safeAreaPadding(.bo) // Apply safe area padding to the bottom
+                    }
+
                 }
 
                 // "Track" button at the bottom
-                VStack {
-                    Text("Track how test results vary across medical records. Select one or more tests to Track and analyze.")
-                        .font(.subheadline)
-                        .padding([.horizontal])
-                        .padding(.top, 3)
-                        .foregroundStyle(Color.secondary)
-
-                    if !selectedRecords.isEmpty {
-                        Button(action: {
-                            // Show action sheet when 2 or more records are selected
-                            if selectedRecords.count > 1 {
-                                showActionSheet = true
-                            } else {
-                                print("1 row selected only")
-                                // Navigate directly to the chart view when one record is selected
-                                navigateToChartView()
+                if isSearchScopeMedicalRecord() {
+                    VStack {
+                        Text("Track how test results vary across medical records. Select one or more tests to Track and analyze.")
+                            .font(.subheadline)
+                            .padding([.horizontal])
+                            .padding(.top, 3)
+                            .foregroundStyle(Color.secondary)
+                        
+                        if !selectedRecords.isEmpty {
+                            Button(action: {
+                                // Show action sheet when 2 or more records are selected
+                                if selectedRecords.count > 1 {
+                                    showActionSheet = true
+                                } else {
+                                    print("1 row selected only")
+                                    // Navigate directly to the chart view when one record is selected
+                                    navigateToChartView()
+                                }
+                            }) {
+                                Text("Track \(selectedRecords.count) \(selectedRecords.count == 1 ? "Test" : "Tests")")
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(Color.blue)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(8)
+                                    .padding()
                             }
-                        }) {
-                            Text("Track \(selectedRecords.count) \(selectedRecords.count == 1 ? "Test" : "Tests")")
+                            .actionSheet(isPresented: $showActionSheet) {
+                                ActionSheet(
+                                    title: Text("Analyze Tests"),
+                                    message: Text("You have selected multiple tests, how would like to analyze them?\nYou can treat multiple tests as a single group, this is useful when 2 or more tests are the same but with different test names. For eg (ALBUMIN - SERUM) and (ALBUMIN)"),
+                                    buttons: [
+                                        .default(Text("Analyze Each Test Separately")) {
+                                            // Navigate to chart view for separate tracking
+                                            mergeSelectedGroups = false
+                                            navigateToChartView()
+                                            print("Each Test Separately")
+                                        },
+                                        .default(Text("Analyze All Tests as a Single Group")) {
+                                            // Navigate to chart view for combined tracking
+                                            mergeSelectedGroups = true
+                                            navigateToChartView()
+                                            print("Analyze All Tests as a Single Group")
+                                        },
+                                        .cancel()
+                                    ]
+                                )
+                            }
+                        } else {
+                            // Disabled Track button
+                            Text("Track")
                                 .font(.headline)
                                 .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.blue)
+                                .background(Color.secondary)
                                 .foregroundColor(.white)
                                 .cornerRadius(8)
                                 .padding()
                         }
-                        .actionSheet(isPresented: $showActionSheet) {
-                            ActionSheet(
-                                title: Text("Analyze Tests"),
-                                message: Text("You have selected multiple tests, how would like to analyze them?\nYou can treat multiple tests as a single group, this is useful when 2 or more tests are the same but with different test names. For eg (ALBUMIN - SERUM) and (ALBUMIN)"),
-                                buttons: [
-                                    .default(Text("Analyze Each Test Separately")) {
-                                        // Navigate to chart view for separate tracking
-                                        mergeSelectedGroups = false
-                                        navigateToChartView()
-                                        print("Each Test Separately")
-                                    },
-                                    .default(Text("Analyze All Tests as a Single Group")) {
-                                        // Navigate to chart view for combined tracking
-                                        mergeSelectedGroups = true
-                                        navigateToChartView()
-                                        print("Analyze All Tests as a Single Group")
-                                    },
-                                    .cancel()
-                                ]
-                            )
-                        }
-                    } else {
-                        // Disabled Track button
-                        Text("Track")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.secondary)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                            .padding()
                     }
+                }else{
+                    Text("")//so that in supplement search scope we have padding and scroll view does go on top of the bottom bar
                 }
-
                 // Navigation link for chart view
                 NavigationLink(destination: GroupedTestRecordChartView(selectedGroupedRecords: getSelectedGroups()),isActive: $showVariationCharts) {
                     EmptyView() // This will not show any button; it only serves to navigate
@@ -122,6 +144,9 @@ struct VariationView: View {
 
     }
     
+    func isSearchScopeMedicalRecord()->Bool{
+        return searchScope == .medicaltest
+    }
     
     // Function to handle navigation to the chart view
     private func navigateToChartView() {
@@ -168,6 +193,111 @@ struct VariationView: View {
     }
 
     
+}
+
+// MARK: - SearchSupplementView
+struct SearchSupplementView: View {
+    @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
+    
+    var searchText: String                     // Search text to filter records
+
+
+    // Filtered records based on search text
+    @State var filteredRecords: [BMSupplement] = []
+    // Function to filter records on a background thread
+    func filterRecordsAsync(supplements: [BMSupplement],
+                            searchText: String,
+                            completion: @escaping ([BMSupplement]) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            // Perform filtering in a background thread
+            let filtered = supplements.filter { $0.satisfiesSearch(searchStr: searchText.lowercased()) }
+            
+            
+            // Pass the result back to the main thread
+            DispatchQueue.main.async {
+                completion(filtered)
+            }
+        }
+    }
+
+    var body: some View {
+       // ScrollView(showsIndicators: false){
+            VStack{
+                
+                if filteredRecords.count == 0 {
+                    HStack{
+                        Spacer()
+                        Text("Nothing to show")
+                            .font(.title2)
+                            .foregroundStyle(Color.secondary)
+                            .padding()
+                        Spacer()
+                    }
+                }
+                //show info about history variations
+                ForEach(filteredRecords) { supp in
+                    
+                    Button(action:{
+                        // Toggle selection of the row
+                        //open in detail
+                        //                        if selectedRecords.contains(testName) {
+                        //                            selectedRecords.remove(testName)
+                        //                        } else {
+                        //                            selectedRecords.insert(testName)
+                        //                        }
+                    }){
+                        //                        HStack {
+                        //                            // Display the group name (test name)
+                        //                            Text()
+                        //                                .multilineTextAlignment(.leading)
+                        //                                .font(.headline)
+                        //
+                        //
+                        //                            Spacer()
+                        //
+                        //                            // Display the number of items in the group
+                        //                            Text("Found \(group.count) \(group.count == 1 ? "time" : "times")")
+                        //                                .font(.subheadline)
+                        //                                .foregroundColor(.secondary)
+                        //                        }
+                        
+                        SupplementRow(supplement: supp)
+                    }
+                    
+                    .padding(.vertical,8)
+                    .padding(.horizontal,8)
+                    //.background(selectedRecords.contains(testName) ? Color.blue.opacity(0.2) : Color.clear)
+                    
+                    .cornerRadius(10)
+                    
+                    .padding(.horizontal)
+                    
+                    
+                    Divider().padding(.horizontal)
+                    
+                }
+            }.onChange(of: searchText){newValue in
+                if newValue.isEmpty {
+                    filteredRecords = bmSupplementStackGL.supplements // No filtering needed
+                } else {
+                    filterRecordsAsync(supplements: bmSupplementStackGL.supplements, searchText: newValue) { result in
+                        self.filteredRecords = result
+                    }
+                }
+            }
+            .onAppear{
+                if searchText.isEmpty {
+                    filteredRecords = bmSupplementStackGL.supplements // No filtering needed
+                } else {
+                    filterRecordsAsync(supplements: bmSupplementStackGL.supplements, searchText: searchText) { result in
+                        self.filteredRecords = result
+                        
+                        // Update your UI here if needed
+                    }
+                }
+            }
+        //}
+    }
 }
 
 // MARK: - GroupedTestRecordsView

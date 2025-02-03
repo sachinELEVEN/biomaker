@@ -7,6 +7,12 @@
 
 import Foundation
 
+//these represent the main feature set supported by the app, like these are the main features of the app
+enum BMScopes: String, CaseIterable{
+    case medicaltest = "Medical record"
+    case supplement = "Supplement & food"
+}
+
 enum BMSupplementType: String, CaseIterable, Codable {
     case supplement = "Supplement"
     case food = "Food"
@@ -119,6 +125,21 @@ class BMSupplement: Identifiable, Codable {
     func isSupplementValid() -> Bool {
         return aiSupplementValid != "no"
     }
+    
+    ///returns a boolean value indicating whether this result matches the search key string
+    func satisfiesSearch(searchStr: String)->Bool{
+        //we need to get parent section's summary, name access here
+        
+        var searchCorpus = ""
+        
+        searchCorpus += "," + name + "," + (aiContainsWhichChemicals ?? "") + "," + (aiUsageCommonReasonForUseAndAdvantage ?? "") + "," + (aiAdditionalInfo ?? "") + "," + (aiCommonStrengthNumberAndUnits ?? "") + "," + (aiAdviceBasedUserHealthContext ?? "") + "," + (aiSideEffect ?? "") + "," + (aiCategory ?? "") + "," + (aiCommonName ?? "") + "," + (aiReport ?? "") + "," + (frequency.rawValue ) + "," + (form?.rawValue ?? "") + "," + (userNotes ?? "")
+        
+        //we are not searching the history for now
+        
+        return SearchFlow.search(searchCorpus: searchCorpus, searchKey: searchStr)
+        
+    }
+    
 
     
     func saveEditChanges(supplementTypeL: BMSupplementType, nameL: String, strengthNumberL: String, strengthUnitL: String,
