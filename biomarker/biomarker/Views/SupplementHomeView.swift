@@ -256,11 +256,12 @@ struct SupplementRow: View {
                         .padding(.top,3)
                 }
                 
-                if supplement.history.count > 1{
+                if supplement.history.count > 0{
                     HStack{
                         imageView(systemName: "clock.arrow.circlepath",color: .secondary, size: 15)
                         VStack(alignment: .leading){
-                            Text("\(supplement.history.count) history variations")
+                            //+1 because we are also counting current revision as well
+                            Text("\(supplement.history.count+1) history variations")
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                                 
