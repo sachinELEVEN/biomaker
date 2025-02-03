@@ -256,6 +256,18 @@ struct SupplementRow: View {
                         .padding(.top,3)
                 }
                 
+                if supplement.history.count > 1{
+                    HStack{
+                        imageView(systemName: "clock.arrow.circlepath",color: .secondary, size: 15)
+                        VStack(alignment: .leading){
+                            Text("\(supplement.history.count) history variations")
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
+                                
+                        }
+                    }.padding(.top,3)
+                    
+                }
                 
             }
             .padding(.leading, 8)

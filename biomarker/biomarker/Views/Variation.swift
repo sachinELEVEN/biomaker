@@ -199,7 +199,9 @@ struct VariationView: View {
 struct SearchSupplementView: View {
     @ObservedObject var bmSupplementStackGL = BMSupplementStackGL
     
-    var searchText: String                     // Search text to filter records
+    var searchText: String  // Search text to filter records
+    @State var showSupplementDetailView: Bool = false
+    @State var supplementViewToShowInDetail: BMSupplement? = nil
 
 
     // Filtered records based on search text
@@ -234,43 +236,32 @@ struct SearchSupplementView: View {
                         Spacer()
                     }
                 }
+                
+                if supplementViewToShowInDetail != nil{
+                    NavigationLink(destination: SupplementDetailView(showSelf: $showSupplementDetailView, supplement: supplementViewToShowInDetail!),isActive: $showSupplementDetailView) {
+                        EmptyView()
+                    }
+                }
+                
                 //show info about history variations
                 ForEach(filteredRecords) { supp in
                     
                     Button(action:{
-                        // Toggle selection of the row
-                        //open in detail
-                        //                        if selectedRecords.contains(testName) {
-                        //                            selectedRecords.remove(testName)
-                        //                        } else {
-                        //                            selectedRecords.insert(testName)
-                        //                        }
+                        supplementViewToShowInDetail = supp
+                        showSupplementDetailView = true
                     }){
-                        //                        HStack {
-                        //                            // Display the group name (test name)
-                        //                            Text()
-                        //                                .multilineTextAlignment(.leading)
-                        //                                .font(.headline)
-                        //
-                        //
-                        //                            Spacer()
-                        //
-                        //                            // Display the number of items in the group
-                        //                            Text("Found \(group.count) \(group.count == 1 ? "time" : "times")")
-                        //                                .font(.subheadline)
-                        //                                .foregroundColor(.secondary)
-                        //                        }
+
                         
                         SupplementRow(supplement: supp)
                     }
                     
-                    .padding(.vertical,8)
-                    .padding(.horizontal,8)
+                    .padding(.vertical,4)
+                    .padding(.horizontal,4)
                     //.background(selectedRecords.contains(testName) ? Color.blue.opacity(0.2) : Color.clear)
                     
-                    .cornerRadius(10)
+                    //.cornerRadius(10)
                     
-                    .padding(.horizontal)
+                   // .padding(.horizontal)
                     
                     
                     Divider().padding(.horizontal)
