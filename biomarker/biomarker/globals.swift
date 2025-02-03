@@ -24,6 +24,16 @@ class Utils{
         
         return formattedDate
     }
+    
+    // Helper function to split strings by multiple delimiters
+   static func splitIntoListBy(_ input: String, delimiters: [String]) -> [String] {
+        let pattern = delimiters.map { NSRegularExpression.escapedPattern(for: $0) }.joined(separator: "|")
+        let regex = try? NSRegularExpression(pattern: pattern, options: [])
+        let matches = regex?.split(input) ?? []
+        return matches.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { !$0.isEmpty }
+    }
+
+    
 }
 
 class TextLocalisation{

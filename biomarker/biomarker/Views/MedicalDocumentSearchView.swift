@@ -31,7 +31,7 @@ struct MedicalDocumentSearchView: View{
                 .padding(.horizontal)
             ScrollView(showsIndicators: false){
                 
-                QuickSearchOptionsView(docs: [doc],searchText: $searchText)
+                QuickSearchOptionsView(docs: [doc], searchScope: .medicaltest,searchText: $searchText)
                 .padding(.horizontal)
                     .padding(.vertical)
                 
@@ -140,6 +140,7 @@ struct MedicalDocumentSearchView: View{
 
 struct QuickSearchOptionsView: View{
     var docs : [MedicalDocument]
+    var searchScope: BMScopes
     @Binding var searchText: String
     var body: some View{
         HStack{
@@ -149,7 +150,7 @@ struct QuickSearchOptionsView: View{
                     HStack{
                 ForEach(getQuickSearchOptions(),id:\.self){ organ in
                     HStack{
-                        if organ.count<15{//sometimes organs has full blown sentences like 'reflects body inflammation' so we do not want that to appear in the search bar quick options
+                        if organ.count < (searchScope == .medicaltest ? 15 : 30){//sometimes organs has full blown sentences like 'reflects body inflammation' so we do not want that to appear in the search bar quick options
                             Button(action:{
                                 quickSearchOptionTapped(option: organ)
                             }){
@@ -177,15 +178,16 @@ struct QuickSearchOptionsView: View{
     }
     
     func getQuickSearchOptions()->[String]{
+        //searchScope
         //in future you can add more options here
-        var allDocOrgansSet : Set<String> = Set()
+        var quickSearchOptionsSet : Set<String> = Set()
         for doc in docs{
-            for organ in doc.getDocOrgans(){
-                allDocOrgansSet.insert(organ)
+            for option in searchScope == .medicaltest ? doc.getDocOrgans() : BMSupplementStackGL.getCategories(){
+                quickSearchOptionsSet.insert(option)
             }
         }
         
-        return allDocOrgansSet.sorted()
+        return quickSearchOptionsSet.sorted()
     }
     
     func quickSearchOptionTapped(option: String){

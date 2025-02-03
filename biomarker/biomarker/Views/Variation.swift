@@ -35,7 +35,7 @@ struct VariationView: View {
                     .pickerStyle(SegmentedPickerStyle())
                     .padding(.horizontal)
                    
-                    QuickSearchOptionsView(docs: sys.medicalDocuments,searchText: $searchText)
+                    QuickSearchOptionsView(docs: sys.medicalDocuments, searchScope: searchScope,searchText: $searchText)
                     .padding(.horizontal)
                         .padding(.vertical)
                     

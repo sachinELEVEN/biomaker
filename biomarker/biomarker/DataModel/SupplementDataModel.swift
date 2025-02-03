@@ -291,6 +291,30 @@ class BMSupplementStack: ObservableObject, Codable {
         self.stackHistory = []
     }
     
+    //returns a set representing categories of supplement present in the system
+    func getCategories(maxLength: Int = Int.max) -> Set<String> {
+//        var summary = "Biomarker found \(totalTestRecordsCount()) tests in the document.\n"
+        var categoriesSet: Set<String> = Set()
+        
+        // Collect unique organs
+            for supp in supplements {
+                let listOfCategories = Utils.splitIntoListBy(supp.aiCategory ?? "", delimiters: [",", ";"])
+                categoriesSet.formUnion(listOfCategories) // Add unique organs to the set
+            }
+        
+        
+//        if !categoriesSet.isEmpty {
+//            //summary += "The report focuses on tests for: "
+//            summary += categoriesSet.sorted().joined(separator: ", ") // Combine organ names, sorted, and separated by commas
+//        }
+//        
+//        if summary.count > maxLength{
+//            return summary.prefix(maxLength) + "..."
+//        }
+        //return summary
+        return categoriesSet
+    }
+    
     func addSupplement(_ supplement: BMSupplement)->(Bool,String){
         //here we will do checks like the same id object is not already there in the system
         var found = false
