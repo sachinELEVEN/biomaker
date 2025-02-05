@@ -37,7 +37,7 @@ struct RootTabView: View {
             
             SettingsView()
                 .tabItem {
-                    Label("Settings", systemImage: "gear")
+                    Label("Manage", systemImage: "heart.text.square")
                 }
         }.onAppear{
             BiomarkerFileSystem.loadModelDataFromFile()
