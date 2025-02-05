@@ -284,11 +284,23 @@ class BMSupplementStack: ObservableObject, Codable {
     @Published var aiSupplementStackRecommendedTime: String? = nil
     @Published var stackCompatibilityNote: String? = nil
     @Published var adviceFeedbackOnStack: String? = nil
+    @Published var stip: String = ""
     
     init(id: String, supplements: [BMSupplement]) {
         self.id = id
         self.supplements = supplements
         self.stackHistory = []
+    }
+    
+    //using this m_propertyname naming scheme from Broadway/BFX and this whole stip thing is picked from broadway
+    private var m_userGeneralHealthNotesKey = "usergeneralhealthnotes"
+    var userGeneralHealthNotes: String {
+        get {
+            return StipulationHandler.readStipulation(stip: stip, key: m_userGeneralHealthNotesKey) ?? ""
+        }
+        set {
+            self.stip = StipulationHandler.addToStipulation(stip: stip, key: m_userGeneralHealthNotesKey, value: newValue)
+        }
     }
     
     //returns a set representing categories of supplement present in the system
@@ -355,7 +367,7 @@ class BMSupplementStack: ObservableObject, Codable {
     
     // Custom CodingKeys to exclude `_refresh`
     enum CodingKeys: String, CodingKey {
-        case id, supplements, stackHistory, aiSupplementStackRecommendedTime, stackCompatibilityNote, adviceFeedbackOnStack
+        case id, supplements, stackHistory, aiSupplementStackRecommendedTime, stackCompatibilityNote, adviceFeedbackOnStack, stip
     }
     
     // Custom encoding to handle @Published properties
@@ -367,6 +379,8 @@ class BMSupplementStack: ObservableObject, Codable {
         try container.encode(aiSupplementStackRecommendedTime, forKey: .aiSupplementStackRecommendedTime)
         try container.encode(stackCompatibilityNote, forKey: .stackCompatibilityNote)
         try container.encode(adviceFeedbackOnStack, forKey: .adviceFeedbackOnStack)
+        try container.encode(stip, forKey: .stip)
+        
     }
     
     // Custom decoding to handle @Published properties
@@ -378,5 +392,8 @@ class BMSupplementStack: ObservableObject, Codable {
         aiSupplementStackRecommendedTime = try container.decodeIfPresent(String.self, forKey: .aiSupplementStackRecommendedTime)
         stackCompatibilityNote = try container.decodeIfPresent(String.self, forKey: .stackCompatibilityNote)
         adviceFeedbackOnStack = try container.decodeIfPresent(String.self, forKey: .adviceFeedbackOnStack)
+        stip = try container.decodeIfPresent(String.self, forKey: .stip) ?? ""
+        
+        
     }
 }

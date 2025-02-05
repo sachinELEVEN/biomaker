@@ -35,10 +35,10 @@ struct RootTabView: View {
                 }
             
             
-//            SettingsView()
-//                .tabItem {
-//                    Label("Settings", systemImage: "gear")
-//                }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
         }.onAppear{
             BiomarkerFileSystem.loadModelDataFromFile()
         }
@@ -275,8 +275,18 @@ struct SearchView: View {
 struct SettingsView: View {
     var body: some View {
         NavigationView {
-            Text("Settings Page")
-                .navigationTitle("Settings")
+           // Text("Settings Page")
+            List{
+                Section {
+                    UserHealthGeneralNotesView()
+                       
+                } header: {
+                    Text("General Health Notes")
+                } footer: {
+                    Text("Here, you can add any health or medical information relevant to you. This helps organize your health data and history in one place, allowing you to better understand your report.")
+                }
+
+            } .navigationTitle("Settings")
         }
     }
 }

@@ -55,6 +55,21 @@ struct CustomBlur: UIViewRepresentable {
     }
 }
 
+func descriptionView(text: String)->some View{
+    return HStack{
+        
+        Text(text)
+            .multilineTextAlignment(.leading)
+            .padding()
+            .font(.subheadline)
+            .foregroundColor(Color.secondary)
+            //.background(Color(.systemGray6))
+           // .cornerRadius(8)
+            //.padding()
+        Spacer()
+    }
+}
+
 func label(_ text : String,textColor : Color = Color.secondary, bgColor : Color = Color.secondary.opacity(0.15) , imgName : String = "", imgColor : Color = .primary, width : CGFloat = 300, radius: CGFloat = 10, font: Font = Font.headline, fontWeight: Font.Weight = .bold, alignment : Alignment = .center, verticalPadding: CGFloat = 12)->some View{
     return HStack{
         

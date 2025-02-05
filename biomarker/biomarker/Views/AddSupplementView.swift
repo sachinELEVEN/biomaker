@@ -671,21 +671,6 @@ struct AddSupplementView: View {
         return ""
     }
 
-    
-    func descriptionView(text: String)->some View{
-        return HStack{
-            
-            Text(text)
-                .multilineTextAlignment(.leading)
-                .padding()
-                .font(.subheadline)
-                .foregroundColor(Color.secondary)
-                //.background(Color(.systemGray6))
-               // .cornerRadius(8)
-                //.padding()
-            Spacer()
-        }
-    }
 
 }
 

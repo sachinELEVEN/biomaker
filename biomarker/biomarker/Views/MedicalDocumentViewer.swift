@@ -337,7 +337,7 @@ struct MedicalDocumentViewerHandler: View{
                     persistChangesInDisk()
                 }
                 .onChange(of: docDate) { newValue in
-                    doc.date = docDate
+                    BMSupplementStackGL.supplements
                     persistChangesInDisk()
                 }
               //  }
