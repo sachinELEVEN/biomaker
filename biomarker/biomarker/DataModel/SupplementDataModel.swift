@@ -294,12 +294,14 @@ class BMSupplementStack: ObservableObject, Codable {
     
     //using this m_propertyname naming scheme from Broadway/BFX and this whole stip thing is picked from broadway
     private var m_userGeneralHealthNotesKey = "usergeneralhealthnotes"
+    //this also saves the newly set value in the local filesystem
     var userGeneralHealthNotes: String {
         get {
             return StipulationHandler.readStipulation(stip: stip, key: m_userGeneralHealthNotesKey) ?? ""
         }
         set {
             self.stip = StipulationHandler.addToStipulation(stip: stip, key: m_userGeneralHealthNotesKey, value: newValue)
+            BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem, useDebouncer: true)
         }
     }
     

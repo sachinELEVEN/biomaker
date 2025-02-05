@@ -107,6 +107,6 @@ class System: ObservableObject{
     ///DO NOT USE THIS DIRECTLY- USE IT VIA USERHEALTHCONTEXT.UserGeneralHealthNotesContext() for better formatted context
     func userHealthNotes()->String{
         //This will be later filled by the user
-        return ""
+        return BMSupplementStackGL.userGeneralHealthNotes
     }
 }

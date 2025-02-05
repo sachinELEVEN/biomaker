@@ -8,6 +8,28 @@
 import Foundation
 import SwiftUI
 
+// MARK: - Settings View
+struct SettingsView: View {
+    var body: some View {
+        NavigationView {
+           // Text("Settings Page")
+            List{
+                Section {
+                    UserHealthGeneralNotesView()
+                       
+                } header: {
+                    Text("General Health Notes")
+                } footer: {
+                    Text("Add any relevant health or medical information, such as your height, weight, age, or conditions like hypothyroidism and diabetes. This will help organize your health data and history in one place, making it easier for you to understand your report.")
+                }
+
+            } .navigationTitle("Settings")
+        }
+    }
+}
+
+
+
 struct UserHealthGeneralNotesView: View {
     @State private var healthContext: String = "" // State variable to hold the user's health context
     @State private var notes: String = "" // State variable to hold the user's notes
@@ -52,9 +74,10 @@ struct UserHealthGeneralNotesView: View {
             
                    // descriptionView(text: "Here, you can add any health or medical information relevant to you. This helps organize your health data and history in one place, allowing you to better understand your report.")
         }.onChange(of: userNotes) { newValue in
-           // doc.notes = newValue
-            //BMSupplementStackGL.stip = newValue
-            //persistChangesInDisk()
+            BMSupplementStackGL.userGeneralHealthNotes = userNotes
+        }
+        .onAppear{
+            self.userNotes = BMSupplementStackGL.userGeneralHealthNotes
         }
     //}
 //            .navigationTitle("User Health Context")
