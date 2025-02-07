@@ -215,19 +215,22 @@ struct HomeView: View {
                 VStack {
                     GeometryReader{ geo in
                         ScrollView(showsIndicators: false){
-                        
-                            Text("You have \(sys.medicalDocuments.count) medical \(sys.medicalDocuments.count==1 ? "document" : "documents") containing \(sys.totalTestRecordsCount()) tests")
-                            .fontWeight(.bold)
-                            .foregroundStyle(Color.secondary)
-                            .padding(.bottom)
-                            .padding(.horizontal)
                             
-                        
+                            Text("You have \(sys.medicalDocuments.count) medical \(sys.medicalDocuments.count==1 ? "document" : "documents") containing \(sys.totalTestRecordsCount()) tests")
+                                .fontWeight(.bold)
+                                .foregroundStyle(Color.secondary)
+                                .padding(.bottom)
+                                .padding(.horizontal)
+                            
+                            HStack{
+                                Spacer()
                             Button(action:{
                                 showPdfUploadScreen.toggle()
                             }){
                                 label("Add Medical Report (PDF)", textColor: .primaryInvert, bgColor: .primary, imgName: "doc.plaintext.fill", imgColor: .primaryInvert, width: geo.size.width*0.85, radius: 10, verticalPadding: 5)
                             }
+                                Spacer()
+                        }
                             .sheet(isPresented: $showPdfUploadScreen){
                                 PDFUploaderView(showSelf: $showPdfUploadScreen)
                             }
