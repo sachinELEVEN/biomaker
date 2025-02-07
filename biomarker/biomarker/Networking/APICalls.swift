@@ -188,7 +188,7 @@ class APIService {
     
     // API endpoint
     let useProdUrl = false
-    let urlString = useProdUrl ? "https://backend.brainsphere.in/biomarker-supplement-analyser" : "http://localhost:3000/biomarker-supplement-analyser"
+    let urlString = useProdUrl ? "https://backend.brainsphere.in/biomarker-supplement-stack-analyser" : "http://localhost:3000/biomarker-supplement-stack-analyser"
     guard let url = URL(string: urlString) else {
         print("/generateSupplementReportWithLLM: invalid url")
         completion(false, nil)
@@ -205,7 +205,7 @@ class APIService {
     // Set the HTTP body directly from the JSON string
    // Create the JSON body on the fly
       let payload: [String: Any] = [
-          "supplementstackinformation": supplementStackInformation,
+          "supplementinformation": supplementStackInformation,
           "credentials": credentials
       ]
    
