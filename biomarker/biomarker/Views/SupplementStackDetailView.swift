@@ -101,7 +101,13 @@ struct supplementStackBriefView: View {
                                 Spacer()
                             }
                             
-                            supplementStackDetailView.aiInfoView(header: "Rating", description: supplementStack.getProperty(property: .ai_rating))//should be in format x/10
+//                            supplementStackDetailView.aiInfoView(header: "Rating", description: supplementStack.getProperty(property: .ai_rating))//should be in format x/10
+//                            
+                            Text("Your supplement stack got a rating of \(supplementStack.getProperty(property: .ai_rating))")
+                                .font(.subheadline)
+                                .foregroundStyle(Color.secondary)
+                                .multilineTextAlignment(.leading)
+                                //.padding(.top)
                             
                             if  Float(supplementStack.getProperty(property: .ai_rating)) != nil{
                                 ZStack(alignment: .leading) {
@@ -118,6 +124,14 @@ struct supplementStackBriefView: View {
                                         .cornerRadius(20) // Optional: Rounded corners
                                 }//.padding(.horizontal)
                             }
+                            
+                            //give a brief of the report
+                            Text(supplementStack.getProperty(property: .compatibility).prefix(200) + "...")
+                                .font(.subheadline)
+                                .foregroundStyle(Color.secondary)
+                                .multilineTextAlignment(.leading)
+                                .padding(.vertical)
+                            
                         }
                     }
                     }
@@ -194,6 +208,7 @@ struct supplementStackDetailView: View {
                     ScrollView(showsIndicators: false){
                         //supplementStackRow(supplementStack: supplementStack, showRating: false, showDateOfCreation: true)
                         
+                        supplementStackDetailView.descriptionView("This supplement report takes into account the supplements and food items in your stack, as well as your medical test records.")
                         
                         if supplementStack.aiAnalysisStage == .completed || supplementStack.aiAnalysisStage == .outdated{
                             if supplementStack.isSupplementStackValid(){
