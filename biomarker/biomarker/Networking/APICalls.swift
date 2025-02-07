@@ -182,4 +182,83 @@ class APIService {
         task.resume()
     }
     ///
+    ///
+    static func generateSupplementStackReportWithLLM(supplementStackInformation: String, completion: @escaping (Bool, [String: Any]?) -> Void) {
+    
+    
+    // API endpoint
+    let useProdUrl = false
+    let urlString = useProdUrl ? "https://backend.brainsphere.in/biomarker-supplement-analyser" : "http://localhost:3000/biomarker-supplement-analyser"
+    guard let url = URL(string: urlString) else {
+        print("/generateSupplementReportWithLLM: invalid url")
+        completion(false, nil)
+        return
+    }
+    
+    // Create the URL request
+    var request = URLRequest(url: url)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    
+   let credentials = "2930hrifnef4df3983hr@9RHIOWWN"
+    // Encode the supplement information to JSON
+    // Set the HTTP body directly from the JSON string
+   // Create the JSON body on the fly
+      let payload: [String: Any] = [
+          "supplementstackinformation": supplementStackInformation,
+          "credentials": credentials
+      ]
+   
+   do {
+           // Convert the dictionary to JSON data
+           let jsonData = try JSONSerialization.data(withJSONObject: payload, options: [])
+           
+           // Set the httpBody of the request
+           request.httpBody = jsonData
+       } catch {
+           print("Error encoding supplement information: \(error)")
+           completion(false, nil)
+           return
+       }
+    
+    // Create the URLSession data task
+    let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        // Check for errors
+        if let error = error {
+            print("Error making request: \(error)")
+            completion(false, nil)
+            return
+        }
+        
+        // Check for a valid response
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            print("Server error: \(response.debugDescription)")
+            completion(false, nil)
+            return
+        }
+        
+        // Check for data
+        guard let data = data else {
+            print("No data received")
+            completion(false, nil)
+            return
+        }
+        
+        // Decode the JSON response
+        do {
+            if let jsonResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                completion(true, jsonResponse) // Return success and the JSON response
+            } else {
+                print("Invalid JSON format")
+                completion(false, nil)
+            }
+        } catch {
+            print("Error decoding JSON: \(error)")
+            completion(false, nil)
+        }
+    }
+    
+    // Start the data task
+    task.resume()
+}
 }

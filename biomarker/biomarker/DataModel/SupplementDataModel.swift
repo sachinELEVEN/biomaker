@@ -18,7 +18,7 @@ enum BMSupplementType: String, CaseIterable, Codable {
     case food = "Food"
 }
 
-enum BMSupplementAIAnalysisStage: String, Codable {
+enum BMAIAnalysisStage: String, Codable {
     case never
     case failed
     case completed
@@ -100,7 +100,7 @@ class BMSupplement: Identifiable, Codable {
     var aiRating: String?//present in supplement analysis report
     var aiReport: String?//present in supplement analysis report
     var aiSupplementValid: String?//present in supplement analysis report
-    var aiAnalysisStage: BMSupplementAIAnalysisStage
+    var aiAnalysisStage: BMAIAnalysisStage
 
     init(id: String, supplementType: BMSupplementType, name: String, strengthNumber: String, strengthUnit: String,
          frequency: BMSupplementFrequency, form: BMSupplementForm?, timeOfConsumption: [Date?],
@@ -234,7 +234,7 @@ class BMSupplement: Identifiable, Codable {
         aiRating = try container.decodeIfPresent(String.self, forKey: .aiRating)
         aiReport = try container.decodeIfPresent(String.self, forKey: .aiReport)
         aiSupplementValid = try container.decodeIfPresent(String.self, forKey: .aiSupplementValid)
-        aiAnalysisStage = try container.decode(BMSupplementAIAnalysisStage.self, forKey: .aiAnalysisStage)
+        aiAnalysisStage = try container.decode(BMAIAnalysisStage.self, forKey: .aiAnalysisStage)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -285,11 +285,13 @@ class BMSupplementStack: ObservableObject, Codable {
     @Published var stackCompatibilityNote: String? = nil
     @Published var adviceFeedbackOnStack: String? = nil
     @Published var stip: String = ""
+    var aiAnalysisStage: BMAIAnalysisStage
     
     init(id: String, supplements: [BMSupplement]) {
         self.id = id
         self.supplements = supplements
         self.stackHistory = []
+        self.aiAnalysisStage = .never
     }
     
     //using this m_propertyname naming scheme from Broadway/BFX and this whole stip thing is picked from broadway
@@ -369,7 +371,7 @@ class BMSupplementStack: ObservableObject, Codable {
     
     // Custom CodingKeys to exclude `_refresh`
     enum CodingKeys: String, CodingKey {
-        case id, supplements, stackHistory, aiSupplementStackRecommendedTime, stackCompatibilityNote, adviceFeedbackOnStack, stip
+        case id, supplements, stackHistory, aiSupplementStackRecommendedTime, stackCompatibilityNote, adviceFeedbackOnStack, stip, aiAnalysisStage
     }
     
     // Custom encoding to handle @Published properties
@@ -382,6 +384,7 @@ class BMSupplementStack: ObservableObject, Codable {
         try container.encode(stackCompatibilityNote, forKey: .stackCompatibilityNote)
         try container.encode(adviceFeedbackOnStack, forKey: .adviceFeedbackOnStack)
         try container.encode(stip, forKey: .stip)
+        try container.encode(aiAnalysisStage, forKey: .aiAnalysisStage)
         
     }
     
@@ -395,6 +398,7 @@ class BMSupplementStack: ObservableObject, Codable {
         stackCompatibilityNote = try container.decodeIfPresent(String.self, forKey: .stackCompatibilityNote)
         adviceFeedbackOnStack = try container.decodeIfPresent(String.self, forKey: .adviceFeedbackOnStack)
         stip = try container.decodeIfPresent(String.self, forKey: .stip) ?? ""
+        aiAnalysisStage = try container.decode(BMAIAnalysisStage.self, forKey: .aiAnalysisStage)
         
         
     }

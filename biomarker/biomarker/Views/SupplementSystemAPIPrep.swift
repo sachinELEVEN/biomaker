@@ -31,6 +31,62 @@ class UserHealthContext {
             return ""
     }
     
+    static func analyzeSupplementStackWithLLM(_ supplementStack: BMSupplementStack, completion: @escaping (Bool, [String: Any]?) -> Void){
+        
+        //WE SHOULD ONLY PEROFORM IS IF THE SUPPLEMENTS COUNT > 0
+        if supplementStack.supplements.count == 0{
+            print("/analyzeSupplementStackWithLLM: no supplements present so cannot do stack analysis")
+            completion(false,nil)
+            return
+        }
+        
+        /*
+         Here we will provide LLM with
+         1. supplement list
+         
+         Expectation- 1. Give a note on the supplement compatibilty or any advice on the supplement stack or changes user should make,2. recomended time to take these supplement or which order to the supplement in for max impact, 3. Rate the supplement based on the user's data out of 10.
+         */
+        let context = prepareSupplementStackAnalaysisContext()
+        
+        //MAKE A REQUEST TO THE SERVER WITH THIS PROMPT
+        APIService.generateSupplementStackReportWithLLM(supplementStackInformation: context) { success, response in
+            if !success{
+                print("Failed to analyse the reponse")
+                supplementStack.aiAnalysisStage = .failed
+                DispatchQueue.main.async {
+                    BMSupplementStackGL.refresh()
+                }
+                BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
+                completion(false,nil)
+            }else{
+                print("/analyzeSupplementStackWithLLM: Successfully analysed the supplement compatibility")
+                //modify the supplement with llm details
+                /*- we can publish all this in the stip
+                supplement.aiRating = response?["ai_rating"] as? String ?? nil
+                supplement.aiReport = response?["ai_report"] as? String ?? nil
+                supplement.aiCommonName = response?["ai_common_name"] as? String ?? nil
+                supplement.aiCategory = response?["ai_category"] as? String ?? nil
+                supplement.aiCalories = response?["ai_calories"] as? String ?? nil
+                supplement.aiSideEffect = response?["ai_side_effects"] as? String ?? nil
+                supplement.aiAdviceBasedUserHealthContext = response?["ai_advice"] as? String ?? nil
+                supplement.aiCommonStrengthNumberAndUnits = response?["ai_common_dosage_strength"] as? String ?? nil
+                supplement.aiUsageCommonReasonForUseAndAdvantage = response?["ai_common_reason_for_use_and_advantages"] as? String ?? nil
+                supplement.aiAnalysisStage = .completed
+                supplement.aiSupplementValid = response?["ai_is_valid"] as? String ?? nil
+                 */
+                //Assign values to the supplement
+                DispatchQueue.main.async {
+                    BMSupplementStackGL.refresh()
+                }
+                BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
+                completion(true,response)
+            }
+        }
+        
+        
+        
+    }
+    
     static func analyzeSupplementWithLLM(_ supplement: BMSupplement, completion: @escaping (Bool, [String: Any]?) -> Void){
         
         /*
@@ -95,6 +151,27 @@ class UserHealthContext {
         }
         
         
+    }
+    
+   static func prepareSupplementStackAnalaysisContext()->String{
+        
+        
+        var context = ""
+       //STEP1: SUPPLEMENT INFORMATION
+       //context += getSuppplementDetailsContext(supplement: supplement)
+        
+        //STEP2: USER GENERAL HEALTH NOTES FROM USER
+        context += userGeneralHealthNotesContext()
+        
+        //STEP3: Past test record information
+       //THIS NEEDS ENHANCEMENT- WE MUST NOT SEND DUPLICATE TEST ENTRIES
+        context += getTestRecordsContext()
+        
+        //STEP4: EXISTING SUPPLEMENT USER IS TAKING
+       //we dont want the newly added supplement to be part of the supplement stack context
+       context += getUserSupplementStackContext(supplementsToIgnore: [])
+        
+        return context
     }
     
    static func prepareSupplementAnalaysisContext(_ supplement: BMSupplement)->String{
