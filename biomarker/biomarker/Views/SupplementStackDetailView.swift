@@ -31,7 +31,17 @@ struct supplementStackBriefView: View {
                     if supplementStack.aiAnalysisStage == .never {
                         Button(action:{analysesupplementStackWithLLM()}){
                             VStack{
-                                label("\(analysisInProgress ? "Analysing":"Analyse with Biomarker Intelligence")", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: width/1.2, radius: 10)
+                                HStack{
+                                Text("Supplement Stack Analysis")
+                                                           //.italic()
+                                                           //.underline()
+                                                               .fontWeight(.bold)
+                                                               .font(.headline)
+                                                               .multilineTextAlignment(.leading)
+                                                               .padding(.vertical)
+                                    Spacer()
+                                }
+                                label("\(analysisInProgress ? "Analysing":"Analyse with Biomarker Intelligence")", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: width*0.8, radius: 10,verticalPadding: 5)
                                 
                                 Text("You have \(supplementStack.supplements.count) \(supplementStack.supplements.count==1 ? "supplement" : "supplements") in your stack, analyse \(supplementStack.supplements.count==1 ? "it" : "them") and and see a comprehensive report right here")
                                     .fontWeight(.bold)
@@ -40,12 +50,22 @@ struct supplementStackBriefView: View {
                                     .padding(.top,3)
                                     .padding(.bottom)
                                     .padding(.horizontal)
-                            }.padding(.top)
+                            }//.padding(.top)
                             
                         }
                     }else  if supplementStack.aiAnalysisStage == .failed{
+                        HStack{
+                            Text("Supplement Stack Analysis")
+                            //.italic()
+                            //.underline()
+                                .fontWeight(.bold)
+                                .font(.headline)
+                                .multilineTextAlignment(.leading)
+                                .padding(.vertical)
+                            Spacer()
+                        }
                         Button(action:{analysesupplementStackWithLLM()}){
-                            label("\(analysisInProgress ? "Analysing":"Analyse with Biomarker Intelligence")", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: width/1.2, radius: 10)
+                            label("\(analysisInProgress ? "Analysing":"Analyse with Biomarker Intelligence")", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: width*0.8, radius: 10,verticalPadding: 5)
                         }
                         Text("Your stack's analysis failed last time, tap to try again")
                             .fontWeight(.bold)
@@ -94,12 +114,13 @@ struct supplementStackBriefView: View {
         
         
         UserHealthContext.analyzeSupplementStackWithLLM(supplementStack) { success, response in
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-//                //putting thing in here because we do not want abrupt stops in animation in case completion handler gets called very quicky
-//                //side effect is that we will show anlaying with biomarker for a few moments longer, but its fine
-//                isAnimating = false
-//                analysisInProgress = false
-//            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                //putting thing in here because we do not want abrupt stops in animation in case completion handler gets called very quicky
+                //side effect is that we will show anlaying with biomarker for a few moments longer, but its fine
+               // isAnimating = false
+                analysisInProgress = false
+            })
+            
             
             
             if success{

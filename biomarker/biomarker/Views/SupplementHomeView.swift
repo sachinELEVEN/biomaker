@@ -45,7 +45,7 @@ struct SupplementHomeView:View {
                                 Button(action:{
                                     showAddSupplementScreen.toggle()
                                 }){
-                                    label("Add a supplement", textColor: .primaryInvert, bgColor: .primary, imgName: "bolt.fill", imgColor: .primaryInvert, width: geo.size.width/1.2, radius: 10,verticalPadding: 5)
+                                    label("Add a supplement", textColor: .primaryInvert, bgColor: .primary, imgName: "bolt.fill", imgColor: .primaryInvert, width: geo.size.width*0.8, radius: 10,verticalPadding: 5)
                                 }
                                 Spacer()
                             }.padding(.top)
