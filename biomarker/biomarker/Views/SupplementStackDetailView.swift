@@ -9,6 +9,114 @@ import Foundation
 import SwiftUI
 
 //here we will give brief about the supplementStack stack and show list of all supplementStacks- might be overkill and not want to do that tbh
+struct supplementStackBriefView: View {
+    @ObservedObject var supplementStack = BMSupplementStackGL
+    @Binding var showSelf : Bool
+    @State var analysisInProgress = false
+    var width: CGFloat
+    
+    var body: some View{
+        //GeometryReader{ geo in
+            VStack{
+                if supplementStack.supplements.count == 0{
+                    HStack{
+                        Spacer()
+                        Text("Add your supplements to your stack, and see a comprehensive report right here")
+                            .font(.title2)
+                            .foregroundStyle(Color.secondary)
+                            .padding()
+                        Spacer()
+                    }
+                }else{
+                    if supplementStack.aiAnalysisStage == .never {
+                        Button(action:{analysesupplementStackWithLLM()}){
+                            VStack{
+                                label("\(analysisInProgress ? "Analysing":"Analyse with Biomarker Intelligence")", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: width/1.2, radius: 10)
+                                
+                                Text("You have \(supplementStack.supplements.count) \(supplementStack.supplements.count==1 ? "supplement" : "supplements") in your stack, analyse \(supplementStack.supplements.count==1 ? "it" : "them") and and see a comprehensive report right here")
+                                    .fontWeight(.bold)
+                                    .font(.caption)
+                                    .foregroundStyle(Color.secondary)
+                                    .padding(.top,3)
+                                    .padding(.bottom)
+                                    .padding(.horizontal)
+                            }.padding(.top)
+                            
+                        }
+                    }else  if supplementStack.aiAnalysisStage == .failed{
+                        Button(action:{analysesupplementStackWithLLM()}){
+                            label("\(analysisInProgress ? "Analysing":"Analyse with Biomarker Intelligence")", textColor: .white, bgColor: .blue, imgName: "staroflife.fill", imgColor: .white, width: width/1.2, radius: 10)
+                        }
+                        Text("Your stack's analysis failed last time, tap to try again")
+                            .fontWeight(.bold)
+                            .font(.caption)
+                            .foregroundStyle(Color.secondary)
+                            .padding(.top,3)
+                            .padding(.bottom)
+                            .padding(.horizontal)
+                    }
+                    
+                    else{
+                        //show basic information about the stack
+                        supplementStackDetailView.aiInfoView(header: supplementStack.getProperty(property: .ai_common_name) != "" ? supplementStack.getProperty(property: .ai_common_name)  : "Supplement Stack", description: "Learn more")
+                        
+                        supplementStackDetailView.aiInfoView(header: "Rating", description: supplementStack.getProperty(property: .ai_rating))//should be in format x/10
+                        
+                        if  Float(supplementStack.getProperty(property: .ai_rating)) != nil{
+                            ZStack(alignment: .leading) {
+                                // Background rectangle
+                                Rectangle()
+                                    .fill(Color.secondary) // Default color for the background
+                                    .frame(height: 30) // Height of the progress bar
+                                    .cornerRadius(20) // Optional: Rounded corners
+                                
+                                // Filled rectangle based on the number
+                                Rectangle()
+                                    .fill(supplementStackDetailView.colorForNumber(Float(supplementStack.getProperty(property: .ai_rating))!)) // Set the fill color based on the number
+                                    .frame(width: min(CGFloat(Float(supplementStack.getProperty(property: .ai_rating))!) / 10 * width, width/1.2), height: 30) // Calculate width based on the number
+                                    .cornerRadius(20) // Optional: Rounded corners
+                            }//.padding(.horizontal)
+                        }
+                    }
+                }
+            }
+        //}
+    }
+    
+    func analysesupplementStackWithLLM(){
+        
+        if analysisInProgress{
+            print("Cannot request a supplementStack analysis as the last one is in progress")
+            return
+        }
+        analysisInProgress = true
+       // isAnimating = true
+        
+        
+        UserHealthContext.analyzeSupplementStackWithLLM(supplementStack) { success, response in
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+//                //putting thing in here because we do not want abrupt stops in animation in case completion handler gets called very quicky
+//                //side effect is that we will show anlaying with biomarker for a few moments longer, but its fine
+//                isAnimating = false
+//                analysisInProgress = false
+//            })
+            
+            
+            if success{
+            
+                
+            }else{
+                print("Failed to analyse the reponse")
+                //WE WILL PROBABLY NOT SHOW THIS MESSAGE BECAUSE WE IMEEDIATELY MOVE TO THE SCREEN 7- WHICH IS supplementStack DETAILED VIEW
+                //message = "The \(supplementStackIsFoodItem ? "food item" : "supplementStack") has been added to your stack. However Biomarker was unable to analyze the \(supplementStackIsFoodItem ? "food item" : "supplementStack"), and you can request an analysis later from the supplementStack details page."
+                
+                //currentStep = 7
+            }
+        }
+    }
+    
+}
+    
 struct supplementStackDetailView: View {
     @ObservedObject var supplementStack = BMSupplementStackGL
     @Binding var showSelf : Bool

@@ -45,7 +45,7 @@ struct SupplementHomeView:View {
                                 Button(action:{
                                     showAddSupplementScreen.toggle()
                                 }){
-                                    label("Add a supplement", textColor: .primaryInvert, bgColor: .primary, imgName: "bolt.fill", imgColor: .primaryInvert, width: geo.size.width*0.8, radius: 10,verticalPadding: 5)
+                                    label("Add a supplement", textColor: .primaryInvert, bgColor: .primary, imgName: "bolt.fill", imgColor: .primaryInvert, width: geo.size.width/1.2, radius: 10,verticalPadding: 5)
                                 }
                                 Spacer()
                             }.padding(.top)
@@ -53,15 +53,15 @@ struct SupplementHomeView:View {
                                     AddSupplementView(showSelf: $showAddSupplementScreen)
                                 }
                             
-                            Text("Supplement Stack Analysis")
-                            //.italic()
-                            //.underline()
-                                .fontWeight(.bold)
-                                .font(.headline)
-                                .multilineTextAlignment(.leading)
-                                .padding(.vertical)
+//                            Text("Supplement Stack Analysis")
+//                            //.italic()
+//                            //.underline()
+//                                .fontWeight(.bold)
+//                                .font(.headline)
+//                                .multilineTextAlignment(.leading)
+//                                .padding(.vertical)
                             
-                            supplementStackDetailView(showSelf: .constant(true))
+                            supplementStackBriefView(showSelf: .constant(true), width: geo.size.width)
                             
                             
                             Text("Supplements")
