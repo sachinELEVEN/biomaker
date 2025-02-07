@@ -332,6 +332,10 @@ class BMSupplementStack: ObservableObject, Codable {
         BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem, useDebouncer: true)
     }
     
+    func isSupplementStackValid() -> Bool {
+        return getProperty(property: .ai_is_valid) != "no"
+    }
+    
     //returns a set representing categories of supplement present in the system
     func getCategories(maxLength: Int = Int.max) -> Set<String> {
 //        var summary = "Biomarker found \(totalTestRecordsCount()) tests in the document.\n"

@@ -35,6 +35,7 @@
 		8EA9F36E2D4EB47300F547B9 /* SupplementDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9F36D2D4EB47300F547B9 /* SupplementDetailView.swift */; };
 		8EA9F3702D53B0D500F547B9 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9F36F2D53B0D500F547B9 /* Settings.swift */; };
 		8EA9F3722D53C42200F547B9 /* StipulationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9F3712D53C42200F547B9 /* StipulationHandler.swift */; };
+		8EA9F3742D5668C600F547B9 /* SupplementStackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA9F3732D5668C600F547B9 /* SupplementStackDetailView.swift */; };
 		8EFAC50A2CB1D15B0067ACDB /* sample.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 8EFAC5092CB1D15B0067ACDB /* sample.pdf */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		8EA9F36D2D4EB47300F547B9 /* SupplementDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementDetailView.swift; sourceTree = "<group>"; };
 		8EA9F36F2D53B0D500F547B9 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8EA9F3712D53C42200F547B9 /* StipulationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StipulationHandler.swift; sourceTree = "<group>"; };
+		8EA9F3732D5668C600F547B9 /* SupplementStackDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupplementStackDetailView.swift; sourceTree = "<group>"; };
 		8EFAC5072CB1CD2E0067ACDB /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = sample.pdf; sourceTree = "<group>"; };
 		8EFAC5092CB1D15B0067ACDB /* sample.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = sample.pdf; path = "../../medical-reports/sample.pdf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -217,6 +219,7 @@
 				8E8450EA2D4AC6A300882C3D /* AddSupplementView.swift */,
 				8EA9F3692D4C0A5A00F547B9 /* SupplementHomeView.swift */,
 				8EA9F36D2D4EB47300F547B9 /* SupplementDetailView.swift */,
+				8EA9F3732D5668C600F547B9 /* SupplementStackDetailView.swift */,
 				8E604EA82CB0665A00694510 /* TestRecordEditView.swift */,
 				8EA9F36F2D53B0D500F547B9 /* Settings.swift */,
 				8E28FE5B2CAD8E3300BE56DA /* PDFShareView.swift */,
@@ -371,6 +374,7 @@
 				8EA9F36E2D4EB47300F547B9 /* SupplementDetailView.swift in Sources */,
 				8E28FE582CAC89DD00BE56DA /* TestRecordSmallView.swift in Sources */,
 				8E28FE492CAC465C00BE56DA /* System.swift in Sources */,
+				8EA9F3742D5668C600F547B9 /* SupplementStackDetailView.swift in Sources */,
 				8E28FE1A2CAC426B00BE56DA /* RootView.swift in Sources */,
 				8E28FE442CAC45BE00BE56DA /* MedicalTestRecordDM.swift in Sources */,
 				8E28FE542CAC704900BE56DA /* IndependentUI.swift in Sources */,

@@ -61,6 +61,8 @@ struct SupplementHomeView:View {
                                 .multilineTextAlignment(.leading)
                                 .padding(.vertical)
                             
+                            supplementStackDetailView(showSelf: .constant(true))
+                            
                             
                             Text("Supplements")
                             //.italic()
