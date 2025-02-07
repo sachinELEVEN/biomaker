@@ -193,7 +193,7 @@ struct supplementStackDetailView: View {
     @State private var isAnimating = false
 //    @State var showsupplementStackEditView = false
 //    @State var showsupplementStackHistoryView = false
-//    @State var showActionSheet = false
+    @State var showActionSheet = false
 
     var body: some View {
         GeometryReader{ geo in
@@ -308,63 +308,33 @@ struct supplementStackDetailView: View {
                         
                     }.animation(.default, value: 1)
                 }.navigationTitle("Stack Report")
-//                    .toolbar {
-//                        ToolbarItem(placement: .navigationBarTrailing) {
-//                            Button(action: {
-//                                // Your action here
-//                               // self.showsupplementStackEditView.toggle()//view history of this supplementStack
-//                                showsupplementStackHistoryView.toggle()
-//                            }) {
-//                                Image(systemName: "clock.arrow.circlepath")  // SF Symbol for search icon
-//                            }
-//                        }
-//                        ToolbarItem(placement: .navigationBarTrailing) {
-//                            Button(action: {
-//                                // Your action here
-//                                self.showsupplementStackEditView.toggle()
-//                            }) {
-//                                Image(systemName: "slider.horizontal.3")  // SF Symbol for search icon
-//                            }
-//                        }
-//                        ToolbarItem(placement: .navigationBarTrailing) {
-//                            Button(action: {
-//                                // Your action here
-//                                self.showActionSheet.toggle()
-//                            }) {
-//                                Image(systemName: "info.circle")  // SF Symbol for info icon
-//                            }
-//                            .actionSheet(isPresented: $showActionSheet) {
-//                                ActionSheet(
-//                                    title: Text("Actions"),
-//                                    message: Text(""),
-//                                    buttons: [
-////                                        .default(Text("Share Original Document (PDF)")) {
-////                                            // Navigate to chart view for separate tracking
-////                                            //mergeSelectedGroups = false
-////                                           // navigateToChartView()
-////                                            //print("Each Test Separately")
-////        //                                        showUpdateTestManuallyScreen.toggle()
-////                                            isSharePresented.toggle()
-////                                           // SharePDFView(pdfURL: doc.pdfDocumentUrl,width: system.fullWidth*0.2)
-////                                        },
-//                                        .destructive(Text("Delete supplementStack and its History")) {
-//        //                                        deleteTestRecord()
-//                                            //system.medicalDocuments
-//                                            //system.deleteDocument(document: doc)
-//                                            BMsupplementStackStackGL.removesupplementStack(supplementStack)
-//                                            BiomarkerFileSystem.saveSystemMedicalDocuments()
-//                                            self.showSelf.toggle()
-//                                        },
-//                                        .cancel()
-//                                    ]
-//                                )
-//                            }
-////                            .sheet(isPresented: $isSharePresented) {
-////                                ShareSheet(activityItems: [doc.pdfDocumentUrl])
-////                            }
-//                        }
-//                        
-//                    }
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {
+                                // Your action here
+                                self.showActionSheet.toggle()
+                            }) {
+                                Image(systemName: "info.circle")  // SF Symbol for info icon
+                            }
+                            .actionSheet(isPresented: $showActionSheet) {
+                                ActionSheet(
+                                    title: Text("Actions"),
+                                    message: Text(""),
+                                    buttons: [
+
+                                        .default(Text("Re-run analysis")) {
+        //
+                                            analysesupplementStackWithLLM()
+                                            
+                                        },
+                                        .cancel()
+                                    ]
+                                )
+                            }
+       
+                        }
+                        
+                    }
                     
             }
         }
