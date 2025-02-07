@@ -181,8 +181,17 @@ struct QuickSearchOptionsView: View{
         //searchScope
         //in future you can add more options here
         var quickSearchOptionsSet : Set<String> = Set()
-        for doc in docs{
-            for option in searchScope == .medicaltest ? doc.getDocOrgans() : BMSupplementStackGL.getCategories(){
+        
+        if searchScope == .medicaltest{
+            for doc in docs{
+                for option in doc.getDocOrgans(){
+                    quickSearchOptionsSet.insert(option)
+                }
+            }
+        }
+        
+        if searchScope == .supplement{
+            for option in BMSupplementStackGL.getCategories(){
                 quickSearchOptionsSet.insert(option)
             }
         }
