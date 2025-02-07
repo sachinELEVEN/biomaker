@@ -13,6 +13,7 @@ struct supplementStackBriefView: View {
     @ObservedObject var supplementStack = BMSupplementStackGL
     @Binding var showSelf : Bool
     @State var analysisInProgress = false
+    @State var showDetailView = false
     var width: CGFloat
     
     var body: some View{
@@ -77,27 +78,59 @@ struct supplementStackBriefView: View {
                     }
                     
                     else{
-                        //show basic information about the stack
-                        supplementStackDetailView.aiInfoView(header: supplementStack.getProperty(property: .ai_common_name) != "" ? supplementStack.getProperty(property: .ai_common_name)  : "Supplement Stack", description: "Learn more")
-                        
-                        supplementStackDetailView.aiInfoView(header: "Rating", description: supplementStack.getProperty(property: .ai_rating))//should be in format x/10
-                        
-                        if  Float(supplementStack.getProperty(property: .ai_rating)) != nil{
-                            ZStack(alignment: .leading) {
-                                // Background rectangle
-                                Rectangle()
-                                    .fill(Color.secondary) // Default color for the background
-                                    .frame(height: 30) // Height of the progress bar
-                                    .cornerRadius(20) // Optional: Rounded corners
-                                
-                                // Filled rectangle based on the number
-                                Rectangle()
-                                    .fill(supplementStackDetailView.colorForNumber(Float(supplementStack.getProperty(property: .ai_rating))!)) // Set the fill color based on the number
-                                    .frame(width: min(CGFloat(Float(supplementStack.getProperty(property: .ai_rating))!) / 10 * width, width/1.2), height: 30) // Calculate width based on the number
-                                    .cornerRadius(20) // Optional: Rounded corners
-                            }//.padding(.horizontal)
+                        Button(action:{
+                            showDetailView.toggle()
+                        }){
+                        VStack(alignment: .leading){
+                            //show basic information about the stack
+                            //                        supplementStackDetailView.aiInfoView(header: supplementStack.getProperty(property: .ai_common_name) != "" ? supplementStack.getProperty(property: .ai_common_name)  : "Supplement Stack", description: "Learn more")
+                            HStack{
+                                VStack(alignment: .leading){
+                                    Text("Supplement Stack Analysis")
+                                    //.italic()
+                                    //.underline()
+                                        .fontWeight(.bold)
+                                        .font(.headline)
+                                        .multilineTextAlignment(.leading)
+                                        .padding(.top)
+                                    Text("Learn more")
+                                        .font(.subheadline)
+                                        .foregroundStyle(Color.secondary)
+                                        .padding([.bottom])
+                                }
+                                Spacer()
+                            }
+                            
+                            supplementStackDetailView.aiInfoView(header: "Rating", description: supplementStack.getProperty(property: .ai_rating))//should be in format x/10
+                            
+                            if  Float(supplementStack.getProperty(property: .ai_rating)) != nil{
+                                ZStack(alignment: .leading) {
+                                    // Background rectangle
+                                    Rectangle()
+                                        .fill(Color.secondary) // Default color for the background
+                                        .frame(height: 30) // Height of the progress bar
+                                        .cornerRadius(20) // Optional: Rounded corners
+                                    
+                                    // Filled rectangle based on the number
+                                    Rectangle()
+                                        .fill(supplementStackDetailView.colorForNumber(Float(supplementStack.getProperty(property: .ai_rating))!)) // Set the fill color based on the number
+                                        .frame(width: min(CGFloat(Float(supplementStack.getProperty(property: .ai_rating))!) / 10 * width, width/1.2), height: 30) // Calculate width based on the number
+                                        .cornerRadius(20) // Optional: Rounded corners
+                                }//.padding(.horizontal)
+                            }
                         }
                     }
+                    }
+                    
+                    //if supplementViewToShowInDetail != nil{
+//                    NavigationLink(destination: supplementStackDetailView(showSelf: $showDetailView,isActive: $showDetailView));) {
+//                            Text("")
+//                        }
+                    
+                    NavigationLink(destination: supplementStackDetailView(showSelf: $showDetailView),isActive: $showDetailView) {
+                        EmptyView() // This will not show any button; it only serves to navigate
+                    }
+                        
                 }
             }
         //}
@@ -167,8 +200,9 @@ struct supplementStackDetailView: View {
                                 biomarerIntelligenceLabel()
                                     .padding()
                             }else{
-                                biomarerIntelligenceLabel(text: "Biomarker couldn't find any specific information on your stack")
-                                    .padding()
+                                //we notice for supplement stack ai return stack not valid many times, so we will not use it
+//                                biomarerIntelligenceLabel(text: "Biomarker couldn't find any specific information on your stack")
+//                                    .padding()
                             }
                         }
                         
