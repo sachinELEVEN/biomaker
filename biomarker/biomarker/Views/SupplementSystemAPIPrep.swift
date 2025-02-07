@@ -59,20 +59,37 @@ class UserHealthContext {
                 BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem)
                 completion(false,nil)
             }else{
-                print("/analyzeSupplementStackWithLLM: Successfully analysed the supplement compatibility")
+                print("/analyzeSupplementStackWithLLM: Successfully analysed the supplement stack compatibility")
                 //modify the supplement with llm details
-                /*- we can publish all this in the stip
-                supplement.aiRating = response?["ai_rating"] as? String ?? nil
-                supplement.aiReport = response?["ai_report"] as? String ?? nil
-                supplement.aiCommonName = response?["ai_common_name"] as? String ?? nil
-                supplement.aiCategory = response?["ai_category"] as? String ?? nil
-                supplement.aiCalories = response?["ai_calories"] as? String ?? nil
-                supplement.aiSideEffect = response?["ai_side_effects"] as? String ?? nil
-                supplement.aiAdviceBasedUserHealthContext = response?["ai_advice"] as? String ?? nil
-                supplement.aiCommonStrengthNumberAndUnits = response?["ai_common_dosage_strength"] as? String ?? nil
-                supplement.aiUsageCommonReasonForUseAndAdvantage = response?["ai_common_reason_for_use_and_advantages"] as? String ?? nil
-                supplement.aiAnalysisStage = .completed
-                supplement.aiSupplementValid = response?["ai_is_valid"] as? String ?? nil
+                //- we can publish all this in the stip
+                let compatibility = response?["compatibility"] as? String ?? nil
+                let recommended_timing = response?["recommended_timing"] as? String ?? nil
+                let ai_rating = response?["ai_rating"] as? String ?? nil
+                let ai_advice = response?["ai_advice"] as? String ?? nil
+                let ai_common_name = response?["ai_common_name"] as? String ?? nil
+                let ai_category = response?["ai_category"] as? String ?? nil
+                let ai_is_valid = response?["ai_is_valid"] as? String ?? nil
+                supplementStack.aiAnalysisStage = .completed
+                
+                //saving to Model and storage
+                supplementStack.setProperty(property: .compatibility, value: compatibility)
+                supplementStack.setProperty(property: .recommended_timing, value: recommended_timing)
+                supplementStack.setProperty(property: .ai_rating, value: ai_rating)
+                supplementStack.setProperty(property: .ai_advice, value: ai_advice)
+                supplementStack.setProperty(property: .ai_common_name, value: ai_common_name)
+                supplementStack.setProperty(property: .ai_category, value: ai_category)
+                supplementStack.setProperty(property: .ai_is_valid, value: ai_is_valid)
+                /*
+                let aiReport = response?["ai_report"] as? String ?? nil
+                let aiCommonName = response?["ai_common_name"] as? String ?? nil
+                let aiCategory = response?["ai_category"] as? String ?? nil
+                let aiCalories = response?["ai_calories"] as? String ?? nil
+                let aiSideEffect = response?["ai_side_effects"] as? String ?? nil
+                let aiAdviceBasedUserHealthContext = response?["ai_advice"] as? String ?? nil
+                let aiCommonStrengthNumberAndUnits = response?["ai_common_dosage_strength"] as? String ?? nil
+                let aiUsageCommonReasonForUseAndAdvantage = response?["ai_common_reason_for_use_and_advantages"] as? String ?? nil
+                let aiAnalysisStage = .completed
+                let aiSupplementValid = response?["ai_is_valid"] as? String ?? nil
                  */
                 //Assign values to the supplement
                 DispatchQueue.main.async {

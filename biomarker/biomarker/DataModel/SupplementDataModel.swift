@@ -7,6 +7,17 @@
 
 import Foundation
 
+//These are a list of properties that can be received from ai response or somewhere else, and we store them in supplementstack's stip instead of creating standalone properties for them, this allows for quick addition/removal of properties without changing the BMSupplementStack data model and its encoder decooder since everything will be stored inthe stip as a string
+enum BMSupplementStackDynamicProperties: String, CaseIterable{
+    //snakecase because that's used in server side, in future i should really move to snakecase because i really like it better than camelCase for long names
+    case compatibility
+    case recommended_timing
+    case ai_rating
+    case ai_advice
+    case ai_common_name
+    case ai_category
+    case ai_is_valid
+}
 //these represent the main feature set supported by the app, like these are the main features of the app
 enum BMScopes: String, CaseIterable{
     case medicaltest = "Medical record"
@@ -281,9 +292,9 @@ class BMSupplementStack: ObservableObject, Codable {
     var id: String
     @Published var supplements: [BMSupplement]
     @Published var stackHistory: [BMSupplementStack] // Track changes in the supplement stack
-    @Published var aiSupplementStackRecommendedTime: String? = nil
-    @Published var stackCompatibilityNote: String? = nil
-    @Published var adviceFeedbackOnStack: String? = nil
+    @Published var aiSupplementStackRecommendedTime: String? = nil//not used- we now use dynamic properties from BMSupplementStackDynamicProperties
+    @Published var stackCompatibilityNote: String? = nil//not used- we now use dynamic properties from BMSupplementStackDynamicProperties
+    @Published var adviceFeedbackOnStack: String? = nil//not used- we now use dynamic properties from BMSupplementStackDynamicProperties
     @Published var stip: String = ""
     var aiAnalysisStage: BMAIAnalysisStage
     
@@ -305,6 +316,20 @@ class BMSupplementStack: ObservableObject, Codable {
             self.stip = StipulationHandler.addToStipulation(stip: stip, key: m_userGeneralHealthNotesKey, value: newValue)
             BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem, useDebouncer: true)
         }
+    }
+    
+    func getProperty(property: BMSupplementStackDynamicProperties)->String{
+        return StipulationHandler.readStipulation(stip: stip, key: property.rawValue) ?? ""
+    }
+    
+    func setProperty(property: BMSupplementStackDynamicProperties, value: String?){
+        
+        guard let value = value else{
+            print("/BMSupplementStack.setProperty: Cannot set nil string to stip")
+            return
+        }
+        self.stip = StipulationHandler.addToStipulation(stip: stip, key: property.rawValue, value: value)
+        BiomarkerFileSystem.saveToStorage(fileTypeToSave: .supplementSystem, useDebouncer: true)
     }
     
     //returns a set representing categories of supplement present in the system
