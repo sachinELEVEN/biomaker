@@ -211,10 +211,12 @@ struct supplementStackDetailView: View {
                         supplementStackDetailView.descriptionView("This supplement report takes into account the supplements and food items in your stack, as well as your medical test records.")
                         
                         if supplementStack.aiAnalysisStage == .completed || supplementStack.aiAnalysisStage == .outdated{
-                            if supplementStack.isSupplementStackValid(){
+                            //we notice for supplement stack ai return stack not valid many times, so we will not use it
+
+                           // if supplementStack.isSupplementStackValid(){
                                 biomarerIntelligenceLabel()
                                     .padding()
-                            }else{
+                           // }else{
                                 //we notice for supplement stack ai return stack not valid many times, so we will not use it
 //                                biomarerIntelligenceLabel(text: "Biomarker couldn't find any specific information on your stack")
 //                                    .padding()
