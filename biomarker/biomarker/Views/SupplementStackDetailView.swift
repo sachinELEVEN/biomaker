@@ -220,7 +220,7 @@ struct supplementStackDetailView: View {
                                 //we notice for supplement stack ai return stack not valid many times, so we will not use it
 //                                biomarerIntelligenceLabel(text: "Biomarker couldn't find any specific information on your stack")
 //                                    .padding()
-                            }
+                          //  }
                         }
                         
                         if supplementStack.aiAnalysisStage == .never{
