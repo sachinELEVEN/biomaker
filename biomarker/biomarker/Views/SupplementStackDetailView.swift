@@ -157,11 +157,13 @@ struct supplementStackBriefView: View {
                             }
                             
 //                            supplementStackDetailView.aiInfoView(header: "Rating", description: supplementStack.getProperty(property: .ai_rating))//should be in format x/10
-//                            
-                            Text("Your supplement stack got a rating of \(supplementStack.getProperty(property: .ai_rating))")
-                                .font(.subheadline)
-                                .foregroundStyle(Color.secondary)
-                                .multilineTextAlignment(.leading)
+//
+                            if supplementStack.getProperty(property: .ai_rating) != ""{
+                                Text("Your supplement stack got a rating of \(supplementStack.getProperty(property: .ai_rating))")
+                                    .font(.subheadline)
+                                    .foregroundStyle(Color.secondary)
+                                    .multilineTextAlignment(.leading)
+                            }
                                 //.padding(.top)
                             
                             if  Float(supplementStack.getProperty(property: .ai_rating)) != nil{
