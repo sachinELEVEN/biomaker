@@ -158,16 +158,19 @@ struct MedicalDocumentViewerSmall: View{
                         }
                         */
                         
+                        Divider().padding()
                     }
                     Spacer()
                 }.foregroundColor(.primary)
                    // .padding([.top])
             }
-            .padding()
-            .background(CustomBlur(style: .prominent))
-            .cornerRadius(20)
+           // .padding()
+            //.background(CustomBlur(style: .prominent))
+            //.cornerRadius(20)
             .padding([.horizontal,.top])
             .foregroundColor(.primary)
+            
+            
             
         }
     }
