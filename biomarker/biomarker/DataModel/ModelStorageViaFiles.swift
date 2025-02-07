@@ -101,9 +101,9 @@ class BiomarkerFileSystem{
         
         var supp3 = BMSupplement(id: "34", supplementType: .supplement, name: "Cheese", strengthNumber: "1000", strengthUnit: "mcg", frequency: .daily3, form: nil, timeOfConsumption: [Date(),Date(),Date()], reminderTime: [], createdAt: Date(), is5MinReminderSet: false, userNotes: "These are my thyroid notes")
         
-        BMSupplementStackGL.addSupplement(supp)
-        BMSupplementStackGL.addSupplement(supp2)
-        BMSupplementStackGL.addSupplement(supp3)
+//        BMSupplementStackGL.addSupplement(supp)
+//        BMSupplementStackGL.addSupplement(supp2)
+//        BMSupplementStackGL.addSupplement(supp3)
         
     }
     

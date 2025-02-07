@@ -124,13 +124,13 @@ struct SupplementHomeView:View {
                             SupplementScheduleView()
                             
                             //biomarker recommended
-                            Text("Recommended schedule")
-                            //.italic()
-                            //.underline()
-                                .fontWeight(.bold)
-                                .font(.headline)
-                                .multilineTextAlignment(.leading)
-                                .padding(.vertical)
+//                            Text("Recommended schedule")
+//                            //.italic()
+//                            //.underline()
+//                                .fontWeight(.bold)
+//                                .font(.headline)
+//                                .multilineTextAlignment(.leading)
+//                                .padding(.vertical)
                         }.animation(.default)//putting animation in the outside of this causes wierd issue with navigation tile bar getting a flickerring effect on scroll
                     }
                 }.padding(.horizontal)          

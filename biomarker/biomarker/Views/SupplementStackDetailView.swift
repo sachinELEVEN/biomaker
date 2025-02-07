@@ -20,14 +20,69 @@ struct supplementStackBriefView: View {
         //GeometryReader{ geo in
             VStack{
                 if supplementStack.supplements.count == 0{
-                    HStack{
+//                    HStack{
+//                        Spacer()
+//                        Text("Add your supplements to your stack, and see a comprehensive report right here")
+//                            .font(.title2)
+//                            .foregroundStyle(Color.secondary)
+//                            .padding()
+//                        Spacer()
+//                    }
+                    HStack {
+                        Text("Add")
+                            .fontWeight(.bold)
+                            .font(.headline)
+                           // .multilineTextAlignment(.leading)
+                            //.padding(.vertical)
+
+                        + Text(" supplements and food items")
+                            .fontWeight(.bold)
+                            .font(.headline)
+                            .italic() // Make it italic
+                            .foregroundColor(.pink) // Set the color to pink
+
+                       +  Text(" to your")
+                            .fontWeight(.bold)
+                            .font(.headline)
+                           // .multilineTextAlignment(.leading)
+                            //.padding(.vertical)
+
+                        + Text(" stack")
+                            .fontWeight(.bold)
+                            .font(.headline)
+                            .italic() // Make it italic
+                            .foregroundColor(.pink) // Set the color to pink
+
+                       + Text(" and get a")
+                            .fontWeight(.bold)
+                            .font(.headline)
+                        
+                        + Text(" comprehensive report")
+                            .fontWeight(.bold)
+                            .font(.headline)
+                            .italic() // Make it italic
+                            .foregroundColor(.pink)
+                        
+                        
+                        + Text(" right here")
+                             .fontWeight(.bold)
+                             .font(.headline)
+                        
+                       
+//                        + Text(selectedFrequency.lowercased() != "all" ? " which you consume " : "")
+//                                .fontWeight(.bold)
+//                                .font(.headline)
+//                            
+//                        + Text(selectedFrequency.lowercased() != "all" ? selectedFrequency.lowercased() : "")
+//                                .fontWeight(.bold)
+//                                .font(.headline)
+//                                .italic() // Make it italic
+//                                .foregroundColor(.pink)
+                      
+
                         Spacer()
-                        Text("Add your supplements to your stack, and see a comprehensive report right here")
-                            .font(.title2)
-                            .foregroundStyle(Color.secondary)
-                            .padding()
-                        Spacer()
-                    }
+                    }.multilineTextAlignment(.leading)
+                        .padding(.vertical)
                 }else{
                     if supplementStack.aiAnalysisStage == .never {
                         Button(action:{analysesupplementStackWithLLM()}){

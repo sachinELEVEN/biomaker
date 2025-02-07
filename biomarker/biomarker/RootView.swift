@@ -220,6 +220,7 @@ struct HomeView: View {
                             .fontWeight(.bold)
                             .foregroundStyle(Color.secondary)
                             .padding(.bottom)
+                            .padding(.horizontal)
                             
                         
                             Button(action:{
@@ -252,7 +253,7 @@ struct HomeView: View {
                 }
             }
                 
-                .padding([.horizontal])
+                //.padding([.horizontal])
             .navigationTitle("Biomarker")
         }
     
