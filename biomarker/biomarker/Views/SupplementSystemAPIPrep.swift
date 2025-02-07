@@ -270,6 +270,7 @@ class UserHealthContext {
             for supplement in supplementToConsider{
                 var row = "\n-Name: \(supplement.name)"
                 row += "\n-Dosage strength: \(supplement.strengthNumber) \(supplement.strengthUnit)"
+                row += "\n-Frequency of use: \(supplement.frequency.rawValue)"
                 context += row
             }
            
