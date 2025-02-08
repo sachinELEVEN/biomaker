@@ -542,15 +542,26 @@ struct AddSupplementView: View {
     }
     
     func updateReminderState(supplement: BMSupplement) {
-        // Step 1: Check if reminders are allowed
         
+        // Step 0: Remove existing notifications for this supplement
+        let center = UNUserNotificationCenter.current()
+        center.getPendingNotificationRequests { requests in
+            print("/updateReminderState: Removing out of the following notifs", requests.count)
+            let supplementReminders = requests
+                .filter { $0.identifier.hasPrefix(supplement.id) }
+                .map { $0.identifier }
+            
+            center.removePendingNotificationRequests(withIdentifiers: supplementReminders)
+        }
+        
+        
+        // Step 1: Check if reminders are allowed
         guard supplement.is5MinReminderSet else {
             print("Reminders are turned off for this supplement.")
             return
         }
 
         // Step 2: Request notification permission
-        let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .sound]) { granted, error in
             if let error = error {
                 print("Error requesting notification permission: \(error)")
@@ -562,17 +573,10 @@ struct AddSupplementView: View {
                 return
             }
 
-            // Step 3: Remove existing notifications for this supplement
-            center.getPendingNotificationRequests { requests in
-                let supplementReminders = requests
-                    .filter { $0.identifier.hasPrefix(supplement.id) }
-                    .map { $0.identifier }
-                
-                center.removePendingNotificationRequests(withIdentifiers: supplementReminders)
-            }
+           
 
 
-            // Step 4: Create new periodic reminders based on timeOfConsumption and frequency
+            // Step 3: Create new periodic reminders based on timeOfConsumption and frequency
             let frequency = supplement.frequency
             let timeOfConsumption = supplement.timeOfConsumption
 
