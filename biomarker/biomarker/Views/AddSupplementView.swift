@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import UserNotifications
 
 
 // Main View
@@ -539,6 +540,147 @@ struct AddSupplementView: View {
     func isEditMode()->Bool{
         return supplementToEdit != nil ? true : false
     }
+    
+    func updateReminderState(supplement: BMSupplement){
+        
+        /*
+         
+         PROMPT FOR LLM 4o mini
+         
+         I need to create notifications for medication dosages.
+         I have a supplement which can have dosage times and frequency and i want you to create reminders for them in iOS using local notification
+         
+         We first need to remove any existing notifications for this supplement. Each supplement can be uniquely identified using supplement.id
+         
+         After this
+         
+         Based on the timeOfConsumption and if reminder is turn on- we need to create new periodic reminders for the each time in time of consumption in future re-occuring every frequency period(frequency - can be one time daily, 2 time daily, 3 times daily, monthly etc)
+         
+         
+         
+         I have the following things which we need to use
+         1. supplement.id - to uniquely identify the supplement for which we have to handle notifications for.
+         1.  supplement.allowReminding5MinBeforeDosage bool value which determines if the reminder needs to be turned on or off.
+         3. supplement.frequency of the reminder - frequency
+            These are my frequency
+             enum BMSupplementFrequency{
+                 case oneTime = "One time"
+                 case daily = "1 time Daily"
+                 case daily2 = "2 times daily"
+                 case daily3 = "3 times daily"
+                 case onceIn2Days = "Once every 2 days"
+                 case weekly = "Weekly"
+                 case onceIn2Weeks = "Once every 2 weeks"
+                 case monthly = "Monthly"
+             }
+         2. supplement.timeOfConsumption which is  @State  var timeOfConsumption: [Date?] = []
+            If allowReminding5MinBeforeDosage is turned on we need to set a reminder 5 minutes before the time mentioned in each item in TimeOfConsumption, and this should re-occur every 'frequency' period.
+            
+         can you write swift code to enable this?
+         
+         
+         */
+    
+        //IMPELEMENTATION BY LLM
+        // Step 1: Check if reminders are allowed
+        guard supplement.is5MinReminderSet else {
+            print("Reminders are turned off for this supplement.")
+            return
+        }
+        
+        // Step 2: Request notification permission
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .sound]) { granted, error in
+            if let error = error {
+                print("Error requesting notification permission: \(error)")
+                return
+            }
+            
+            if granted {
+                // Step 3: Remove existing notifications for this supplement
+                center.removePendingNotificationRequests(withIdentifiers: [supplement.id])
+                
+                
+                
+                // Step 4: Create new periodic reminders based on timeOfConsumption and frequency
+                let frequency = supplement.frequency
+                let timeOfConsumption = supplement.timeOfConsumption
+                
+                for time in timeOfConsumption {
+                    if let dosageTime = time {
+                        // Create a date components object for the notification
+                        var components = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dosageTime)
+                        
+                        // Set the reminder for 5 minutes before the dosage time
+                        components.minute = (components.minute ?? 0) - 5
+                        
+                        // Create the notification content
+                        let content = UNMutableNotificationContent()
+                        content.title = "Medication Reminder"
+                        content.body = "It's time to take your \(supplement.name)."
+                        content.sound = .default
+                        
+                        // Create the trigger based on frequency
+                        var trigger: UNNotificationTrigger?
+                        switch frequency {
+                        case .oneTime:
+                            trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+                        case .daily:
+                            trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+                        case .daily2:
+                            // Set up for 2 times daily
+                            let morningTrigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+                            var eveningComponents = components
+                            eveningComponents.hour = (eveningComponents.hour ?? 0) + 12 // Adjust for evening
+                            let eveningTrigger = UNCalendarNotificationTrigger(dateMatching: eveningComponents, repeats: true)
+                            
+                            // Schedule both notifications
+                            center.add(UNNotificationRequest(identifier: "\(supplement.id)-morning", content: content, trigger: morningTrigger))
+                            center.add(UNNotificationRequest(identifier: "\(supplement.id)-evening", content: content, trigger: eveningTrigger))
+                            continue // Skip to the next time
+                        case .daily3:
+                            // Similar logic for 3 times daily
+                            let morningTrigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+                            var afternoonComponents = components
+                            afternoonComponents.hour = (afternoonComponents.hour ?? 0) + 6 // Adjust for afternoon
+                            let afternoonTrigger = UNCalendarNotificationTrigger(dateMatching: afternoonComponents, repeats: true)
+                            var eveningComponents = components
+                            eveningComponents.hour = (eveningComponents.hour ?? 0) + 12 // Adjust for evening
+                            let eveningTrigger = UNCalendarNotificationTrigger(dateMatching: eveningComponents, repeats: true)
+                            
+                            // Schedule all three notifications
+                            center.add(UNNotificationRequest(identifier: "\(supplement.id)-morning", content: content, trigger: morningTrigger))
+                            center.add(UNNotificationRequest(identifier: "\(supplement.id)-afternoon", content: content, trigger: afternoonTrigger))
+                            center.add(UNNotificationRequest(identifier: "\(supplement.id)-evening", content: content, trigger: eveningTrigger))
+                            continue // Skip to the next time
+                        case .onceIn2Days:
+                            // Set up for every 2 days
+                            let triggerDate = Calendar.current.date(byAdding: .day, value: 2, to: dosageTime)!
+                            let triggerComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: triggerDate)
+                            trigger = UNCalendarNotificationTrigger(dateMatching: triggerComponents, repeats: true)
+                        case .weekly:
+                            trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+                        case .onceIn2Weeks:
+                            // Set up for every 2 weeks
+                            let triggerDate = Calendar.current.date(byAdding: .weekOfYear, value: 2, to: dosageTime)!
+                            let triggerComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: triggerDate)
+                            trigger = UNCalendarNotificationTrigger(dateMatching: triggerComponents, repeats: true)
+                        case .monthly:
+                            trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
+                        }
+                        
+                        // Schedule the notification if a trigger was created
+                        if let trigger = trigger {
+                            center.add(UNNotificationRequest(identifier: supplement.id, content: content, trigger: trigger))
+                        }
+                    }
+                }
+            } else {
+                print("Notification permission not granted.")
+            }
+        }
+    }
+
 
     private func createSupplement() {
         let id = UUID().uuidString
@@ -569,6 +711,8 @@ struct AddSupplementView: View {
             
             //here we will close the edit screen once edits are done
             showSelf = false
+            
+        updateReminderState(supplement: supp)
            return
         }
         
@@ -586,6 +730,7 @@ struct AddSupplementView: View {
             let result = BMSupplementStackGL.addSupplement(supplement!)
             if result.0{
                 //send a request to server for analysing the supplement
+                updateReminderState(supplement: supplement!)
                 analysisInProgress = true
                 UserHealthContext.analyzeSupplementWithLLM(supplement!) { success, response in
                     analysisInProgress = false
