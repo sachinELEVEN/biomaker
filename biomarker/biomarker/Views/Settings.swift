@@ -11,7 +11,7 @@ import SwiftUI
 // MARK: - Settings View
 struct SettingsView: View {
     var body: some View {
-        NavigationView {
+        NavigationStack {
            // Text("Settings Page")
             List{
                 Section {
@@ -23,7 +23,7 @@ struct SettingsView: View {
                     Text("Add any relevant health or medical information, such as your height, weight, age, or conditions like hypothyroidism and diabetes. This will help organize your health data and history in one place, making it easier for you to understand your report.")
                 }
 
-            } .navigationTitle("Settings")
+            } .navigationTitle("Manage")
         }
     }
 }

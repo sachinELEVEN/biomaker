@@ -141,6 +141,19 @@ struct VariationView: View {
                     }
                 }
             }
+            
+            
+            VStack{
+                Image(uiImage: UIImage(named: "appicon")!)
+                    .resizable()
+                    .frame(width: 250, height: 250)
+                    .opacity(0.8)
+                Text("Track your test results over time across medical reports. You can also analyse your supplements and their history ")
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color.secondary)
+                    .multilineTextAlignment(.center)
+            }.padding()
+            
         }
 
         

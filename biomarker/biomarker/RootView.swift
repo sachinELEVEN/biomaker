@@ -254,10 +254,22 @@ struct HomeView: View {
                         
                     }
                 }
-            }
+            }.navigationTitle("Biomarker")
+            
+            VStack{
+                Image(uiImage: UIImage(named: "appicon")!)
+                    .resizable()
+                    .frame(width: 250, height: 250)
+                    .opacity(0.8)
+                Text("Tap on the medical report on the left side and see the report in detail")
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color.secondary)
+                    .multilineTextAlignment(.center)
+            }.padding()
+                
                 
                 //.padding([.horizontal])
-            .navigationTitle("Biomarker")
+            
         }
     
 

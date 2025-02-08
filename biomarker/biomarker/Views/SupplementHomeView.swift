@@ -134,7 +134,19 @@ struct SupplementHomeView:View {
                         }.animation(.default)//putting animation in the outside of this causes wierd issue with navigation tile bar getting a flickerring effect on scroll
                     }
                 }.padding(.horizontal)          
-            }.navigationTitle("Supplement Stack")      
+            }.navigationTitle("Supplement Stack")  
+            
+            
+            VStack{
+                Image(uiImage: UIImage(named: "appicon")!)
+                    .resizable()
+                    .frame(width: 250, height: 250)
+                    .opacity(0.8)
+                Text("Maange your supplements and food items, add supplements to your stack and analyse them in detail with Biomarker")
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color.secondary)
+                    .multilineTextAlignment(.center)
+            }.padding()
         }
     }
 }

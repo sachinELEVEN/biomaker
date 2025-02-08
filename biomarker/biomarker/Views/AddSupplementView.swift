@@ -34,7 +34,8 @@ struct AddSupplementView: View {
     @State var analysisInProgress = false
     @State  var isAnimating = false
     var body: some View {
-        NavigationView {
+        //NavigationView {
+            NavigationStack{
             ZStack {
                 // Background dimming effect
                 if currentStep == 6{
