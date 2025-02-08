@@ -563,7 +563,14 @@ struct AddSupplementView: View {
             }
 
             // Step 3: Remove existing notifications for this supplement
-            center.removePendingNotificationRequests(withIdentifiers: [supplement.id])
+            center.getPendingNotificationRequests { requests in
+                let supplementReminders = requests
+                    .filter { $0.identifier.hasPrefix(supplement.id) }
+                    .map { $0.identifier }
+                
+                center.removePendingNotificationRequests(withIdentifiers: supplementReminders)
+            }
+
 
             // Step 4: Create new periodic reminders based on timeOfConsumption and frequency
             let frequency = supplement.frequency
