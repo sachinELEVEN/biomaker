@@ -34,6 +34,9 @@ struct VariationView: View {
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .padding(.horizontal)
+                    .onChange(of: searchScope){_ in
+                        searchText = ""
+                    }
                    
                     QuickSearchOptionsView(docs: sys.medicalDocuments, searchScope: searchScope,searchText: $searchText)
                     .padding(.horizontal)
