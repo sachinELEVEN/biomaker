@@ -95,11 +95,11 @@ class BiomarkerFileSystem{
         
         
         //Mock data for supplements
-        var supp = BMSupplement(id: "32", supplementType: .supplement, name: "Vitamin D3", strengthNumber: "1000", strengthUnit: "IU", frequency: .daily3, form: .capsule, timeOfConsumption: [Date(),Date(),Date()], reminderTime: [], createdAt: Date(), is5MinReminderSet: false, userNotes: "These are my notes")
-        
-        var supp2 = BMSupplement(id: "33", supplementType: .supplement, name: "Minoxidil", strengthNumber: "5", strengthUnit: "%", frequency: .monthly, form: .capsule, timeOfConsumption: [Date()], reminderTime: [], createdAt: Date(), is5MinReminderSet: false, userNotes: "Was facing hair loss before")
-        
-        var supp3 = BMSupplement(id: "34", supplementType: .supplement, name: "Cheese", strengthNumber: "1000", strengthUnit: "mcg", frequency: .daily3, form: nil, timeOfConsumption: [Date(),Date(),Date()], reminderTime: [], createdAt: Date(), is5MinReminderSet: false, userNotes: "These are my thyroid notes")
+//        var supp = BMSupplement(id: "32", supplementType: .supplement, name: "Vitamin D3", strengthNumber: "1000", strengthUnit: "IU", frequency: .daily3, form: .capsule, timeOfConsumption: [Date(),Date(),Date()], reminderTime: [], createdAt: Date(), is5MinReminderSet: false, userNotes: "These are my notes")
+//        
+//        var supp2 = BMSupplement(id: "33", supplementType: .supplement, name: "Minoxidil", strengthNumber: "5", strengthUnit: "%", frequency: .monthly, form: .capsule, timeOfConsumption: [Date()], reminderTime: [], createdAt: Date(), is5MinReminderSet: false, userNotes: "Was facing hair loss before")
+//        
+//        var supp3 = BMSupplement(id: "34", supplementType: .supplement, name: "Cheese", strengthNumber: "1000", strengthUnit: "mcg", frequency: .daily3, form: nil, timeOfConsumption: [Date(),Date(),Date()], reminderTime: [], createdAt: Date(), is5MinReminderSet: false, userNotes: "These are my thyroid notes")
         
 //        BMSupplementStackGL.addSupplement(supp)
 //        BMSupplementStackGL.addSupplement(supp2)
